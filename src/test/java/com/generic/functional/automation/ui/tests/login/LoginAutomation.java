@@ -1,16 +1,12 @@
 package com.generic.functional.automation.ui.tests.login;
 
-import java.util.regex.Pattern;
-import java.util.concurrent.TimeUnit;
-
-import org.junit.*;
-
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+import java.util.concurrent.TimeUnit;
+import static org.testng.Assert.*;
 
 
 public class LoginAutomation {
@@ -19,15 +15,13 @@ public class LoginAutomation {
     private boolean acceptNextAlert = true;
     private StringBuffer verificationErrors = new StringBuffer();
 
-    @Before
+    @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
-
-        System.setProperty("webdriver.gecko.driver", "C:\\Users\\hello\\Desktop\\geckodriver-v0.26.0-win64\\geckodriver.exe");
+        System.setProperty("webdriver.gecko.driver", "E:\\geckodriver-v0.26.0-win64\\geckodriver.exe");
 
         driver = new FirefoxDriver();
         baseUrl = "https://www.google.com/";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
     }
 
     @Test
@@ -38,11 +32,31 @@ public class LoginAutomation {
         driver.findElement(By.id("email")).sendKeys("superadmin");
         driver.findElement(By.id("password")).clear();
         driver.findElement(By.id("password")).sendKeys("Design_20");
-        driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/main/div/form/button/span")).click();
+        //driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/main/div/form/button/span")).click();
+        WebElement span = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/main/div/form/button/span"));
+        WebElement btn = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/main/div/form/button"));
+
+        // 1. Button style
+        String style = btn.getAttribute("style");
+
+
+        if(style.contains("box-shadow: rgba(255, 105, 135, 0.3)")) {
+            // Fail it because the style is not valid.
+            System.out.println("==> "+style);
+            System.err.println("Style is not what we desired.");
+        }
+
+        span.click();
+
+
+        // 2. How do I know I actually Logged In?
+        driver.findElement(By.xpath("//input[@name='']")).click();
+        driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/button/span")).click();
+
 
     }
 
-    @After
+    @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
         driver.quit();
         String verificationErrorString = verificationErrors.toString();
@@ -83,7 +97,9 @@ public class LoginAutomation {
             acceptNextAlert = true;
         }
     }
-
 }
+
+
+
 
 
