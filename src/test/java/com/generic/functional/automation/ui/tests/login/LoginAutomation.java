@@ -1,6 +1,7 @@
 package com.generic.functional.automation.ui.tests.login;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -17,16 +18,17 @@ public class LoginAutomation {
 
     @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
-        System.setProperty("webdriver.gecko.driver", "E:\\geckodriver-v0.26.0-win64\\geckodriver.exe");
 
-        driver = new FirefoxDriver();
-        baseUrl = "https://www.google.com/";
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        System.setProperty("webdriver.chrome.driver", "chromedriver");
+
+        driver = new ChromeDriver();
+        baseUrl = "google.com";
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 
     @Test
     public void testLogin() throws Exception {
-        driver.get("https://a4data-dev.netlify.com/");
+        driver.get("https://a4data-dev.netlify.app");
         driver.findElement(By.id("email")).click();
         driver.findElement(By.id("email")).clear();
         driver.findElement(By.id("email")).sendKeys("superadmin");
@@ -37,21 +39,22 @@ public class LoginAutomation {
         WebElement btn = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/main/div/form/button"));
 
         // 1. Button style
-        String style = btn.getAttribute("style");
+//        String style = btn.getAttribute("style");
 
 
-        if(style.contains("box-shadow: rgba(255, 105, 135, 0.3)")) {
-            // Fail it because the style is not valid.
-            System.out.println("==> "+style);
-            System.err.println("Style is not what we desired.");
-        }
+//        if(style.contains("box-shadow: rgba(255, 105, 135, 0.3)")) {
+//            // Fail it because the style is not valid.
+//            System.out.println("==> "+style);
+//            System.err.println("Style is not what we desired.");
+//        }
 
         span.click();
 
 
         // 2. How do I know I actually Logged In?
-        driver.findElement(By.xpath("//input[@name='']")).click();
-        driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/button/span")).click();
+        driver.findElement(By.xpath("//*[text()='Data Studio']"));
+        //driver.findElement(By.xpath("//input[@name='']")).click();
+        //driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/button/span")).click();
 
 
     }
