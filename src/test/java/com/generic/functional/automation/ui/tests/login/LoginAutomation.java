@@ -1,5 +1,6 @@
 package com.generic.functional.automation.ui.tests.login;
 
+import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -18,8 +19,16 @@ public class LoginAutomation {
 
     @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
-
-        System.setProperty("webdriver.chrome.driver", "chromedriver");
+        /*
+            Identify the Operating System and assign the chrome driver
+         */
+        if(System.getProperty("os.name").startsWith("Windows")) {
+            System.out.println("OS name -> " +System.getProperty("os.name"));
+            System.setProperty("webdriver.chrome.driver", "chromedriver_win32.exe");
+        } else {
+            System.out.println("Other Operating Systems");
+            System.setProperty("webdriver.chrome.driver", "chromedriver");
+        }
 
         driver = new ChromeDriver();
         baseUrl = "google.com";
@@ -58,6 +67,17 @@ public class LoginAutomation {
 
 
     }
+
+    @Test
+    public void testLogout() throws Exception {
+        //driver.get("https://a4data-dev.netlify.app");
+        driver.findElement(By.xpath("//*[text()='Logout']")).click();
+        WebElement span = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/main/div/form/button/span"));
+        span.click();
+        // 2. How do I know I actually Logged In?
+        driver.findElement(By.xpath("//*[text()='Sign in']"));
+    }
+
 
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
