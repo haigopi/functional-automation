@@ -35,6 +35,7 @@ public class LoginAutomation {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 
+
     @Test
     public void testLogin() throws Exception {
         driver.get("https://a4data-dev.netlify.app");
