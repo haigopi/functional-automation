@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="Login and Home" verbose="1" >
+<suite name="Login and Home" verbose="1" preserve-order="true">
+    <parameter name="Suitename" value="Registration" />
+
+    <listeners>
+        <listener class-name="org.uncommons.reportng.HTMLReporter" />
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+    </listeners>
     <test name="Regression suite" >
         <classes>
             <class name="com.generic.functional.automation.ui.tests.login.LoginLogoutAutomation"/>
