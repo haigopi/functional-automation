@@ -13,10 +13,11 @@ public class HomeScreenAutomation extends TestConfig {
     @Test
     public void testSVGClickTestCase() throws Exception {
 
-        login.doLogin(driver);
+        test = extent.createTest("SVGClickTestCase");
+        login.doLogin(driver, test);
 
-        driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.explore-query-svg.ml-2 > path")).click();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        //driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.explore-query-svg.ml-2 > path")).click();
+        //driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
 //        driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d")).click();
 //        driver.findElement(By.id("mainArc-d5f6e57b-d157-4ec5-bbc4-9fd35cc68775")).click();

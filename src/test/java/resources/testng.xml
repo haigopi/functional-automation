@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="Login and Home" verbose="1" preserve-order="true">
-    <parameter name="Suitename" value="Registration" />
-
-    <listeners>
-        <listener class-name="org.uncommons.reportng.HTMLReporter" />
-        <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
-    </listeners>
-    <test name="Regression suite" >
+<suite name="A4" verbose="1" preserve-order="true">
+    <test name="Regression Suite">
         <classes>
             <class name="com.generic.functional.automation.ui.tests.login.LoginLogoutAutomation"/>
             <class name="com.generic.functional.automation.ui.tests.login.HomeScreenAutomation"/>
