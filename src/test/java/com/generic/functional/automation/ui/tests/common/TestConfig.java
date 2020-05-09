@@ -5,11 +5,10 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-import com.aventstack.extentreports.reporter.ExtentAventReporter;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-import com.aventstack.extentreports.reporter.ExtentKlovReporter;
-import com.aventstack.extentreports.reporter.configuration.Theme;
+import com.generic.framework.ui.functional.ExtentManager;
 import com.generic.framework.ui.functional.Login;
+import com.generic.framework.ui.functional.AppConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
@@ -35,17 +34,9 @@ public class TestConfig {
 
     protected Login login;
     protected ExtentReports extent;
-    public ExtentHtmlReporter htmlReporter;
     public ExtentTest test;
 
-
-
-    public TestConfig() {
-        extent = new ExtentReports();
-        login = new Login(extent);
-    }
-
-    @BeforeSuite(alwaysRun = true)
+    @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
         System.out.println("Setup Started...");
 
@@ -54,23 +45,15 @@ public class TestConfig {
 
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.get(TestConstants.BASE_URL);
-        driver.manage().window().maximize();
+        driver.get(AppConstants.BASE_URL);
+        //driver.manage().window().maximize();
+        extent = ExtentManager.getInstance();
+        login = new Login(driver);
+
     }
 
     private void setReport() {
-        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + TestConstants.REPORT_PATH);
-        extent = new ExtentReports();  //create object of ExtentReports
-        extent.attachReporter(htmlReporter);
-
-        htmlReporter.config().setDocumentTitle("A4 Functional Test Automation Report"); // Tittle of Report
-        htmlReporter.config().setReportName("A4 Functional Test Report"); // Name of the report
-        htmlReporter.config().setTheme(Theme.STANDARD);//Default Theme of Report
-
-        // General information releated to application
-        extent.setSystemInfo("Application Name", "A4 Tests");
-        extent.setSystemInfo("User Name", "Gopi K Kancharla");
-        extent.setSystemInfo("Envirnoment", "QE");
+        extent = ExtentManager.getInstance();
     }
 
     private void setOS() {
@@ -99,7 +82,7 @@ public class TestConfig {
         } else if (result.getStatus() == ITestResult.SKIP) {
             test.log(Status.SKIP, MarkupHelper.createLabel(result.getName() + " - Test Case Skipped", ExtentColor.ORANGE));
         } else if (result.getStatus() == ITestResult.SUCCESS) {
-            test.log(Status.PASS, MarkupHelper.createLabel(result.getName() + " Test Case PASSED", ExtentColor.GREEN));
+            test.log(Status.PASS, MarkupHelper.createLabel(result.getName() + " - Test Case PASSED", ExtentColor.GREEN));
         }
 
 
@@ -111,22 +94,22 @@ public class TestConfig {
         File source = ts.getScreenshotAs(OutputType.FILE);
 
         // after execution, you could see a folder "FailedTestsScreenshots" under src folder
-        String destination = System.getProperty("user.dir") + TestConstants.SCREEN_SHOT_PATH + screenshotName + dateName + ".png";
+        String destination = System.getProperty("user.dir") + AppConstants.SCREEN_SHOT_PATH + screenshotName + dateName + ".png";
         File finalDestination = new File(destination);
         FileUtils.copyFile(source, finalDestination);
         return destination;
     }
 
-    @AfterSuite(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
 
         System.out.println("Flushing out...");
-        extent.flush();
-        driver.quit();
         String verificationErrorString = verificationErrors.toString();
         if (!"".equals(verificationErrorString)) {
             fail(verificationErrorString);
         }
+        extent.flush();
+        driver.quit();
     }
 
     protected boolean isElementPresent(By by) {

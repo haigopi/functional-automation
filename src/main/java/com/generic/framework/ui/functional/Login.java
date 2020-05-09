@@ -11,13 +11,12 @@ import java.util.concurrent.TimeUnit;
 
 public class Login {
 
-    ExtentReports extent;
-
-    public Login(ExtentReports extent) {
-        this.extent = extent;
+    WebDriver driver;
+    public Login(WebDriver driver) {
+        this.driver = driver;
     }
 
-    public void doLogin(WebDriver driver, ExtentTest test) {
+    public void doLogin(ExtentTest test) {
         test.log(Status.INFO, "LOGIN STARTED");
         driver.get("https://a4data-qe.netlify.app");
 

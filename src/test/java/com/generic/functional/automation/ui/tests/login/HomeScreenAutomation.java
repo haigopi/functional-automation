@@ -16,9 +16,9 @@ public class HomeScreenAutomation extends TestConfig {
 
         test = extent.createTest("SVGClickTestCase");
         test.log(Status.INFO, "Help Button Clicked");
-        login.doLogin(driver, test);
+        login.doLogin(test);
         test.log(Status.INFO, "Help Button Click Test Complete");
-//        driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.explore-query-svg.ml-2 > path")).click();
+       //driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.explore-query-svg.ml-2 > path")).click();
         //driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
 //        driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d")).click();

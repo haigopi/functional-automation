@@ -1,14 +1,12 @@
 package com.generic.functional.automation.ui.tests.login;
 
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.markuputils.ExtentColor;
-import com.aventstack.extentreports.markuputils.MarkupHelper;
+import com.generic.framework.ui.functional.ExtentManager;
+import com.generic.framework.ui.functional.Login;
 import com.generic.functional.automation.ui.tests.common.TestConfig;
+import com.generic.framework.ui.functional.AppConstants;
 import org.openqa.selenium.*;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -40,7 +38,7 @@ public class LoginLogoutAutomation extends TestConfig {
         test = extent.createTest("Login Button Click",
                 "Verifying Login Functionalities");
         test.createNode("Click Login Test");
-        login.doLogin(driver, test);
+        login.doLogin(test);
     }
 
     @Test
