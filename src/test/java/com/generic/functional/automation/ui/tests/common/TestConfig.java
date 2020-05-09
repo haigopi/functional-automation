@@ -1,5 +1,6 @@
 package com.generic.functional.automation.ui.tests.common;
 
+import com.generic.framework.ui.functional.Login;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
