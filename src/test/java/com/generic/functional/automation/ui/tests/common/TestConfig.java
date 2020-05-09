@@ -65,14 +65,14 @@ public class TestConfig {
         extent = new ExtentReports();  //create object of ExtentReports
         extent.attachReporter(htmlReporter);
 
-        htmlReporter.config().setDocumentTitle("Automation Report"); // Tittle of Report
-        htmlReporter.config().setReportName("Extent Report V4"); // Name of the report
-        htmlReporter.config().setTheme(Theme.DARK);//Default Theme of Report
+        htmlReporter.config().setDocumentTitle("A4 Functional Test Automation Report"); // Tittle of Report
+        htmlReporter.config().setReportName("A4 Functional Test Report"); // Name of the report
+        htmlReporter.config().setTheme(Theme.STANDARD);//Default Theme of Report
 
         // General information releated to application
-        extent.setSystemInfo("Application Name", "Google Test");
-        extent.setSystemInfo("User Name", "Ankur Jain");
-        extent.setSystemInfo("Envirnoment", "Production");
+        extent.setSystemInfo("Application Name", "A4 Tests");
+        extent.setSystemInfo("User Name", "Gopi K Kancharla");
+        extent.setSystemInfo("Envirnoment", "QE");
     }
 
     private void setOS() {
