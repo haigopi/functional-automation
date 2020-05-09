@@ -4,10 +4,13 @@ import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 import java.util.concurrent.TimeUnit;
+
 import static org.testng.Assert.*;
 
 
@@ -22,8 +25,8 @@ public class LoginAutomation {
         /*
             Identify the Operating System and assign the chrome driver
          */
-        if(System.getProperty("os.name").startsWith("Windows")) {
-            System.out.println("OS name -> " +System.getProperty("os.name"));
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            System.out.println("OS name -> " + System.getProperty("os.name"));
             System.setProperty("webdriver.chrome.driver", "chromedriver_win32.exe");
         } else {
             System.out.println("Other Operating Systems");
@@ -38,7 +41,7 @@ public class LoginAutomation {
 
     @Test
     public void testLogin() throws Exception {
-        driver.get("https://a4data-dev.netlify.app");
+        driver.get("https://a4data-qe.netlify.app");
         driver.findElement(By.id("email")).click();
         driver.findElement(By.id("email")).clear();
         driver.findElement(By.id("email")).sendKeys("superadmin");
@@ -48,34 +51,37 @@ public class LoginAutomation {
         WebElement span = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/main/div/form/button/span"));
         WebElement btn = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/main/div/form/button"));
 
+
         // 1. Button style
-//        String style = btn.getAttribute("style");
-
-
-//        if(style.contains("box-shadow: rgba(255, 105, 135, 0.3)")) {
-//            // Fail it because the style is not valid.
-//            System.out.println("==> "+style);
-//            System.err.println("Style is not what we desired.");
-//        }
+        String style = btn.getAttribute("style");
+        if (style.contains("box-shadow: rgba(255, 105, 135, 0.3)")) {
+            // Fail it because the style is not valid.
+            System.out.println("==> " + style);
+            System.err.println("Style is not what we desired.");
+        }
 
         span.click();
-
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
         // 2. How do I know I actually Logged In?
-        driver.findElement(By.xpath("//*[text()='Data Studio']"));
+        driver.findElement(By.xpath("//*[text()='Logout']"));
+
+
         //driver.findElement(By.xpath("//input[@name='']")).click();
         //driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/button/span")).click();
 
-
     }
 
+
     @Test
-    public void testLogout() throws Exception {
-        //driver.get("https://a4data-dev.netlify.app");
+    public void testLoginElementsAndLogout() throws Exception {
+        driver.findElement(By.xpath("//*[text()='Data Studio']"));
+        driver.findElement(By.xpath("//*[text()='Articulator']"));
+        driver.findElement(By.xpath("//*[text()='Cluster Studio']"));
+        driver.findElement(By.xpath("//*[text()='Entitles']"));
         driver.findElement(By.xpath("//*[text()='Logout']")).click();
-        WebElement span = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/main/div/form/button/span"));
-        span.click();
         // 2. How do I know I actually Logged In?
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.findElement(By.xpath("//*[text()='Sign in']"));
     }
 
