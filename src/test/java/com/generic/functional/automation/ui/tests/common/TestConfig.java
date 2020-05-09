@@ -15,9 +15,7 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,7 +45,7 @@ public class TestConfig {
         login = new Login(extent);
     }
 
-    @BeforeClass(alwaysRun = true)
+    @BeforeSuite(alwaysRun = true)
     public void setUp() throws Exception {
         System.out.println("Setup Started...");
 
@@ -104,6 +102,7 @@ public class TestConfig {
             test.log(Status.PASS, MarkupHelper.createLabel(result.getName() + " Test Case PASSED", ExtentColor.GREEN));
         }
 
+
     }
 
     public String TakeScreenshot(WebDriver driver, String screenshotName) throws IOException {
@@ -118,7 +117,7 @@ public class TestConfig {
         return destination;
     }
 
-    @AfterClass(alwaysRun = true)
+    @AfterSuite(alwaysRun = true)
     public void tearDown() throws Exception {
 
         System.out.println("Flushing out...");

@@ -2,6 +2,7 @@ package com.generic.functional.automation.ui.tests.login;
 
 import java.util.concurrent.TimeUnit;
 
+import com.aventstack.extentreports.Status;
 import com.generic.functional.automation.ui.tests.common.TestConfig;
 import org.testng.annotations.*;
 import static org.testng.Assert.*;
@@ -14,9 +15,10 @@ public class HomeScreenAutomation extends TestConfig {
     public void testSVGClickTestCase() throws Exception {
 
         test = extent.createTest("SVGClickTestCase");
+        test.log(Status.INFO, "Help Button Clicked");
         login.doLogin(driver, test);
-
-        driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.explore-query-svg.ml-2 > path")).click();
+        test.log(Status.INFO, "Help Button Click Test Complete");
+//        driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.explore-query-svg.ml-2 > path")).click();
         //driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
 //        driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d")).click();
