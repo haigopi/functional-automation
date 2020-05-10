@@ -19,12 +19,16 @@ public class ExtentManager {
 
             htmlReporter.config().setDocumentTitle("A4 Functional Test Automation Report"); // Tittle of Report
             htmlReporter.config().setReportName("A4 Functional Test Report"); // Name of the report
-            htmlReporter.config().setTheme(Theme.STANDARD);//Default Theme of Report
+            htmlReporter.config().setTheme(Theme.DARK);//Default Theme of Report
+            htmlReporter.config().setTimeStampFormat("EEEE, MMMM dd, yyyy, hh:mm a '('zzz')'");
 
             // General information releated to application
             extentReports.setSystemInfo("Application Name", "A4 Tests");
             extentReports.setSystemInfo("User Name", "Gopi K Kancharla");
             extentReports.setSystemInfo("Envirnoment", "QE");
+
+
+
         }
 
         return extentReports;

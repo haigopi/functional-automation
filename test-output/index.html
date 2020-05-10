@@ -15,7 +15,7 @@
 	<meta name='description' content='' />
 	<meta name='robots' content='noodp, noydir' />
 	<meta name='viewport' content='width=device-width, initial-scale=1' />
-	<meta id="timeStampFormat" name="timeStampFormat" content='MMM d, yyyy hh:mm:ss a'/>
+	<meta id="timeStampFormat" name="timeStampFormat" content='EEEE, MMMM dd, yyyy, hh:mm a '('zzz')''/>
 	
         <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css' />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -33,7 +33,7 @@
 		var JSONTree=function(){var n={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#x27;","/":"&#x2F;"},t=0,r=0;this.create=function(n,t){return r+=1,N(u(n,0,!1),{class:"jstValue"})};var e=function(t){return t.replace(/[&<>'"]/g,function(t){return n[t]})},s=function(){return r+"_"+t++},u=function(n,t,r){if(null===n)return f(r?t:0);switch(typeof n){case"boolean":return l(n,r?t:0);case"number":return i(n,r?t:0);case"string":return o(n,r?t:0);default:return n instanceof Array?a(n,t,r):c(n,t,r)}},c=function(n,t,r){var e=s(),u=Object.keys(n).map(function(r){return j(r,n[r],t+1,!0)}).join(m()),c=[g("{",r?t:0,e),N(u,{id:e}),p("}",t)].join("\n");return N(c,{})},a=function(n,t,r){var e=s(),c=n.map(function(n){return u(n,t+1,!0)}).join(m());return[g("[",r?t:0,e),N(c,{id:e}),p("]",t)].join("\n")},o=function(n,t){var r=e(JSON.stringify(n));return N(v(r,t),{class:"jstStr"})},i=function(n,t){return N(v(n,t),{class:"jstNum"})},l=function(n,t){return N(v(n,t),{class:"jstBool"})},f=function(n){return N(v("null",n),{class:"jstNull"})},j=function(n,t,r){var s=v(e(JSON.stringify(n))+": ",r),c=N(u(t,r,!1),{});return N(s+c,{class:"jstProperty"})},m=function(){return N(",\n",{class:"jstComma"})},N=function(n,t){return d("span",t,n)},d=function(n,t,r){return"<"+n+Object.keys(t).map(function(n){return" "+n+'="'+t[n]+'"'}).join("")+">"+r+"</"+n+">"},g=function(n,t,r){return N(v(n,t),{class:"jstBracket"})+N("",{class:"jstFold",onclick:"JSONTree.toggle('"+r+"')"})};this.toggle=function(n){var t=document.getElementById(n),r=t.parentNode,e=t.previousElementSibling;""===t.className?(t.className="jstHiddenBlock",r.className="jstFolded",e.className="jstExpand"):(t.className="",r.className="",e.className="jstFold")};var p=function(n,t){return N(v(n,t),{})},v=function(n,t){return Array(2*t+1).join(" ")+n};return this}();
 	</script>
 </head>
-	<body class='extent standard default hide-overflow '>
+	<body class='extent dark default hide-overflow '>
 		<div id='theme-selector' alt='Click to toggle theme. To enable by default, use theme configuration.' title='Click to toggle theme. To enable by default, use theme configuration.'>
 			<span><i class='material-icons'>desktop_windows</i></span>
 		</div>
@@ -52,7 +52,7 @@
 		<!-- nav-right -->
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<a href='#!'>
-			<span class='label blue darken-3 suite-start-time'>May 9, 2020 02:56:17 PM</span>
+			<span class='label blue darken-3 suite-start-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			</a>
 		</ul>
 	</div>
@@ -68,7 +68,6 @@
 				</a>
 				<ul id='tests-toggle' class='dropdown-content'>
 										<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
-					<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
 					<li class='divider'></li>
 					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
 				</ul>
@@ -111,10 +110,10 @@
                     <canvas id='parent-analysis' width='90' height='70'></canvas>
                 </div>
                 <div class='block text-small'>
-                    <span class='tooltipped' data-position='top' data-tooltip='75%'><span class='strong'>3</span> test(s) passed</span>
+                    <span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>4</span> test(s) passed</span>
                 </div>
                 <div class='block text-small'>
-                    <span class='strong tooltipped' data-position='top' data-tooltip='25%'>1</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> skipped
+                    <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> skipped
                 </div>
             </div>
         </div>
@@ -151,14 +150,14 @@
 				<li class='test displayed active has-leaf pass' status='pass' bdd='false' test-id='1'>
 					<div class='test-heading'>
 						<span class='test-name'>Login Page Button Shadow</span>
-						<span class='test-time'>May 9, 2020 02:56:20 PM</span>
+						<span class='test-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 						<span class='test-status right pass'>pass</span>
 					</div>
 					<div class='test-content hide'>
 <div class='test-time-info'>
-	<span class='label start-time'>May 9, 2020 02:56:20 PM</span>
-	<span class='label end-time'>May 9, 2020 02:56:20 PM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+33ms</span>
+	<span class='label start-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
+	<span class='label end-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+34ms</span>
 </div>
 <div class='test-desc'>Verifying Login Shadow Button </div>
 <div class='test-steps'>
@@ -173,7 +172,7 @@
 		<tbody>
 			<tr class='log' status='pass'>
 				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-				<td class='timestamp'>2:56:20 PM</td>
+				<td class='timestamp'>6:41:07 PM</td>
 				<td class='step-details'>
 						<span class='badge white-text green'>btnShadowTest - Test Case PASSED</span>
 					
@@ -186,7 +185,7 @@
 	<li class='node level-1 leaf pass' status='pass' test-id='2'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Looking for button</div>
-			<span class='node-time'>May 9, 2020 02:56:20 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -194,7 +193,7 @@
 	<li class='node level-1 leaf pass' status='pass' test-id='3'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Style retrieved</div>
-			<span class='node-time'>May 9, 2020 02:56:20 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -202,7 +201,7 @@
 	<li class='node level-1 leaf pass' status='pass' test-id='4'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Style Cross Checked.</div>
-			<span class='node-time'>May 9, 2020 02:56:20 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -213,14 +212,14 @@
 				<li class='test displayed active has-leaf pass' status='pass' bdd='false' test-id='5'>
 					<div class='test-heading'>
 						<span class='test-name'>Login Button Click</span>
-						<span class='test-time'>May 9, 2020 02:56:20 PM</span>
+						<span class='test-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 						<span class='test-status right pass'>pass</span>
 					</div>
 					<div class='test-content hide'>
 <div class='test-time-info'>
-	<span class='label start-time'>May 9, 2020 02:56:20 PM</span>
-	<span class='label end-time'>May 9, 2020 02:56:26 PM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 0m 5s+663ms</span>
+	<span class='label start-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
+	<span class='label end-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 4s+146ms</span>
 </div>
 <div class='test-desc'>Verifying Login Functionalities </div>
 <div class='test-steps'>
@@ -235,7 +234,7 @@
 		<tbody>
 			<tr class='log' status='info'>
 				<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-				<td class='timestamp'>2:56:20 PM</td>
+				<td class='timestamp'>6:41:07 PM</td>
 				<td class='step-details'>
 						LOGIN STARTED
 					
@@ -243,7 +242,7 @@
 			</tr>
 			<tr class='log' status='info'>
 				<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-				<td class='timestamp'>2:56:26 PM</td>
+				<td class='timestamp'>6:41:11 PM</td>
 				<td class='step-details'>
 						LOGIN SUCCESS
 					
@@ -251,7 +250,7 @@
 			</tr>
 			<tr class='log' status='pass'>
 				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-				<td class='timestamp'>2:56:26 PM</td>
+				<td class='timestamp'>6:41:11 PM</td>
 				<td class='step-details'>
 						<span class='badge white-text green'>testLogin - Test Case PASSED</span>
 					
@@ -264,7 +263,7 @@
 	<li class='node level-1 leaf pass' status='pass' test-id='6'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Click Login Test</div>
-			<span class='node-time'>May 9, 2020 02:56:20 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -272,7 +271,7 @@
 	<li class='node level-1 leaf pass' status='pass' test-id='7'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Looking for username</div>
-			<span class='node-time'>May 9, 2020 02:56:21 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -280,7 +279,7 @@
 	<li class='node level-1 leaf pass' status='pass' test-id='8'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Clicked inside username</div>
-			<span class='node-time'>May 9, 2020 02:56:21 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -288,15 +287,15 @@
 	<li class='node level-1 leaf pass' status='pass' test-id='9'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Cleared the text if any</div>
-			<span class='node-time'>May 9, 2020 02:56:21 PM</span>
-			&middot; <span class='node-duration'>0h 0m 0s+1ms</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
+			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
 	</li>
 	<li class='node level-1 leaf pass' status='pass' test-id='10'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Username Typed</div>
-			<span class='node-time'>May 9, 2020 02:56:21 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -304,7 +303,7 @@
 	<li class='node level-1 leaf pass' status='pass' test-id='11'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Password Typed</div>
-			<span class='node-time'>May 9, 2020 02:56:21 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -312,7 +311,7 @@
 	<li class='node level-1 leaf pass' status='pass' test-id='12'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Button Clicked</div>
-			<span class='node-time'>May 9, 2020 02:56:21 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -320,7 +319,7 @@
 	<li class='node level-1 leaf pass' status='pass' test-id='13'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Logout Found</div>
-			<span class='node-time'>May 9, 2020 02:56:26 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -331,14 +330,14 @@
 				<li class='test displayed active has-leaf pass' status='pass' bdd='false' test-id='14'>
 					<div class='test-heading'>
 						<span class='test-name'>Logout Button Click</span>
-						<span class='test-time'>May 9, 2020 02:56:26 PM</span>
+						<span class='test-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 						<span class='test-status right pass'>pass</span>
 					</div>
 					<div class='test-content hide'>
 <div class='test-time-info'>
-	<span class='label start-time'>May 9, 2020 02:56:26 PM</span>
-	<span class='label end-time'>May 9, 2020 02:56:26 PM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+325ms</span>
+	<span class='label start-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
+	<span class='label end-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+540ms</span>
 </div>
 <div class='test-desc'>Verifying Logout Functionalities </div>
 <div class='test-steps'>
@@ -353,7 +352,7 @@
 		<tbody>
 			<tr class='log' status='pass'>
 				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
-				<td class='timestamp'>2:56:26 PM</td>
+				<td class='timestamp'>6:41:12 PM</td>
 				<td class='step-details'>
 						<span class='badge white-text green'>testLoginElementsAndLogout - Test Case PASSED</span>
 					
@@ -366,7 +365,7 @@
 	<li class='node level-1 leaf pass' status='pass' test-id='15'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Looking for DataStudio Button</div>
-			<span class='node-time'>May 9, 2020 02:56:26 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -374,7 +373,7 @@
 	<li class='node level-1 leaf pass' status='pass' test-id='16'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Looking for Articulator Button</div>
-			<span class='node-time'>May 9, 2020 02:56:26 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -382,15 +381,15 @@
 	<li class='node level-1 leaf pass' status='pass' test-id='17'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Looking for Cluster Studio Button</div>
-			<span class='node-time'>May 9, 2020 02:56:26 PM</span>
-			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
+			&middot; <span class='node-duration'>0h 0m 0s+1ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
 	</li>
 	<li class='node level-1 leaf pass' status='pass' test-id='18'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Looking for Entitles Button</div>
-			<span class='node-time'>May 9, 2020 02:56:26 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -398,7 +397,7 @@
 	<li class='node level-1 leaf pass' status='pass' test-id='19'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Looking for Logout Button & clicking on it</div>
-			<span class='node-time'>May 9, 2020 02:56:26 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -406,7 +405,7 @@
 	<li class='node level-1 leaf pass' status='pass' test-id='20'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Looking for SignIn Button</div>
-			<span class='node-time'>May 9, 2020 02:56:26 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -414,7 +413,7 @@
 	<li class='node level-1 leaf pass' status='pass' test-id='21'>
 		<div class='collapsible-header'>
 			<div class='node-name'>SignIn Found</div>
-			<span class='node-time'>May 9, 2020 02:56:26 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -422,17 +421,17 @@
 </ul>
 					</div>
 				</li>
-				<li class='test displayed active has-leaf fail' status='fail' bdd='false' test-id='22'>
+				<li class='test displayed active has-leaf pass' status='pass' bdd='false' test-id='22'>
 					<div class='test-heading'>
 						<span class='test-name'>SVGClickTestCase</span>
-						<span class='test-time'>May 9, 2020 02:56:35 PM</span>
-						<span class='test-status right fail'>fail</span>
+						<span class='test-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
+						<span class='test-status right pass'>pass</span>
 					</div>
 					<div class='test-content hide'>
 <div class='test-time-info'>
-	<span class='label start-time'>May 9, 2020 02:56:35 PM</span>
-	<span class='label end-time'>May 9, 2020 02:56:42 PM</span>
-	<span class='label time-taken grey lighten-1 white-text'>0h 0m 7s+562ms</span>
+	<span class='label start-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
+	<span class='label end-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 3s+844ms</span>
 </div>
 <div class='test-steps'>
 	<table class='bordered table-results'>
@@ -446,7 +445,7 @@
 		<tbody>
 			<tr class='log' status='info'>
 				<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-				<td class='timestamp'>2:56:34 PM</td>
+				<td class='timestamp'>6:41:13 PM</td>
 				<td class='step-details'>
 						Help Button Clicked
 					
@@ -454,7 +453,7 @@
 			</tr>
 			<tr class='log' status='info'>
 				<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-				<td class='timestamp'>2:56:34 PM</td>
+				<td class='timestamp'>6:41:13 PM</td>
 				<td class='step-details'>
 						LOGIN STARTED
 					
@@ -462,7 +461,7 @@
 			</tr>
 			<tr class='log' status='info'>
 				<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-				<td class='timestamp'>2:56:42 PM</td>
+				<td class='timestamp'>6:41:17 PM</td>
 				<td class='step-details'>
 						LOGIN SUCCESS
 					
@@ -470,39 +469,17 @@
 			</tr>
 			<tr class='log' status='info'>
 				<td class='status info' title='info' alt='info'><i class='material-icons'>info_outline</i></td>
-				<td class='timestamp'>2:56:42 PM</td>
+				<td class='timestamp'>6:41:17 PM</td>
 				<td class='step-details'>
 						Help Button Click Test Complete
 					
 				</td>
 			</tr>
-			<tr class='log' status='fail'>
-				<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
-				<td class='timestamp'>2:56:43 PM</td>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>6:41:17 PM</td>
 				<td class='step-details'>
-						<span class='badge white-text red'>testSVGClickTestCase - Test Case Failed</span>
-					
-				</td>
-			</tr>
-			<tr class='log' status='fail'>
-				<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
-				<td class='timestamp'>2:56:43 PM</td>
-				<td class='step-details'>
-						<span class='badge white-text red'>org.openqa.selenium.ElementClickInterceptedException: element click intercepted: Element <path d="M19 2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h4l3 3 3-3h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-6 16h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 11.9 13 12.5 13 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"></path> is not clickable at point (1172, 97). Other element would receive the click: <svg class="MuiSvgIcon-root explore-query-svg ml-2" focusable="false" viewBox="0 0 24 24" color="#36245B" aria-hidden="true" role="presentation" title="Click here to explore more">...</svg>
-  (Session info: chrome=81.0.4044.92)
-Build info: version: '4.0.0-alpha-4', revision: 'c2d955b49e'
-System info: host: 'gopis-mac-mini.lan', ip: '192.168.86.164', os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.15.4', java.version: '1.8.0_241'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 81.0.4044.92, chrome: {chromedriverVersion: 81.0.4044.69 (6813546031a4b..., userDataDir: /var/folders/2h/j1bhmdvs5y3...}, goog:chromeOptions: {debuggerAddress: localhost:53132}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: MAC, platformName: MAC, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:virtualAuthenticators: true}
-Session ID: c23b3028d7feca6da8c5cca19f42571d - Test Case Failed</span>
-					
-				</td>
-			</tr>
-			<tr class='log' status='fail'>
-				<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
-				<td class='timestamp'>2:56:44 PM</td>
-				<td class='step-details'>
-						Test Case Failed Snapshot is below com.aventstack.extentreports.ExtentTest@5e63cad
+						<span class='badge white-text green'>testSVGClickTestCase - Test Case PASSED</span>
 					
 				</td>
 			</tr>
@@ -513,7 +490,7 @@ Session ID: c23b3028d7feca6da8c5cca19f42571d - Test Case Failed</span>
 	<li class='node level-1 leaf pass' status='pass' test-id='23'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Looking for username</div>
-			<span class='node-time'>May 9, 2020 02:56:35 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -521,7 +498,7 @@ Session ID: c23b3028d7feca6da8c5cca19f42571d - Test Case Failed</span>
 	<li class='node level-1 leaf pass' status='pass' test-id='24'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Clicked inside username</div>
-			<span class='node-time'>May 9, 2020 02:56:35 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -529,7 +506,7 @@ Session ID: c23b3028d7feca6da8c5cca19f42571d - Test Case Failed</span>
 	<li class='node level-1 leaf pass' status='pass' test-id='25'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Cleared the text if any</div>
-			<span class='node-time'>May 9, 2020 02:56:35 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -537,7 +514,7 @@ Session ID: c23b3028d7feca6da8c5cca19f42571d - Test Case Failed</span>
 	<li class='node level-1 leaf pass' status='pass' test-id='26'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Username Typed</div>
-			<span class='node-time'>May 9, 2020 02:56:35 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -545,7 +522,7 @@ Session ID: c23b3028d7feca6da8c5cca19f42571d - Test Case Failed</span>
 	<li class='node level-1 leaf pass' status='pass' test-id='27'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Password Typed</div>
-			<span class='node-time'>May 9, 2020 02:56:35 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -553,7 +530,7 @@ Session ID: c23b3028d7feca6da8c5cca19f42571d - Test Case Failed</span>
 	<li class='node level-1 leaf pass' status='pass' test-id='28'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Button Clicked</div>
-			<span class='node-time'>May 9, 2020 02:56:35 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -561,7 +538,7 @@ Session ID: c23b3028d7feca6da8c5cca19f42571d - Test Case Failed</span>
 	<li class='node level-1 leaf pass' status='pass' test-id='29'>
 		<div class='collapsible-header'>
 			<div class='node-name'>Logout Found</div>
-			<span class='node-time'>May 9, 2020 02:56:42 PM</span>
+			<span class='node-time'>Saturday, May 09, 2020, 06:41 PM (CDT)</span>
 			&middot; <span class='node-duration'>0h 0m 0s+0ms</span>
 			<span class='test-status right pass'>pass</span>
 		</div>
@@ -609,19 +586,19 @@ Session ID: c23b3028d7feca6da8c5cca19f42571d - Test Case Failed</span>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>May 9, 2020 02:56:17 PM</div>
+					<div class='panel-lead'>Saturday, May 09, 2020, 06:41 PM (CDT)</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>May 9, 2020 02:56:44 PM</div>
+			 		<div class='panel-lead'>Saturday, May 09, 2020, 06:41 PM (CDT)</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>0h 0m 26s+77ms</div>
+					<div class='panel-lead'>0h 0m 13s+7ms</div>
 				</div>
 			</div>
 			<div class='col s4'>
@@ -657,13 +634,13 @@ Session ID: c23b3028d7feca6da8c5cca19f42571d - Test Case Failed</span>
 		<script>
 			var statusGroup = {
                 parentCount: 4,
-				passParent: 3,
-				failParent: 1,
+				passParent: 4,
+				failParent: 0,
 				fatalParent: 0,
 				errorParent: 0,
 				warningParent: 0,
 				skipParent: 0,
-				exceptionsParent: 1,
+				exceptionsParent: 0,
 				childCount: 25,
 				passChild: 25,
 				failChild: 0,
@@ -688,7 +665,7 @@ Session ID: c23b3028d7feca6da8c5cca19f42571d - Test Case Failed</span>
 		</script>
 		<script>
 			var timeline = {
-			        "Login Page Button Shadow":0.033,"Login Button Click":5.663,"Logout Button Click":0.325,"SVGClickTestCase":7.562
+			        "Login Page Button Shadow":0.034,"Login Button Click":4.146,"Logout Button Click":0.54,"SVGClickTestCase":3.844
 			};
 		</script>
 	
