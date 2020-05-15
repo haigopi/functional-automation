@@ -34,6 +34,6 @@ public class HomeScreenAutomation extends TestConfig {
 //        driver.findElement(By.id("react-select-4-option-0")).click();
 //        driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span")).click();
 //        driver.findElement(By.xpath("//div[@id='panel1d-header']/div")).click();
-    }
+}
 
 }
