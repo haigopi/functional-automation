@@ -22,7 +22,6 @@ public class HelpButtonTest extends TestConfig {
         driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.explore-query-svg.ml-2")).click();
         driver.findElement(By.id("mainArc-890e16a2-6415-4661-982d-33acafbb1fed")).click();
         Thread.sleep(1*2000);
-
     }
 
     @AfterClass(alwaysRun = true)
