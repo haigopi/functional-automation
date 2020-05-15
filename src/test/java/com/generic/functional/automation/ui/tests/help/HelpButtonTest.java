@@ -24,6 +24,7 @@ public class HelpButtonTest extends TestConfig {
         Thread.sleep(1*2000);
     }
 
+
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
         driver.quit();
