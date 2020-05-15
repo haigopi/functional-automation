@@ -1,15 +1,12 @@
 package com.generic.functional.automation.ui.tests.login;
 
-import com.generic.framework.ui.functional.ExtentManager;
-import com.generic.framework.ui.functional.Login;
-import com.generic.functional.automation.ui.tests.common.TestConfig;
-import com.generic.framework.ui.functional.AppConstants;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.BeforeClass;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
+import com.generic.functional.automation.ui.tests.common.TestConfig;
 
 
 public class LoginLogoutAutomation extends TestConfig {
