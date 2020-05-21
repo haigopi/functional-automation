@@ -70,6 +70,10 @@ public class TestConfig {
 
     @AfterMethod
     public void getResult(ITestResult result) throws Exception {
+
+        if(test!=null)
+            return;
+
         if (result.getStatus() == ITestResult.FAILURE) {
             test.log(Status.FAIL, MarkupHelper.createLabel(result.getName() + " - Test Case Failed", ExtentColor.RED));
             test.log(Status.FAIL, MarkupHelper.createLabel(result.getThrowable() + " - Test Case Failed", ExtentColor.RED));
@@ -108,7 +112,9 @@ public class TestConfig {
         if (!"".equals(verificationErrorString)) {
             fail(verificationErrorString);
         }
-        extent.flush();
+        if(extent!=null) {
+            extent.flush();
+        }
         driver.quit();
     }
 

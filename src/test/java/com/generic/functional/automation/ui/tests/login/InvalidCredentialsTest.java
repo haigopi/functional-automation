@@ -41,8 +41,7 @@ public class InvalidCredentialsTest extends TestConfig {
             s = "";
         }
 
-        Assert.assertEquals(s, "Username or password doesn't exists."
-        );
+        Assert.assertEquals(s, "Username or password doesn't exists.");
 
 
     }

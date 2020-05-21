@@ -6,10 +6,5 @@
 
             </package>
         </packages>
-<!--        <classes>-->
-<!--            <class name="com.generic.functional.automation.ui.tests.login.LoginLogoutAutomation"/>-->
-<!--&lt;!&ndash;            <class name="com.generic.functional.automation.ui.tests.login.HomeScreenAutomation"/>&ndash;&gt;-->
-<!--            <class name="com.generic.functional.automation.ui.tests.home.HomePageAutomation"/>-->
-<!--        </classes>-->
     </test>
 </suite>
