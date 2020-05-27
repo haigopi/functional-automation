@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
@@ -58,7 +59,8 @@ public class TestConfig {
 
     private void setOS() {
         String osName = System.getProperty("os.name");
-        String driverName = "chromedriver_win32.exe";
+
+        String driverName = "chromedriver_83.exe";
 
         System.out.println("OS found -> " + osName);
         if (!osName.startsWith("Windows")) {
