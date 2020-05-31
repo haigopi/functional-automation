@@ -112,20 +112,59 @@ public class HomePageAutomation extends TestConfig {
 
     @Test
     public void testVerifySubjectGuides() throws Exception {
+        test = extent.createTest("Verify the Subject Guide Test");
         logicAndClickHelpButton();
         WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
         helpButton.click();
+        test.log(Status.INFO, "Testing the Functionality of the Verify the Subjects Guide Label");
         //driver.get("https://a4data-qe.netlify.app/dashboard/");
         driver.findElement(By.id("mainArc-890e16a2-6415-4661-982d-33acafbb1fed")).click();
+        Thread.sleep(1*1000);
         driver.findElement(By.id("mainArc-656a2ba3-4af2-471a-a5ef-6b3decb8dfeb")).click();
+        Thread.sleep(1*1000);
         driver.findElement(By.id("mainArc-df1ff2c9-14ac-4aa1-8572-93a4cd914093")).click();
+        Thread.sleep(1*1000);
         driver.findElement(By.id("mainArc-2ba8d1f2-779e-4574-b83e-046a283eff931")).click();
+        Thread.sleep(1*1000);
+        WebElement element = driver.findElement(By.xpath("//*[text()='Domain of Values']"));
+        System.out.println("$$$$ Check the element" +element);
+        test.log(Status.INFO, "Found Domain Domain of Values");
+        Thread.sleep(2*1000);
+        driver.findElement(By.xpath("//*[text()='']"));
+        test.log(Status.INFO, "Found Domain Drill down for Sub-elements");
     }
 
     public void logicAndClickHelpButton() throws Exception {
         test = extent.createTest("Help Button International Click");
         login.doLogin(test);
     }
+    @Test
+    public void testVerifyResetButton() throws Exception {
+        test = extent.createTest("Test Case - Verify Reset Button");
+        login.doLogin(test);
+        WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+        helpButton.click();
+        test.log(Status.INFO, "Help Button Clicked");
+        test.log(Status.INFO, "Sunburst Shown");
+        driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d")).click();
+        Thread.sleep(3*1000);
+        driver.findElement(By.id("mainArc-71ef3c15-be01-454d-bd1e-c59d13904a65")).click();
+        test.log(Status.INFO, "Clicked on Shipments");
+        Thread.sleep(3*1000);
+        driver.findElement(By.id("mainArc-466ed1b9-526b-45c7-a02c-e6d419ef606f")).click();
+        test.log(Status.INFO, "Clicked on International");
+//        WebElement btn2 = driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.mr-2"));  //COpy link
+//        System.out.println("Button2 "+btn2);
+//        btn2.click();
+        test.log(Status.INFO, "Clicked on Country of Origin");
+        Thread.sleep(4*1000);
+        //driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.highlightIcon")).click();
+        WebElement resetBtn =  driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.highlightIcon"));
+        test.log(Status.INFO, "Reset Button Clicked");
+        System.out.println("ResetButton "+resetBtn);
+        resetBtn.click();
+    }
+
 
 
 }
