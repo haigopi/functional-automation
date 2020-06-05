@@ -16,7 +16,7 @@ public class Login {
         this.driver = driver;
     }
 
-    public void doLogin(ExtentTest test) {
+    public void doLogin(ExtentTest test) throws Exception{
         test.log(Status.INFO, "LOGIN STARTED");
         driver.get("https://a4data-qe.netlify.app");
 
@@ -25,8 +25,9 @@ public class Login {
         test.createNode("Clicked inside username");
         driver.findElement(By.id("email")).clear();
         test.createNode("Cleared the text if any ");
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.findElement(By.id("email")).sendKeys("superadmin");
+        Thread.sleep(2*1000);
         test.createNode("Username Typed");
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElement(By.id("password")).clear();
