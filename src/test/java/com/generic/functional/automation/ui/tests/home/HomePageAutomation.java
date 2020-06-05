@@ -82,6 +82,29 @@ public class HomePageAutomation extends TestConfig {
     }
 
     @Test
+    public void testShipmentsSunburstDocClick() throws Exception {
+        test = extent.createTest("Shipments Documents Click");
+        driver.manage().window().maximize();
+        login.doLogin(test);
+        test.createNode("Help Button Click");
+        WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+        helpButton.click();
+        Thread.sleep(5 * 1000);
+        test.createNode("Subject Shipments Button Click");
+        WebElement SubjectShipmentsButtonClick=driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d"));
+        SubjectShipmentsButtonClick.click();
+        Thread.sleep(5 * 1000);
+        test.createNode("Documents Cluster Click");
+        WebElement DocumentsCluster =driver.findElement(By.id("mainArc-11a018d0-8978-48ff-9c7b-ea8606201da5"));
+        DocumentsCluster.click();
+        Thread.sleep(5 * 1000);
+        test.createNode("Documents Provider Cluster Click");
+        WebElement DocumentsProviderCluster =driver.findElement(By.id("mainArc-cd5709c6-2d2e-4d24-8c1e-df38a9f9b0e5"));
+        DocumentsProviderCluster.click();
+        Thread.sleep(5 * 1000);
+    }
+
+    @Test
     public void testResetButton() throws Exception {
         test = extent.createTest("Reset Button Test");
         login.doLogin(test);
@@ -107,9 +130,6 @@ public class HomePageAutomation extends TestConfig {
         test.log(Status.INFO, "Reset Button Clicked");
 
     }
-
-
-
     @Test
     public void testVerifySubjectGuides() throws Exception {
         test = extent.createTest("Verify the Subject Guide Test");
