@@ -1,0 +1,16 @@
+*.iml
+.idea
+**/.idea/*
+/.idea/*
+.gradle/*
+*/build/*
+build/*
+logs
+out
+out/*
+*.jar
+*.log
+build/
+.DS_STORE
+**/node_modules
+**/package-lock.json

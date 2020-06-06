@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+}
+
+group 'com.a4'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.0.0-alpha-4'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.testng', name: 'testng', version: '7.1.0'
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
+    compile group: 'com.aventstack', name: 'extentreports', version: '4.1.5'
+    compile group: 'com.aventstack', name: 'extentreports-testng-adapter', version: '1.0.7'
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+
+
+}
+
+test {
+    useTestNG()
+    maxHeapSize = '1G'
+}

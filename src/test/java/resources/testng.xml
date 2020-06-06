@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="A4" verbose="1" preserve-order="true">
+    <test name="Regression Suite">
+        <packages>
+            <package name="com.generic.functional.automation.ui.tests">
+
+            </package>
+        </packages>
+    </test>
+</suite>
