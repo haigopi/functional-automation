@@ -32,29 +32,68 @@ public class HomePageAutomation extends TestConfig {
 
     }
 
+    @Test
+    public void testVerifyResetButtonSearchBar() throws Exception {
+        test = extent.createTest("Home > Verify Reset Button / Clear the Search Bubble");
+        login.doLogin(test);
+        test.log(Status.INFO,"Help Button Clicked");
+        WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+        helpButton.click();
+        Thread.sleep(5 * 1000);
+        test.log(Status.INFO,"Shipments Clicked");
+        driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d")).click();
+        Thread.sleep(7 * 1000);
+        test.log(Status.INFO,"International Clicked");
+        driver.findElement(By.id("mainArc-71ef3c15-be01-454d-bd1e-c59d13904a65")).click();
+        Thread.sleep(7 * 1000);
+        test.log(Status.INFO,"XXXXXXX Clicked");
+        driver.findElement(By.id("mainArc-fa581093-0286-4f62-a4a1-5abf224fa8f1")).click();
+        Thread.sleep(7 * 1000);
+        driver.findElement(By.className("search_icon")).click();
+        Thread.sleep(7 * 1000);
 
+        WebElement element = driver.findElement(By.xpath("//*[@id=\"gatsby-focus-wrapper\"]/div/main/div/div/div/div[4]/div/div[2]/div[2]/div/div/div/div/div/div/div/div[1]"));
+        element.click();
+        WebElement element1 = driver.findElement(By.id("copy-query-0"));
+        //WebElement element = driver.findElement(By.cssSelector("#copy-query-0 > path"));
+        System.out.println("Is Element Enabled -> "+element1.isEnabled());
+        System.out.println("Is Element is Displayed -> "+element1.isDisplayed());
+        element1.click();
+        Thread.sleep(7 * 1000);
+        test.log(Status.INFO, "Query Copied");
+        driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.highlightIcon")).click();  // Reset Button
+        Thread.sleep(7 * 1000);
+
+
+    }
 
 
     @Test
     public void testVerifyInternationalCountryOfOrigin() throws Exception {
         test = extent.createTest("Verify International Facts Country Of Origin");
+        driver.manage().window().maximize();
         login.doLogin(test);
+        Thread.sleep(7*1000);
+       // driver.manage().window().maximize();
         test.log(Status.INFO, "Help button Clicked");
         WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
         helpButton.click();
+        Thread.sleep(7*1000);
         test.log(Status.INFO, "Sunburst Shown");
         test.log(Status.INFO, "Shipments Cluster Clicked on the Sunburst");
         driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d")).click();
-        Thread.sleep(5*1000);
+        Thread.sleep(7*1000);
         test.log(Status.INFO, "International Clicked on the Sunburst");
         driver.findElement(By.id("mainArc-71ef3c15-be01-454d-bd1e-c59d13904a65")).click();
-        Thread.sleep(5*1000);
+        Thread.sleep(7*1000);
         test.log(Status.INFO, "Country of Origin Element Clicked on the Sunburst");
         WebElement helpButtoncountry = driver.findElement(By.id("mainArc-466ed1b9-526b-45c7-a02c-e6d419ef606f"));
         helpButtoncountry.click();
-        Thread.sleep(5*1000);
+        Thread.sleep(7*1000);
         driver.findElement(By.xpath("//*[text()=' Total Records']"));
         test.log(Status.INFO,"Total Records found and table shown");
+        Thread.sleep(7*1000);
+
 
     }
 
@@ -79,6 +118,8 @@ public class HomePageAutomation extends TestConfig {
         test.log(Status.INFO, "Documents Element Clicked");
         driver.findElement(By.xpath("//*[text()=' Total Records']"));
         test.log(Status.INFO,"Total Records found and table shown");
+        Thread.sleep(5*1000);
+
 
     }
 
@@ -106,48 +147,39 @@ public class HomePageAutomation extends TestConfig {
     }
 
     @Test
-    public void testResetButton() throws Exception {
-        test = extent.createTest("Verify Reset Button");
+    public void testVerifyResetButtonSunburst() throws Exception {
+        test = extent.createTest("Home Page Verify Reset Button by Sunburst");
         login.doLogin(test);
-
+        driver.manage().window().maximize();
+       // test.createNode("Verified Reset Button");
         test.log(Status.INFO,"Help Button Clicked");
         WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
         helpButton.click();
-        Thread.sleep(5 * 1000);
+        Thread.sleep(7 * 1000);
         test.log(Status.INFO, "Sunburst Shown");
+        test.createNode("Verified Reset Button");
         driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d")).click();
-        Thread.sleep(5 * 1000);
+        Thread.sleep(7 * 1000);
         test.log(Status.INFO, "Clicked on Shipments Cluster");
         driver.findElement(By.id("mainArc-71ef3c15-be01-454d-bd1e-c59d13904a65")).click();
-        Thread.sleep(5 * 1000);
+        Thread.sleep(7 * 1000);
         test.log(Status.INFO, "Clicked on International");
         driver.findElement(By.id("mainArc-7000c84e-b726-405b-ae57-3103e755a869")).click();
-        Thread.sleep(5 * 1000);
+        Thread.sleep(7 * 1000);
         test.log(Status.INFO, "Clicked on Sub element to get the Query");
         driver.findElement(By.id("mainArc-a4b796c9-8bbb-4f37-b959-26b2e1dd758e")).click();
-        Thread.sleep(5 * 1000);
+        Thread.sleep(7 * 1000);
         test.log(Status.INFO, "Clicked on Sub element to get the Query");
         driver.findElement(By.id("mainArc-dcf61afd-31e9-4faa-9e8f-8743a267ac26")).click();
-        Thread.sleep(5 * 1000);
+        Thread.sleep(7 * 1000);
         test.log(Status.INFO, "Clicked on Sub element to get the Query");
         driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.highlightIcon")).click();
-        Thread.sleep(5 * 1000);
+        Thread.sleep(7 * 1000);
         driver.findElement(By.xpath("//input[@name='']")).click();
-        Thread.sleep(5 * 1000);
+        Thread.sleep(7 * 1000);
         test.log(Status.INFO, "Clicked on Reset Button");
         driver.findElement(By.xpath("//input[@name='']")).clear();
-        Thread.sleep(3 * 1000);
-        driver.findElement(By.xpath("//input[@name='']")).sendKeys("list all international");
-        test.log(Status.INFO, "Entered a Query in search bubble");
-        Thread.sleep(3*1000);
-        driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.highlightIcon > path")).click();
-        test.log(Status.INFO, "Reset Button Clicked");
-        Thread.sleep(2*1000);
-     /*   driver.findElement(By.xpath("//input[@name='']")).sendKeys("list all customers by city");
-        test.log(Status.INFO, "Entered Query No.2");
-        Thread.sleep(5*1000);
-        driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.highlightIcon > path")).click();
-        test.log(Status.INFO, "Reset Button Clicked");*/
+        Thread.sleep(7 * 1000);
 
     }
     @Test
@@ -158,59 +190,21 @@ public class HomePageAutomation extends TestConfig {
         WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
         helpButton.click();
         Thread.sleep(5 * 1000);
-        driver.findElement(By.id("mainArc-890e16a2-6415-4661-982d-33acafbb1fed")).click();
+        test.createNode("Verified Subject Guides Successfully!");
+        driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[3]/div/div/div/ul/li[2]/span")).click();
         Thread.sleep(5 * 1000);
-        driver.findElement(By.id("mainArc-656a2ba3-4af2-471a-a5ef-6b3decb8dfeb")).click();
+        driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[3]/div/div/div/ul/li/span")).click();
         Thread.sleep(5 * 1000);
-        driver.findElement(By.id("mainArc-df1ff2c9-14ac-4aa1-8572-93a4cd914093")).click();
-        Thread.sleep(5 * 1000);
-        driver.findElement(By.linkText("Customer")).click();
-        Thread.sleep(5 * 1000);
-        driver.findElement(By.id("mainArc-dde43c3d-c500-407e-9786-7fb0b1d39b85")).click();
-        Thread.sleep(5 * 1000);
-        driver.findElement(By.linkText("Customer")).click();
-        Thread.sleep(5 * 1000);
-        driver.findElement(By.id("mainArc-cf0ac243-723d-468b-b40c-91195565e4e0")).click();
-        Thread.sleep(5 * 1000);
-        driver.findElement(By.linkText("Customer")).click();
-        Thread.sleep(5 * 1000);
-        driver.findElement(By.id("mainArc-79796cc3-bd59-437c-9763-495a5f1fb6bc")).click();
-        Thread.sleep(5 * 1000);
-        driver.findElement(By.id("mainArc-79796cc3-bd59-437c-9763-495a5f1fb6bc1")).click();
-        Thread.sleep(5 * 1000);
-
+        driver.findElement(By.xpath("//*[text()=' -- Subjects Guide -- ']"));
+        test.log(Status.INFO,"Subjects Guide Displayed");
+        driver.findElement(By.xpath("//*[text()='Domain of Values']"));
+        test.log(Status.INFO,"Domain of Values Displayed");
+        driver.findElement(By.xpath("//*[text()='Drill down for Sub-elements']"));
+        test.log(Status.INFO,"Drill down for Sub-elements Displayed");
     }
 
-    public void logicAndClickHelpButton() throws Exception {
-        test = extent.createTest("Help Button International Click");
-        login.doLogin(test);
-    }
-    @Test
-    public void testVerifyResetButton() throws Exception {
-        test = extent.createTest("Test Case - Verify Reset Button");
-        login.doLogin(test);
-        WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
-        helpButton.click();
-        test.log(Status.INFO, "Help Button Clicked");
-        test.log(Status.INFO, "Sunburst Shown");
-        driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d")).click();
-        Thread.sleep(3*1000);
-        driver.findElement(By.id("mainArc-71ef3c15-be01-454d-bd1e-c59d13904a65")).click();
-        test.log(Status.INFO, "Clicked on Shipments");
-        Thread.sleep(3*1000);
-        driver.findElement(By.id("mainArc-466ed1b9-526b-45c7-a02c-e6d419ef606f")).click();
-        test.log(Status.INFO, "Clicked on International");
-//        WebElement btn2 = driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.mr-2"));  //COpy link
-//        System.out.println("Button2 "+btn2);
-//        btn2.click();
-        test.log(Status.INFO, "Clicked on Country of Origin");
-        Thread.sleep(4*1000);
-        //driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.highlightIcon")).click();
-        WebElement resetBtn =  driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.highlightIcon"));
-        test.log(Status.INFO, "Reset Button Clicked");
-        System.out.println("ResetButton "+resetBtn);
-        resetBtn.click();
-    }
+
+
 
 
 
