@@ -64,7 +64,7 @@ public class TestConfig {
 
         System.out.println("OS found -> " + osName);
         if (!osName.startsWith("Windows")) {
-            driverName = "chromedriver_83-mac";
+            driverName = "chromedriver_83-macb";
         }
 
         System.setProperty("webdriver.chrome.driver", driverName);
