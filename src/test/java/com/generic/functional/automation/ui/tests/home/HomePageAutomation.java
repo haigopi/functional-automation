@@ -119,9 +119,17 @@ public class HomePageAutomation extends TestConfig {
         driver.findElement(By.xpath("//*[text()=' Total Records']"));
         test.log(Status.INFO,"Total Records found and table shown");
         Thread.sleep(5*1000);
-
-
+        driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.helpIcon.explore-query-svg.ml-2 > path")).click();
+        driver.findElement(By.xpath("//button[@id='simple-tab-1']/span")).click();
+        driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]")).click();
+        driver.findElement(By.cssSelector("svg.css-19bqh2r")).click();
+        driver.findElement(By.id("react-select-5-option-0")).click();
+        driver.findElement(By.id("react-select-6-option-0")).click();
+        driver.findElement(By.id("react-select-7-option-4")).click();
+        driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span")).click();
     }
+
+
 
     @Test
     public void testShipmentsSunburstDocClick() throws Exception {
@@ -144,7 +152,46 @@ public class HomePageAutomation extends TestConfig {
         WebElement DocumentsProviderCluster =driver.findElement(By.id("mainArc-cd5709c6-2d2e-4d24-8c1e-df38a9f9b0e5"));
         DocumentsProviderCluster.click();
         Thread.sleep(5 * 1000);
+       // driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.helpIcon.explore-query-svg.ml-2 > path")).click();
+        WebElement helpButton1 = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+        helpButton1.click();
+        Thread.sleep(5 * 1000);
+        driver.findElement(By.xpath("//button[@id='simple-tab-1']/span")).click();
+        Thread.sleep(5 * 1000);
+
+        driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]")).click();
+        Thread.sleep(5 * 1000);
+        WebElement Axis1=driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div/div[2]/div/div/div"));
+        Axis1.click();
+        Thread.sleep(5 * 1000);
+        test.createNode("Provider clicked in drop down");
+        WebElement Provider=driver.findElement(By.id("react-select-2-option-0"));
+        Provider.click();
+        Thread.sleep(5 * 1000);
+        test.createNode("Axis2");
+        WebElement Axis2=driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[2]/div[2]/div/div/div"));
+        Axis2.click();
+        Thread.sleep(5 * 1000);
+        test.createNode("Count   clicked  ");
+        WebElement Count=driver.findElement(By.id("react-select-3-option-0"));
+        Count.click();
+        Thread.sleep(5 * 1000);
+        test.createNode("Graph");
+        WebElement Graph=driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div"));
+        Graph.click();
+        Thread.sleep(5 * 1000);
+        test.createNode("Donut view clicked in drop down ");
+        WebElement donutView=driver.findElement(By.id("react-select-4-option-3"));
+        donutView.click();
+        Thread.sleep(5 * 1000);
+        test.createNode("Show button");
+        WebElement showButton=driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span"));
+        showButton.click();
+        Thread.sleep(5 * 1000);
     }
+
+
+
 
     @Test
     public void testVerifyResetButtonSunburst() throws Exception {
