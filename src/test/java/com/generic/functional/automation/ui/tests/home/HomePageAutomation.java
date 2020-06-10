@@ -123,14 +123,23 @@ public class HomePageAutomation extends TestConfig {
         driver.findElement(By.xpath("//*[text()=' Total Records']"));
         test.log(Status.INFO,"Total Records found and table shown");
         Thread.sleep(5*1000);
-        driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.helpIcon.explore-query-svg.ml-2 > path")).click();
+        WebElement helpButton1 = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+        helpButton1.click();
+        Thread.sleep(5*1000);
         driver.findElement(By.xpath("//button[@id='simple-tab-1']/span")).click();
+        Thread.sleep(5*1000);
         driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]")).click();
+        Thread.sleep(5*1000);
         driver.findElement(By.cssSelector("svg.css-19bqh2r")).click();
+        Thread.sleep(5*1000);
         driver.findElement(By.id("react-select-5-option-0")).click();
+        Thread.sleep(5*1000);
         driver.findElement(By.id("react-select-6-option-0")).click();
+        Thread.sleep(5*1000);
         driver.findElement(By.id("react-select-7-option-4")).click();
+        Thread.sleep(5*1000);
         driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span")).click();
+
     }
 
 
@@ -164,38 +173,40 @@ public class HomePageAutomation extends TestConfig {
         test.log(Status.INFO, "Tabular View displayed");
         driver.findElement(By.xpath("//button[@id='simple-tab-1']/span")).click();
         Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Clicked on Graphical View ");
+        test.log(Status.INFO, "Graphical View Displayed ");
         driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]")).click();
         Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Grahical View displayed");
+        test.log(Status.INFO, "Under Axis 1");
         WebElement Axis1=driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div/div[2]/div/div/div"));
         Axis1.click();
         Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Clicked on Axis1");
+        test.log(Status.INFO, "Selected Provider");
         WebElement Provider=driver.findElement(By.id("react-select-2-option-0"));
         Provider.click();
         Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Clicked on Axis2");
+        test.log(Status.INFO, "Under Axis2");
         WebElement Axis2=driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[2]/div[2]/div/div/div"));
         Axis2.click();
         Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "clicked on click");
+        test.log(Status.INFO, "Selected Count");
         WebElement Count=driver.findElement(By.id("react-select-3-option-0"));
         Count.click();
         Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Graph");
+        test.log(Status.INFO, "Under Graph");
         WebElement Graph=driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div"));
         Graph.click();
         Thread.sleep(5 * 1000);
-        WebElement donutView=driver.findElement(By.id("react-select-4-option-3"));
-        donutView.click();
+        test.log(Status.INFO, "Selected Bubble Graph");
+        WebElement bubbleGraph=driver.findElement(By.id("react-select-4-option-4"));
+        bubbleGraph.click();
         Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Clicked on show ");
+
+        test.log(Status.INFO, "Clicked on Show Button ");
         WebElement showButton=driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span"));
         showButton.click();
         Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Donut view Displayed ");
-        test.createNode("Verified Documents Cluster");
+        test.log(Status.INFO, "Bubble Graph Displayed ");
+        test.createNode("Verified Documents Cluster with Dimensional Data");
 
     }
 
