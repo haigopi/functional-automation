@@ -60,13 +60,38 @@ public class HomePageAutomation extends TestConfig {
         WebElement element1 = driver.findElement(By.id("copy-query-0"));
         element1.click();
         Thread.sleep(7 * 1000);
+
+        /// VALIDATION ///
+
+        WebElement searchBubble = driver.findElement(By.className("search_input"));
+        String queryText = searchBubble.getAttribute("value");
+
+        System.out.println("Query Text (text inside search-bubble before reset button clicked): " + queryText);
+        System.out.println();
+        System.out.println("After Reset Button Clicked");
+        test.log(Status.INFO, "Text in Search Bubble BEFORE reset button clicked (" + queryText + ")");
+
         driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.highlightIcon")).click();  // Reset Button
         Thread.sleep(7 * 1000);
         test.log(Status.INFO, "Reset Button Clicked");
+
+        // Check After Reset Button Clicked
+        queryText = searchBubble.getAttribute("value"); // Used to get value after reset button clicked
+        if (queryText.isEmpty()) {
+            System.out.println("Nothing in Search Bubble; Reset Button Worked!");
+            System.out.println("This is what is in the search bubble (after reset button clicked): " + queryText);
+            test.log(Status.INFO, "Text in Search Bubble AFTER reset button clicked (" + queryText + ")");
+            System.out.println("Nothing as expected!");
+            test.log(Status.INFO, "Verification of Reset Button Complete: checked that the value is empty");
+
+        }
+        else {
+            System.out.println("Search Bubble still has text in it -> not null; Reset Button Did not Work!");
+        }
+
         test.createNode("Verified Reset Button by Query History Search");
-
-
-
+        //HTML CODE TO ACCESS
+        // <input class="search_input" type="text" name="" placeholder="Search..." value="">
 
     }
 
