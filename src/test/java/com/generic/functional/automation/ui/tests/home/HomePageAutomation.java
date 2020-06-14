@@ -4,6 +4,7 @@ import com.aventstack.extentreports.Status;
 import com.generic.functional.automation.ui.tests.common.TestConfig;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class HomePageAutomation extends TestConfig {
@@ -83,10 +84,12 @@ public class HomePageAutomation extends TestConfig {
             test.log(Status.INFO, "Text in Search Bubble AFTER reset button clicked (" + queryText + ")");
             System.out.println("Nothing as expected!");
             test.log(Status.INFO, "Verification of Reset Button Complete: checked that the value is empty");
+            Assert.assertTrue(true);
 
         }
         else {
             System.out.println("Search Bubble still has text in it -> not null; Reset Button Did not Work!");
+            Assert.assertFalse(false);
         }
 
         test.createNode("Verified Reset Button by Query History Search");
@@ -118,12 +121,32 @@ public class HomePageAutomation extends TestConfig {
         WebElement helpButtoncountry = driver.findElement(By.id("mainArc-466ed1b9-526b-45c7-a02c-e6d419ef606f"));
         helpButtoncountry.click();
         Thread.sleep(7*1000);
-        driver.findElement(By.xpath("//*[text()=' Total Records']"));
-        test.log(Status.INFO,"Total Records found and table shown");
-        Thread.sleep(7*1000);
-        test.createNode("Verified Reset Button with Search Bar");
+
+        /// VALIDATION ///
+
+        //WebElement totalRecords = driver.findElement(By.id("total-records-count"));
+        WebElement tr = driver.findElement(By.xpath("/html/body/div/div/div/main/div/div/div/div[5]/div/div/div/div[1]/div/div/div[1]/div[2]/ul/li/div/span/div[2]/span[2]"));
+        String value = tr.getText();
+        System.out.println("Value: " + value);
+        if (Integer.parseInt(value) == 0) {
+            System.out.println("No Table should appear since no data fetched for given query");
+            test.log(Status.INFO, "No Table should appear since no data fetched for given query");
+            Assert.assertEquals(Integer.parseInt(value) == 0, 0);
+            Assert.assertFalse(Integer.parseInt(value) == 0); // to fail, parameter has to be true (0 == 0) => so true; assertFalse(true) means failed test
+        }
+        else {
+            System.out.println("Table Should be Shown with the records since value > 0");
+            test.log(Status.INFO, "Table is shown with records since table records != 0");
+            Assert.assertEquals(Integer.parseInt(value) > 0, true); //setting to true since if it comes into this else, it is greater than 0
+            Assert.assertTrue(Integer.parseInt(value) > 0);
 
 
+            driver.findElement(By.xpath("//*[text()=' Total Records']"));
+            test.log(Status.INFO,"Total Records found and table shown");
+            Thread.sleep(7*1000);
+            test.createNode("Verified the table information is displayed when Country of origin is selected. ");
+        }
+        //System.out.println(totalRecords.getText());
     }
 
     @Test
