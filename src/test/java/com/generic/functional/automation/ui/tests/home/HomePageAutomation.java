@@ -28,7 +28,6 @@ public class HomePageAutomation extends TestConfig {
         driver.findElement(By.id("mainArc-f18c2bb1-ad7d-4583-8b64-7ef98ba647cc")).click();
         Thread.sleep(5*1000);
         driver.findElement(By.xpath("//*[text()=' Total Records']"));
-        //driver.findElement(By.xpath("//*[text()='28']"));
 
         test.createNode("Total Records found means table loaded");
 
@@ -84,8 +83,8 @@ public class HomePageAutomation extends TestConfig {
             test.log(Status.INFO, "Text in Search Bubble AFTER reset button clicked (" + queryText + ")");
             System.out.println("Nothing as expected!");
             test.log(Status.INFO, "Verification of Reset Button Complete: checked that the value is empty");
-            Assert.assertTrue(true);
-
+            Assert.assertTrue(true); // 1st validation
+            Assert.assertEquals(queryText, ""); //2nd validation
         }
         else {
             System.out.println("Search Bubble still has text in it -> not null; Reset Button Did not Work!");
@@ -105,7 +104,7 @@ public class HomePageAutomation extends TestConfig {
         driver.manage().window().maximize();
         login.doLogin(test);
         Thread.sleep(7*1000);
-       // driver.manage().window().maximize();
+        // driver.manage().window().maximize();
         test.log(Status.INFO, "Help button Clicked");
         WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
         helpButton.click();
@@ -131,13 +130,13 @@ public class HomePageAutomation extends TestConfig {
         if (Integer.parseInt(value) == 0) {
             System.out.println("No Table should appear since no data fetched for given query");
             test.log(Status.INFO, "No Table should appear since no data fetched for given query");
-            Assert.assertEquals(Integer.parseInt(value) == 0, 0);
+            Assert.assertEquals(0, 0);
             Assert.assertFalse(Integer.parseInt(value) == 0); // to fail, parameter has to be true (0 == 0) => so true; assertFalse(true) means failed test
         }
         else {
             System.out.println("Table Should be Shown with the records since value > 0");
             test.log(Status.INFO, "Table is shown with records since table records != 0");
-            Assert.assertEquals(Integer.parseInt(value) > 0, true); //setting to true since if it comes into this else, it is greater than 0
+            Assert.assertEquals(Integer.parseInt(value) > 0, true); //setting to true since if it comes into this else, it is greater than 0 (can be any num greater than 0 so can't put set value for expected)
             Assert.assertTrue(Integer.parseInt(value) > 0);
 
 
@@ -145,6 +144,25 @@ public class HomePageAutomation extends TestConfig {
             test.log(Status.INFO,"Total Records found and table shown");
             Thread.sleep(7*1000);
             test.createNode("Verified the table information is displayed when Country of origin is selected. ");
+
+            driver.findElement(By.xpath("//button[@id='simple-tab-1']/span")).click(); // Clicks on Graphical View
+            Thread.sleep(5*1000);
+            driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]")).click(); // Clicks on Other Graphical View
+            Thread.sleep(5*1000);
+            driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div/div[2]/div/div/div")).click(); // Click Axis 1
+            Thread.sleep(3*1000);
+            driver.findElement(By.id("react-select-2-option-0")).click(); // Click origin country
+            Thread.sleep(5*1000);
+            driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[2]/div[2]/div/div/div")).click(); // Click Axis 2
+            Thread.sleep(3*1000);
+            driver.findElement(By.id("react-select-3-option-0")).click(); // Click count
+            Thread.sleep(5*1000);
+            driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div")).click(); //Click graph
+            Thread.sleep(3*1000);
+            driver.findElement(By.id("react-select-4-option-4")).click(); // Click bubble Graph
+            Thread.sleep(5*1000);
+            driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span")).click(); // Click Show
+
         }
         //System.out.println(totalRecords.getText());
     }
@@ -223,29 +241,50 @@ public class HomePageAutomation extends TestConfig {
         Thread.sleep(5 * 1000);
         test.log(Status.INFO, "Graphical View Displayed ");
         driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]")).click();
+
+        /// VALIDATION ///
+
         Thread.sleep(5 * 1000);
         test.log(Status.INFO, "Under Axis 1");
         WebElement Axis1=driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div/div[2]/div/div/div"));
         Axis1.click();
+
+
         Thread.sleep(5 * 1000);
         test.log(Status.INFO, "Selected Provider");
         WebElement Provider=driver.findElement(By.id("react-select-2-option-0"));
+        test.log(Status.INFO, "Validating 'Provider' variable");
+        Assert.assertTrue(Provider.getText().equals("Provider")); //1st Validator
+        Assert.assertEquals(Provider.getText(), "Provider"); // 2nd Validator
+        test.log(Status.INFO, "Validation of 'Provider' variable Successful");
         Provider.click();
+
         Thread.sleep(5 * 1000);
         test.log(Status.INFO, "Under Axis2");
         WebElement Axis2=driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[2]/div[2]/div/div/div"));
         Axis2.click();
+
         Thread.sleep(5 * 1000);
         test.log(Status.INFO, "Selected Count");
         WebElement Count=driver.findElement(By.id("react-select-3-option-0"));
+        test.log(Status.INFO, "Validating 'COUNT' variable");
+        Assert.assertTrue(Count.getText().equals("COUNT")); //1st Validator
+        Assert.assertEquals(Count.getText(), "COUNT"); // 2nd Validator
+        test.log(Status.INFO, "Validation of 'COUNT' variable Successful");
         Count.click();
         Thread.sleep(5 * 1000);
+
         test.log(Status.INFO, "Under Graph");
         WebElement Graph=driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div"));
         Graph.click();
+
         Thread.sleep(5 * 1000);
         test.log(Status.INFO, "Selected Bubble Graph");
         WebElement bubbleGraph=driver.findElement(By.id("react-select-4-option-4"));
+        test.log(Status.INFO, "Validating 'Bubble Graph' variable");
+        Assert.assertTrue(bubbleGraph.getText().equals("Bubble Graph")); //1st Validator
+        Assert.assertEquals(bubbleGraph.getText(), "Bubble Graph"); // 2nd Validator
+        test.log(Status.INFO, "Validation of 'Bubble Graph' variable Successful");
         bubbleGraph.click();
         Thread.sleep(5 * 1000);
 
@@ -267,7 +306,7 @@ public class HomePageAutomation extends TestConfig {
         login.doLogin(test);
         Thread.sleep(5 * 1000);
         driver.manage().window().maximize();
-       // test.createNode("Verified Reset Button");
+        // test.createNode("Verified Reset Button");
         test.log(Status.INFO,"Help Button Clicked");
         WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
         helpButton.click();
@@ -329,6 +368,4 @@ public class HomePageAutomation extends TestConfig {
 
 
 }
-
-
 
