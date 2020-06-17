@@ -1,11 +1,13 @@
 package com.generic.functional.automation.ui.tests.login;
 
+import com.aventstack.extentreports.Status;
 import com.generic.functional.automation.ui.tests.common.TestConfig;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public class InvalidCredentialsTest extends TestConfig {

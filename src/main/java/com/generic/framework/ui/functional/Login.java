@@ -1,10 +1,13 @@
 package com.generic.framework.ui.functional;
 
+
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
+import helper.HighlightHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 
 import java.util.concurrent.TimeUnit;
 
@@ -26,12 +29,21 @@ public class Login {
     driver.findElement(By.id("email")).clear();
     test.log(Status.INFO, "Cleared the text if any ");
     driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
+    WebElement username = driver.findElement(By.xpath("/html/body/div/div/div/main/div/main/div/form/div[1]/div/input"));
+    HighlightHelper.highLightElement(driver,username);
+
+
     driver.findElement(By.id("email")).sendKeys("superadmin");
     Thread.sleep(2 * 1000);
     test.createNode("LoginPage Username= \"superadmin\"  Typed");
     driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
     driver.findElement(By.id("password")).clear();
     driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+
+    WebElement password = driver.findElement(By.xpath("/html/body/div/div/div/main/div/main/div/form/div[2]/div/input"));
+    HighlightHelper.highLightElement(driver, password);
+
     driver.findElement(By.id("password")).sendKeys("Design_20");
     test.createNode("LoginPage Password =\"Design_20\" Typed ");
     driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
@@ -45,7 +57,7 @@ public class Login {
     driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     //2. How do I know I actually Logged In?
     driver.findElement(By.xpath("//*[text()='Logout']"));
-    test.log(Status.INFO, "clicking on login button");
+    //test.log(Status.INFO, "clicking on login button");
     test.log(Status.INFO, "LOGIN SUCCESS");
     test.createNode("Logout ");
 
