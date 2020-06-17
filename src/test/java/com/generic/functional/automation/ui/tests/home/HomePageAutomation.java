@@ -1,6 +1,7 @@
 package com.generic.functional.automation.ui.tests.home;
 
 import com.aventstack.extentreports.Status;
+import helper.HighlightHelper;
 import com.generic.functional.automation.ui.tests.common.TestConfig;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -40,10 +41,13 @@ public class HomePageAutomation extends TestConfig {
         Thread.sleep(5 * 1000);
         test.log(Status.INFO,"Clicked on Help Button");
         WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+        HighlightHelper.highLightElement(driver , helpButton);
         helpButton.click();
         Thread.sleep(5 * 1000);
         test.log(Status.INFO,"Clicked on Shipments");
-        driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d")).click();
+        WebElement e1 = driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d"));
+        //HighlightHelper.highLightElement(driver, e1); // arcs dont highlight
+        e1.click();
         Thread.sleep(7 * 1000);
         test.log(Status.INFO,"Clicked on International");
         driver.findElement(By.id("mainArc-71ef3c15-be01-454d-bd1e-c59d13904a65")).click();
@@ -52,12 +56,16 @@ public class HomePageAutomation extends TestConfig {
         driver.findElement(By.id("mainArc-fa581093-0286-4f62-a4a1-5abf224fa8f1")).click();
         Thread.sleep(7 * 1000);
         test.log(Status.INFO, "Clicked on Search Button");
-        driver.findElement(By.className("search_icon")).click();
+        WebElement searchButton = driver.findElement(By.className("search_icon"));
+        HighlightHelper.highLightElement(driver, searchButton);
+        searchButton.click();
         Thread.sleep(7 * 1000);
         WebElement element = driver.findElement(By.xpath("//*[@id=\"gatsby-focus-wrapper\"]/div/main/div/div/div/div[4]/div/div[2]/div[2]/div/div/div/div/div/div/div/div[1]"));
+        HighlightHelper.highLightElement(driver ,element);
         element.click();
         test.log(Status.INFO, "Query Copied");
         WebElement element1 = driver.findElement(By.id("copy-query-0"));
+        HighlightHelper.highLightElement(driver, element1);
         element1.click();
         Thread.sleep(7 * 1000);
 
@@ -71,8 +79,10 @@ public class HomePageAutomation extends TestConfig {
         System.out.println("After Reset Button Clicked");
         test.log(Status.INFO, "Text in Search Bubble BEFORE reset button clicked (" + queryText + ")");
 
-        driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.highlightIcon")).click();  // Reset Button
-        Thread.sleep(7 * 1000);
+        WebElement resetButton = driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.highlightIcon")); // Reset Button
+        HighlightHelper.highLightElement(driver, resetButton);
+        resetButton.click();
+        Thread.sleep(3 * 1000);
         test.log(Status.INFO, "Reset Button Clicked");
 
         // Check After Reset Button Clicked
@@ -88,7 +98,7 @@ public class HomePageAutomation extends TestConfig {
         }
         else {
             System.out.println("Search Bubble still has text in it -> not null; Reset Button Did not Work!");
-            Assert.assertFalse(false);
+            Assert.assertFalse(true); // terminate & exit
         }
 
         test.createNode("Verified Reset Button by Query History Search");
@@ -218,6 +228,7 @@ public class HomePageAutomation extends TestConfig {
         Thread.sleep(5 * 1000);
         test.log(Status.INFO, "Help Button Clicked");
         WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+        HighlightHelper.highLightElement(driver, helpButton);
         helpButton.click();
         test.log(Status.INFO, "Sunburst Shown");
         Thread.sleep(5 * 1000);
