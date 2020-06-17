@@ -28,6 +28,7 @@ import static org.testng.Assert.fail;
 @Slf4j
 public class TestConfig {
 
+    protected static final String DEFAULT_DOWNLOAD_DIR = "C:\\Users\\hello\\Downloads" ;
     protected WebDriver driver;
 
     private boolean acceptNextAlert = true;

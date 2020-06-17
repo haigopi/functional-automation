@@ -17,7 +17,6 @@ public class HelpButtonTest extends TestConfig {
         test.createNode("looking for help button and clicking on it");
         driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.helpIcon.explore-query-svg.ml-2")).click();
         Thread.sleep(2*1000);
-
         test.createNode("Checking for User");
         driver.findElement(By.cssSelector("g > circle")).click();
         Thread.sleep(6*1000);
@@ -26,14 +25,10 @@ public class HelpButtonTest extends TestConfig {
         driver.findElement(By.cssSelector("g > circle")).click();
         Thread.sleep(6*1000);
         driver.findElement(By.id("mainArc-11a018d0-8978-48ff-9c7b-ea8606201da5")).click();
-
         driver.findElement(By.cssSelector("g > circle")).click();
         Thread.sleep(6*1000);
-
-
         WebElement mapObject = driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.explore-query-svg.ml-2 > path"));
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", mapObject);
-
         Thread.sleep(2*1000);
 
         WebElement user = driver.findElement(By.xpath("//*[text()='User']"));
