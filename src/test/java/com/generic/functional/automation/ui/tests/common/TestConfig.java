@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -21,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.fail;
@@ -28,7 +30,7 @@ import static org.testng.Assert.fail;
 @Slf4j
 public class TestConfig {
 
-    protected static final String DEFAULT_DOWNLOAD_DIR = "C:\\Users\\hello\\Downloads" ;
+    protected static final String DEFAULT_DOWNLOAD_DIR =  System.getProperty("user.dir")+File.separator+"downloads";
     protected WebDriver driver;
 
     private boolean acceptNextAlert = true;
@@ -41,13 +43,20 @@ public class TestConfig {
     @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
         System.out.println("Setup Started...");
-
+        System.out.println("Default Download Directory..."+DEFAULT_DOWNLOAD_DIR);
         setOS();
         setReport();
 
-        driver = new ChromeDriver();
+        HashMap<String, Object> prefs = new HashMap<>();
+        prefs.put("download.default_directory", DEFAULT_DOWNLOAD_DIR);
+        ChromeOptions options = new ChromeOptions();
+        options.setExperimentalOption("prefs", prefs);
+
+        driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(AppConstants.BASE_URL);
+
+
         //driver.manage().window().maximize();
         extent = ExtentManager.getInstance();
         login = new Login(driver);

@@ -250,7 +250,7 @@ public class HomePageAutomation extends TestConfig {
         test.log(Status.INFO, "Drill down for Sub-elements Displayed");
     }
 @Test
-public void testDownloadCSVButton()throws Exception {
+public void testDownloadCSVButton() throws Exception {
     test = extent.createTest("DownloadCSVButton");
     login.doLogin(test);
     test.log(Status.INFO, "Help Button Clicked");
@@ -273,13 +273,19 @@ public void testDownloadCSVButton()throws Exception {
     Thread.sleep(5 * 1000);
     test.createNode("DownloadCSVButton");
     driver.findElement(By.id("search-result-download-csv")).click();
-    File file = new File(TestConfig.DEFAULT_DOWNLOAD_DIR+File.separator+"exports.csv");
-    if (file.delete()) {
-        test.createNode("File  deleted  succesfully");
+    System.out.println(TestConfig.DEFAULT_DOWNLOAD_DIR+File.separator+"export.csv");
+    File file = new File(TestConfig.DEFAULT_DOWNLOAD_DIR+File.separator+"export.csv");
+    Thread.sleep(5*1000);
+
+    try {
+        if (file.delete()) {
+            test.createNode("File  deleted  succesfully");
+        } else {
+            test.createNode("Failed to delete the file");
+        }
     }
-    else
-    {
-     test.createNode("Failed to delete the file");
+    catch (Exception e) {
+        System.out.println(e);
     }
     }
 
