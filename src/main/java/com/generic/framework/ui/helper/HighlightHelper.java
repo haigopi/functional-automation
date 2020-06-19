@@ -1,4 +1,4 @@
-package helper;
+package com.generic.framework.ui.helper;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
