@@ -2,8 +2,10 @@ package com.generic.functional.automation.ui.tests.home;
 
 import com.aventstack.extentreports.Status;
 import com.generic.framework.ui.helper.HighlightHelper;
+import com.generic.framework.ui.helper.QueryChecker;
 import com.generic.functional.automation.ui.tests.common.TestConfig;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -11,6 +13,7 @@ import org.testng.annotations.Test;
 
 
 import java.io.File;
+import java.security.Key;
 
 public class HomePageAutomation extends TestConfig {
 
@@ -387,9 +390,9 @@ public void testDownloadCSVButton() throws Exception {
     Thread.sleep(5 * 1000);
     test.createNode("DownloadCSVButton");
     driver.findElement(By.id("search-result-download-csv")).click();
-    System.out.println(TestConfig.DEFAULT_DOWNLOAD_DIR+File.separator+"export.csv");
-    File file = new File(TestConfig.DEFAULT_DOWNLOAD_DIR+File.separator+"export.csv");
-    Thread.sleep(5*1000);
+    System.out.println(TestConfig.DEFAULT_DOWNLOAD_DIR + File.separator + "export.csv");
+    File file = new File(TestConfig.DEFAULT_DOWNLOAD_DIR + File.separator + "export.csv");
+    Thread.sleep(5 * 1000);
 
     try {
         if (file.delete()) {
@@ -397,11 +400,10 @@ public void testDownloadCSVButton() throws Exception {
         } else {
             test.createNode("Failed to delete the file");
         }
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
         System.out.println(e);
     }
-    }
+}
 
 
 
@@ -434,6 +436,24 @@ public void testDownloadCSVButton() throws Exception {
         driver.findElement(By.cssSelector("#search-result-print > span.MuiIconButton-label > svg.MuiSvgIcon-root > path")).click();
         Thread.sleep(5 * 1000);
     }
+
+    @Test
+    public void testFreightChargeQueries() throws Exception {
+        //Setup
+        test = extent.createTest("Verify Freight Charges Queries");
+        login.doLogin(test);
+        test.log(Status.INFO, "Clicking on Search Bar");
+        //query 1
+        QueryChecker.runSearchBubbleQuery(driver,"list all charges", test);
+        //query 2
+        QueryChecker.runSearchBubbleQuery(driver,"list all charges where carrier id is fedex", test);
+        //query 3
+        QueryChecker.runSearchBubbleQuery(driver,"list all charges where charge type is Disk and freight charges amount > 100", test);
+
+        test.createNode("Verified Freight Charge Queries Successfully!");
+    }
+
+
 
 }
 
