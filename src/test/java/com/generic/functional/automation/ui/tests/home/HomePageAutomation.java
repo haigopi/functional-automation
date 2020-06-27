@@ -3,6 +3,7 @@ package com.generic.functional.automation.ui.tests.home;
 import com.aventstack.extentreports.Status;
 import com.generic.framework.ui.helper.HighlightHelper;
 import com.generic.framework.ui.helper.QueryChecker;
+import com.generic.framework.ui.helper.TableChecker;
 import com.generic.functional.automation.ui.tests.common.TestConfig;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -443,12 +444,16 @@ public void testDownloadCSVButton() throws Exception {
         test = extent.createTest("Verify Freight Charges Queries");
         login.doLogin(test);
         test.log(Status.INFO, "Clicking on Search Bar");
+
         //query 1
         QueryChecker.runSearchBubbleQuery(driver,"list all charges", test);
+
         //query 2
         QueryChecker.runSearchBubbleQuery(driver,"list all charges where carrier id is fedex", test);
+
         //query 3
         QueryChecker.runSearchBubbleQuery(driver,"list all charges where charge type is Disk and freight charges amount > 100", test);
+
 
         test.createNode("Verified Freight Charge Queries Successfully!");
     }
