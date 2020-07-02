@@ -457,7 +457,19 @@ public void testDownloadCSVButton() throws Exception {
 
         test.createNode("Verified Freight Charge Queries Successfully!");
     }
+    @Test
+    public void testShipmentsQueries() throws Exception {
+        //Setup
+        test = extent.createTest("Verify shipments Queries");
+        login.doLogin(test);
+        test.log(Status.INFO, "Clicking on Search Bar");
 
+        // query 1
+
+        QueryChecker.runSearchBubbleQuery(driver, "list all shipments", test);
+
+        test.createNode("Verified Shipments Queries Successfully!");
+    }
 
 
 }
