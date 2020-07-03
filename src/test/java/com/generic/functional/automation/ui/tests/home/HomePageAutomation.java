@@ -454,6 +454,8 @@ public void testDownloadCSVButton() throws Exception {
         //query 3
         QueryChecker.runSearchBubbleQuery(driver,"list all charges where charge type is Disk and freight charges amount > 100", test);
 
+        //query 4
+        QueryChecker.runSearchBubbleQuery(driver, "list all charges where carrier id is ups frieght", test);
 
         test.createNode("Verified Freight Charge Queries Successfully!");
     }
