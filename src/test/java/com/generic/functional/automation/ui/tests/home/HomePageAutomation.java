@@ -203,7 +203,7 @@ public class HomePageAutomation extends TestConfig {
         Thread.sleep(5*1000);
         driver.findElement(By.cssSelector("svg.css-19bqh2r")).click();
         Thread.sleep(5*1000);
-        driver.findElement(By.id("react-select-5-option-0")).click();
+        driver.findElement(By.id("react-select-5-option-0")).click(); //failing @ this line
         Thread.sleep(5*1000);
         driver.findElement(By.id("react-select-6-option-0")).click();
         Thread.sleep(5*1000);
@@ -458,6 +458,37 @@ public void testDownloadCSVButton() throws Exception {
 
 
         test.createNode("Verified Freight Charge Queries Successfully!");
+    }
+    @Test
+    public void testPrivateQueries() throws Exception {
+        test = extent.createTest("Verify Private Query Button");
+        login.doLogin(test);
+        Thread.sleep(4 * 1000);
+        test.log(Status.INFO, "Clicking on Help Button");
+        WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+        helpButton.click();
+        Thread.sleep(4 * 1000);
+        test.log(Status.INFO, "Clicking on Private Query Button");
+        WebElement privateQueryButton = driver.findElement(By.xpath("//*[@id=\"scrollable-auto-tab-1\"]/span[1]"));
+        privateQueryButton.click();
+        Thread.sleep(4 * 1000);
+        test.createNode("Verified Private Query Successfully");
+    }
+
+    @Test
+    public void testPublicQueries() throws Exception {
+        test = extent.createTest("Verify Public Query Button");
+        login.doLogin(test);
+        Thread.sleep(4 * 1000);
+        test.log(Status.INFO, "Clicking on Help Button");
+        WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+        helpButton.click();
+        Thread.sleep(4 * 1000);
+        test.log(Status.INFO, "Clicking on Public Query Button");
+        WebElement publicQueryButton = driver.findElement(By.xpath("//*[@id=\"scrollable-auto-tab-2\"]/span[1]"));
+        publicQueryButton.click();
+        Thread.sleep(4 * 1000);
+        test.createNode("Verified Public Query Successfully");
     }
 
 
