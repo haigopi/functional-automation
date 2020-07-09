@@ -482,10 +482,12 @@ public void testDownloadCSVButton() throws Exception {
         Thread.sleep(4 * 1000);
         test.log(Status.INFO, "Clicking on Help Button");
         WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+        HighlightHelper.highLightElement(driver,helpButton);
         helpButton.click();
         Thread.sleep(4 * 1000);
         test.log(Status.INFO, "Clicking on Public Query Button");
         WebElement publicQueryButton = driver.findElement(By.xpath("//*[@id=\"scrollable-auto-tab-2\"]/span[1]"));
+        HighlightHelper.highLightElement(driver,publicQueryButton);
         publicQueryButton.click();
         Thread.sleep(4 * 1000);
         test.createNode("Verified Public Query Successfully");
