@@ -54,27 +54,27 @@ public class HomePageAutomation extends TestConfig {
         Thread.sleep(5 * 1000);
         test.log(Status.INFO,"Clicked on Shipments");
         WebElement e1 = driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d"));
-        //HighlightHelper.highLightElement(driver, e1); // arcs dont highlight
         e1.click();
-        Thread.sleep(7 * 1000);
+        Thread.sleep(4 * 1000);
         test.log(Status.INFO,"Clicked on International");
         driver.findElement(By.id("mainArc-71ef3c15-be01-454d-bd1e-c59d13904a65")).click();
-        Thread.sleep(7 * 1000);
+        Thread.sleep(4 * 1000);
         test.log(Status.INFO,"Clicked on Account Number");
         driver.findElement(By.id("mainArc-fa581093-0286-4f62-a4a1-5abf224fa8f1")).click();
-        Thread.sleep(7 * 1000);
+        Thread.sleep(4 * 1000);
         test.log(Status.INFO, "Clicked on Search Button");
         WebElement searchButton = driver.findElement(By.className("search_icon"));
         HighlightHelper.highLightElement(driver, searchButton);
         searchButton.click();
-        Thread.sleep(7 * 1000);
-        WebElement element = driver.findElement(By.xpath("//*[@id=\"gatsby-focus-wrapper\"]/div/main/div/div/div/div[4]/div/div[2]/div[2]/div/div/div/div/div/div/div/div[1]"));
-        HighlightHelper.highLightElement(driver ,element);
-        element.click();
+        Thread.sleep(4 * 1000); //next line error (works now)
+        WebElement hoverElement = driver.findElement(By.cssSelector("#scrollable-auto-tabpanel-0 > div > div.pl-4.pr-4.pb-2 > div > div > div > div > div > div > div.MuiButtonBase-root.MuiExpansionPanelSummary-root.query-title-wrapper > div > div > div.right-carousel-item > div.query-text-area"));
+        //*[@id="gatsby-focus-wrapper"]/div/main/div/div/div/div[4]/div/div[2]/div[2]/div/div/div/div/div/div/div/div[1] OLD
+        HighlightHelper.highLightElement(driver ,hoverElement);
+        hoverElement.click();
         test.log(Status.INFO, "Query Copied");
-        WebElement element1 = driver.findElement(By.id("copy-query-0"));
-        HighlightHelper.highLightElement(driver, element1);
-        element1.click();
+        WebElement copyQueryBtn = driver.findElement(By.id("copy-current-query-0"));
+        HighlightHelper.highLightElement(driver, copyQueryBtn);
+        copyQueryBtn.click();
         Thread.sleep(7 * 1000);
 
         /// VALIDATION ///
@@ -173,7 +173,7 @@ public class HomePageAutomation extends TestConfig {
     }
 
     @Test
-    public void testVerifyInternationalDocumentsClick() throws Exception {
+    public void testVerifyInternationalDocumentsClick() throws Exception { // FIX
         test = extent.createTest("Verify International Documents");
         login.doLogin(test);
         Thread.sleep(5*1000);
@@ -197,20 +197,27 @@ public class HomePageAutomation extends TestConfig {
         WebElement helpButton1 = driver.findElement(By.cssSelector(".explore-quiries-inner"));
         helpButton1.click();
         Thread.sleep(5*1000);
-        driver.findElement(By.xpath("//button[@id='simple-tab-1']/span")).click();
+        driver.findElement(By.xpath("//button[@id='simple-tab-1']/span")).click(); // clicks on graphical view
         Thread.sleep(5*1000);
-        driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]")).click();
+        driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]")).click(); // clicks on other graphical view
         Thread.sleep(5*1000);
-        driver.findElement(By.cssSelector("svg.css-19bqh2r")).click();
-        Thread.sleep(5*1000);
-        driver.findElement(By.id("react-select-5-option-0")).click(); //failing @ this line
-        Thread.sleep(5*1000);
-        driver.findElement(By.id("react-select-6-option-0")).click();
-        Thread.sleep(5*1000);
-        driver.findElement(By.id("react-select-7-option-4")).click();
-        Thread.sleep(5*1000);
-        driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span")).click();
 
+        driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div/div[2]/div/div/div")).click(); //Axis 1 click
+        Thread.sleep(3*1000);
+        driver.findElement(By.id("react-select-2-option-0")).click(); //Clicked on Documents Only
+        Thread.sleep(3*1000);
+        driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[2]/div[2]/div/div/div")).click(); // Click Axis 2
+        Thread.sleep(3*1000);
+        driver.findElement(By.id("react-select-3-option-0")).click(); // Clicks Count
+        Thread.sleep(3*1000);
+        driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div")).click(); //Click graph
+        Thread.sleep(3*1000);
+        driver.findElement(By.id("react-select-4-option-4")).click(); // Clicks Bubble Graph
+        Thread.sleep(3*1000);
+        driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span")).click(); // Clicks Show
+        Thread.sleep(3*1000); // To show bubble graph momentarily
+
+        test.createNode("Verified international documents only (multiple graphical views)");
     }
 
 
@@ -466,10 +473,12 @@ public void testDownloadCSVButton() throws Exception {
         Thread.sleep(4 * 1000);
         test.log(Status.INFO, "Clicking on Help Button");
         WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+        HighlightHelper.highLightElement(driver, helpButton);
         helpButton.click();
         Thread.sleep(4 * 1000);
         test.log(Status.INFO, "Clicking on Private Query Button");
         WebElement privateQueryButton = driver.findElement(By.xpath("//*[@id=\"scrollable-auto-tab-1\"]/span[1]"));
+        HighlightHelper.highLightElement(driver,privateQueryButton);
         privateQueryButton.click();
         Thread.sleep(4 * 1000);
         test.createNode("Verified Private Query Successfully");
@@ -482,12 +491,12 @@ public void testDownloadCSVButton() throws Exception {
         Thread.sleep(4 * 1000);
         test.log(Status.INFO, "Clicking on Help Button");
         WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
-        HighlightHelper.highLightElement(driver,helpButton);
+        HighlightHelper.highLightElement(driver, helpButton);
         helpButton.click();
         Thread.sleep(4 * 1000);
         test.log(Status.INFO, "Clicking on Public Query Button");
         WebElement publicQueryButton = driver.findElement(By.xpath("//*[@id=\"scrollable-auto-tab-2\"]/span[1]"));
-        HighlightHelper.highLightElement(driver,publicQueryButton);
+        HighlightHelper.highLightElement(driver, publicQueryButton);
         publicQueryButton.click();
         Thread.sleep(4 * 1000);
         test.createNode("Verified Public Query Successfully");
