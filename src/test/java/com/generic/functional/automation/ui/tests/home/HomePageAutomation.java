@@ -458,6 +458,82 @@ public void testDownloadCSVButton() throws Exception {
         test.createNode("Verified Freight Charge Queries Successfully!");
     }
 
+    @Test
+    public void testPackagesQueries()  {
+        test = extent.createTest("Verify Package Queries");
+        try {
+            login.doLogin(test);
+
+        } catch (Exception e) {
+            test.createNode("Exception "+e+"in Package Queries");
+        }
+        try {
+            QueryChecker.runSearchBubbleQuery(driver,"list all Packages", test);
+            QueryChecker.runSearchBubbleQuery(driver,"list of all Packages where Ltl class starts with 50", test);
+            QueryChecker.runSearchBubbleQuery(driver,"list of all Packages where Nmfc Number Starts with 00521", test);
+        }catch (Exception e){
+            test.createNode("Exception "+e+"in Package Queries");
+
+        }
+
+        test.createNode("Verified Package Queries Successfully!");
+    }
+
+    @Test
+    public void testPublicQueriesButton(){
+        test=extent.createTest("Verify Public QueryButton");
+        try {
+            login.doLogin(test);
+            WebElement Help=driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Logout'])[1]/following::*[name()='svg'][5]"));
+            Help.click();
+            Thread.sleep(5000);
+            WebElement PublicQueries =driver.findElement(By.xpath("//button[@id='scrollable-auto-tab-2']/span"));
+            PublicQueries.click();
+        }catch (Exception e){
+            test.createNode("Exception "+e+"in Public Queries");
+
+        }
+    }
+
+    @Test
+    public void testPrivateQueriesButton(){
+        test=extent.createTest("Verify Public QueryButton");
+        try {
+            login.doLogin(test);
+           /* WebElement Help=driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Logout'])[1]/following::*[name()='svg'][5]"));
+            Help.click();*/
+            driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Logout'])[1]/following::*[name()='svg'][5]")).click();
+            Thread.sleep(5000);
+           /* WebElement PrivateQueries =driver.findElement(By.xpath("//button[@id='scrollable-auto-tab-1']/span"));
+            PrivateQueries.click();*/
+            driver.findElement(By.xpath("//button[@id='scrollable-auto-tab-1']/span")).click();
+        }catch (Exception e){
+            test.createNode("Exception "+e+"in Public Queries");
+
+        }
+    }
+
+    @Test
+    public void testDocumentFactsBydocType(){
+        test=extent.createTest("Verify DocumentFactsByDocType");
+
+        try {
+            login.doLogin(test);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            QueryChecker.runSearchBubbleQuery(driver,"list all Document Facts", test);
+            QueryChecker.runSearchBubbleQuery(driver,"list all Document Facts where Document Type is RPT", test);
+            QueryChecker.runSearchBubbleQuery(driver, "list all Document Facts where Document Type is FRM", test);
+            QueryChecker.runSearchBubbleQuery(driver, "list all Document Facts where Document Type is LBL", test);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+    }
 
 
 }
