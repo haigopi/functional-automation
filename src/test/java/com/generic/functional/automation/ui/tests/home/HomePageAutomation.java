@@ -5,9 +5,12 @@ import com.generic.framework.ui.helper.HighlightHelper;
 import com.generic.framework.ui.helper.QueryChecker;
 import com.generic.framework.ui.helper.TableChecker;
 import com.generic.functional.automation.ui.tests.common.TestConfig;
+import com.google.gson.annotations.Until;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -15,6 +18,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.security.Key;
+import java.util.concurrent.TimeUnit;
 
 public class HomePageAutomation extends TestConfig {
 
@@ -308,9 +312,12 @@ public class HomePageAutomation extends TestConfig {
 
     @Test
     public void testVerifyResetButtonSunburst() throws Exception {
+
+
         test = extent.createTest("Home Page Verify Reset Button by Sunburst");
         login.doLogin(test);
         Thread.sleep(5 * 1000);
+
         driver.manage().window().maximize();
         // test.createNode("Verified Reset Button");
         test.log(Status.INFO,"Help Button Clicked");
@@ -412,31 +419,33 @@ public void testDownloadCSVButton() throws Exception {
 
     @Test
     public void testVerifyPrintButton() throws Exception {
+        WebDriverWait wait = new WebDriverWait(driver, 15);
         test = extent.createTest("VerifyPrintButton");
         login.doLogin(test);
         test.log(Status.INFO, "Help Button Clicked");
         test.createNode("Help Button Click");
         WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
         helpButton.click();
-        Thread.sleep(5 * 1000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d")));//Thread.sleep(5 * 1000);
         test.log(Status.INFO,"Subject Shipments Button Click");
         test.createNode("Subject Shipments Button Click");
         WebElement subjectShipmentsButton = driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d"));
         subjectShipmentsButton.click();
-        Thread.sleep(5 * 1000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("mainArc-2609f85e-b113-407e-b007-dcea50347141")));//Thread.sleep(5 * 1000);
         test.createNode("Freight Charges Click");
         test.log(Status.INFO,"Freight Charges Click");
         driver.findElement(By.id("mainArc-2609f85e-b113-407e-b007-dcea50347141")).click();
-        Thread.sleep(5 * 1000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("mainArc-a5cc64db-9de3-414a-98a4-e975accd1246")));//Thread.sleep(5 * 1000);
         test.createNode("Carrier Identifier Click");
         test.log(Status.INFO,"Carrier Identifier Click");
         driver.findElement(By.id("mainArc-a5cc64db-9de3-414a-98a4-e975accd1246")).click();
-        Thread.sleep(5 * 1000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#search-result-print > span.MuiIconButton-label > svg.MuiSvgIcon-root > path")));//Thread.sleep(5 * 1000);
         test.createNode("Print Button Click");
         test.log(Status.INFO,"Print Button Click");
         driver.findElement(By.cssSelector("#search-result-print > span.MuiIconButton-label > svg.MuiSvgIcon-root > path")).click();
         Thread.sleep(5 * 1000);
     }
+
 
     @Test
     public void testFreightChargeQueries() throws Exception {
@@ -463,11 +472,6 @@ public void testDownloadCSVButton() throws Exception {
         test = extent.createTest("Verify Package Queries");
         try {
             login.doLogin(test);
-
-        } catch (Exception e) {
-            test.createNode("Exception "+e+"in Package Queries");
-        }
-        try {
             QueryChecker.runSearchBubbleQuery(driver,"list all Packages", test);
             QueryChecker.runSearchBubbleQuery(driver,"list of all Packages where Ltl class starts with 50", test);
             QueryChecker.runSearchBubbleQuery(driver,"list of all Packages where Nmfc Number Starts with 00521", test);
@@ -482,13 +486,19 @@ public void testDownloadCSVButton() throws Exception {
     @Test
     public void testPublicQueriesButton(){
         test=extent.createTest("Verify Public QueryButton");
-        try {
+        try{
             login.doLogin(test);
             WebElement Help=driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Logout'])[1]/following::*[name()='svg'][5]"));
             Help.click();
-            Thread.sleep(5000);
+            //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+            WebDriverWait wait = new WebDriverWait(driver, 15);
+
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='scrollable-auto-tab-2']/span")));
             WebElement PublicQueries =driver.findElement(By.xpath("//button[@id='scrollable-auto-tab-2']/span"));
             PublicQueries.click();
+            test.createNode("Public Queries Button clicked");
+            test.createNode("Verified Public Queries Button Successfully!");
+
         }catch (Exception e){
             test.createNode("Exception "+e+"in Public Queries");
 
@@ -498,31 +508,30 @@ public void testDownloadCSVButton() throws Exception {
     @Test
     public void testPrivateQueriesButton(){
         test=extent.createTest("Verify Public QueryButton");
-        try {
+        try{
             login.doLogin(test);
            /* WebElement Help=driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Logout'])[1]/following::*[name()='svg'][5]"));
             Help.click();*/
             driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Logout'])[1]/following::*[name()='svg'][5]")).click();
-            Thread.sleep(5000);
+            test.createNode("Help Button Clicked");
+            WebDriverWait wait = new WebDriverWait(driver, 15);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='scrollable-auto-tab-1']/span")));
            /* WebElement PrivateQueries =driver.findElement(By.xpath("//button[@id='scrollable-auto-tab-1']/span"));
             PrivateQueries.click();*/
             driver.findElement(By.xpath("//button[@id='scrollable-auto-tab-1']/span")).click();
+            test.createNode("Private Queries clicked");
+            test.createNode("Verified Private Queries Successfully!");
         }catch (Exception e){
-            test.createNode("Exception "+e+"in Public Queries");
+        test.createNode("Exception "+e+"in Public Queries");
 
-        }
+    }
     }
 
     @Test
-    public void testDocumentFactsBydocType(){
+    public void testDocumentBydocType()  {
         test=extent.createTest("Verify DocumentFactsByDocType");
-
         try {
             login.doLogin(test);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
             QueryChecker.runSearchBubbleQuery(driver,"list all Document ", test);
             QueryChecker.runSearchBubbleQuery(driver,"list all Document where Document Type is RPT", test);
             QueryChecker.runSearchBubbleQuery(driver, "list all Document where Document Type is FRM", test);
