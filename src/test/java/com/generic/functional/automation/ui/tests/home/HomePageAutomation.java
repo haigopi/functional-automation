@@ -523,10 +523,10 @@ public void testDownloadCSVButton() throws Exception {
             e.printStackTrace();
         }
         try {
-            QueryChecker.runSearchBubbleQuery(driver,"list all Document Facts", test);
-            QueryChecker.runSearchBubbleQuery(driver,"list all Document Facts where Document Type is RPT", test);
-            QueryChecker.runSearchBubbleQuery(driver, "list all Document Facts where Document Type is FRM", test);
-            QueryChecker.runSearchBubbleQuery(driver, "list all Document Facts where Document Type is LBL", test);
+            QueryChecker.runSearchBubbleQuery(driver,"list all Document ", test);
+            QueryChecker.runSearchBubbleQuery(driver,"list all Document where Document Type is RPT", test);
+            QueryChecker.runSearchBubbleQuery(driver, "list all Document where Document Type is FRM", test);
+            QueryChecker.runSearchBubbleQuery(driver, "list all Document where Document Type is LBL", test);
         }catch (Exception e){
             e.printStackTrace();
         }
