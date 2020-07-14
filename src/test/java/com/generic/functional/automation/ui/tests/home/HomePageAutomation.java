@@ -463,7 +463,7 @@ public class HomePageAutomation extends TestConfig {
         test.createNode("Verified Freight Charge Queries Successfully!");
     }
 
-    
+
 
     @Test
     public void testDocumentBydocTypeQueries() {
