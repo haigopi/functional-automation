@@ -62,6 +62,7 @@ public class DataStudioAutomation extends TestConfig {
         WebElement DataStudioButton = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/header/div/header/div/div/div[3]/div[2]/div/div[2]/span"));
         DataStudioButton.click();
         Thread.sleep(5 * 1000);
+
         test.createNode("Subject Shipments Cluster Click ");
         WebElement SubjectShipmentsCluster = driver.findElement(By.cssSelector("#subject-Shipments > text"));
         SubjectShipmentsCluster.click();
