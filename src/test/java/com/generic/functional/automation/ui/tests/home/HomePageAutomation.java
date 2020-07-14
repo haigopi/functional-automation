@@ -18,6 +18,12 @@ import java.security.Key;
 
 public class HomePageAutomation extends TestConfig {
 
+    QueryChecker queryChecker;
+    HighlightHelper highlightHelper;
+    public HomePageAutomation() {
+        queryChecker = new QueryChecker();
+        highlightHelper = new HighlightHelper();
+    }
 
     @Test
     public void testHelpButtonShipmentsClick() throws Exception {
@@ -49,7 +55,7 @@ public class HomePageAutomation extends TestConfig {
         Thread.sleep(5 * 1000);
         test.log(Status.INFO,"Clicked on Help Button");
         WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
-        HighlightHelper.highLightElement(driver , helpButton);
+        highlightHelper.highLightElement(driver , helpButton);
         helpButton.click();
         Thread.sleep(5 * 1000);
         test.log(Status.INFO,"Clicked on Shipments");
@@ -64,16 +70,16 @@ public class HomePageAutomation extends TestConfig {
         Thread.sleep(4 * 1000);
         test.log(Status.INFO, "Clicked on Search Button");
         WebElement searchButton = driver.findElement(By.className("search_icon"));
-        HighlightHelper.highLightElement(driver, searchButton);
+        highlightHelper.highLightElement(driver, searchButton);
         searchButton.click();
         Thread.sleep(4 * 1000); //next line error (works now)
         WebElement hoverElement = driver.findElement(By.cssSelector("#scrollable-auto-tabpanel-0 > div > div.pl-4.pr-4.pb-2 > div > div > div > div > div > div > div.MuiButtonBase-root.MuiExpansionPanelSummary-root.query-title-wrapper > div > div > div.right-carousel-item > div.query-text-area"));
         //*[@id="gatsby-focus-wrapper"]/div/main/div/div/div/div[4]/div/div[2]/div[2]/div/div/div/div/div/div/div/div[1] OLD
-        HighlightHelper.highLightElement(driver ,hoverElement);
+        highlightHelper.highLightElement(driver ,hoverElement);
         hoverElement.click();
         test.log(Status.INFO, "Query Copied");
         WebElement copyQueryBtn = driver.findElement(By.id("copy-current-query-0"));
-        HighlightHelper.highLightElement(driver, copyQueryBtn);
+        highlightHelper.highLightElement(driver, copyQueryBtn);
         copyQueryBtn.click();
         Thread.sleep(7 * 1000);
 
@@ -83,7 +89,7 @@ public class HomePageAutomation extends TestConfig {
         String queryText = searchBubble.getAttribute("value");
         test.log(Status.INFO, "Text in Search Bubble BEFORE reset button clicked (" + queryText + ")");
         WebElement resetButton = driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.highlightIcon")); // Reset Button
-        HighlightHelper.highLightElement(driver, resetButton);
+        highlightHelper.highLightElement(driver, resetButton);
         resetButton.click();
         Thread.sleep(3 * 1000);
         test.log(Status.INFO, "Reset Button Clicked");
@@ -230,7 +236,7 @@ public class HomePageAutomation extends TestConfig {
         Thread.sleep(5 * 1000);
         test.log(Status.INFO, "Help Button Clicked");
         WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
-        HighlightHelper.highLightElement(driver, helpButton);
+        highlightHelper.highLightElement(driver, helpButton);
         helpButton.click();
         test.log(Status.INFO, "Sunburst Shown");
         Thread.sleep(5 * 1000);
@@ -453,16 +459,13 @@ public void testDownloadCSVButton() throws Exception {
         test.log(Status.INFO, "Clicking on Search Bar");
 
         //query 1
-        QueryChecker.runSearchBubbleQuery(driver,"list all charges", test);
-
+        queryChecker.runSearchBubbleQuery(driver,"list all charges", test);
         //query 2
-        QueryChecker.runSearchBubbleQuery(driver,"list all charges where carrier id is fedex", test);
-
+        queryChecker.runSearchBubbleQuery(driver,"list all charges where carrier id is fedex", test);
         //query 3
-        QueryChecker.runSearchBubbleQuery(driver,"list all charges where charge type is Disk and freight charges amount > 100", test);
-
-        QueryChecker.runSearchBubbleQuery(driver,"list all charges where freight charges amount > 100", test);
-
+        queryChecker.runSearchBubbleQuery(driver,"list all charges where charge type is Disk and freight charges amount > 100", test);
+        //query 4
+        queryChecker.runSearchBubbleQuery(driver,"list all charges where freight charges amount > 100", test);
 
         test.createNode("Verified Freight Charge Queries Successfully!");
     }
@@ -473,12 +476,12 @@ public void testDownloadCSVButton() throws Exception {
         Thread.sleep(4 * 1000);
         test.log(Status.INFO, "Clicking on Help Button");
         WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
-        HighlightHelper.highLightElement(driver, helpButton);
+        highlightHelper.highLightElement(driver, helpButton);
         helpButton.click();
         Thread.sleep(4 * 1000);
         test.log(Status.INFO, "Clicking on Private Query Button");
         WebElement privateQueryButton = driver.findElement(By.xpath("//*[@id=\"scrollable-auto-tab-1\"]/span[1]"));
-        HighlightHelper.highLightElement(driver,privateQueryButton);
+        highlightHelper.highLightElement(driver,privateQueryButton);
         privateQueryButton.click();
         Thread.sleep(4 * 1000);
         test.createNode("Verified Private Query Successfully");
@@ -491,12 +494,12 @@ public void testDownloadCSVButton() throws Exception {
         Thread.sleep(4 * 1000);
         test.log(Status.INFO, "Clicking on Help Button");
         WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
-        HighlightHelper.highLightElement(driver, helpButton);
+        highlightHelper.highLightElement(driver, helpButton);
         helpButton.click();
         Thread.sleep(4 * 1000);
         test.log(Status.INFO, "Clicking on Public Query Button");
         WebElement publicQueryButton = driver.findElement(By.xpath("//*[@id=\"scrollable-auto-tab-2\"]/span[1]"));
-        HighlightHelper.highLightElement(driver, publicQueryButton);
+        highlightHelper.highLightElement(driver, publicQueryButton);
         publicQueryButton.click();
         Thread.sleep(4 * 1000);
         test.createNode("Verified Public Query Successfully");

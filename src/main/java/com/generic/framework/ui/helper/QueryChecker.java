@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 //import sun.tools.jconsole.Tab;
 
 public class QueryChecker {
-    public static void runSearchBubbleQuery(WebDriver driver, String query, ExtentTest test) throws Exception { // Table xpath necessary for table validation
+    public void runSearchBubbleQuery(WebDriver driver, String query, ExtentTest test) throws Exception { // Table xpath necessary for table validation
         WebElement searchBubble = driver.findElement(By.xpath("//input[@name='']"));
         searchBubble.click();
         String[] splited = query.split(" ");
