@@ -463,65 +463,7 @@ public class HomePageAutomation extends TestConfig {
         test.createNode("Verified Freight Charge Queries Successfully!");
     }
 
-    @Test
-    public void testPackagesQueries() {
-        test = extent.createTest("Verify Package Queries");
-        try{
-            login.doLogin(test);
-            QueryChecker.runSearchBubbleQuery(driver, "list all Packages", test);
-            QueryChecker.runSearchBubbleQuery(driver, "list of all Packages where Ltl class starts with 50", test);
-            QueryChecker.runSearchBubbleQuery(driver, "list of all Packages where Nmfc Number Starts with 00521", test);
-        } catch (Exception e) {
-            test.createNode("Exception " + e + "in Package Queries");
-
-        }
-
-        test.createNode("Verified Package Queries Successfully!");
-    }
-
-    @Test
-    public void testPublicQueriesButton() {
-        test = extent.createTest("Verify Public QueryButton");
-        try {
-            login.doLogin(test);
-            WebElement Help = driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Logout'])[1]/following::*[name()='svg'][5]"));
-            Help.click();
-            //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-            WebDriverWait wait = new WebDriverWait(driver, 15);
-
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='scrollable-auto-tab-2']/span")));
-            WebElement PublicQueries = driver.findElement(By.xpath("//button[@id='scrollable-auto-tab-2']/span"));
-            PublicQueries.click();
-            test.createNode("Public Queries Button clicked");
-            test.createNode("Verified Public Queries Button Successfully!");
-
-        } catch (Exception e) {
-            test.createNode("Exception " + e + "in Public Queries");
-
-        }
-    }
-
-    @Test
-    public void testPrivateQueriesButton() {
-        test = extent.createTest("Verify Public QueryButton");
-        try {
-            login.doLogin(test);
-           /* WebElement Help=driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Logout'])[1]/following::*[name()='svg'][5]"));
-            Help.click();*/
-            driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Logout'])[1]/following::*[name()='svg'][5]")).click();
-            test.createNode("Help Button Clicked");
-            WebDriverWait wait = new WebDriverWait(driver, 15);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='scrollable-auto-tab-1']/span")));
-           /* WebElement PrivateQueries =driver.findElement(By.xpath("//button[@id='scrollable-auto-tab-1']/span"));
-            PrivateQueries.click();*/
-            driver.findElement(By.xpath("//button[@id='scrollable-auto-tab-1']/span")).click();
-            test.createNode("Private Queries clicked");
-            test.createNode("Verified Private Queries Successfully!");
-        } catch (Exception e) {
-            test.createNode("Exception " + e + "in Public Queries");
-
-        }
-    }
+    
 
     @Test
     public void testDocumentBydocTypeQueries() {
