@@ -6,7 +6,12 @@ import com.generic.framework.ui.helper.QueryChecker;
 import com.generic.framework.ui.helper.TableChecker;
 import com.generic.functional.automation.ui.tests.common.TestConfig;
 import com.google.gson.annotations.Until;
+import lombok.extern.flogger.Flogger;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.interactions.Actions;
+import org.slf4j.ILoggerFactory;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -17,6 +22,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.security.Key;
 import java.util.concurrent.TimeUnit;
@@ -474,14 +483,16 @@ public class HomePageAutomation extends TestConfig {
             QueryChecker.runSearchBubbleQuery(driver, "list all Document where Document Type is RPT", test);
             QueryChecker.runSearchBubbleQuery(driver, "list all Document where Document Type is FRM", test);
             QueryChecker.runSearchBubbleQuery(driver, "list all Document where Document Type is LBL", test);
+            test.createNode(" DocumentBydocTypeQueries verified");
+
         } catch (Exception e) {
-            e.printStackTrace();
+            test.createNode("Exception ---" + e + "---in DocumentBydocTypeQueries");
         }
     }
 
     @Test
-    public void testDocBydocTypeOGraphs() {
-        test = extent.createTest("Verify DocByDoctypeGraph");
+    public void testDocBydocTypeOtherGraphs() {
+        test = extent.createTest("Verify DocByDoctypeOtherGraph");
         WebDriverWait wait = new WebDriverWait(driver, 15);
         try {
             login.doLogin(test);
@@ -523,8 +534,9 @@ public class HomePageAutomation extends TestConfig {
             driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span")).click();
             Thread.sleep(5 * 1000);
             //click on show
+            test.createNode("DocBydocTypeOtherGraphs verified");
         } catch (Exception e) {
-            test.createNode("Exception " + e + "in DocTypeGraphs");
+            test.createNode("Exception " + e + "in DocTypeOtherGraphs");
         }
     }
 
@@ -546,10 +558,50 @@ public class HomePageAutomation extends TestConfig {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("mainArc-287afee1-7e35-4f10-a768-4d44610ecea8")));
             driver.findElement(By.id("mainArc-287afee1-7e35-4f10-a768-4d44610ecea8")).click();
             //clicking on document Type
+
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Graphical View']")));
             driver.findElement(By.xpath("//span[text()='Graphical View']")).click();
+            test.createNode("DocByDoctypeGraph verified");
         }catch (Exception e){
+            test.createNode("Exception " + e + "in DocTypeGraphs");
 
+        }
+    }
+
+    @Test
+    public void testColumresize(){
+        test = extent.createTest("Verify testColumresize");
+        WebDriverWait wait = new WebDriverWait(driver, 15);
+        try {
+            login.doLogin(test);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='']")));
+            WebElement searchBubble = driver.findElement(By.xpath("//input[@name='']"));
+            searchBubble.click();
+            searchBubble.sendKeys("list of documents");
+            searchBubble.sendKeys(Keys.ENTER);
+
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"query-search-result-table\"]/div/div/div[1]/div/div[1]/div[2]/div/div/div[6]/div[1]")));
+            //WebElement resize=driver.findElement(By.xpath("//*[@id=\"query-search-result-table\"]/div/div/div[1]/div/div[1]/div[2]/div/div/div[6]/div[1]"));
+            Actions action;
+
+            //action.clickAndHold(resize);
+            //action.moveByOffset(500,0);
+            //action.wait(5000);
+            //action.release(resize).perform();
+            WebElement resize;
+            for (int i=1;i<=4;i++){
+                resize=driver.findElement(By.xpath("//*[@id=\"query-search-result-table\"]/div/div/div[1]/div/div[1]/div[2]/div/div/div["+i+"]/div[1]"));
+                action=new Actions(driver);
+                action.clickAndHold(resize);
+                action.moveByOffset(100,0);
+                action.release(resize).perform();
+
+            }
+
+            test.createNode("Columresize verified");
+            Thread.sleep(5000);
+        }catch (Exception e){
+            test.createNode("Error at Columresize  --"+e+"--");
         }
     }
 
