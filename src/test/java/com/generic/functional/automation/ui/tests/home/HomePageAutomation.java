@@ -5,9 +5,13 @@ import com.generic.framework.ui.helper.HighlightHelper;
 import com.generic.framework.ui.helper.QueryChecker;
 import com.generic.framework.ui.helper.TableChecker;
 import com.generic.functional.automation.ui.tests.common.TestConfig;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -15,11 +19,15 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.security.Key;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.ErrorManager;
 
+@Slf4j
 public class HomePageAutomation extends TestConfig {
 
     QueryChecker queryChecker;
     HighlightHelper highlightHelper;
+
     public HomePageAutomation() {
         queryChecker = new QueryChecker();
         highlightHelper = new HighlightHelper();
@@ -320,7 +328,7 @@ public class HomePageAutomation extends TestConfig {
 
 
     @Test
-    public void testVerifyResetButtonSunburst() throws Exception {
+    public void testVerifyResetButtonSunburst() throws Exception { //***
         test = extent.createTest("Home Page Verify Reset Button by Sunburst");
         login.doLogin(test);
         Thread.sleep(5 * 1000);
@@ -357,7 +365,7 @@ public class HomePageAutomation extends TestConfig {
 
     }
     @Test
-    public void testVerifySubjectGuides() throws Exception { //Haritha
+    public void testVerifySubjectGuides() throws Exception { //***
         test = extent.createTest("Verifying Subjects Guide ");
         login.doLogin(test);
         Thread.sleep(5 * 1000);
@@ -366,7 +374,7 @@ public class HomePageAutomation extends TestConfig {
         helpButton.click();
         Thread.sleep(5 * 1000);
         test.log(Status.INFO,"Sunburst Shown");
-        test.createNode("Verified Subject Guides Successfully!");
+        /*test.createNode("Verified Subject Guides Successfully!");
         driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[3]/div/div/div/ul/li[2]/span")).click();
         Thread.sleep(5 * 1000);
         test.log(Status.INFO,"Clicked on Domain Values");
@@ -378,49 +386,47 @@ public class HomePageAutomation extends TestConfig {
         driver.findElement(By.xpath("//*[text()='Domain of Values']"));
         test.log(Status.INFO,"Domain of Values Displayed");
         driver.findElement(By.xpath("//*[text()='Drill down for Sub-elements']"));
-        test.log(Status.INFO,"Drill down for Sub-elements Displayed");
+        test.log(Status.INFO,"Drill down for Sub-elements Displayed");*/
     }
-@Test
-public void testDownloadCSVButton() throws Exception {
-    test = extent.createTest("DownloadCSVButton");
-    login.doLogin(test);
-    test.log(Status.INFO, "Help Button Clicked");
-    test.createNode("Help Button Click");
-    WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
-    helpButton.click();
-    Thread.sleep(5 * 1000);
-    test.log(Status.INFO, "Subject Shipments Button Click");
-    test.createNode("Subject Shipments Button Click");
-    WebElement subjectShipmentsButton = driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d"));
-    subjectShipmentsButton.click();
-    Thread.sleep(5 * 1000);
-    test.createNode("Freight Charges Click");
-    test.log(Status.INFO, "Freight Charges Click");
-    driver.findElement(By.id("mainArc-2609f85e-b113-407e-b007-dcea50347141")).click();
-    Thread.sleep(5 * 1000);
-    test.createNode("Carrier Identifier Click");
-    test.log(Status.INFO, "Carrier Identifier Click");
-    driver.findElement(By.id("mainArc-a5cc64db-9de3-414a-98a4-e975accd1246")).click();
-    Thread.sleep(5 * 1000);
-    test.createNode("DownloadCSVButton");
-    driver.findElement(By.id("search-result-download-csv")).click();
-    System.out.println(TestConfig.DEFAULT_DOWNLOAD_DIR + File.separator + "export.csv");
-    File file = new File(TestConfig.DEFAULT_DOWNLOAD_DIR + File.separator + "export.csv");
-    Thread.sleep(5 * 1000);
 
-    try {
-        if (file.delete()) {
-            test.createNode("File  deleted  succesfully");
-        } else {
-            test.createNode("Failed to delete the file");
+    @Test
+    public void testDownloadCSVButton() throws Exception {
+        test = extent.createTest("DownloadCSVButton");
+        login.doLogin(test);
+        test.log(Status.INFO, "Help Button Clicked");
+        test.createNode("Help Button Click");
+        WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+        helpButton.click();
+        Thread.sleep(5 * 1000);
+        test.log(Status.INFO, "Subject Shipments Button Click");
+        test.createNode("Subject Shipments Button Click");
+        WebElement subjectShipmentsButton = driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d"));
+        subjectShipmentsButton.click();
+        Thread.sleep(5 * 1000);
+        test.createNode("Freight Charges Click");
+        test.log(Status.INFO, "Freight Charges Click");
+        driver.findElement(By.id("mainArc-2609f85e-b113-407e-b007-dcea50347141")).click();
+        Thread.sleep(5 * 1000);
+        test.createNode("Carrier Identifier Click");
+        test.log(Status.INFO, "Carrier Identifier Click");
+        driver.findElement(By.id("mainArc-a5cc64db-9de3-414a-98a4-e975accd1246")).click();
+        Thread.sleep(5 * 1000);
+        test.createNode("DownloadCSVButton");
+        driver.findElement(By.id("search-result-download-csv")).click();
+        System.out.println(TestConfig.DEFAULT_DOWNLOAD_DIR + File.separator + "export.csv");
+        File file = new File(TestConfig.DEFAULT_DOWNLOAD_DIR + File.separator + "export.csv");
+        Thread.sleep(5 * 1000);
+
+        try {
+            if (file.delete()) {
+                test.createNode("File  deleted  succesfully");
+            } else {
+                test.createNode("Failed to delete the file");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
         }
-    } catch (Exception e) {
-        System.out.println(e);
     }
-}
-
-
-
 
 
     @Test
@@ -470,8 +476,30 @@ public void testDownloadCSVButton() throws Exception {
         test.createNode("Verified Freight Charge Queries Successfully!");
     }
     @Test
-    public void testPrivateQueries() throws Exception {
+    public void testPrivateQueries() {
         test = extent.createTest("Verify Private Query Button");
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        try {
+            login.doLogin(test);
+            test.log(Status.INFO, "Clicking on Help Button");
+            WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+            highlightHelper.highLightElement(driver, helpButton);
+            helpButton.click();
+
+            test.log(Status.INFO, "Clicking on Private Query Button");
+            WebElement privateQueryButton = driver.findElement(By.xpath("//*[@id=\"scrollable-auto-tab-1\"]/span[1]"));
+            highlightHelper.highLightElement(driver,privateQueryButton);
+            privateQueryButton.click();
+        } catch (Exception e) {
+            test.createNode("Exception (" + e + ") found"); // catches exception (test still passes)
+            Assert.assertTrue(false);
+        }
+        test.createNode("Verified Private Query Successfully");
+    }
+
+    /*@Test
+    public void testPrivateQuery() throws Exception{
+        test = extent.createTest("Verify Private Query Button -> w Thread.sleep()");
         login.doLogin(test);
         Thread.sleep(4 * 1000);
         test.log(Status.INFO, "Clicking on Help Button");
@@ -485,7 +513,7 @@ public void testDownloadCSVButton() throws Exception {
         privateQueryButton.click();
         Thread.sleep(4 * 1000);
         test.createNode("Verified Private Query Successfully");
-    }
+    }*/
 
     @Test
     public void testPublicQueries() throws Exception {
