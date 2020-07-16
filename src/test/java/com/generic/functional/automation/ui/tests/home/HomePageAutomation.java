@@ -568,6 +568,11 @@ public class HomePageAutomation extends TestConfig {
         }
     }
 
+    /**
+     * testColumresize is used to verify whether the columns can be resized are not.
+     * @author Pardhu
+     */
+
     @Test
     public void testColumresize(){
         test = extent.createTest("Verify testColumresize");
@@ -577,17 +582,12 @@ public class HomePageAutomation extends TestConfig {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='']")));
             WebElement searchBubble = driver.findElement(By.xpath("//input[@name='']"));
             searchBubble.click();
-            searchBubble.sendKeys("list of documents");
+            searchBubble.sendKeys("list of customers");
             searchBubble.sendKeys(Keys.ENTER);
-
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"query-search-result-table\"]/div/div/div[1]/div/div[1]/div[2]/div/div/div[6]/div[1]")));
-            //WebElement resize=driver.findElement(By.xpath("//*[@id=\"query-search-result-table\"]/div/div/div[1]/div/div[1]/div[2]/div/div/div[6]/div[1]"));
             Actions action;
 
-            //action.clickAndHold(resize);
-            //action.moveByOffset(500,0);
-            //action.wait(5000);
-            //action.release(resize).perform();
+
             WebElement resize;
             for (int i=1;i<=4;i++){
                 resize=driver.findElement(By.xpath("//*[@id=\"query-search-result-table\"]/div/div/div[1]/div/div[1]/div[2]/div/div/div["+i+"]/div[1]"));
@@ -599,9 +599,11 @@ public class HomePageAutomation extends TestConfig {
             }
 
             test.createNode("Columresize verified");
-            Thread.sleep(5000);
+
+            //Thread.sleep(5000); //use this if you want to observe the size while execution.
         }catch (Exception e){
             test.createNode("Error at Columresize  --"+e+"--");
+
         }
     }
 
