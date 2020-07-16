@@ -14,8 +14,10 @@ import java.util.concurrent.TimeUnit;
 public class Login {
 
     WebDriver driver;
+    HighlightHelper highlightHelper;
     public Login(WebDriver driver) {
         this.driver = driver;
+        this.highlightHelper = new HighlightHelper();
     }
 
     public void doLogin(ExtentTest test) throws Exception {
@@ -31,7 +33,7 @@ public class Login {
     driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
     WebElement username = driver.findElement(By.xpath("/html/body/div/div/div/main/div/main/div/form/div[1]/div/input"));
-    HighlightHelper.highLightElement(driver,username);
+    highlightHelper.highLightElement(driver,username);
 
 
     driver.findElement(By.id("email")).sendKeys("superadmin");
@@ -42,7 +44,7 @@ public class Login {
     driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
     WebElement password = driver.findElement(By.xpath("/html/body/div/div/div/main/div/main/div/form/div[2]/div/input"));
-    HighlightHelper.highLightElement(driver, password);
+    highlightHelper.highLightElement(driver, password);
 
     driver.findElement(By.id("password")).sendKeys("Design_20");
     test.createNode("LoginPage Password =\"Design_20\" Typed ");

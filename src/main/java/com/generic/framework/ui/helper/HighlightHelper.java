@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class HighlightHelper {
-    public static void highLightElement(WebDriver driver, WebElement element)
+    public void highLightElement(WebDriver driver, WebElement element)
     {
         JavascriptExecutor js=(JavascriptExecutor)driver;
 
