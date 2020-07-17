@@ -6,15 +6,11 @@ import com.generic.framework.ui.helper.QueryChecker;
 import com.generic.framework.ui.helper.TableChecker;
 import com.generic.functional.automation.ui.tests.common.TestConfig;
 import com.google.gson.annotations.Until;
-import lombok.extern.flogger.Flogger;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.interactions.Actions;
-import org.slf4j.ILoggerFactory;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,10 +18,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.security.Key;
 import java.util.concurrent.TimeUnit;
@@ -473,7 +465,6 @@ public class HomePageAutomation extends TestConfig {
     }
 
 
-
     @Test
     public void testDocumentBydocTypeQueries() {
         test = extent.createTest("Verify DocumentByDocTypeQueries");
@@ -483,16 +474,62 @@ public class HomePageAutomation extends TestConfig {
             QueryChecker.runSearchBubbleQuery(driver, "list all Document where Document Type is RPT", test);
             QueryChecker.runSearchBubbleQuery(driver, "list all Document where Document Type is FRM", test);
             QueryChecker.runSearchBubbleQuery(driver, "list all Document where Document Type is LBL", test);
-            test.createNode(" DocumentBydocTypeQueries verified");
-
         } catch (Exception e) {
-            test.createNode("Exception ---" + e + "---in DocumentBydocTypeQueries");
+            e.printStackTrace();
         }
     }
 
     @Test
-    public void testDocBydocTypeOtherGraphs() {
-        test = extent.createTest("Verify DocByDoctypeOtherGraph");
+    public void TestPackages() throws Exception { //saraswathikakollu
+        test = extent.createTest("Home > Verify Packing Items Facts");
+        login.doLogin(test);
+        test.log(Status.INFO, "Help Button Clicked");
+        test.createNode("Help Button Click");
+        WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+        helpButton.click();
+        Thread.sleep(5 * 1000);
+        test.log(Status.INFO,"Subject Shipments Button Click");
+        test.createNode("Subject Shipments Button Click");
+        WebElement subjectShipmentsButton = driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d"));
+        subjectShipmentsButton.click();
+        Thread.sleep(5 * 1000);
+        test.createNode("Packing Items Click");
+        test.log(Status.INFO,"Packing Items Click");
+        driver.findElement(By.id("mainArc-a252fc7e-4232-4f49-a276-f849d6662834")).click();
+        Thread.sleep(5 * 1000);
+        test.createNode("Active Package Click");
+        test.log(Status.INFO,"Active Package Click");
+        driver.findElement(By.id("mainArc-4ede3542-fafa-49f1-8be1-fcce43f06999")).click();
+        Thread.sleep(5 * 1000);
+    }
+    @Test
+    public void LocationFacts() throws Exception { //saraswathikakollu
+        test = extent.createTest("Home > Verify Location Facts");
+        login.doLogin(test);
+        test.log(Status.INFO, "Help Button Clicked");
+        test.createNode("Help Button Click");
+        WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+        helpButton.click();
+        Thread.sleep(5 * 1000);
+        test.log(Status.INFO,"Subject Shipments Button Click");
+        test.createNode("Subject Shipments Button Click");
+        WebElement subjectShipmentsButton = driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d"));
+        subjectShipmentsButton.click();
+        Thread.sleep(5 * 1000);
+        test.createNode("Location Click");
+        test.log(Status.INFO,"Location Click");
+        driver.findElement(By.id("mainArc-7294ba99-5ade-47ff-9fb5-f21e080d9601")).click();
+        Thread.sleep(5 * 1000);
+        test.createNode("Location Address Click");
+        test.log(Status.INFO,"Location Address Click");
+        driver.findElement(By.id("mainArc-dfc929d9-b607-4950-a794-1eda5d2ba47d")).click();
+        Thread.sleep(5 * 1000);
+    }
+
+
+    @Test
+    public void testDocBydocTypeOGraphs() {
+        test = extent.createTest("Verify DocByDoctypeGraph");
         WebDriverWait wait = new WebDriverWait(driver, 15);
         try {
             login.doLogin(test);
@@ -534,9 +571,8 @@ public class HomePageAutomation extends TestConfig {
             driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span")).click();
             Thread.sleep(5 * 1000);
             //click on show
-            test.createNode("DocBydocTypeOtherGraphs verified");
         } catch (Exception e) {
-            test.createNode("Exception " + e + "in DocTypeOtherGraphs");
+            test.createNode("Exception " + e + "in DocTypeGraphs");
         }
     }
 
@@ -558,9 +594,9 @@ public class HomePageAutomation extends TestConfig {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("mainArc-287afee1-7e35-4f10-a768-4d44610ecea8")));
             driver.findElement(By.id("mainArc-287afee1-7e35-4f10-a768-4d44610ecea8")).click();
             //clicking on document Type
-
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Graphical View']")));
             driver.findElement(By.xpath("//span[text()='Graphical View']")).click();
+
             test.createNode("DocByDoctypeGraph verified");
         }catch (Exception e){
             test.createNode("Exception " + e + "in DocTypeGraphs");
@@ -602,8 +638,9 @@ public class HomePageAutomation extends TestConfig {
             test.createNode("Columresize verified");
 
             //Thread.sleep(5000); //use this if you want to observe the size while execution.
+
         }catch (Exception e){
-            test.createNode("Error at Columresize  --"+e+"--");
+            test.createNode("Exception " + e + "in testColumresize");
 
         }
     }
