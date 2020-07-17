@@ -579,12 +579,13 @@ public class HomePageAutomation extends TestConfig {
         WebDriverWait wait = new WebDriverWait(driver, 15);
         try {
             login.doLogin(test);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name='']")));
-            WebElement searchBubble = driver.findElement(By.xpath("//input[@name='']"));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@class='auto-suggestion-input']")));
+            WebElement searchBubble = driver.findElement(By.xpath("//input[@class='auto-suggestion-input']"));
             searchBubble.click();
             searchBubble.sendKeys("list of customers");
             searchBubble.sendKeys(Keys.ENTER);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"query-search-result-table\"]/div/div/div[1]/div/div[1]/div[2]/div/div/div[6]/div[1]")));
+            searchBubble.sendKeys(Keys.ENTER);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"query-search-result-table\"]/div/div/div[1]/div/div[1]/div[2]/div/div/div[6]/div[1]")));//changes according to xpath
             Actions action;
 
 
