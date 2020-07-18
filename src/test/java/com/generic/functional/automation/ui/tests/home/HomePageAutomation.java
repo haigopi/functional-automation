@@ -464,7 +464,6 @@ public class HomePageAutomation extends TestConfig {
     }
 
 
-
     @Test
     public void testDocumentBydocTypeQueries() {
         test = extent.createTest("Verify DocumentByDocTypeQueries");
@@ -478,6 +477,54 @@ public class HomePageAutomation extends TestConfig {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void TestPackages() throws Exception { //saraswathikakollu
+        test = extent.createTest("Home > Verify Packing Items Facts");
+        login.doLogin(test);
+        test.log(Status.INFO, "Help Button Clicked");
+        test.createNode("Help Button Click");
+        WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+        helpButton.click();
+        Thread.sleep(5 * 1000);
+        test.log(Status.INFO,"Subject Shipments Button Click");
+        test.createNode("Subject Shipments Button Click");
+        WebElement subjectShipmentsButton = driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d"));
+        subjectShipmentsButton.click();
+        Thread.sleep(5 * 1000);
+        test.createNode("Packing Items Click");
+        test.log(Status.INFO,"Packing Items Click");
+        driver.findElement(By.id("mainArc-a252fc7e-4232-4f49-a276-f849d6662834")).click();
+        Thread.sleep(5 * 1000);
+        test.createNode("Active Package Click");
+        test.log(Status.INFO,"Active Package Click");
+        driver.findElement(By.id("mainArc-4ede3542-fafa-49f1-8be1-fcce43f06999")).click();
+        Thread.sleep(5 * 1000);
+    }
+    @Test
+    public void LocationFacts() throws Exception { //saraswathikakollu
+        test = extent.createTest("Home > Verify Location Facts");
+        login.doLogin(test);
+        test.log(Status.INFO, "Help Button Clicked");
+        test.createNode("Help Button Click");
+        WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+        helpButton.click();
+        Thread.sleep(5 * 1000);
+        test.log(Status.INFO,"Subject Shipments Button Click");
+        test.createNode("Subject Shipments Button Click");
+        WebElement subjectShipmentsButton = driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d"));
+        subjectShipmentsButton.click();
+        Thread.sleep(5 * 1000);
+        test.createNode("Location Click");
+        test.log(Status.INFO,"Location Click");
+        driver.findElement(By.id("mainArc-7294ba99-5ade-47ff-9fb5-f21e080d9601")).click();
+        Thread.sleep(5 * 1000);
+        test.createNode("Location Address Click");
+        test.log(Status.INFO,"Location Address Click");
+        driver.findElement(By.id("mainArc-dfc929d9-b607-4950-a794-1eda5d2ba47d")).click();
+        Thread.sleep(5 * 1000);
+    }
+
 
     @Test
     public void testDocBydocTypeOGraphs() {
