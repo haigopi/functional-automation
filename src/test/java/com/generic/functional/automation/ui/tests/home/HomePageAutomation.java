@@ -217,7 +217,6 @@ public class HomePageAutomation extends TestConfig {
 
     }
 
-
     @Test
     public void testShipmentsSunburstDocClick() throws Exception { //Haritha
         test = extent.createTest("Verifying Shipments Documents Test");
@@ -305,7 +304,6 @@ public class HomePageAutomation extends TestConfig {
         test.createNode("Verified Documents Cluster with Dimensional Data");
 
     }
-
 
     @Test
     public void testVerifyResetButtonSunburst() throws Exception {
@@ -412,7 +410,6 @@ public class HomePageAutomation extends TestConfig {
         }
     }
 
-
     @Test
     public void testVerifyPrintButton() throws Exception {
         WebDriverWait wait = new WebDriverWait(driver, 15);
@@ -442,7 +439,6 @@ public class HomePageAutomation extends TestConfig {
         Thread.sleep(5 * 1000);
     }
 
-
     @Test
     public void testFreightChargeQueries() throws Exception {
         //Setup
@@ -463,7 +459,56 @@ public class HomePageAutomation extends TestConfig {
         test.createNode("Verified Freight Charge Queries Successfully!");
     }
 
+    @Test
+    public void TestPackages() throws Exception { //saraswathikakollu
+        test = extent.createTest("Home > Verify Packing Items Facts");
+        login.doLogin(test);
+        test.log(Status.INFO, "Help Button Clicked");
+        test.createNode("Help Button Click");
+        WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+        helpButton.click();
+        Thread.sleep(3 * 1000);
+        test.log(Status.INFO,"Subject Shipments Button Click");
+        test.createNode("Subject Shipments Button Click");
+        WebElement subjectShipmentsButton = driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d"));
+        subjectShipmentsButton.click();
+        Thread.sleep(3 * 1000);
+        test.createNode("Packing Items Click");
+        test.log(Status.INFO,"Packing Items Click");
+        driver.findElement(By.id("mainArc-a252fc7e-4232-4f49-a276-f849d6662834")).click(); //Pack Item
+        Thread.sleep(3 * 1000);
+        test.createNode("Active Package Click");
+        test.log(Status.INFO,"Active Package Click");
+        driver.findElement(By.id("mainArc-4ede3542-fafa-49f1-8be1-fcce43f06999")).click(); //Active Pac
+        Thread.sleep(3 * 1000);
+      //  driver.findElement(By.xpath("//*[text()=' Total Records']"));
+       // test.createNode("Total Records found means table loaded");
+    }
+    @Test
+    public void LocationFacts() throws Exception { //saraswathikakollu
+        test = extent.createTest("Home > Verify Location Facts");
+        login.doLogin(test);
+        test.log(Status.INFO, "Help Button Clicked");
+        test.createNode("Help Button Click");
+        WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+        helpButton.click();
+        Thread.sleep(3 * 1000);
+        test.log(Status.INFO,"Subject Shipments Button Click");
+        test.createNode("Subject Shipments Button Click");
+        WebElement subjectShipmentsButton = driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d"));
+        subjectShipmentsButton.click();
+        Thread.sleep(3 * 1000);
+        test.createNode("Location Click");
+        test.log(Status.INFO,"Location Click");
+        driver.findElement(By.id("mainArc-7294ba99-5ade-47ff-9fb5-f21e080d9601")).click(); //location
+        Thread.sleep(3 * 1000);
+        test.createNode("Location Address Click");
+        test.log(Status.INFO,"Location Address Click");
+        driver.findElement(By.id("mainArc-dfc929d9-b607-4950-a794-1eda5d2ba47d")).click();  //Loc Add
+        Thread.sleep(3 * 1000);
 
+
+    }
 
     @Test
     public void testDocumentBydocTypeQueries() {
@@ -518,16 +563,14 @@ public class HomePageAutomation extends TestConfig {
             graph.sendKeys("Vertical");
             graph.sendKeys(Keys.ARROW_DOWN);
             graph.sendKeys(Keys.ENTER);
-
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span")));
             driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span")).click();
             Thread.sleep(5 * 1000);
             //click on show
-        } catch (Exception e) {
+            } catch (Exception e) {
             test.createNode("Exception " + e + "in DocTypeGraphs");
         }
     }
-
     @Test
     public void testDocTypeGraph(){
         test = extent.createTest("Verify DocByDoctypeGraph");
@@ -548,10 +591,13 @@ public class HomePageAutomation extends TestConfig {
             //clicking on document Type
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Graphical View']")));
             driver.findElement(By.xpath("//span[text()='Graphical View']")).click();
-        }catch (Exception e){
+
+              }catch (Exception e){
 
         }
     }
+
+
 
 }
 
