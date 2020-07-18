@@ -8,7 +8,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-//import sun.tools.jconsole.Tab;
+
 
 public class QueryChecker {
     TableChecker tableChecker;
