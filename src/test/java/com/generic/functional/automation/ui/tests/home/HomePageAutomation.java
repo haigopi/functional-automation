@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -595,7 +596,51 @@ public class HomePageAutomation extends TestConfig {
             //clicking on document Type
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Graphical View']")));
             driver.findElement(By.xpath("//span[text()='Graphical View']")).click();
+
+            test.createNode("DocByDoctypeGraph verified");
         }catch (Exception e){
+            test.createNode("Exception " + e + "in DocTypeGraphs");
+
+        }
+    }
+
+    /**
+     * testColumresize is used to verify whether the columns can be resized are not.
+     * @author Pardhu
+     */
+
+    @Test
+    public void testColumresize(){
+        test = extent.createTest("Verify testColumresize");
+        WebDriverWait wait = new WebDriverWait(driver, 15);
+        try {
+            login.doLogin(test);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@class='auto-suggestion-input']")));
+            WebElement searchBubble = driver.findElement(By.xpath("//input[@class='auto-suggestion-input']"));
+            searchBubble.click();
+            searchBubble.sendKeys("list of customers");
+            searchBubble.sendKeys(Keys.ENTER);
+            searchBubble.sendKeys(Keys.ENTER);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"query-search-result-table\"]/div/div/div[1]/div/div[1]/div[2]/div/div/div[6]/div[1]")));//changes according to xpath
+            Actions action;
+
+
+            WebElement resize;
+            for (int i=1;i<=4;i++){
+                resize=driver.findElement(By.xpath("//*[@id=\"query-search-result-table\"]/div/div/div[1]/div/div[1]/div[2]/div/div/div["+i+"]/div[1]"));
+                action=new Actions(driver);
+                action.clickAndHold(resize);
+                action.moveByOffset(100,0);
+                action.release(resize).perform();
+
+            }
+
+            test.createNode("Columresize verified");
+
+            //Thread.sleep(5000); //use this if you want to observe the size while execution.
+
+        }catch (Exception e){
+            test.createNode("Exception " + e + "in testColumresize");
 
         }
     }
