@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class TableChecker {
-    public static void rowValidator(WebDriver driver, ExtentTest test, String table_xpath) {
-        WebElement totalRecords = driver.findElement(By.xpath("//*[@id=\"total-records-count\"]")); // same for all tables
+    public void rowValidator(WebDriver driver, ExtentTest test, String table_xpath) {
+        WebElement totalRecords = driver.findElement(By.id("total-records-count")); // same for all tables
         String rows_on_screen = totalRecords.getText();
         int actual_rows = Integer.parseInt(rows_on_screen);
 
@@ -34,8 +34,8 @@ public class TableChecker {
 
     }
 
-    public static void rowValidatorWithoutXpath(WebDriver driver, ExtentTest test) {
-        WebElement totalRecords = driver.findElement(By.xpath("//*[@id=\"total-records-count\"]")); // same for all tables
+    public void rowValidatorWithoutXpath(WebDriver driver, ExtentTest test) {
+        WebElement totalRecords = driver.findElement(By.id("total-records-count")); // same for all tables
         String rows_on_screen = totalRecords.getText();
         int actual_rows = Integer.parseInt(rows_on_screen);
 
@@ -44,6 +44,7 @@ public class TableChecker {
         test.log(Status.INFO, "Total Records On Screen (actual): " + actual_rows);
 
         WebElement grid = driver.findElement(By.xpath("//*[@id=\"query-search-result-table\"]/div/div/div[1]/div"));
+        //WebElement grid = driver.findElement(By.className("ag-root ag-unselectable ag-layout-normal"));
         String row_count = grid.getAttribute("aria-rowcount");
         int expected_rows = Integer.parseInt(row_count);
         expected_rows--; // counts the column names row as one row so we decrement
@@ -56,15 +57,15 @@ public class TableChecker {
     }
 
 
-    public static void getColumnCount(WebDriver driver, ExtentTest test, String table_xpath) {
+    public void getColumnCount(WebDriver driver, ExtentTest test, String table_xpath) {
         WebElement grid = driver.findElement(By.xpath(table_xpath));
         String col_count = grid.getAttribute("aria-colcount");
         System.out.println("Column Count: " + col_count);
     }
 
-    public static void getColumnCountAndNames(WebDriver driver, ExtentTest test) {
+    public void getColumnCountAndNames(WebDriver driver, ExtentTest test) {
         WebElement column_names = driver.findElement(By.xpath("//*[@id=\"query-search-result-table\"]/div/div/div[1]/div/div[1]")); //xpath same for all
-
+        //WebElement column_names = driver.findElement(By.className("ag-header ag-pivot-off"));
         String[] col_names = column_names.getText().split("\n");
         System.out.println("Column length: " + col_names.length);
         test.log(Status.INFO, "Column Count: " + col_names.length);
