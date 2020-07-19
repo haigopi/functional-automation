@@ -24,6 +24,7 @@ public class HomePageAutomation extends TestConfig {
 
     QueryChecker queryChecker;
     HighlightHelper highlightHelper;
+    final int time_to_wait = 30;
 
 
 
@@ -477,7 +478,7 @@ public class HomePageAutomation extends TestConfig {
     @Test
     public void testPrivateQueries() {
         test = extent.createTest("Verify Private Query Button");
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
         try {
             login.doLogin(test);
             test.log(Status.INFO, "Clicking on Help Button");
