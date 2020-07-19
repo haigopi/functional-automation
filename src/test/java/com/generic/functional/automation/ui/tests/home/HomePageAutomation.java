@@ -26,8 +26,8 @@ public class HomePageAutomation extends TestConfig {
     HighlightHelper highlightHelper;
 
 
-    @BeforeClass(alwaysRun = true)
-    public void setUp() throws Exception {
+
+    public HomePageAutomation() throws Exception {
         queryChecker = new QueryChecker();
         highlightHelper = new HighlightHelper();
     }
