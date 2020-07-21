@@ -27,7 +27,6 @@ public class HomePageAutomation extends TestConfig {
     final int time_to_wait = 30;
 
 
-
     public HomePageAutomation() throws Exception {
         queryChecker = new QueryChecker();
         highlightHelper = new HighlightHelper();
@@ -807,11 +806,24 @@ public class HomePageAutomation extends TestConfig {
         return super.toString();
     }
 
+
+    @Test
+    public void testDocumentsQueries() throws Exception {
+        test = extent.createTest("Verify Documents Queries");
+        try {
+            login.doLogin(test);
+
+        queryChecker.runSearchBubbleQuery(driver, "list all documents", test);
+        queryChecker.runSearchBubbleQuery(driver, "list all documents where provider is FedEx", test);
+        queryChecker.runSearchBubbleQuery(driver, "list all documents where delivery number ends with 003", test);
+        queryChecker.runSearchBubbleQuery(driver, "list all documents where document type is LBL ", test);
+
+        test.createNode("Verified Documents Queries Successfully!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
-
-
-
-
 
 
 
