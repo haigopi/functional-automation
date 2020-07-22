@@ -788,12 +788,14 @@ public class HomePageAutomation extends TestConfig {
         test = extent.createTest("Verify Public Query Button");
         login.doLogin(test);
         Thread.sleep(4 * 1000);
-        test.log(Status.INFO, "Clicking on Help Button");
+        test.createNode("Clicking on Help Button");
+        //test.log(Status.INFO, "Clicking on Help Button");
         WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
         highlightHelper.highLightElement(driver, helpButton);
         helpButton.click();
         Thread.sleep(4 * 1000);
-        test.log(Status.INFO, "Clicking on Public Query Button");
+        test.createNode("Clicking on Public Query Button");
+        //test.log(Status.INFO, "Clicking on Public Query Button");
         WebElement publicQueryButton = driver.findElement(By.xpath("//*[@id=\"scrollable-auto-tab-2\"]/span[1]"));
         highlightHelper.highLightElement(driver, publicQueryButton);
         publicQueryButton.click();
