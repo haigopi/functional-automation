@@ -281,6 +281,7 @@ public class DataStudioAutomation extends TestConfig {
         PrimaryKeyPlantIdentifier.click();
         test.createNode(" Primary Key Displayed For Location Cluster ");
         Thread.sleep(5 * 1000);
+        test.createNode(" Primary Key Displayed For Location Cluster fake line ");
     }
 
     @Test(priority = 10)
