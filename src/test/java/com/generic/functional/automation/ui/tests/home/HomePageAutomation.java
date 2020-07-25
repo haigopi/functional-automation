@@ -463,20 +463,29 @@ public class HomePageAutomation extends TestConfig {
     public void testFreightChargeQueries() throws Exception {
         //Setup
         test = extent.createTest("Verify Freight Charges Queries");
-        login.doLogin(test);
-        test.log(Status.INFO, "Clicking on Search Bar");
+        try {
+            login.doLogin(test);
+            test.log(Status.INFO, "Clicking on Search Bar");
 
-        //query 1
-        queryChecker.runSearchBubbleQuery(driver, "list all charges", test);
-        //query 2
-        queryChecker.runSearchBubbleQuery(driver, "list all charges where carrier id is fedex", test);
-        //query 3
-        queryChecker.runSearchBubbleQuery(driver, "list all charges where charge type is Disk and freight charges amount > 100", test);
-        //query 4
-        queryChecker.runSearchBubbleQuery(driver, "list all charges where freight charges amount > 100", test);
-
+            //query 1
+            queryChecker.runSearchBubbleQuery(driver, "list all charges", test);
+            //query 2
+            queryChecker.runSearchBubbleQuery(driver, "list all charges where carrier id is fedex", test);
+            //query 3
+            queryChecker.runSearchBubbleQuery(driver, "list all charges where charge type is Disk and freight charges amount > 100", test);
+            //query 4
+            queryChecker.runSearchBubbleQuery(driver, "list all charges where freight charges amount > 100", test);
+        } catch (Exception e) {
+            test.createNode("Caught exception [ " + e + " ]");
+        }
         test.createNode("Verified Freight Charge Queries Successfully!");
     }
+
+    /**
+     * testPrivateQueries is used to automate private queries button (verify its existence)
+     *
+     * @author Sai
+     */
 
     @Test
     public void testPrivateQueries() {
@@ -484,12 +493,14 @@ public class HomePageAutomation extends TestConfig {
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
         try {
             login.doLogin(test);
-            test.log(Status.INFO, "Clicking on Help Button");
+            test.createNode("Clicking on Help Button");
+            //test.log(Status.INFO, "Clicking on Help Button");
             WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
             highlightHelper.highLightElement(driver, helpButton);
             helpButton.click();
 
-            test.log(Status.INFO, "Clicking on Private Query Button");
+            test.createNode("Clicking on Private Query Button");
+            //test.log(Status.INFO, "Clicking on Private Query Button");
             WebElement privateQueryButton = driver.findElement(By.xpath("//*[@id=\"scrollable-auto-tab-1\"]/span[1]"));
             highlightHelper.highLightElement(driver, privateQueryButton);
             privateQueryButton.click();
@@ -825,6 +836,12 @@ public class HomePageAutomation extends TestConfig {
 
     }
 
+    /**
+     * testPublicQueries is used to automate public queries button (verify its existence)
+     *
+     * @author Haritha
+     */
+
     @Test
     public void testPublicQueries() throws Exception {
         test = extent.createTest("Verify Public Query Button");
@@ -837,6 +854,7 @@ public class HomePageAutomation extends TestConfig {
             WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
             highlightHelper.highLightElement(driver, helpButton);
             helpButton.click();
+
             //Thread.sleep(4 * 1000);
             test.createNode("Clicking on Public Query Button");
             //test.log(Status.INFO, "Clicking on Public Query Button");
