@@ -458,6 +458,13 @@ public class HomePageAutomation extends TestConfig {
         Thread.sleep(5 * 1000);
     }
 
+    /**
+     * @author - Tanuj
+     * @Desc - Testing Fright charges Queries
+     * @in params - none
+     * @out params - void
+     * @throws Exception
+     */
 
     @Test
     public void testFreightChargeQueries() throws Exception {
@@ -505,7 +512,7 @@ public class HomePageAutomation extends TestConfig {
             highlightHelper.highLightElement(driver, privateQueryButton);
             privateQueryButton.click();
         } catch (Exception e) {
-            test.createNode("Exception (" + e + ") found"); // catches exception (test still passes)
+            test.createNode("Exception (" + e.toString() + ") found").fail(e);
             Assert.assertTrue(false);
         }
         test.createNode("Verified Private Query Successfully");
