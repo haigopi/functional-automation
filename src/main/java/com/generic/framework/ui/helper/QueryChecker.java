@@ -8,11 +8,18 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-//import sun.tools.jconsole.Tab;
+
 
 public class QueryChecker {
-    public static void runSearchBubbleQuery(WebDriver driver, String query, ExtentTest test) throws Exception { // Table xpath necessary for table validation
-        WebElement searchBubble = driver.findElement(By.xpath("//input[@name='']"));
+    TableChecker tableChecker;
+
+    public QueryChecker() {
+        tableChecker = new TableChecker();
+    }
+
+    public void runSearchBubbleQuery(WebDriver driver, String query, ExtentTest test) throws Exception { // Table xpath necessary for table validation
+        WebElement searchBubble = driver.findElement(By.className("auto-suggestion-input"));
+        //WebElement searchBubble = driver.findElement(By.xpath("//input[@name='']"));
         searchBubble.click();
         String[] splited = query.split(" ");
         Thread.sleep(1000 * 5);
@@ -25,13 +32,15 @@ public class QueryChecker {
         Thread.sleep(1000 * 3);
         test.log(Status.INFO, "Typed " + searchBubble.getAttribute("value"));
         searchBubble.sendKeys(Keys.ENTER);
+        searchBubble.sendKeys(Keys.ENTER);
+        //WebElement searchButton = driver.findElement(By.className("search_icon"));
+        //searchButton.click();
         test.log(Status.INFO, "Successfully validated");
         Thread.sleep(1000 * 5);
-        String col_xpath = "";
-        //TableChecker.rowValidator(driver, test, table_xpath); // if table xpath changes, use this method: table xpath currently - //*[@id="query-search-result-table"]/div/div/div[1]/div
-        TableChecker.rowValidatorWithoutXpath(driver, test);
-        //TableChecker.getColumnCount(driver, test, table_xpath);
-        TableChecker.getColumnCountAndNames(driver, test);
+        //tableChecker.rowValidator(driver, test, table_xpath); // if table xpath changes, use this method: table xpath currently - //*[@id="query-search-result-table"]/div/div/div[1]/div
+        tableChecker.rowValidatorWithoutXpath(driver, test);
+        //tableChecker.getColumnCount(driver, test, table_xpath);
+        tableChecker.getColumnCountAndNames(driver, test);
 
     }
 }
