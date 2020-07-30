@@ -3,11 +3,12 @@ package com.generic.functional.automation.ui.tests.home;
 import com.aventstack.extentreports.Status;
 import com.generic.framework.ui.helper.HighlightHelper;
 import com.generic.framework.ui.helper.QueryChecker;
+import com.generic.framework.ui.helper.TableChecker;
 import com.generic.functional.automation.ui.tests.common.TestConfig;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,6 +20,8 @@ import org.testng.annotations.Test;
 
 
 import java.io.File;
+import java.io.IOException;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -26,6 +29,7 @@ public class HomePageAutomation extends TestConfig {
 
     QueryChecker queryChecker;
     HighlightHelper highlightHelper;
+    TableChecker tableChecker;
     final int time_to_wait = 30;
     WebDriverWait wait;
 
@@ -34,6 +38,7 @@ public class HomePageAutomation extends TestConfig {
         wait = new WebDriverWait(driver, 15);
         queryChecker = new QueryChecker();
         highlightHelper = new HighlightHelper();
+        tableChecker = new TableChecker();
     }
 
     @Test
@@ -128,23 +133,23 @@ public class HomePageAutomation extends TestConfig {
         test = extent.createTest("Verify International Facts Country Of Origin");
         driver.manage().window().maximize();
         login.doLogin(test);
-        Thread.sleep(7 * 1000);
+        Thread.sleep(2 * 1000);
         // driver.manage().window().maximize();
         test.log(Status.INFO, "Help button Clicked");
         WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
         helpButton.click();
-        Thread.sleep(7 * 1000);
+        Thread.sleep(3 * 1000);
         test.log(Status.INFO, "Sunburst Shown");
         test.log(Status.INFO, "Shipments Cluster Clicked on the Sunburst");
         driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d")).click();
-        Thread.sleep(7 * 1000);
+        Thread.sleep(2 * 1000);
         test.log(Status.INFO, "International Clicked on the Sunburst");
         driver.findElement(By.id("mainArc-71ef3c15-be01-454d-bd1e-c59d13904a65")).click();
-        Thread.sleep(7 * 1000);
+        Thread.sleep(3 * 1000);
         test.log(Status.INFO, "Country of Origin Element Clicked on the Sunburst");
         WebElement helpButtoncountry = driver.findElement(By.id("mainArc-466ed1b9-526b-45c7-a02c-e6d419ef606f"));
         helpButtoncountry.click();
-        Thread.sleep(7 * 1000);
+        Thread.sleep(3 * 1000);
 
         /// VALIDATION ///
 
@@ -163,11 +168,12 @@ public class HomePageAutomation extends TestConfig {
 
             driver.findElement(By.xpath("//*[text()=' Total Records']"));
             test.log(Status.INFO, "Total Records found and table shown");
-            Thread.sleep(7 * 1000);
+            Thread.sleep(3 * 1000);
             test.createNode("Verified the table information is displayed when Country of origin is selected. ");
 
             driver.findElement(By.xpath("//button[@id='simple-tab-1']/span")).click(); // Clicks on Graphical View
             Thread.sleep(5 * 1000);
+            driver.findElement(By.id("simple-tab-1")).click();
             driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]")).click(); // Clicks on Other Graphical View
             Thread.sleep(5 * 1000);
             driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div/div[2]/div/div/div")).click(); // Click Axis 1
@@ -501,19 +507,23 @@ public class HomePageAutomation extends TestConfig {
         try {
             login.doLogin(test);
             test.createNode("Clicking on Help Button");
-            //test.log(Status.INFO, "Clicking on Help Button");
-            WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+            WebElement helpButton = driver.findElement(By.className("explore-quiries"));
             highlightHelper.highLightElement(driver, helpButton);
             helpButton.click();
 
             test.createNode("Clicking on Private Query Button");
-            //test.log(Status.INFO, "Clicking on Private Query Button");
             WebElement privateQueryButton = driver.findElement(By.xpath("//*[@id=\"scrollable-auto-tab-1\"]/span[1]"));
+            //WebElement privateQueryButton = driver.findElement(By.className("MuiTouchRipple-root"));
             highlightHelper.highLightElement(driver, privateQueryButton);
             privateQueryButton.click();
         } catch (Exception e) {
             test.createNode("Exception (" + e.toString() + ") found").fail(e);
-            Assert.assertTrue(false);
+            //call screenshot
+            try {
+                String destination = TakeScreenshot(driver, "privatequeries");
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         }
         test.createNode("Verified Private Query Successfully");
     }
@@ -897,6 +907,67 @@ public class HomePageAutomation extends TestConfig {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void deleteColumnsWithDragDrop() throws Exception {
+        test = extent.createTest("Verify Column Deletion");
+        try {
+            login.doLogin(test);
+            queryChecker.runSearchBubbleQuery(driver, "list all charges", test);
+            Thread.sleep(5000);
+
+            //WebElement on which drag and drop operation needs to be performed
+            WebElement columnToDelete = driver.findElement(By.xpath("//*[@id=\"query-search-result-table\"]/div/div/div[1]/div/div[1]/div[2]/div/div/div[5]")); //xpath for Freight Charges Amount column
+            System.out.println(columnToDelete.getAttribute("col-id")); //prints column name
+            //WebElement to which the above object is dropped
+            WebElement destination = driver.findElement(By.xpath("//*[@id=\"gatsby-focus-wrapper\"]/div/header/div[1]/header/div"));
+
+            //Trial 1
+            //Creating object of Actions class to build composite actions
+            Actions action = new Actions(driver);
+            //Building a drag and drop action
+            Action dragAndDrop = action.clickAndHold(columnToDelete)
+                    .pause(2)
+                    .moveToElement(destination)
+                    .pause(2)
+                    .release(destination)
+                    .build();
+
+            //Performing the drag and drop action
+            dragAndDrop.perform();
+
+            //Trial 2
+            //action.clickAndHold(columnToDelete);
+            //action.moveToElement(destination);
+            //action.moveByOffset(0, -200);
+            //action.release(columnToDelete).perform();
+            //action.pause(Duration.ofSeconds(3)).dragAndDropBy(columnToDelete, 0, -100).build().perform();
+            Thread.sleep(5000);
+
+            //Trial 3
+            //action.dragAndDrop(columnToDelete, destination).perform();
+
+            //Trial 4
+            //action.clickAndHold(columnToDelete).pause(Duration.ofSeconds(3)).moveToElement(destination).pause(Duration.ofSeconds(3)).release().build().perform();
+
+            System.out.println("Columns after deletion:");
+            tableChecker.getColumnCountAndNames(driver, test);
+            Thread.sleep(5000);
+            test.createNode("Verified Column Deletion Successfully!");
+        } catch (Exception e) {
+            test.createNode("Exception (" + e.toString() + ") found").fail(e);
+            //call screenshot
+            try {
+                String destination = TakeScreenshot(driver, "deletecolumns");
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }
+
+    }
+
+
+
 }
 
 
