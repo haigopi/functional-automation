@@ -13,6 +13,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 
@@ -25,9 +27,11 @@ public class HomePageAutomation extends TestConfig {
     QueryChecker queryChecker;
     HighlightHelper highlightHelper;
     final int time_to_wait = 30;
+    WebDriverWait wait;
 
-
-    public HomePageAutomation() throws Exception {
+    @BeforeMethod
+    public void beforeMethod() {
+        wait = new WebDriverWait(driver, 15);
         queryChecker = new QueryChecker();
         highlightHelper = new HighlightHelper();
     }
@@ -427,7 +431,7 @@ public class HomePageAutomation extends TestConfig {
 
     @Test
     public void testVerifyPrintButton() throws Exception {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
+       // WebDriverWait wait = new WebDriverWait(driver, 15);
         test = extent.createTest("VerifyPrintButton");
         login.doLogin(test);
         test.log(Status.INFO, "Help Button Clicked");
@@ -454,25 +458,41 @@ public class HomePageAutomation extends TestConfig {
         Thread.sleep(5 * 1000);
     }
 
+    /**
+     * @author - Tanuj
+     * @Desc - Testing Fright charges Queries
+     * @in params - none
+     * @out params - void
+     * @throws Exception
+     */
 
     @Test
     public void testFreightChargeQueries() throws Exception {
         //Setup
         test = extent.createTest("Verify Freight Charges Queries");
-        login.doLogin(test);
-        test.log(Status.INFO, "Clicking on Search Bar");
+        try {
+            login.doLogin(test);
+            test.log(Status.INFO, "Clicking on Search Bar");
 
-        //query 1
-        queryChecker.runSearchBubbleQuery(driver, "list all charges", test);
-        //query 2
-        queryChecker.runSearchBubbleQuery(driver, "list all charges where carrier id is fedex", test);
-        //query 3
-        queryChecker.runSearchBubbleQuery(driver, "list all charges where charge type is Disk and freight charges amount > 100", test);
-        //query 4
-        queryChecker.runSearchBubbleQuery(driver, "list all charges where freight charges amount > 100", test);
-
+            //query 1
+            queryChecker.runSearchBubbleQuery(driver, "list all charges", test);
+            //query 2
+            queryChecker.runSearchBubbleQuery(driver, "list all charges where carrier id is fedex", test);
+            //query 3
+            queryChecker.runSearchBubbleQuery(driver, "list all charges where charge type is Disk and freight charges amount > 100", test);
+            //query 4
+            queryChecker.runSearchBubbleQuery(driver, "list all charges where freight charges amount > 100", test);
+        } catch (Exception e) {
+            test.createNode("Caught exception [ " + e + " ]");
+        }
         test.createNode("Verified Freight Charge Queries Successfully!");
     }
+
+    /**
+     * testPrivateQueries is used to automate private queries button (verify its existence)
+     *
+     * @author Sai
+     */
 
     @Test
     public void testPrivateQueries() {
@@ -480,31 +500,37 @@ public class HomePageAutomation extends TestConfig {
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
         try {
             login.doLogin(test);
-            test.log(Status.INFO, "Clicking on Help Button");
+            test.createNode("Clicking on Help Button");
+            //test.log(Status.INFO, "Clicking on Help Button");
             WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
             highlightHelper.highLightElement(driver, helpButton);
             helpButton.click();
 
-            test.log(Status.INFO, "Clicking on Private Query Button");
+            test.createNode("Clicking on Private Query Button");
+            //test.log(Status.INFO, "Clicking on Private Query Button");
             WebElement privateQueryButton = driver.findElement(By.xpath("//*[@id=\"scrollable-auto-tab-1\"]/span[1]"));
             highlightHelper.highLightElement(driver, privateQueryButton);
             privateQueryButton.click();
         } catch (Exception e) {
-            test.createNode("Exception (" + e + ") found"); // catches exception (test still passes)
+            test.createNode("Exception (" + e.toString() + ") found").fail(e);
             Assert.assertTrue(false);
         }
         test.createNode("Verified Private Query Successfully");
     }
 
     @Test
-    public void testDocumentBydocTypeQueries() {
+    public void testDocumentBydocTypeQueries() {//pardhu
         test = extent.createTest("Verify DocumentByDocTypeQueries");
         try {
             login.doLogin(test);
             queryChecker.runSearchBubbleQuery(driver, "list all Document ", test);
+            test.createNode("list all Documents verified successfully");
             queryChecker.runSearchBubbleQuery(driver, "list all Document where Document Type is RPT", test);
+            test.createNode("list all Documents where Document Type is RPT verified successfully");
             queryChecker.runSearchBubbleQuery(driver, "list all Document where Document Type is FRM", test);
+            test.createNode("list all Documents where Document Type is FRM verified successfully");
             queryChecker.runSearchBubbleQuery(driver, "list all Document where Document Type is LBL", test);
+            test.createNode("list all Documents where Document Type is LBL verified successfully");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -562,23 +588,37 @@ public class HomePageAutomation extends TestConfig {
     @Test
     public void testDocBydocTypeOGraphs() {
         test = extent.createTest("Verify DocByDoctypeGraph");
-        WebDriverWait wait = new WebDriverWait(driver, 15);
+       // WebDriverWait wait = new WebDriverWait(driver, 15);
         try {
             login.doLogin(test);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".explore-quiries-inner")));
-            driver.findElement(By.cssSelector(".explore-quiries-inner")).click();
+
+            WebElement helpbtn=driver.findElement(By.cssSelector(".explore-quiries-inner"));
+            wait.until(ExpectedConditions.visibilityOf(helpbtn));
+            helpbtn.click();
             test.createNode("HelpButton clicked");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d")));
-            driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d")).click();
+
+            WebElement shipment=driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d"));
+            wait.until(ExpectedConditions.visibilityOf(shipment));
+            shipment.click();
+            test.createNode("clicked on shipments");
             //clicking on shipments
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("mainArc-11a018d0-8978-48ff-9c7b-ea8606201da5")));
-            driver.findElement(By.id("mainArc-11a018d0-8978-48ff-9c7b-ea8606201da5")).click();
+
+            WebElement document=driver.findElement(By.id("mainArc-11a018d0-8978-48ff-9c7b-ea8606201da5"));
+            wait.until(ExpectedConditions.visibilityOf(document));
+            document.click();
+            test.createNode("clicked on documents");
             //clicking on documents
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("mainArc-287afee1-7e35-4f10-a768-4d44610ecea8")));
-            driver.findElement(By.id("mainArc-287afee1-7e35-4f10-a768-4d44610ecea8")).click();
+
+            WebElement documenttype=driver.findElement(By.id("mainArc-287afee1-7e35-4f10-a768-4d44610ecea8"));
+            wait.until(ExpectedConditions.visibilityOf(documenttype));
+            documenttype.click();
+            test.createNode("clicked on document type");
             //clicking on document Type
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[1]/div/div/main/div/div/div/div[5]/div/div/div/header/div/div/div/button[3]/span[1]")));
-            driver.findElement(By.xpath("/html/body/div[1]/div/div/main/div/div/div/div[5]/div/div/div/header/div/div/div/button[3]/span[1]")).click();
+
+            WebElement Ograph=driver.findElement(By.xpath("/html/body/div[1]/div/div/main/div/div/div/div[5]/div/div/div/header/div/div/div/button[3]/span[1]"));
+            wait.until(ExpectedConditions.visibilityOf(Ograph));
+            Ograph.click();
+            test.createNode("clicked on other graphical Views");
             //clicking on other graphical views #same ids for both graphs and ographs
 
             WebElement axis1 = driver.findElement(By.cssSelector("#react-select-2-input"));
@@ -586,22 +626,29 @@ public class HomePageAutomation extends TestConfig {
             axis1.sendKeys("Document Type");
             axis1.sendKeys(Keys.ARROW_DOWN);
             axis1.sendKeys(Keys.ENTER);
+            test.createNode("input given to axis1 successfully");
 
             WebElement axis2 = driver.findElement(By.cssSelector("#react-select-3-input"));
             axis2.clear();
             axis2.sendKeys("COUNT");
             axis2.sendKeys(Keys.ARROW_DOWN);
             axis2.sendKeys(Keys.ENTER);
+            test.createNode("input given to axis2 successfully");
+
 
             WebElement graph = driver.findElement(By.cssSelector("#react-select-4-input"));
             graph.clear();
             graph.sendKeys("Vertical");
             graph.sendKeys(Keys.ARROW_DOWN);
             graph.sendKeys(Keys.ENTER);
+            test.createNode("input given to graphs as vertical graph");
 
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span")));
-            driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span")).click();
-            Thread.sleep(5 * 1000);
+            WebElement show=driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span"));
+            wait.until(ExpectedConditions.visibilityOf(show));
+            show.click();
+            test.createNode("clicked on show");
+            test.createNode("OtherGraphs verified successfully");
+            //Thread.sleep(5 * 1000);
             //click on show
         } catch (Exception e) {
             test.createNode("Exception " + e + "in DocTypeGraphs");
@@ -611,25 +658,38 @@ public class HomePageAutomation extends TestConfig {
     @Test
     public void testDocTypeGraph() {
         test = extent.createTest("Verify DocByDoctypeGraph");
-        WebDriverWait wait = new WebDriverWait(driver, 15);
+       // WebDriverWait wait = new WebDriverWait(driver, 15);
         try {
             login.doLogin(test);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".explore-quiries-inner")));
-            driver.findElement(By.cssSelector(".explore-quiries-inner")).click();
+            WebElement helpbtn=driver.findElement(By.cssSelector(".explore-quiries-inner"));
+            wait.until(ExpectedConditions.visibilityOf(helpbtn));
+            helpbtn.click();
             test.createNode("HelpButton clicked");
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d")));
-            driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d")).click();
-            //clicking on shipments
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("mainArc-11a018d0-8978-48ff-9c7b-ea8606201da5")));
-            driver.findElement(By.id("mainArc-11a018d0-8978-48ff-9c7b-ea8606201da5")).click();
-            //clicking on documents
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("mainArc-287afee1-7e35-4f10-a768-4d44610ecea8")));
-            driver.findElement(By.id("mainArc-287afee1-7e35-4f10-a768-4d44610ecea8")).click();
-            //clicking on document Type
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Graphical View']")));
-            driver.findElement(By.xpath("//span[text()='Graphical View']")).click();
 
-            test.createNode("DocByDoctypeGraph verified");
+            WebElement shipment=driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d"));
+            wait.until(ExpectedConditions.visibilityOf(shipment));
+            shipment.click();
+            test.createNode("clicked on shipments");
+            //clicking on shipments
+
+            WebElement document=driver.findElement(By.id("mainArc-11a018d0-8978-48ff-9c7b-ea8606201da5"));
+            wait.until(ExpectedConditions.visibilityOf(document));
+            document.click();
+            test.createNode("clicked on documents");
+            //clicking on documents
+
+            WebElement documenttype=driver.findElement(By.id("mainArc-287afee1-7e35-4f10-a768-4d44610ecea8"));
+            wait.until(ExpectedConditions.visibilityOf(documenttype));
+            documenttype.click();
+            test.createNode("clicked on document type");
+            //clicking on document Type
+
+            WebElement graphicalView=driver.findElement(By.xpath("//span[text()='Graphical View']"));
+            wait.until(ExpectedConditions.visibilityOf(graphicalView));
+            graphicalView.click();
+            test.createNode("clicked on graphical View");
+
+            test.createNode("DocByDoctypeGraph verified successfully");
         } catch (Exception e) {
             test.createNode("Exception " + e + "in DocTypeGraphs");
 
@@ -645,11 +705,11 @@ public class HomePageAutomation extends TestConfig {
     @Test
     public void testColumresize() {
         test = extent.createTest("Verify testColumresize");
-        WebDriverWait wait = new WebDriverWait(driver, 15);
+      //  WebDriverWait wait = new WebDriverWait(driver, 15);
         try {
             login.doLogin(test);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@class='auto-suggestion-input']")));
             WebElement searchBubble = driver.findElement(By.xpath("//input[@class='auto-suggestion-input']"));
+            wait.until(ExpectedConditions.visibilityOf(searchBubble));
             searchBubble.click();
             searchBubble.sendKeys("list of customers");
             searchBubble.sendKeys(Keys.ENTER);
@@ -668,7 +728,7 @@ public class HomePageAutomation extends TestConfig {
 
             }
 
-            test.createNode("Columresize verified");
+            test.createNode("Columresize verified successfully");
 
             //Thread.sleep(5000); //use this if you want to observe the size while execution.
 
@@ -783,21 +843,35 @@ public class HomePageAutomation extends TestConfig {
 
     }
 
+    /**
+     * testPublicQueries is used to automate public queries button (verify its existence)
+     *
+     * @author Haritha
+     */
+
     @Test
     public void testPublicQueries() throws Exception {
         test = extent.createTest("Verify Public Query Button");
-        login.doLogin(test);
-        Thread.sleep(4 * 1000);
-        test.log(Status.INFO, "Clicking on Help Button");
-        WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
-        highlightHelper.highLightElement(driver, helpButton);
-        helpButton.click();
-        Thread.sleep(4 * 1000);
-        test.log(Status.INFO, "Clicking on Public Query Button");
-        WebElement publicQueryButton = driver.findElement(By.xpath("//*[@id=\"scrollable-auto-tab-2\"]/span[1]"));
-        highlightHelper.highLightElement(driver, publicQueryButton);
-        publicQueryButton.click();
-        Thread.sleep(4 * 1000);
+        driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);
+        try {
+            login.doLogin(test);
+            //Thread.sleep(4 * 1000);
+            test.createNode("Clicking on Help Button");
+            //test.log(Status.INFO, "Clicking on Help Button");
+            WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+            highlightHelper.highLightElement(driver, helpButton);
+            helpButton.click();
+
+            //Thread.sleep(4 * 1000);
+            test.createNode("Clicking on Public Query Button");
+            //test.log(Status.INFO, "Clicking on Public Query Button");
+            WebElement publicQueryButton = driver.findElement(By.xpath("//*[@id=\"scrollable-auto-tab-2\"]/span[1]"));
+            highlightHelper.highLightElement(driver, publicQueryButton);
+            publicQueryButton.click();
+            //Thread.sleep(4 * 1000);
+        } catch (Exception e) {
+            test.createNode("Caught [ " + e + " ] exception in testPublicQueries");
+        }
         test.createNode("Verified Public Query Successfully");
     }
 
