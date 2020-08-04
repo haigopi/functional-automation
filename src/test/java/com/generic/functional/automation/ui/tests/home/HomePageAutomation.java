@@ -741,54 +741,68 @@ public class HomePageAutomation extends TestConfig {
     @Test
     public void testShipmentsSunburstDocURLsDocClick() {//prasanna
         test = extent.createTest("Verifying Shipments Documents Test");
+        //WebDriverWait wait = new WebDriverWait(driver,45);
+        //driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);
+
 
         try {
             driver.manage().window().maximize();
             login.doLogin(test);
-            Thread.sleep(5 * 1000);
+            //Thread.sleep(5 * 1000);
             test.log(Status.INFO, "Help Button Clicked");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".explore-quiries-inner")));
             WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
             highlightHelper.highLightElement(driver, helpButton);
             helpButton.click();
             test.log(Status.INFO, "Sunburst Shown");
             test.createNode("Click on the help button to open sunburst ");
-            Thread.sleep(5 * 1000);
+            //Thread.sleep(5 * 1000);
             test.log(Status.INFO, "Subject Shipments Button Click");
             test.createNode("Shipments click on sunburst ");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d")));
             WebElement SubjectShipmentsButtonClick = driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d"));
             SubjectShipmentsButtonClick.click();
-            Thread.sleep(5 * 1000);
+            //Thread.sleep(5 * 1000);
             test.log(Status.INFO, "Document URLs Cluster Click");
             test.createNode("Document URLs Cluster Click");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("mainArc-bfe454df-aa7e-43a8-9bf2-8a4941d59edd")));
             WebElement DocumentURLsCluster = driver.findElement(By.id("mainArc-bfe454df-aa7e-43a8-9bf2-8a4941d59edd"));
             DocumentURLsCluster.click();
             Thread.sleep(5 * 1000);
             test.log(Status.INFO, "Documents Provider Cluster Click");
             test.createNode("Documents Provider Cluster Click");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("mainArc-d71a8a74-5e78-426f-ad9e-a7bab8283818")));
             WebElement DocumentsProviderCluster = driver.findElement(By.id("mainArc-d71a8a74-5e78-426f-ad9e-a7bab8283818"));
             DocumentsProviderCluster.click();
-            Thread.sleep(5 * 1000);
-            WebElement helpButton1 = driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.helpIcon.explore-query-svg.ml-2"));
+            test.log(Status.INFO, "Tabular View displayed");
+            test.createNode("Tabular View displayed");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".explore-quiries-inner")));
+            WebElement helpButton1 = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+            highlightHelper.highLightElement(driver, helpButton1);
             helpButton1.click();
             Thread.sleep(5 * 1000);
             test.log(Status.INFO, "Tabular View displayed");
             test.createNode("Tabular View displayed");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='simple-tab-1']/span")));
             driver.findElement(By.xpath("//button[@id='simple-tab-1']/span")).click();
-            Thread.sleep(5 * 1000);
+            //Thread.sleep(5 * 1000);
             test.log(Status.INFO, "Graphical View Displayed ");
             test.createNode("Graphical View Displayed ");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//button[@id='simple-tab-1']/span)[3]")));
             driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]")).click();
 
             /// VALIDATION ///
 
-            Thread.sleep(5 * 1000);
+            //Thread.sleep(5 * 1000);
             test.log(Status.INFO, "Under Axis 1");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='panel1d-content']/div/div/form/div/div[2]/div/div/div")));
             WebElement Axis1 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div/div[2]/div/div/div"));
             Axis1.click();
 
 
-            Thread.sleep(5 * 1000);
+            //Thread.sleep(5 * 1000);
             test.log(Status.INFO, "Selected Document Provider");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("react-select-2-option-0")));
             WebElement Provider = driver.findElement(By.id("react-select-2-option-0"));
             test.log(Status.INFO, "Validating 'Docs Provider' variable");
             test.createNode("Validating 'Docs Provider' variable");
@@ -797,14 +811,16 @@ public class HomePageAutomation extends TestConfig {
             test.log(Status.INFO, "Validation of 'Docs Provider' variable Successful");
             Provider.click();
 
-            Thread.sleep(5 * 1000);
+            //Thread.sleep(5 * 1000);
             test.log(Status.INFO, "Under Axis2");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='panel1d-content']/div/div/form/div[2]/div[2]/div/div/div")));
             WebElement Axis2 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[2]/div[2]/div/div/div"));
             Axis2.click();
 
-            Thread.sleep(5 * 1000);
+            //Thread.sleep(5 * 1000);
             test.log(Status.INFO, "Selected Count");
             test.createNode("Selected Count");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("react-select-3-option-0")));
             WebElement Count = driver.findElement(By.id("react-select-3-option-0"));
             test.log(Status.INFO, "Validating 'COUNT' variable");
             test.createNode("Validating 'COUNT' variable");
@@ -812,15 +828,17 @@ public class HomePageAutomation extends TestConfig {
             Assert.assertEquals(Count.getText(), "COUNT"); // 2nd Validator
             test.log(Status.INFO, "Validation of 'COUNT' variable Successful");
             Count.click();
-            Thread.sleep(5 * 1000);
+            //Thread.sleep(5 * 1000);
 
             test.log(Status.INFO, "Under Graph");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div")));
             WebElement Graph = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div"));
             Graph.click();
 
-            Thread.sleep(5 * 1000);
+            //Thread.sleep(5 * 1000);
             test.log(Status.INFO, "Selected Bubble Graph");
             test.createNode("Selected Bubble Graph");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("react-select-4-option-4")));
             WebElement bubbleGraph = driver.findElement(By.id("react-select-4-option-4"));
             test.log(Status.INFO, "Validating 'Bubble Graph' variable");
             test.createNode("Validating 'Bubble Graph' variable");
@@ -828,26 +846,28 @@ public class HomePageAutomation extends TestConfig {
             Assert.assertEquals(bubbleGraph.getText(), "Bubble Graph"); // 2nd Validator
             test.log(Status.INFO, "Validation of 'Bubble Graph' variable Successful");
             bubbleGraph.click();
-            Thread.sleep(5 * 1000);
+            //Thread.sleep(5 * 1000);
 
             test.log(Status.INFO, "Clicked on Show Button ");
             test.createNode("Clicked on Show Button ");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span")));
             WebElement showButton = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span"));
             showButton.click();
-            Thread.sleep(5 * 1000);
+            //Thread.sleep(5 * 1000);
             test.log(Status.INFO, "Bubble Graph Displayed ");
             test.createNode("Verified Documents Cluster with Dimensional Data");
         } catch (Exception e) {
-            test.createNode("Error in the graphical view of Doc URLs  --" + e + "---In testShipmentsSunburstDocURLsDocClick ");
+            test.createNode("Exception (" + e.toString() + ") found").fail(e);
+            Assert.assertTrue(false);
+            //test.createNode("Error in the graphical view of Doc URLs  --" + e + "---In testShipmentsSunburstDocURLsDocClick ");
         }
-
     }
 
-    /**
-     * testPublicQueries is used to automate public queries button (verify its existence)
-     *
-     * @author Haritha
-     */
+        /**
+         * testPublicQueries is used to automate public queries button (verify its existence)
+         *
+         * @author Haritha
+         */
 
     @Test
     public void testPublicQueries() throws Exception {
