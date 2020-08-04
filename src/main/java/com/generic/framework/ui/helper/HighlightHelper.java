@@ -9,7 +9,7 @@ public class HighlightHelper {
     {
         JavascriptExecutor js=(JavascriptExecutor)driver;
 
-        js.executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');", element);
+        js.executeScript("arguments[0].setAttribute('style', 'background: No color; border: 2px solid black;');", element);
 
         try
         {
