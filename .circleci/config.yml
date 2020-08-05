@@ -34,7 +34,7 @@ jobs:
       - run: gradle dependencies
       - run:
           name: Download Selenium
-          command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-4.0.0-alpha-2.jar
+          command: curl -O http://selenium-release.storage.googleapis.com/4.0/selenium-server-standalone-4.0.0-alpha-2.jar
       - run:
           name: Start Selenium
           command: java -jar selenium-server-standalone-4.0.0-alpha-2.jar -log test-output/selenium.log
