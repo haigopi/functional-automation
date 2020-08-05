@@ -53,10 +53,15 @@ public class TestConfig {
 
         HashMap<String, Object> prefs = new HashMap<>();
         prefs.put("download.default_directory", DEFAULT_DOWNLOAD_DIR);
-        ChromeOptions options = new ChromeOptions();
-        options.setExperimentalOption("prefs", prefs);
 
-        driver = new ChromeDriver(options);
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless");
+        chromeOptions.addArguments("--disable-gpu");
+        chromeOptions.addArguments("--disable-extensions");
+        chromeOptions.setExperimentalOption("prefs", prefs);
+
+
+        driver = new ChromeDriver(chromeOptions);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(AppConstants.BASE_URL);
 
