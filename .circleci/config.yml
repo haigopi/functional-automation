@@ -8,7 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
-      - image: selenium/standalone-chrome:latest
+#      - image: selenium/standalone-chrome:latest
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
@@ -23,13 +23,22 @@ jobs:
 
     steps:
       - checkout
-
+      - run: mkdir test-reports
       # Download and cache dependencies
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "build.gradle" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
+      - run:
+          name: Download Selenium
+          command: |
+            curl -O http://selenium-release.storage.googleapis.com/4.0/selenium-server-standalone-4.0.0-alpha-2.jar
+      - run:
+          name: Start Selenium
+          command: |
+            java -jar selenium-server-standalone-4.0.0-alpha-2.jar -log test-reports/selenium.log
+          background: true
 
       - run: gradle dependencies
 
