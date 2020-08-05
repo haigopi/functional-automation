@@ -5,24 +5,26 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.generic.framework.ui.functional.AppConstants;
 import com.generic.framework.ui.functional.ExtentManager;
 import com.generic.framework.ui.functional.Login;
-import com.generic.framework.ui.functional.AppConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.fail;
@@ -30,7 +32,7 @@ import static org.testng.Assert.fail;
 @Slf4j
 public class TestConfig {
 
-    protected static final String DEFAULT_DOWNLOAD_DIR =  System.getProperty("user.dir")+File.separator+"downloads";
+    protected static final String DEFAULT_DOWNLOAD_DIR = System.getProperty("user.dir") + File.separator + "downloads";
     protected WebDriver driver;
 
     private boolean acceptNextAlert = true;
@@ -40,19 +42,26 @@ public class TestConfig {
     protected ExtentReports extent;
     public ExtentTest test;
 
+    private final String RESOURCE_PATH = "src/test/java/resources/";
+
     @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
         System.out.println("Setup Started...");
-        System.out.println("Default Download Directory..."+DEFAULT_DOWNLOAD_DIR);
+        System.out.println("Default Download Directory..." + DEFAULT_DOWNLOAD_DIR);
         setOS();
         setReport();
 
         HashMap<String, Object> prefs = new HashMap<>();
         prefs.put("download.default_directory", DEFAULT_DOWNLOAD_DIR);
-        ChromeOptions options = new ChromeOptions();
-        options.setExperimentalOption("prefs", prefs);
 
-        driver = new ChromeDriver(options);
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless");
+        chromeOptions.addArguments("--disable-gpu");
+        chromeOptions.addArguments("--disable-extensions");
+        chromeOptions.setExperimentalOption("prefs", prefs);
+
+
+        driver = new ChromeDriver(chromeOptions);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.get(AppConstants.BASE_URL);
 
@@ -68,22 +77,25 @@ public class TestConfig {
     }
 
     private void setOS() {
-        String osName = System.getProperty("os.name");
+        String driverName;
 
-        String driverName = "chromedriver_83.exe";
-
-        System.out.println("OS found -> " + osName);
-        if (!osName.startsWith("Windows")) {
-            driverName = "chromedriver_83-macb";
+        if (SystemUtils.IS_OS_MAC) {
+            driverName = RESOURCE_PATH + "chromedriver_mac";
+        } else if (SystemUtils.IS_OS_LINUX) {
+            driverName = RESOURCE_PATH + "chromedriver_linux";
+        } else if (SystemUtils.IS_OS_WINDOWS) {
+            driverName = RESOURCE_PATH + "chromedriver.exe";
+        } else {
+            driverName = RESOURCE_PATH + "chromedriver_linux";
         }
-
+        //log.info("Using Driver", driverName);
         System.setProperty("webdriver.chrome.driver", driverName);
     }
 
     @AfterMethod
     public void getResult(ITestResult result) throws Exception {
 
-        if(test!=null)
+        if (test != null)
             return;
 
         if (result.getStatus() == ITestResult.FAILURE) {
@@ -124,10 +136,12 @@ public class TestConfig {
         if (!"".equals(verificationErrorString)) {
             fail(verificationErrorString);
         }
-        if(extent!=null) {
+        if (extent != null) {
             extent.flush();
         }
-        driver.quit();
+        if (!Objects.isNull(driver)) {
+            driver.quit();
+        }
     }
 
     protected boolean isElementPresent(By by) {
