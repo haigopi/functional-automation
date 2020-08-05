@@ -79,7 +79,7 @@ test {
     testLogging {
         events "passed", "skipped", "failed", "standardOut", "standardError"
     }
-    debug true
+    debug false
 }
 gradle.projectsEvaluated {
     tasks.withType(Test) { task ->
