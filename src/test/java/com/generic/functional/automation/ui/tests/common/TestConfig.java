@@ -77,19 +77,15 @@ public class TestConfig {
     }
 
     private void setOS() {
-        String driverName;
+        String driverName = "chromedriver_linux";
 
         if (SystemUtils.IS_OS_MAC) {
             driverName = RESOURCE_PATH + "chromedriver_mac";
-        } else if (SystemUtils.IS_OS_LINUX) {
-            driverName = RESOURCE_PATH + "chromedriver_linux";
         } else if (SystemUtils.IS_OS_WINDOWS) {
             driverName = RESOURCE_PATH + "chromedriver.exe";
-        } else {
-            driverName = RESOURCE_PATH + "chromedriver_linux";
         }
         System.out.println("==> Using Driver : " + driverName);
-       // log.info(" =-=> Using Driver: {} ", driverName);
+        // log.info(" =-=> Using Driver: {} ", driverName);
         System.setProperty("webdriver.chrome.driver", driverName);
     }
 
@@ -103,7 +99,6 @@ public class TestConfig {
             test.log(Status.FAIL, MarkupHelper.createLabel(result.getName() + " - Test Case Failed", ExtentColor.RED));
             test.log(Status.FAIL, MarkupHelper.createLabel(result.getThrowable() + " - Test Case Failed", ExtentColor.RED));
 
-            //	String Scrnshot=TakeScreenshot.captuerScreenshot(driver,"TestCaseFailed");
             String screenshotPath = TakeScreenshot(driver, result.getName());
 
             test.fail("Test Case Failed Snapshot is below " + test.addScreenCaptureFromPath(screenshotPath));
