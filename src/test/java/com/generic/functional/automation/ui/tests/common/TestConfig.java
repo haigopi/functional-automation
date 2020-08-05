@@ -80,13 +80,13 @@ public class TestConfig {
         String driverName = "chromedriver_linux";
 
         if (SystemUtils.IS_OS_MAC) {
-            driverName = RESOURCE_PATH + "chromedriver_mac";
+            driverName = "chromedriver_mac";
         } else if (SystemUtils.IS_OS_WINDOWS) {
-            driverName = RESOURCE_PATH + "chromedriver.exe";
+            driverName = "chromedriver.exe";
         }
         System.out.println("==> Using Driver : " + driverName);
         // log.info(" =-=> Using Driver: {} ", driverName);
-        System.setProperty("webdriver.chrome.driver", driverName);
+        System.setProperty("webdriver.chrome.driver", RESOURCE_PATH + driverName);
     }
 
     @AfterMethod
