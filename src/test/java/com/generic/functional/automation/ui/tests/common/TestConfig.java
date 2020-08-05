@@ -86,7 +86,7 @@ public class TestConfig {
         }
         System.out.println("==> Using Driver : " + driverName);
         // log.info(" =-=> Using Driver: {} ", driverName);
-        //System.setProperty("webdriver.chrome.driver", RESOURCE_PATH + driverName);
+        System.setProperty("webdriver.chrome.driver", RESOURCE_PATH + driverName);
     }
 
     @AfterMethod
