@@ -500,7 +500,7 @@ public class HomePageAutomation extends TestConfig {
      * @author Sai
      */
 
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testPrivateQueries() {
         test = extent.createTest("Verify Private Query Button");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
@@ -528,7 +528,7 @@ public class HomePageAutomation extends TestConfig {
         test.createNode("Verified Private Query Successfully");
     }
 
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testDocumentBydocTypeQueries() {//pardhu
         test = extent.createTest("Verify DocumentByDocTypeQueries");
         try {
@@ -1209,7 +1209,7 @@ public class HomePageAutomation extends TestConfig {
     }
 
     @Test
-    public void deleteColumnsWithDragDrop() throws Exception {
+    public void deleteColumnsWithDragDrop() throws Exception { //sai
         test = extent.createTest("Verify Column Deletion");
         try {
             login.doLogin(test);

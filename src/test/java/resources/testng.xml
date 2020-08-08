@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="A4" verbose="1" preserve-order="true">
+
+<suite name="A4">
+    <test name="Smoke Tests - Test Cases" verbose="2">
+        <packages>
+            <package name="com.generic.functional.automation.ui.tests.home"></package>
+        </packages>
+
+        <groups>
+
+            <run>
+                <include name="smokeTest"/>
+            </run>
+
+        </groups>
+
+        <classes>
+            <class name = "com.generic.functional.automation.ui.tests.home.HomePageAutomation" />
+        </classes>
+    </test>
     <test name="Regression Suite">
         <packages>
             <package name="com.generic.functional.automation.ui.tests">
@@ -7,4 +25,6 @@
             </package>
         </packages>
     </test>
+
 </suite>
+
