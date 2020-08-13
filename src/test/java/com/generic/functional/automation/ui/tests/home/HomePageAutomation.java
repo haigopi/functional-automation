@@ -1197,9 +1197,30 @@ public class HomePageAutomation extends TestConfig {
             e.printStackTrace();
         }
     }
+
+
+    @Test
+    public void testPackagesQueries() throws Exception {
+
+        test = extent.createTest("Verify PackagesQueries");
+        try {
+            login.doLogin(test);
+            test.log(Status.INFO, "Clicking on Search Bar");
+            // query 1
+            queryChecker.runSearchBubbleQuery(driver, "list of all packages", test);
+            // query 2
+            queryChecker.runSearchBubbleQuery(driver, "list of plant identifier starts with 1314 where packages", test);
+            // query 3
+            queryChecker.runSearchBubbleQuery(driver, "list of ltl class ends with 50 where packages", test);
+            test.createNode("Verified packages Queries Successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
 }
-
-
 
 
 
