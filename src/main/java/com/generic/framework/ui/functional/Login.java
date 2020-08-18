@@ -58,7 +58,7 @@ public class Login {
     test.createNode("Login Button Clicked");
     driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     //2. How do I know I actually Logged In?
-    driver.findElement(By.xpath("//*[@id=\"logout\"]/div[2]/span"));
+    //driver.findElement(By.xpath("//*[@id=\"logout\"]/div[2]/span"));
     //test.log(Status.INFO, "clicking on login button");
     test.log(Status.INFO, "LOGIN SUCCESS");
     test.createNode("Logout ");

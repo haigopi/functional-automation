@@ -64,7 +64,7 @@ public class HomePageAutomation extends TestConfig {
 
     }
 
-    @Test
+    /*@Test
     public void testVerifyResetButtonSearchBar() throws Exception { //Haritha
         test = extent.createTest("Home > Verify Reset Button / Clear the Search Bubble");
         login.doLogin(test);
@@ -104,7 +104,7 @@ public class HomePageAutomation extends TestConfig {
         WebElement searchBubble = driver.findElement(By.className("search_input"));
         String queryText = searchBubble.getAttribute("value");
         test.log(Status.INFO, "Text in Search Bubble BEFORE reset button clicked (" + queryText + ")");
-        WebElement resetButton = driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.highlightIcon")); // Reset Button
+        WebElement resetButton = driver.findElement(By.xpath("//*[@id=\"gatsby-focus-wrapper\"]/div/main/div/div/div/div[2]/div/div/div/div/div[1]/div[2]/div[2]/p/svg")); // Reset Button
         highlightHelper.highLightElement(driver, resetButton);
         resetButton.click();
         Thread.sleep(3 * 1000);
@@ -125,7 +125,7 @@ public class HomePageAutomation extends TestConfig {
         //HTML CODE TO ACCESS
         // <input class="search_input" type="text" name="" placeholder="Search..." value="">
 
-    }
+    }*/
 
 
     @Test
@@ -331,7 +331,7 @@ public class HomePageAutomation extends TestConfig {
     }
 
 
-    @Test
+    /*@Test
     public void testVerifyResetButtonSunburst() throws Exception { //***
         test = extent.createTest("Home Page Verify Reset Button by Sunburst");
         login.doLogin(test);
@@ -368,9 +368,9 @@ public class HomePageAutomation extends TestConfig {
         driver.findElement(By.xpath("//input[@name='']")).clear();
         Thread.sleep(7 * 1000);
 
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void testVerifySubjectGuides() throws Exception { //***
         test = extent.createTest("Verifying Subjects Guide ");
         login.doLogin(test);
@@ -392,8 +392,8 @@ public class HomePageAutomation extends TestConfig {
         driver.findElement(By.xpath("//*[text()='Domain of Values']"));
         test.log(Status.INFO, "Domain of Values Displayed");
         driver.findElement(By.xpath("//*[text()='Drill down for Sub-elements']"));
-        test.log(Status.INFO,"Drill down for Sub-elements Displayed");*/
-    }
+        test.log(Status.INFO,"Drill down for Sub-elements Displayed");
+    }*/
 
     @Test
     public void testDownloadCSVButton() throws Exception {
@@ -435,7 +435,7 @@ public class HomePageAutomation extends TestConfig {
     }
 
 
-    @Test
+    /*@Test
     public void testVerifyPrintButton() throws Exception {
        // WebDriverWait wait = new WebDriverWait(driver, 15);
         test = extent.createTest("VerifyPrintButton");
@@ -462,7 +462,7 @@ public class HomePageAutomation extends TestConfig {
         test.log(Status.INFO, "Print Button Click");
         driver.findElement(By.cssSelector("#search-result-print > span.MuiIconButton-label > svg.MuiSvgIcon-root > path")).click();
         Thread.sleep(5 * 1000);
-    }
+    }*/
 
     /**
      * @author - Tanuj
@@ -528,7 +528,7 @@ public class HomePageAutomation extends TestConfig {
         test.createNode("Verified Private Query Successfully");
     }
 
-    @Test (groups = {"smokeTest"})
+    @Test (groups={"smokeTest", "regressionTest"})
     public void testDocumentBydocTypeQueries() {//pardhu
         test = extent.createTest("Verify DocumentByDocTypeQueries");
         try {
@@ -748,7 +748,7 @@ public class HomePageAutomation extends TestConfig {
         }
     }
 
-    @Test
+    /*@Test
     public void testShipmentsDocURLsDocProGraph() {//prasanna
         test = extent.createTest("Verifying Shipments Documents Test");
         WebDriverWait wait = new WebDriverWait(driver,15);
@@ -805,7 +805,7 @@ public class HomePageAutomation extends TestConfig {
             Assert.assertTrue(false);
             test.createNode("Error in the graphical view of Doc URLs  --" + e + "---In testShipmentsSunburstDocURLsDocClick ");
         }
-    }
+    }*/
 
 
 
@@ -1159,7 +1159,7 @@ public class HomePageAutomation extends TestConfig {
          * @author Haritha
          */
 
-    @Test
+    @Test (groups = {"regressionTest"})
     public void testPublicQueries() throws Exception {
         test = extent.createTest("Verify Public Query Button");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);
@@ -1191,7 +1191,7 @@ public class HomePageAutomation extends TestConfig {
     }
 
 
-    @Test
+    @Test (groups = {"regressionTest"})
     public void testDocumentsQueries() throws Exception {
         test = extent.createTest("Verify Documents Queries");
         try {
@@ -1208,7 +1208,7 @@ public class HomePageAutomation extends TestConfig {
         }
     }
 
-    @Test
+    @Test (groups = {"regressionTest"})
     public void deleteColumnsWithDragDrop() throws Exception { //sai
         test = extent.createTest("Verify Column Deletion");
         try {

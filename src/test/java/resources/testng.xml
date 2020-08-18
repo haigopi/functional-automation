@@ -1,29 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<suite name="A4">
+<suite name="A4 Suite">
     <test name="Smoke Tests - Test Cases" verbose="2">
         <packages>
             <package name="com.generic.functional.automation.ui.tests.home"></package>
         </packages>
 
         <groups>
-
             <run>
                 <include name="smokeTest"/>
             </run>
-
         </groups>
 
         <classes>
             <class name = "com.generic.functional.automation.ui.tests.home.HomePageAutomation" />
         </classes>
     </test>
-    <test name="Regression Suite">
-        <packages>
-            <package name="com.generic.functional.automation.ui.tests">
 
-            </package>
+    <test name="Regression Tests - Test Cases" verbose="2">
+        <packages>
+            <package name="com.generic.functional.automation.ui.tests"></package>
         </packages>
+
+        <groups>
+            <run>
+                <include name="regressionTest"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name = "com.generic.functional.automation.ui.tests.home.HomePageAutomation" />
+        </classes>
     </test>
 
 </suite>
