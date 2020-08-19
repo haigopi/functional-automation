@@ -115,7 +115,6 @@ public class HomePageAutomation extends TestConfig {
             test.log(Status.INFO, "Search Bubble still has text in it -> not null; Reset Button Did not Work!");
             Assert.assertFalse(true); // terminate & exit
         }
-
         test.createNode("Verified Reset Button by Query History Search");
         //HTML CODE TO ACCESS
         // <input class="search_input" type="text" name="" placeholder="Search..." value="">
@@ -326,43 +325,50 @@ public class HomePageAutomation extends TestConfig {
 
 
     @Test
-    public void testVerifyResetButtonSunburst() throws Exception { //***
+    public void testVerifyResetButtonSunburst() throws Exception { //*** Haritha
         test = extent.createTest("Home Page Verify Reset Button by Sunburst");
-        login.doLogin(test);
-        Thread.sleep(5 * 1000);
+        driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        try {
+            login.doLogin(test);
+           // Thread.sleep(5 * 1000);
+            test.log(Status.INFO, "Help Button Clicked");
+            WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+            helpButton.click();
+           // Thread.sleep(7 * 1000);
+            test.log(Status.INFO, "Sunburst Shown");
+            test.createNode("Verified Reset Button");
+            driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d")).click();
+           // Thread.sleep(7 * 1000);
+            test.log(Status.INFO, "Clicked on Shipments Cluster");
+            driver.findElement(By.id("mainArc-71ef3c15-be01-454d-bd1e-c59d13904a65")).click();
+           // Thread.sleep(7 * 1000);
+            test.log(Status.INFO, "Clicked on International");
+            driver.findElement(By.id("mainArc-7000c84e-b726-405b-ae57-3103e755a869")).click();
+           // Thread.sleep(7 * 1000);
+            test.log(Status.INFO, "Clicked on Sub element to get the Query");
+            driver.findElement(By.id("mainArc-a4b796c9-8bbb-4f37-b959-26b2e1dd758e")).click();
+           // Thread.sleep(7 * 1000);
+            test.log(Status.INFO, "Clicked on Sub element to get the Query");
+            driver.findElement(By.id("mainArc-dcf61afd-31e9-4faa-9e8f-8743a267ac26")).click();
+          //  Thread.sleep(7 * 1000);
+            test.log(Status.INFO, "Clicked on Sub element to get the Query");
+            driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.highlightIcon")).click();
+            //Thread.sleep(7 * 1000);
+            driver.findElement(By.xpath("//input[@name='']")).click();
+           // driver.findElement(By.className("MuiSvgIcon-root highlightIcon")).click();
+            //Thread.sleep(7 * 1000);
+            test.log(Status.INFO, "Clicked on Reset Button");
+            driver.findElement(By.xpath("//input[@name='']")).clear();
+           // driver.findElement(By.className("MuiSvgIcon-root highlightIcon")).clear();
+            //Thread.sleep(7 * 1000);
+        } catch (Exception e) {
+         //  test.createNode("Exception (" + e.toString() + ") found").fail(e);
+              e.printStackTrace();
 
-        driver.manage().window().maximize();
-        // test.createNode("Verified Reset Button");
-        test.log(Status.INFO, "Help Button Clicked");
-        WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
-        helpButton.click();
-        Thread.sleep(7 * 1000);
-        test.log(Status.INFO, "Sunburst Shown");
-        test.createNode("Verified Reset Button");
-        driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d")).click();
-        Thread.sleep(7 * 1000);
-        test.log(Status.INFO, "Clicked on Shipments Cluster");
-        driver.findElement(By.id("mainArc-71ef3c15-be01-454d-bd1e-c59d13904a65")).click();
-        Thread.sleep(7 * 1000);
-        test.log(Status.INFO, "Clicked on International");
-        driver.findElement(By.id("mainArc-7000c84e-b726-405b-ae57-3103e755a869")).click();
-        Thread.sleep(7 * 1000);
-        test.log(Status.INFO, "Clicked on Sub element to get the Query");
-        driver.findElement(By.id("mainArc-a4b796c9-8bbb-4f37-b959-26b2e1dd758e")).click();
-        Thread.sleep(7 * 1000);
-        test.log(Status.INFO, "Clicked on Sub element to get the Query");
-        driver.findElement(By.id("mainArc-dcf61afd-31e9-4faa-9e8f-8743a267ac26")).click();
-        Thread.sleep(7 * 1000);
-        test.log(Status.INFO, "Clicked on Sub element to get the Query");
-        driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.highlightIcon")).click();
-        Thread.sleep(7 * 1000);
-        driver.findElement(By.xpath("//input[@name='']")).click();
-        Thread.sleep(7 * 1000);
-        test.log(Status.INFO, "Clicked on Reset Button");
-        driver.findElement(By.xpath("//input[@name='']")).clear();
-        Thread.sleep(7 * 1000);
-
+        }
     }
+
+
 
     @Test
     public void testVerifySubjectGuides() throws Exception { //***
