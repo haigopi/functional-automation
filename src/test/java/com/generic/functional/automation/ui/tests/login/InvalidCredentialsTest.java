@@ -28,15 +28,20 @@ public class InvalidCredentialsTest extends TestConfig {
         password.sendKeys("Design_20");
         WebElement span = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/main/div/form/button/span"));
         span.click();
+
         Thread.sleep(10*1000);
         boolean b = driver.getPageSource().contains("Username or password doesn't exists.");
+
         String s = "Username or password doesn't exists.";
         if (!b) {
             s = "";
         }
 
-        Assert.assertEquals(s, "Username or password doesn't exists.");
+        Assert.assertEquals(s, "Username or password doesn't exists."
+        );
 
 
     }
-}
+
+    }
+
