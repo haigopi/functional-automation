@@ -12,17 +12,14 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
-public class HomePageAutomation extends TestConfig {
+public class HomePageAutomationSuite2 extends TestConfig {
 
     QueryChecker queryChecker;
     HighlightHelper highlightHelper;
@@ -1180,6 +1177,12 @@ public class HomePageAutomation extends TestConfig {
         }
         test.createNode("Verified Public Query Successfully");
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
 
     @Test
     public void testDocumentsQueries() throws Exception {
