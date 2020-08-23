@@ -8,7 +8,6 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:8-jdk-browsers
-      - image: circleci/node:6.10.3
     parallelism: 1
     working_directory: ~/repo
 
@@ -50,4 +49,6 @@ jobs:
             command: circleci tests glob "src/test/java/com/generic/functional/automation/ui/tests/**/*.java" | circleci tests split --split-by=timings | xargs -n 1 echo
       #- run: gradle test
       #- run: gradle check -i -PtestFilter="`circleci tests glob "src/test/java/com/generic/functional/automation/ui/tests/**/*.java" | circleci tests split --split-by=timings`"
-      - run: cd test-reports && pwd && npm install surge
+      - run: git config user.email "haigopi@gmail.com"
+      - run: git config user.name "Gopi from Circle CI"
+      - run: cd test-output && git add -A && git commit -m "[skip ci] && test result"
