@@ -2,7 +2,19 @@
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
-
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - build
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
 version: 2
 jobs:
   build:
