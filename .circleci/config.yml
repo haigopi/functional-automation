@@ -2,6 +2,23 @@
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
+
+
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - build
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build
 version: 2
 jobs:
   build:
@@ -51,19 +68,3 @@ jobs:
       - run: git config user.email "haigopi@gmail.com"
       - run: git config user.name "Gopi from Circle CI"
       - run: cd test-output && git add -A && git commit -m "[skip ci] && test result && git push"
-
-workflows:
-  version: 2
-  commit:
-    jobs:
-      - build
-  nightly:
-    triggers:
-      - schedule:
-          cron: "0 0 * * *"
-          filters:
-            branches:
-              only:
-                - master
-    jobs:
-      - build
