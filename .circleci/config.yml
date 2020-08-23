@@ -51,4 +51,4 @@ jobs:
       #- run: gradle check -i -PtestFilter="`circleci tests glob "src/test/java/com/generic/functional/automation/ui/tests/**/*.java" | circleci tests split --split-by=timings`"
       - run: git config user.email "haigopi@gmail.com"
       - run: git config user.name "Gopi from Circle CI"
-      - run: cd test-output && git add -A && git commit -m "[skip ci] && test result"
+      - run: cd test-output && git add -A && git commit -m "[skip ci] && test result && git push"
