@@ -24,7 +24,7 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:8-jdk-browsers
-    parallelism: 1
+    parallelism: 2
     working_directory: ~/repo
 
     environment:
@@ -66,9 +66,9 @@ jobs:
             # This is just for debugging purposes, you can omit this step
             name: test splitting output
             command: circleci tests glob "src/test/java/com/generic/functional/automation/ui/tests/**/*.java" | circleci tests split --split-by=timings | xargs -n 1 echo
-      - run: gradle test --tests com.generic.functional.automation.ui.tests.login.LoginLogoutAutomation
+      #- run: gradle test --tests com.generic.functional.automation.ui.tests.login.LoginLogoutAutomation
       #- run: gradle test
-      #- run: gradle check -i -PtestFilter="`circleci tests glob "src/test/java/com/generic/functional/automation/ui/tests/**/*.java" | circleci tests split --split-by=timings`"
+      - run: gradle check -i -PtestFilter="`circleci tests glob "src/test/java/com/generic/functional/automation/ui/tests/**/*.java" | circleci tests split --split-by=timings`"
       - run: git config user.email "haigopi@gmail.com"
       - run: git config user.name "Gopi from Circle CI"
       - run: cd /home/circleci/repo/test-output
