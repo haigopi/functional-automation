@@ -50,4 +50,4 @@ jobs:
             command: circleci tests glob "src/test/java/com/generic/functional/automation/ui/tests/**/*.java" | circleci tests split --split-by=timings | xargs -n 1 echo
       #- run: gradle test
       #- run: gradle check -i -PtestFilter="`circleci tests glob "src/test/java/com/generic/functional/automation/ui/tests/**/*.java" | circleci tests split --split-by=timings`"
-      - run: npm install surge
+      - run: cd test-reports && pwd && npm install surge
