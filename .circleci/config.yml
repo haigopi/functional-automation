@@ -45,5 +45,5 @@ jobs:
       - run:
             # This is just for debugging purposes, you can omit this step
             name: test splitting output
-            command: circleci tests glob "src/test/java/com/generic/functional/automation/ui/tests/*.java" | circleci tests split --split-by=timings | xargs -n 1 echo
+            command: circleci tests glob "src/test/java/com/generic/functional/automation/ui/tests/**/*.java" | circleci tests split --split-by=timings | xargs -n 1 echo
       - run: gradle test
