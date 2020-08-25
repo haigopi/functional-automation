@@ -59,6 +59,7 @@ public class HomePageAutomation extends TestConfig {
 
     }
 
+
     @Test
     public void testVerifyResetButtonSearchBar() throws Exception { //Haritha
         test = extent.createTest("Home > Verify Reset Button / Clear the Search Bubble");
@@ -147,93 +148,9 @@ public class HomePageAutomation extends TestConfig {
 
         /// VALIDATION ///
 
-        //WebElement totalRecords = driver.findElement(By.id("total-records-count"));
-        WebElement tr = driver.findElement(By.xpath("/html/body/div/div/div/main/div/div/div/div[5]/div/div/div/div[1]/div/div/div[1]/div[2]/ul/li/div/span/div[2]/span[2]"));
-        String value = tr.getText();
-        if (Integer.parseInt(value) == 0) {
-            test.log(Status.INFO, "No Table should appear since no data fetched for given query");
-            Assert.assertEquals(0, 0);
-            Assert.assertFalse(Integer.parseInt(value) == 0); // to fail, parameter has to be true (0 == 0) => so true; assertFalse(true) means failed test
-        } else {
-            test.log(Status.INFO, "Table is shown with records since table records != 0");
-            Assert.assertEquals(Integer.parseInt(value) > 0, true); //setting to true since if it comes into this else, it is greater than 0 (can be any num greater than 0 so can't put set value for expected)
-            Assert.assertTrue(Integer.parseInt(value) > 0);
 
 
-            driver.findElement(By.xpath("//*[text()=' Total Records']"));
-            test.log(Status.INFO, "Total Records found and table shown");
-            Thread.sleep(7 * 1000);
-            test.createNode("Verified the table information is displayed when Country of origin is selected. ");
-
-            driver.findElement(By.xpath("//button[@id='simple-tab-1']/span")).click(); // Clicks on Graphical View
-            Thread.sleep(5 * 1000);
-            driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]")).click(); // Clicks on Other Graphical View
-            Thread.sleep(5 * 1000);
-            driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div/div[2]/div/div/div")).click(); // Click Axis 1
-            Thread.sleep(3 * 1000);
-            driver.findElement(By.id("react-select-2-option-0")).click(); // Click origin country
-            Thread.sleep(5 * 1000);
-            driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[2]/div[2]/div/div/div")).click(); // Click Axis 2
-            Thread.sleep(3 * 1000);
-            driver.findElement(By.id("react-select-3-option-0")).click(); // Click count
-            Thread.sleep(5 * 1000);
-            driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div")).click(); //Click graph
-            Thread.sleep(3 * 1000);
-            driver.findElement(By.id("react-select-4-option-4")).click(); // Click bubble Graph
-            Thread.sleep(5 * 1000);
-            driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span")).click(); // Click Show
-
-        }
-    }
-
-    @Test
-    public void testVerifyInternationalDocumentsClick() throws Exception { // FIX
-        test = extent.createTest("Verify International Documents");
-        login.doLogin(test);
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Help Button Clicked");
-        WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
-        helpButton.click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Sunburst Shown");
-        driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d")).click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Shipments Cluster Clicked");
-        driver.findElement(By.id("mainArc-71ef3c15-be01-454d-bd1e-c59d13904a65")).click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "International Clicked on Sunburst");
-        driver.findElement(By.id("mainArc-044c1070-d406-443b-a9e5-2fdbdf4daaae")).click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Documents Element Clicked");
-        driver.findElement(By.xpath("//*[text()=' Total Records']"));
-        test.log(Status.INFO, "Total Records found and table shown");
-        Thread.sleep(5 * 1000);
-        WebElement helpButton1 = driver.findElement(By.cssSelector(".explore-quiries-inner"));
-        helpButton1.click();
-        Thread.sleep(5 * 1000);
-        driver.findElement(By.xpath("//button[@id='simple-tab-1']/span")).click(); // clicks on graphical view
-        Thread.sleep(5 * 1000);
-        driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]")).click(); // clicks on other graphical view
-        Thread.sleep(5 * 1000);
-
-        driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div/div[2]/div/div/div")).click(); //Axis 1 click
-        Thread.sleep(3 * 1000);
-        driver.findElement(By.id("react-select-2-option-0")).click(); //Clicked on Documents Only
-        Thread.sleep(3 * 1000);
-        driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[2]/div[2]/div/div/div")).click(); // Click Axis 2
-        Thread.sleep(3 * 1000);
-        driver.findElement(By.id("react-select-3-option-0")).click(); // Clicks Count
-        Thread.sleep(3 * 1000);
-        driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div")).click(); //Click graph
-        Thread.sleep(3 * 1000);
-        driver.findElement(By.id("react-select-4-option-4")).click(); // Clicks Bubble Graph
-        Thread.sleep(3 * 1000);
-        driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span")).click(); // Clicks Show
-        Thread.sleep(3 * 1000); // To show bubble graph momentarily
-
-        test.createNode("Verified international documents only (multiple graphical views)");
-    }
-
+    
 
     @Test
     public void testShipmentsSunburstDocClick() throws Exception { //Haritha
@@ -325,6 +242,7 @@ public class HomePageAutomation extends TestConfig {
 
 
     @Test
+
     public void testVerifyResetButtonSunburst() throws Exception { //*** Haritha
         test = extent.createTest("Home Page Verify Reset Button by Sunburst");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
@@ -371,6 +289,7 @@ public class HomePageAutomation extends TestConfig {
 
 
     @Test
+
     public void testVerifySubjectGuides() throws Exception { //***
         test = extent.createTest("Verifying Subjects Guide ");
         login.doLogin(test);
@@ -435,64 +354,11 @@ public class HomePageAutomation extends TestConfig {
     }
 
 
-    @Test
-    public void testVerifyPrintButton() throws Exception {
-       // WebDriverWait wait = new WebDriverWait(driver, 15);
-        test = extent.createTest("VerifyPrintButton");
-        login.doLogin(test);
-        test.log(Status.INFO, "Help Button Clicked");
-        test.createNode("Help Button Click");
-        WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
-        helpButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d")));//Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Subject Shipments Button Click");
-        test.createNode("Subject Shipments Button Click");
-        WebElement subjectShipmentsButton = driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d"));
-        subjectShipmentsButton.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("mainArc-2609f85e-b113-407e-b007-dcea50347141")));//Thread.sleep(5 * 1000);
-        test.createNode("Freight Charges Click");
-        test.log(Status.INFO, "Freight Charges Click");
-        driver.findElement(By.id("mainArc-2609f85e-b113-407e-b007-dcea50347141")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("mainArc-a5cc64db-9de3-414a-98a4-e975accd1246")));//Thread.sleep(5 * 1000);
-        test.createNode("Carrier Identifier Click");
-        test.log(Status.INFO, "Carrier Identifier Click");
-        driver.findElement(By.id("mainArc-a5cc64db-9de3-414a-98a4-e975accd1246")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#search-result-print > span.MuiIconButton-label > svg.MuiSvgIcon-root > path")));//Thread.sleep(5 * 1000);
-        test.createNode("Print Button Click");
-        test.log(Status.INFO, "Print Button Click");
-        driver.findElement(By.cssSelector("#search-result-print > span.MuiIconButton-label > svg.MuiSvgIcon-root > path")).click();
-        Thread.sleep(5 * 1000);
-    }
+    
 
-    /**
-     * @author - Tanuj
-     * @Desc - Testing Fright charges Queries
-     * @in params - none
-     * @out params - void
-     * @throws Exception
-     */
+ 
 
-    @Test
-    public void testFreightChargeQueries() throws Exception {
-        //Setup
-        test = extent.createTest("Verify Freight Charges Queries");
-        try {
-            login.doLogin(test);
-            test.log(Status.INFO, "Clicking on Search Bar");
-
-            //query 1
-            queryChecker.runSearchBubbleQuery(driver, "list all charges", test);
-            //query 2
-            queryChecker.runSearchBubbleQuery(driver, "list all charges where carrier id is fedex", test);
-            //query 3
-            queryChecker.runSearchBubbleQuery(driver, "list all charges where charge type is Disk and freight charges amount > 100", test);
-            //query 4
-            queryChecker.runSearchBubbleQuery(driver, "list all charges where freight charges amount > 100", test);
-        } catch (Exception e) {
-            test.createNode("Caught exception [ " + e + " ]");
-        }
-        test.createNode("Verified Freight Charge Queries Successfully!");
-    }
+  
 
     /**
      * testPrivateQueries is used to automate private queries button (verify its existence)
