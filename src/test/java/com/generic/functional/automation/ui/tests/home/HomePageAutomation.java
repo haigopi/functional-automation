@@ -187,7 +187,7 @@ public class HomePageAutomation extends TestConfig{
         login.doLogin(test);
         test.log(Status.INFO, "Help Button Clicked");
         test.createNode("Help Button Click");
-        WebElement helpButton = driver.findElement(By.className("helpIcon"));
+        WebElement helpButton = driver.findElement(By.className("helpIcon")); // this is changed locater
         helpButton.click();
         Thread.sleep(5 * 1000);
         test.log(Status.INFO, "Subject Shipments Button Click");
