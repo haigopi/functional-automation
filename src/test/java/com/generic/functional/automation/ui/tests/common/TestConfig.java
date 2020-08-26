@@ -55,7 +55,7 @@ public class TestConfig {
         prefs.put("download.default_directory", DEFAULT_DOWNLOAD_DIR);
 
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--headless");
+       // chromeOptions.addArguments("--headless");
         chromeOptions.addArguments("--disable-gpu");
         chromeOptions.addArguments("--disable-extensions");
         chromeOptions.setExperimentalOption("prefs", prefs);
