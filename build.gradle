@@ -79,6 +79,7 @@ test {
     testLogging {
         events "passed", "skipped", "failed", "standardOut", "standardError"
     }
+    ignoreFailures = true
     debug false
 }
 gradle.projectsEvaluated {

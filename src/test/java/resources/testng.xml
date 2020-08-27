@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="A4" verbose="1" preserve-order="true">
+<suite name="A4" verbose="1" preserve-order="true" thread-count="10" parallel="methods">
     <test name="Regression Suite">
         <packages>
-            <package name="com.generic.functional.automation.ui.tests">
+            <package name="com.generic.functional.automation.ui.tests.login">
 
             </package>
         </packages>
-
 
     </test>
 </suite>

@@ -2,16 +2,30 @@
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
+
+
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - build
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build
 version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
-      - image: circleci/openjdk:8-jdk
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
+
+      - image: circleci/openjdk:8-jdk-browsers
+    parallelism: 1
 
     working_directory: ~/repo
 
@@ -21,23 +35,28 @@ jobs:
       TERM: dumb
 
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "2f:6b:14:f1:02:52:ea:6f:bf:e0:b4:42:ba:95:33:bd"
       - checkout
-      - run: mkdir test-reports
+
       # Download and cache dependencies
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "build.gradle" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-      - run:
-          name: Download Selenium
-          command: |
-            curl -O http://selenium-release.storage.googleapis.com/4.0/selenium-server-standalone-4.0.0-alpha-2.jar
-      - run:
-          name: Start Selenium
-          command: |
-            java -jar selenium-server-standalone-4.0.0-alpha-2.jar -log test-reports/selenium.log
-          background: true
+
+      #- run:
+       #   name: Download Selenium
+        #  command: |
+        #    curl -O http://selenium-release.storage.googleapis.com/4.0/selenium-server-standalone-4.0.0-alpha-2.jar
+      #- run:
+       #   name: Start Selenium
+       #   command: |
+       #     java -jar selenium-server-standalone-4.0.0-alpha-2.jar -log test-reports/selenium.log
+       #   background: true
+
 
       - run: gradle dependencies
 
@@ -47,4 +66,19 @@ jobs:
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
       # run tests!
+
+      - run:
+            # This is just for debugging purposes, you can omit this step
+            name: test splitting output
+            command: circleci tests glob "src/test/java/com/generic/functional/automation/ui/tests/**/*.java" | circleci tests split --split-by=timings | xargs -n 1 echo
+      #- run: gradle test --tests com.generic.functional.automation.ui.tests.login.LoginLogoutAutomation
       - run: gradle test
+      #- run: gradle check -i -PtestFilter="`circleci tests glob "src/test/java/com/generic/functional/automation/ui/tests/**/*.java" | circleci tests split --split-by=timings`"
+      - run: git config user.email "haigopi@gmail.com"
+      - run: git config user.name "Gopi from Circle CI"
+      - run: git pull
+      - run: cd /home/circleci/repo/test-output
+      - run: ls -la && git add -A
+      - run: git commit -m "[skip ci] test result"
+      - run: git push
+
