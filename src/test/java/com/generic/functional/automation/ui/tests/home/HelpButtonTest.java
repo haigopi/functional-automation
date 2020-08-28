@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 
 public class HelpButtonTest extends TestConfig {
+
  /**   @Test
     public void helpButtonTestCase() throws Exception {
         test = extent.createTest("helpButtonClickTestCase");
@@ -37,5 +38,4 @@ public class HelpButtonTest extends TestConfig {
         Thread.sleep(2 * 1000);
 
     }**/
-
 }

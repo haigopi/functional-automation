@@ -137,6 +137,7 @@ public class HomePageAutomation extends TestConfig {
         test = extent.createTest("Verify International Facts Country Of Origin");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
         login.doLogin(test);
+
         try {
             Thread.sleep(5 * 1000);
             test.log(Status.INFO, "Help button Clicked");
@@ -203,6 +204,8 @@ public class HomePageAutomation extends TestConfig {
 
         }
 
+
+    
 
     @Test
     public void testShipmentsSunburstDocClick() throws Exception { //Haritha
