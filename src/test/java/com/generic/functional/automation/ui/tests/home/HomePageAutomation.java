@@ -64,58 +64,67 @@ public class HomePageAutomation extends TestConfig {
     public void testVerifyResetButtonSearchBar() throws Exception { //Haritha
         test = extent.createTest("Home > Verify Reset Button / Clear the Search Bubble");
         login.doLogin(test);
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Clicked on Help Button");
-        WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
-        highlightHelper.highLightElement(driver, helpButton);
-        helpButton.click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Clicked on Shipments");
-        WebElement e1 = driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d"));
-        e1.click();
-        Thread.sleep(4 * 1000);
-        test.log(Status.INFO, "Clicked on International");
-        driver.findElement(By.id("mainArc-71ef3c15-be01-454d-bd1e-c59d13904a65")).click();
-        Thread.sleep(4 * 1000);
-        test.log(Status.INFO, "Clicked on Account Number");
-        driver.findElement(By.id("mainArc-fa581093-0286-4f62-a4a1-5abf224fa8f1")).click();
-        Thread.sleep(4 * 1000);
-        test.log(Status.INFO, "Clicked on Search Button");
-        WebElement searchButton = driver.findElement(By.className("search_icon"));
-        highlightHelper.highLightElement(driver, searchButton);
-        searchButton.click();
-        Thread.sleep(4 * 1000); //next line error (works now)
-        WebElement hoverElement = driver.findElement(By.cssSelector("#scrollable-auto-tabpanel-0 > div > div.pl-4.pr-4.pb-2 > div > div > div > div > div > div > div.MuiButtonBase-root.MuiExpansionPanelSummary-root.query-title-wrapper > div > div > div.right-carousel-item > div.query-text-area"));
-        //*[@id="gatsby-focus-wrapper"]/div/main/div/div/div/div[4]/div/div[2]/div[2]/div/div/div/div/div/div/div/div[1] OLD
-        highlightHelper.highLightElement(driver, hoverElement);
-        hoverElement.click();
-        test.log(Status.INFO, "Query Copied");
-        WebElement copyQueryBtn = driver.findElement(By.id("copy-current-query-0"));
-        highlightHelper.highLightElement(driver, copyQueryBtn);
-        copyQueryBtn.click();
-        Thread.sleep(7 * 1000);
+        try {
 
-        /// VALIDATION ///
+            Thread.sleep(5 * 1000);
+            test.log(Status.INFO, "Clicked on Help Button");
+            WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+            highlightHelper.highLightElement(driver, helpButton);
+            helpButton.click();
+            Thread.sleep(5 * 1000);
+            test.log(Status.INFO, "Clicked on Shipments");
+            WebElement e1 = driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d"));
+            e1.click();
+            Thread.sleep(4 * 1000);
+            test.log(Status.INFO, "Clicked on International");
+            driver.findElement(By.id("mainArc-71ef3c15-be01-454d-bd1e-c59d13904a65")).click();
+            Thread.sleep(4 * 1000);
+            test.log(Status.INFO, "Clicked on Account Number");
+            driver.findElement(By.id("mainArc-fa581093-0286-4f62-a4a1-5abf224fa8f1")).click();
+            Thread.sleep(4 * 1000);
+            test.log(Status.INFO, "Clicked on Search Button");
+            WebElement searchButton = driver.findElement(By.className("search_icon"));
+            highlightHelper.highLightElement(driver, searchButton);
+            searchButton.click();
+            Thread.sleep(4 * 1000); //next line error (works now)
+            WebElement hoverElement = driver.findElement(By.cssSelector("#scrollable-auto-tabpanel-0 > div > div.pl-4.pr-4.pb-2 > div > div > div > div > div > div > div.MuiButtonBase-root.MuiExpansionPanelSummary-root.query-title-wrapper > div > div > div.right-carousel-item > div.query-text-area"));
+            //*[@id="gatsby-focus-wrapper"]/div/main/div/div/div/div[4]/div/div[2]/div[2]/div/div/div/div/div/div/div/div[1] OLD
+            highlightHelper.highLightElement(driver, hoverElement);
+            hoverElement.click();
+            Thread.sleep(4 * 1000);
+            test.log(Status.INFO, "Query Copied");
+            WebElement copyQueryBtn = driver.findElement(By.id("copy-current-query-0"));
+            highlightHelper.highLightElement(driver, copyQueryBtn);
+            copyQueryBtn.click();
+            Thread.sleep(7 * 1000);
 
-        WebElement searchBubble = driver.findElement(By.className("search_input"));
-        String queryText = searchBubble.getAttribute("value");
-        test.log(Status.INFO, "Text in Search Bubble BEFORE reset button clicked (" + queryText + ")");
-        WebElement resetButton = driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.highlightIcon")); // Reset Button
-        highlightHelper.highLightElement(driver, resetButton);
-        resetButton.click();
-        Thread.sleep(3 * 1000);
-        test.log(Status.INFO, "Reset Button Clicked");
-        // Check After Reset Button Clicked
-        queryText = searchBubble.getAttribute("value"); // Used to get value after reset button clicked
-        if (queryText.isEmpty()) {
-            test.log(Status.INFO, "Text in Search Bubble AFTER reset button clicked (" + queryText + ")");
-            test.log(Status.INFO, "Verification of Reset Button Complete: checked that the value is empty");
-            Assert.assertTrue(true); // 1st validation
-            Assert.assertEquals(queryText, ""); //2nd validation
-        } else {
-            test.log(Status.INFO, "Search Bubble still has text in it -> not null; Reset Button Did not Work!");
-            Assert.assertFalse(true); // terminate & exit
+            /// VALIDATION ///
+
+            WebElement searchBubble = driver.findElement(By.className("search_input"));
+            String queryText = searchBubble.getAttribute("value");
+            test.log(Status.INFO, "Text in Search Bubble BEFORE reset button clicked (" + queryText + ")");
+            WebElement resetButton = driver.findElement(By.id("search-text-reset")); // Reset Button
+            highlightHelper.highLightElement(driver, resetButton);
+            resetButton.click();
+            Thread.sleep(3 * 1000);
+            test.log(Status.INFO, "Reset Button Clicked");
+            // Check After Reset Button Clicked
+            queryText = searchBubble.getAttribute("value"); // Used to get value after reset button clicked
+            if (queryText.isEmpty()) {
+                test.log(Status.INFO, "Text in Search Bubble AFTER reset button clicked (" + queryText + ")");
+                test.log(Status.INFO, "Verification of Reset Button Complete: checked that the value is empty");
+                Assert.assertTrue(true); // 1st validation
+                Assert.assertEquals(queryText, ""); //2nd validation
+            } else {
+                test.log(Status.INFO, "Search Bubble still has text in it -> not null; Reset Button Did not Work!");
+                Assert.assertFalse(true); // terminate & exit
+            }
         }
+        catch(Exception e)
+            {
+
+                e.printStackTrace();
+            }
         test.createNode("Verified Reset Button by Query History Search");
         //HTML CODE TO ACCESS
         // <input class="search_input" type="text" name="" placeholder="Search..." value="">
@@ -128,64 +137,72 @@ public class HomePageAutomation extends TestConfig {
         test = extent.createTest("Verify International Facts Country Of Origin");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
         login.doLogin(test);
-        Thread.sleep(7 * 1000);
-        // driver.manage().window().maximize();
-        test.log(Status.INFO, "Help button Clicked");
-        WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
-        helpButton.click();
-        Thread.sleep(7 * 1000);
-        test.log(Status.INFO, "Sunburst Shown");
-        test.log(Status.INFO, "Shipments Cluster Clicked on the Sunburst");
-        driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d")).click();
-        Thread.sleep(7 * 1000);
-        test.log(Status.INFO, "International Clicked on the Sunburst");
-        driver.findElement(By.id("mainArc-71ef3c15-be01-454d-bd1e-c59d13904a65")).click();
-        Thread.sleep(7 * 1000);
-        test.log(Status.INFO, "Country of Origin Element Clicked on the Sunburst");
-        WebElement helpButtoncountry = driver.findElement(By.id("mainArc-466ed1b9-526b-45c7-a02c-e6d419ef606f"));
-        helpButtoncountry.click();
-        Thread.sleep(7 * 1000);
 
-        /// VALIDATION ///
-        //WebElement totalRecords = driver.findElement(By.id("total-records-count"));
-        WebElement tr = driver.findElement(By.xpath("/html/body/div/div/div/main/div/div/div/div[5]/div/div/div/div[1]/div/div/div[1]/div[2]/ul/li/div/span/div[2]/span[2]"));
-        String value = tr.getText();
-        if (Integer.parseInt(value) == 0) {
-            test.log(Status.INFO, "No Table should appear since no data fetched for given query");
-            Assert.assertEquals(0, 0);
-            Assert.assertFalse(Integer.parseInt(value) == 0); // to fail, parameter has to be true (0 == 0) => so true; assertFalse(true) means failed test
-        } else {
-            test.log(Status.INFO, "Table is shown with records since table records != 0");
-            Assert.assertEquals(Integer.parseInt(value) > 0, true); //setting to true since if it comes into this else, it is greater than 0 (can be any num greater than 0 so can't put set value for expected)
-            Assert.assertTrue(Integer.parseInt(value) > 0);
-
-
-            driver.findElement(By.xpath("//*[text()=' Total Records']"));
-            test.log(Status.INFO, "Total Records found and table shown");
+        try {
+            Thread.sleep(5 * 1000);
+            test.log(Status.INFO, "Help button Clicked");
+            WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+            helpButton.click();
             Thread.sleep(7 * 1000);
-            test.createNode("Verified the table information is displayed when Country of origin is selected. ");
+            test.log(Status.INFO, "Sunburst Shown");
+            test.log(Status.INFO, "Shipments Cluster Clicked on the Sunburst");
+            driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d")).click();
+            Thread.sleep(7 * 1000);
+            test.log(Status.INFO, "International Clicked on the Sunburst");
+            driver.findElement(By.id("mainArc-71ef3c15-be01-454d-bd1e-c59d13904a65")).click();
+            Thread.sleep(7 * 1000);
+            test.log(Status.INFO, "Country of Origin Element Clicked on the Sunburst");
+            WebElement helpButtoncountry = driver.findElement(By.id("mainArc-466ed1b9-526b-45c7-a02c-e6d419ef606f"));
+            helpButtoncountry.click();
+            Thread.sleep(7 * 1000);
 
-            driver.findElement(By.xpath("//button[@id='simple-tab-1']/span")).click(); // Clicks on Graphical View
-            Thread.sleep(5 * 1000);
-            driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]")).click(); // Clicks on Other Graphical View
-            Thread.sleep(5 * 1000);
-            driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div/div[2]/div/div/div")).click(); // Click Axis 1
-            Thread.sleep(3 * 1000);
-            driver.findElement(By.id("react-select-2-option-0")).click(); // Click origin country
-            Thread.sleep(5 * 1000);
-            driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[2]/div[2]/div/div/div")).click(); // Click Axis 2
-            Thread.sleep(3 * 1000);
-            driver.findElement(By.id("react-select-3-option-0")).click(); // Click count
-            Thread.sleep(5 * 1000);
-            driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div")).click(); //Click graph
-            Thread.sleep(3 * 1000);
-            driver.findElement(By.id("react-select-4-option-4")).click(); // Click bubble Graph
-            Thread.sleep(5 * 1000);
-            driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span")).click(); // Click Show
+            /// VALIDATION ///
+            //WebElement totalRecords = driver.findElement(By.id("total-records-count"));
+            WebElement tr = driver.findElement(By.xpath("/html/body/div/div/div/main/div/div/div/div[5]/div/div/div/div[1]/div/div/div[1]/div[2]/ul/li/div/span/div[2]/span[2]"));
+            String value = tr.getText();
+            if (Integer.parseInt(value) == 0) {
+                test.log(Status.INFO, "No Table should appear since no data fetched for given query");
+                Assert.assertEquals(0, 0);
+                Assert.assertFalse(Integer.parseInt(value) == 0); // to fail, parameter has to be true (0 == 0) => so true; assertFalse(true) means failed test
+            } else {
+                test.log(Status.INFO, "Table is shown with records since table records != 0");
+                Assert.assertEquals(Integer.parseInt(value) > 0, true); //setting to true since if it comes into this else, it is greater than 0 (can be any num greater than 0 so can't put set value for expected)
+                Assert.assertTrue(Integer.parseInt(value) > 0);
+
+
+                driver.findElement(By.xpath("//*[text()=' Total Records']"));
+                test.log(Status.INFO, "Total Records found and table shown");
+                Thread.sleep(7 * 1000);
+                test.createNode("Verified the table information is displayed when Country of origin is selected. ");
+
+                driver.findElement(By.xpath("//button[@id='simple-tab-1']/span")).click(); // Clicks on Graphical View
+                Thread.sleep(5 * 1000);
+                driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]")).click(); // Clicks on Other Graphical View
+                Thread.sleep(5 * 1000);
+                driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div/div[2]/div/div/div")).click(); // Click Axis 1
+                Thread.sleep(3 * 1000);
+                driver.findElement(By.id("react-select-2-option-0")).click(); // Click origin country
+                Thread.sleep(5 * 1000);
+                driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[2]/div[2]/div/div/div")).click(); // Click Axis 2
+                Thread.sleep(3 * 1000);
+                driver.findElement(By.id("react-select-3-option-0")).click(); // Click count
+                Thread.sleep(5 * 1000);
+                driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div")).click(); //Click graph
+                Thread.sleep(3 * 1000);
+                driver.findElement(By.id("react-select-4-option-4")).click(); // Click bubble Graph
+                Thread.sleep(5 * 1000);
+                driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span")).click(); // Click Show
+            }
+        }
+            catch(Exception e)
+            {
+
+                               e.printStackTrace();
+
+
+            }
 
         }
-    }
-
 
 
     
@@ -376,7 +393,7 @@ public class HomePageAutomation extends TestConfig {
     }
 
     @Test
-    public void testDownloadCSVButton() throws Exception {
+    public void testDownloadCSVButton() throws Exception { // Geeta
         test = extent.createTest("DownloadCSVButton");
         login.doLogin(test);
         test.log(Status.INFO, "Help Button Clicked");
