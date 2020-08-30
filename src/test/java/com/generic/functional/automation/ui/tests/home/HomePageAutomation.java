@@ -534,19 +534,7 @@ public class HomePageAutomation extends TestConfig {
         driver.findElement(By.id("mainArc-dfc929d9-b607-4950-a794-1eda5d2ba47d")).click();
         Thread.sleep(5 * 1000);
     }
-    @Test
-    public void testShipmentsQueries() throws Exception {
-        //Setup
-        test = extent.createTest("Verify shipments Queries");
-        login.doLogin(test);
-        test.log(Status.INFO, "Clicking on Search Bar");
 
-        // query 1
-
-        QueryChecker.runSearchBubbleQuery(driver, "list all shipments", test);
-
-        test.createNode("Verified Shipments Queries Successfully!");
-    }
 
     @Test
     public void testDocBydocTypeOGraphs() {
