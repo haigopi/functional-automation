@@ -1179,13 +1179,42 @@ public class HomePageAutomation extends TestConfig {
 
 
     }
+    @Test
+    public void testDragDropCol(){
+        test = extent.createTest("Verify testColumremoving");
+        try {
+            login.doLogin(test);
+            WebElement searchBubble = driver.findElement(By.xpath("//input[@class='auto-suggestion-input']"));
+            wait.until(ExpectedConditions.visibilityOf(searchBubble));
+            searchBubble.click();
+            searchBubble.sendKeys("list of customers");
+            searchBubble.sendKeys(Keys.ENTER);
+            searchBubble.sendKeys(Keys.ENTER);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"query-search-result-table\"]/div/div/div[1]/div/div[1]/div[2]/div/div/div[1]/div[3]/div")));//changes according to xpath
+            Actions action=new Actions(driver);
+            WebElement ROWID_1Col=driver.findElement(By.xpath("//*[@id=\"query-search-result-table\"]/div/div/div[1]/div/div[1]/div[2]/div/div/div[1]/div[3]/div"));
+            WebElement sam=driver.findElement(By.id("simple-tab-0"));
+            //while(ROWID_1Col.isDisplayed())
+            //{
+            action.clickAndHold(ROWID_1Col).moveByOffset(-100,-100).release().build().perform();
+            //action.dragAndDrop(ROWID_1Col,sam);
+            //action.dragAndDropBy(ROWID_1Col,0,0).build().perform();
+            //action.release();
+            //action.perform();
+            //}
+            if(ROWID_1Col.isDisplayed()){
+                System.err.println("Failed its not removed");
+            }
+            test.createNode("Columremoving verified successfully");
 
+            //Thread.sleep(5000); //use this if you want to observe the size while execution.
 
+        } catch (Exception e) {
+            e.printStackTrace();
+            test.createNode("Exception " + e + "in testColumresize").fail(e);
+        }
 
-
-
-
-
+    }
 }
 
 
