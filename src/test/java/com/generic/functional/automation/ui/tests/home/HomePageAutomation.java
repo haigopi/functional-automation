@@ -819,7 +819,7 @@ public class HomePageAutomation extends TestConfig {
     public void testForValidationOfAllOtherGraphsInDocProv() {//prasanna
         test = extent.createTest("Verifying the all Other GraphicalViews in Doc URLS Doc Providers Test");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);
-        Actions action =new Actions(driver);
+
 
 
         try {
@@ -1121,7 +1121,7 @@ public class HomePageAutomation extends TestConfig {
             //Thread.sleep(2*1000); //if you wanna check the graph
 
 
-            WebElement internal = driver.findElement(By.id("internal-"));
+            /*WebElement internal = driver.findElement(By.id("internal-"));
             highlightHelper.highLightElement(driver, internal);
             //WebElement internal = driver.findElement(By.xpath("/html/body/div[1]/div/div/main/div/div/div/div[3]/div/div/div/div[3]/div/div[4]/div/div[1]/svg/g/g[1]/circle"));
             System.out.println("Rad of the button is:- "+ internal.getAttribute("r"));
@@ -1140,7 +1140,7 @@ public class HomePageAutomation extends TestConfig {
             WebElement dhl = driver.findElement(By.id("dhl"));
             highlightHelper.highLightElement(driver, dhl);
             System.out.println("Rad of the button is:- "+ dhl.getAttribute("r"));
-            test.createNode("select the dhl bubble and bubble radious " + dhl.getAttribute("r"));
+            test.createNode("select the dhl bubble and bubble radious " + dhl.getAttribute("r"));*/
 
 
 
@@ -1201,6 +1201,79 @@ public class HomePageAutomation extends TestConfig {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void testVerifyRadioButton() {//prasanna
+        test = extent.createTest("Verifying the Radio button collapse and expand the Query result Test");
+        driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);
+
+
+
+        try {
+            login.doLogin(test);
+
+            queryChecker.runSearchBubbleQuery(driver,"list of packages",test);
+            test.createNode("Display the Query result Table ");
+            WebElement collapseButton  = driver.findElement(By.cssSelector("div.query-text > svg.MuiSvgIcon-root"));
+            collapseButton.click();
+            test.createNode("collapse the query result");
+            Thread.sleep(2*1000);
+            WebElement expandButton  = driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.search-show-more"));
+            expandButton.click();
+            WebElement ColumnName = driver.findElement(By.xpath("//*[text()='ROWID']"));
+            test.createNode(" Test is passes if it displays true ");
+            if (ColumnName.isDisplayed()){
+                test.createNode("Radio button is working successfully ");
+            }else{
+                throw new Exception("fail the tabular view radio button");
+
+            }
+
+
+        }catch (Exception e) {
+            test.createNode("Exception (" + e.toString() + ") found").fail(e);
+            Assert.assertTrue(false);
+            test.createNode("Error in validation of Radio button   --" + e + "---In testVerifyRadioButton  ");
+        }
+
+
+    }
+    @Test
+    public void testDragDropCol(){
+        test = extent.createTest("Verify testColumremoving");
+        try {
+            login.doLogin(test);
+            WebElement searchBubble = driver.findElement(By.xpath("//input[@class='auto-suggestion-input']"));
+            wait.until(ExpectedConditions.visibilityOf(searchBubble));
+            searchBubble.click();
+            searchBubble.sendKeys("list of customers");
+            searchBubble.sendKeys(Keys.ENTER);
+            searchBubble.sendKeys(Keys.ENTER);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"query-search-result-table\"]/div/div/div[1]/div/div[1]/div[2]/div/div/div[1]/div[3]/div")));//changes according to xpath
+            Actions action=new Actions(driver);
+            WebElement ROWID_1Col=driver.findElement(By.xpath("//*[@id=\"query-search-result-table\"]/div/div/div[1]/div/div[1]/div[2]/div/div/div[1]/div[3]/div"));
+            WebElement sam=driver.findElement(By.id("simple-tab-0"));
+            //while(ROWID_1Col.isDisplayed())
+            //{
+            action.clickAndHold(ROWID_1Col).moveByOffset(-100,-100).release().build().perform();
+            //action.dragAndDrop(ROWID_1Col,sam);
+            //action.dragAndDropBy(ROWID_1Col,0,0).build().perform();
+            //action.release();
+            //action.perform();
+            //}
+            if(ROWID_1Col.isDisplayed()){
+                System.err.println("Failed its not removed");
+            }
+            test.createNode("Columremoving verified successfully");
+
+            //Thread.sleep(5000); //use this if you want to observe the size while execution.
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            test.createNode("Exception " + e + "in testColumresize").fail(e);
+        }
+
     }
 }
 
