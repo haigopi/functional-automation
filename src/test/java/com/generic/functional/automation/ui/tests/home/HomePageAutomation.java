@@ -361,7 +361,7 @@ public class HomePageAutomation extends TestConfig {
 
     @Test
 
-    public void testVerifyResetButtonSunburst() throws Exception { //*** Haritha
+    public void testVerifyResetButtonSunburst() throws Exception { //** Haritha
         test = extent.createTest("Home Page Verify Reset Button by Sunburst");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
         try {
