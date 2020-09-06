@@ -34,6 +34,7 @@ public class HomePageAutomation extends TestConfig {
         wait = new WebDriverWait(driver, 15);
         queryChecker = new QueryChecker();
         highlightHelper = new HighlightHelper();
+
     }
 
     @Test
