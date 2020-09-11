@@ -490,11 +490,6 @@ public class HomePageAutomation extends TestConfig {
     }
 
 
-    
-
- 
-
-  
 
     /**
      * testPrivateQueries is used to automate private queries button (verify its existence)
