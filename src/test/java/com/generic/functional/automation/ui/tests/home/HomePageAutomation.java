@@ -1181,7 +1181,7 @@ public class HomePageAutomation extends TestConfig {
     }
 
     @Test
-    public void testDocumentsQueries() throws Exception {
+    public void testDocumentsQueries() {
         test = extent.createTest("Verify Documents Queries");
         try {
             login.doLogin(test);
@@ -1269,7 +1269,37 @@ public class HomePageAutomation extends TestConfig {
         }
 
     }
+    @Test
+    public void testVerifyExecuteNLPQueryButtonPrivateQueries(){ //teja
+        test = extent.createTest("Verify Execute NLP Query Button under Private Queries");
+        Actions actions = new Actions(driver);
+        try {
+            login.doLogin(test);
+            test.createNode("Help Button CLicked");
+            WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+            wait.until(ExpectedConditions.visibilityOf(helpButton));
+            helpButton.click();
+
+            test.createNode("Private Queries Button clicked");
+            WebElement privateQueryButton = driver.findElement(By.id("scrollable-auto-tab-1"));
+            wait.until(ExpectedConditions.visibilityOf(privateQueryButton));
+            privateQueryButton.click();
+
+            test.createNode("Execute NLP Query Button clicked under a query");
+            WebElement nlpqueryButton = driver.findElement(By.id("execute-private-query-5"));
+            actions.moveToElement(nlpqueryButton).click().perform();
+
+            test.createNode("Scroll to view tabular view and other results");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"gatsby-focus-wrapper\"]/div/main/div/div/div/div[4]")));
+            test.createNode("Tabular view displayed");
+            test.createNode("Verified Execute NLP Query Button Successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+            test.createNode("Exception (" + e.toString() + ") found").fail(e);
+        }
+    }
 }
+
 
 
 
