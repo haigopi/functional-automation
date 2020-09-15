@@ -36,7 +36,7 @@ public class HomePageAutomation extends TestConfig {
         highlightHelper = new HighlightHelper();
     }
 
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testHelpButtonShipmentsClick() throws Exception {
         test = extent.createTest("Help Button Shipments Click");
         login.doLogin(test);
@@ -60,7 +60,7 @@ public class HomePageAutomation extends TestConfig {
     }
 
 
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testVerifyResetButtonSearchBar() throws Exception { //Haritha
         test = extent.createTest("Home > Verify Reset Button / Clear the Search Bubble");
         try {
@@ -145,7 +145,7 @@ public class HomePageAutomation extends TestConfig {
     }
 
 
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testVerifyInternationalCountryOfOrigin() throws Exception {
         test = extent.createTest("Verify International Facts Country Of Origin");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
@@ -245,7 +245,7 @@ public class HomePageAutomation extends TestConfig {
 }
 
 
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testShipmentsSunburstDocClick() throws Exception { //Haritha
         test = extent.createTest("Verifying Shipments Documents Test");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
@@ -358,7 +358,7 @@ public class HomePageAutomation extends TestConfig {
 
     }
 
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testVerifyResetButtonSunburst() throws Exception { //*** Haritha
         test = extent.createTest("Home Page Verify Reset Button by Sunburst");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
@@ -410,8 +410,7 @@ public class HomePageAutomation extends TestConfig {
 
 
 
-    @Test
-
+    @Test (groups = {"smokeTest"})
     public void testVerifySubjectGuides() throws Exception { //***
         test = extent.createTest("Verifying Subjects Guide ");
         login.doLogin(test);
@@ -450,7 +449,7 @@ public class HomePageAutomation extends TestConfig {
         test.createNode("Verified Subject Guides Successfully!");
     }
 
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testDownloadCSVButton() throws Exception { // Geeta
         test = extent.createTest("DownloadCSVButton");
         login.doLogin(test);
@@ -497,7 +496,7 @@ public class HomePageAutomation extends TestConfig {
      * @author Sai
      */
 
-    @Test
+    @Test (groups = {"regressionTest"})
     public void testPrivateQueries() {
         test = extent.createTest("Verify Private Query Button");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
@@ -522,7 +521,7 @@ public class HomePageAutomation extends TestConfig {
         test.createNode("Verified Private Query Successfully");
     }
 
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testDocumentBydocTypeQueries() {//pardhu
         test = extent.createTest("Verify DocumentByDocTypeQueries");
         try {
@@ -540,7 +539,7 @@ public class HomePageAutomation extends TestConfig {
         }
     }
 
-    @Test
+    @Test (groups = {"regressionTest"})
     public void TestPackages() throws Exception { //saraswathikakollu
         test = extent.createTest("Home > Verify Packing Items Facts");
         login.doLogin(test);
@@ -564,7 +563,7 @@ public class HomePageAutomation extends TestConfig {
         Thread.sleep(5 * 1000);
     }
 
-    @Test
+    @Test (groups = {"regressionTest"})
     public void LocationFacts() throws Exception { //saraswathikakollu
         test = extent.createTest("Home > Verify Location Facts");
         login.doLogin(test);
@@ -589,7 +588,7 @@ public class HomePageAutomation extends TestConfig {
     }
 
 
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testDocBydocTypeOGraphs() {
         test = extent.createTest("Verify DocByDoctypeGraph");
        // WebDriverWait wait = new WebDriverWait(driver, 15);
@@ -659,7 +658,7 @@ public class HomePageAutomation extends TestConfig {
         }
     }
 
-    @Test
+    @Test (groups = {"regressionTest"})
     public void testDocTypeGraph() {
         test = extent.createTest("Verify DocByDoctypeGraph");
        // WebDriverWait wait = new WebDriverWait(driver, 15);
@@ -706,7 +705,7 @@ public class HomePageAutomation extends TestConfig {
      * @author Pardhu
      */
 
-    @Test
+    @Test (groups = {"regressionTest"})
     public void testColumresize() {
         test = extent.createTest("Verify testColumresize");
       //  WebDriverWait wait = new WebDriverWait(driver, 15);
@@ -742,7 +741,7 @@ public class HomePageAutomation extends TestConfig {
         }
     }
 
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testShipmentsDocURLsDocProGraph() {//prasanna
         test = extent.createTest("Verifying Shipments Documents Test");
         WebDriverWait wait = new WebDriverWait(driver,15);
@@ -803,19 +802,10 @@ public class HomePageAutomation extends TestConfig {
     }
 
 
-
-
-
-
-
-
-    @Test
+    @Test (groups = {"regressionTest"})
     public void testForValidationOfAllOtherGraphsInDocProv() {//prasanna
         test = extent.createTest("Verifying the all Other GraphicalViews in Doc URLS Doc Providers Test");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);
-
-
-
         try {
             driver.manage().window().maximize();
             login.doLogin(test);
@@ -847,9 +837,6 @@ public class HomePageAutomation extends TestConfig {
             //Thread.sleep(5*1000);
             test.log(Status.INFO, "Tabular View displayed");
             test.createNode("Tabular View displayed");
-
-
-
 
             //WebElement OtherG = driver.findElement(By.id("panel1d-header"));
             WebElement OtherG = driver.findElement(By.xpath("/html/body/div[1]/div/div/main/div/div/div/div[3]/div/div/div/header/div/div/div/button[3]/span[1]"));
@@ -1146,15 +1133,13 @@ public class HomePageAutomation extends TestConfig {
         }
     }
 
-
-
     /**
          * testPublicQueries is used to automate public queries button (verify its existence)
          *
          * @author Haritha
          */
 
-    @Test
+    @Test (groups = {"regressionTest"})
     public void testPublicQueries() throws Exception {
         test = extent.createTest("Verify Public Query Button");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);
@@ -1180,7 +1165,7 @@ public class HomePageAutomation extends TestConfig {
         test.createNode("Verified Public Query Successfully");
     }
 
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testDocumentsQueries() {
         test = extent.createTest("Verify Documents Queries");
         try {
@@ -1197,12 +1182,10 @@ public class HomePageAutomation extends TestConfig {
         }
     }
 
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testVerifyRadioButton() {//prasanna
         test = extent.createTest("Verifying the Radio button collapse and expand the Query result Test");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);
-
-
 
         try {
             login.doLogin(test);
@@ -1233,7 +1216,7 @@ public class HomePageAutomation extends TestConfig {
 
 
     }
-    @Test
+    @Test (groups = {"regressionTest"})
     public void testDragDropCol(){
         test = extent.createTest("Verify testColumremoving");
         try {
@@ -1269,7 +1252,7 @@ public class HomePageAutomation extends TestConfig {
         }
 
     }
-    @Test
+    @Test (groups = {"regressionTest"})
     public void testVerifyExecuteNLPQueryButtonPrivateQueries(){ //teja
         test = extent.createTest("Verify Execute NLP Query Button under Private Queries");
         Actions actions = new Actions(driver);

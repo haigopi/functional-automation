@@ -30,7 +30,7 @@ public class LoginLogoutAutomation extends TestConfig {
         test.createNode("Style Cross Checked.");
     }
 
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testLogin() throws Exception {
         test = extent.createTest("Login Button Click",
                 "Verifying Login Functionalities");
