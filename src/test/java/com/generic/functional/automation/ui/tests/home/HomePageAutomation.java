@@ -490,11 +490,6 @@ public class HomePageAutomation extends TestConfig {
     }
 
 
-    
-
- 
-
-  
 
     /**
      * testPrivateQueries is used to automate private queries button (verify its existence)
@@ -769,6 +764,7 @@ public class HomePageAutomation extends TestConfig {
             SubjectShipmentsButtonClick.click();
             test.log(Status.INFO, "Subject Shipments Button Click");
             test.createNode("Shipments click on sunburst ");
+            Thread.sleep(2*1000);
 
             WebElement DocumentURLsCluster = driver.findElement(By.id("mainArc-bfe454df-aa7e-43a8-9bf2-8a4941d59edd"));
             wait.until(ExpectedConditions.visibilityOf(DocumentURLsCluster));
@@ -781,7 +777,7 @@ public class HomePageAutomation extends TestConfig {
             DocumentsProviderCluster.click();
             test.log(Status.INFO, "Documents Provider Cluster Click");
             test.createNode("Documents Provider Cluster Click");
-            //Thread.sleep(5*1000);
+            Thread.sleep(2*1000);
             WebElement helpButton1 = driver.findElement(By.cssSelector(".explore-quiries-inner"));
             wait.until(ExpectedConditions.visibilityOf(helpButton1));
             highlightHelper.highLightElement(driver, helpButton1);
@@ -832,7 +828,7 @@ public class HomePageAutomation extends TestConfig {
             SubjectShipmentsButtonClick.click();
             test.log(Status.INFO, "Subject Shipments Button Click");
             test.createNode("Shipments click on sunburst ");
-
+            Thread.sleep(2*1000);
             WebElement DocumentURLsCluster = driver.findElement(By.id("mainArc-bfe454df-aa7e-43a8-9bf2-8a4941d59edd"));
             DocumentURLsCluster.click();
             test.log(Status.INFO, "Document URLs Cluster Click");
@@ -842,7 +838,7 @@ public class HomePageAutomation extends TestConfig {
             DocumentsProviderCluster.click();
             test.log(Status.INFO, "Documents Provider Cluster Click");
             test.createNode("Documents Provider Cluster Click");
-            //Thread.sleep(5 * 1000);
+            Thread.sleep(2 * 1000);
             WebElement helpButton1 = driver.findElement(By.cssSelector(".explore-quiries-inner"));
             highlightHelper.highLightElement(driver, helpButton1);
             helpButton1.click();
@@ -1119,18 +1115,18 @@ public class HomePageAutomation extends TestConfig {
             //Thread.sleep(2*1000); //if you wanna check the graph
 
 
-            /*WebElement internal = driver.findElement(By.id("internal-"));
+            WebElement internal = driver.findElement(By.id("internal"));
             highlightHelper.highLightElement(driver, internal);
             //WebElement internal = driver.findElement(By.xpath("/html/body/div[1]/div/div/main/div/div/div/div[3]/div/div/div/div[3]/div/div[4]/div/div[1]/svg/g/g[1]/circle"));
             System.out.println("Rad of the button is:- "+ internal.getAttribute("r"));
             test.createNode("select on thr internal bubble and bubble radious " + internal.getAttribute("r"));
 
-            WebElement ups = driver.findElement(By.id("ups-"));
+            WebElement ups = driver.findElement(By.id("ups"));
             highlightHelper.highLightElement(driver, ups);
             System.out.println("Rad of the button is:- "+ ups.getAttribute("r"));
             test.createNode("select  the ups bubble and bubble radious " + ups.getAttribute("r"));
 
-            WebElement FedEx = driver.findElement(By.id("fedex-"));
+            WebElement FedEx = driver.findElement(By.id("fedex"));
             highlightHelper.highLightElement(driver, FedEx);
             System.out.println("Rad of the button is:- "+ FedEx.getAttribute("r"));
             test.createNode("select  the FedEx bubble and bubble radious " + FedEx.getAttribute("r"));
@@ -1138,7 +1134,7 @@ public class HomePageAutomation extends TestConfig {
             WebElement dhl = driver.findElement(By.id("dhl"));
             highlightHelper.highLightElement(driver, dhl);
             System.out.println("Rad of the button is:- "+ dhl.getAttribute("r"));
-            test.createNode("select the dhl bubble and bubble radious " + dhl.getAttribute("r"));*/
+            test.createNode("select the dhl bubble and bubble radious " + dhl.getAttribute("r"));
 
 
 
@@ -1185,7 +1181,7 @@ public class HomePageAutomation extends TestConfig {
     }
 
     @Test
-    public void testDocumentsQueries() throws Exception {
+    public void testDocumentsQueries() {
         test = extent.createTest("Verify Documents Queries");
         try {
             login.doLogin(test);
@@ -1273,7 +1269,37 @@ public class HomePageAutomation extends TestConfig {
         }
 
     }
+    @Test
+    public void testVerifyExecuteNLPQueryButtonPrivateQueries(){ //teja
+        test = extent.createTest("Verify Execute NLP Query Button under Private Queries");
+        Actions actions = new Actions(driver);
+        try {
+            login.doLogin(test);
+            test.createNode("Help Button CLicked");
+            WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+            wait.until(ExpectedConditions.visibilityOf(helpButton));
+            helpButton.click();
+
+            test.createNode("Private Queries Button clicked");
+            WebElement privateQueryButton = driver.findElement(By.id("scrollable-auto-tab-1"));
+            wait.until(ExpectedConditions.visibilityOf(privateQueryButton));
+            privateQueryButton.click();
+
+            test.createNode("Execute NLP Query Button clicked under a query");
+            WebElement nlpqueryButton = driver.findElement(By.id("execute-private-query-5"));
+            actions.moveToElement(nlpqueryButton).click().perform();
+
+            test.createNode("Scroll to view tabular view and other results");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"gatsby-focus-wrapper\"]/div/main/div/div/div/div[4]")));
+            test.createNode("Tabular view displayed");
+            test.createNode("Verified Execute NLP Query Button Successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+            test.createNode("Exception (" + e.toString() + ") found").fail(e);
+        }
+    }
 }
+
 
 
 
