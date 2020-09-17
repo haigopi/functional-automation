@@ -4,9 +4,20 @@ import com.aventstack.extentreports.Status;
 import com.generic.functional.automation.ui.tests.common.TestConfig;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 public class DataStudioAutomation extends TestConfig {
+
+    WebDriverWait wait;
+    @BeforeMethod
+    public void beforeMethod() {
+        wait = new WebDriverWait(driver, 15);
+    }
 
     @Test(priority = 1)
     public void DataStudioSmartView() throws Exception {
@@ -312,5 +323,53 @@ public class DataStudioAutomation extends TestConfig {
         ForeignKeyPlantIdentifier.click();
         test.createNode("Primary Key & Foreign Key Displayed For Shipments Cluster ");
         Thread.sleep(5 * 1000);
+    }
+    @Test
+    public void TestingClusters() throws Exception{
+        test = extent.createTest("Data Studio Adding and removing clusters in Pardhus DB");
+        login.doLogin(test);
+        WebElement DataStudioBtn=driver.findElement(By.xpath("//*[@id=\"databaseManager\"]"));
+        wait.until(ExpectedConditions.visibilityOf(DataStudioBtn));
+        DataStudioBtn.click();
+        Thread.sleep(2000);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+        WebElement PardhuPlusCir=driver.findElement(By.xpath("//*[@id=\"plusCircle-subject-pardhu\"]"));
+        wait.until(ExpectedConditions.elementToBeClickable(PardhuPlusCir));
+        Thread.sleep(2000);
+        PardhuPlusCir.click();
+
+        WebElement PardhuPlus=driver.findElement(By.id("controlButtonAdd-subject-pardhu"));
+        wait.until(ExpectedConditions.visibilityOf(PardhuPlus));
+        PardhuPlus.click();
+
+        WebElement ClusterName=driver.findElement(By.xpath("//input[@name='clusterName']"));
+        wait.until(ExpectedConditions.visibilityOf(ClusterName));
+        ClusterName.click();
+        ClusterName.sendKeys("AutoGenrated");
+
+        WebElement description=driver.findElement(By.xpath("//input[@name='description']"));
+        wait.until(ExpectedConditions.visibilityOf(description));
+        description.click();
+        description.sendKeys("AutoGenrated");
+
+        WebElement nlpTokens=driver.findElement(By.xpath("//input[@name='nlpTokens']"));
+        wait.until(ExpectedConditions.visibilityOf(nlpTokens));
+        nlpTokens.click();
+        nlpTokens.sendKeys("AutoGenrated");
+
+        WebElement Add=driver.findElement(By.id("add-inside-subject"));
+        wait.until(ExpectedConditions.elementToBeClickable(Add));
+        Add.click();
+
+        Thread.sleep(2000);
+        WebElement tableBtn=driver.findElement(By.id("plusCircle-table-AutoGenrated"));
+        wait.until(ExpectedConditions.elementToBeClickable(tableBtn));
+        tableBtn.click();
+
+        WebElement remove=driver.findElement(By.id("controlsIconsDelete-table-AutoGenrated"));
+        wait.until(ExpectedConditions.elementToBeClickable(remove));
+        remove.click();
+        Thread.sleep(5000);
     }
 }
