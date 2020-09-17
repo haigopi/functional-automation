@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 
 public class HelpButtonTest extends TestConfig {
- /**   @Test
+    @Test
     public void helpButtonTestCase() throws Exception {
         test = extent.createTest("helpButtonClickTestCase");
         login.doLogin(test);
@@ -22,7 +22,7 @@ public class HelpButtonTest extends TestConfig {
         Thread.sleep(6 * 1000);
         driver.findElement(By.cssSelector("g > circle")).click();
         Thread.sleep(6 * 1000);
-        driver.findElement(By.id("mainArc-11a018d0-8978-48ff-9c7b-ea8606201da5")).click(); // error here (no such element: Unable to locate element: {"method":"css selector","selector":"#mainArc\-11a018d0\-8978\-48ff\-9c7b\-ea8606201da5"})
+        driver.findElement(By.className("MuiSvgIcon-root helpIcon explore-query-svg ml-2")).click(); // error here (no such element: Unable to locate element: {"method":"css selector","selector":"#mainArc\-11a018d0\-8978\-48ff\-9c7b\-ea8606201da5"})
         driver.findElement(By.cssSelector("g > circle")).click();
         Thread.sleep(6 * 1000);
         WebElement mapObject = driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.explore-query-svg.ml-2 > path"));
@@ -36,6 +36,6 @@ public class HelpButtonTest extends TestConfig {
         test.createNode("User found");
         Thread.sleep(2 * 1000);
 
-    }**/
 
+    }
 }

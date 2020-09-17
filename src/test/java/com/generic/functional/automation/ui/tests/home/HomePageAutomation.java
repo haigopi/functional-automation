@@ -187,9 +187,6 @@ public class HomePageAutomation extends TestConfig {
     }
 
 
-
-    
-
     @Test
     public void testShipmentsSunburstDocClick() throws Exception { //Haritha
         test = extent.createTest("Verifying Shipments Documents Test");
@@ -229,7 +226,7 @@ public class HomePageAutomation extends TestConfig {
             Graphicalview.click();
             test.log(Status.INFO, "Graphical View Displayed ");
             test.createNode("Graphical View displayed");
-          // driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]")).click(); // clicking on Graphical view using xpath old one
+            // driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]")).click(); // clicking on Graphical view using xpath old one
 
             /// VALIDATION ///
 
@@ -280,11 +277,9 @@ public class HomePageAutomation extends TestConfig {
             Thread.sleep(5 * 1000);
             test.log(Status.INFO, "Bubble Graph Displayed ");
             test.createNode("Verified Documents Cluster with Dimensional Data");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        catch (Exception e)
-            {
-                e.printStackTrace();
-            }
 
     }
 
@@ -337,9 +332,8 @@ public class HomePageAutomation extends TestConfig {
             // test.createNode("Exception (" + e.toString() + ") found").fail(e);
             e.printStackTrace();
         }
-         test.createNode("Verified Reset Button");
+        test.createNode("Verified Reset Button");
     }
-
 
 
     @Test
@@ -347,29 +341,27 @@ public class HomePageAutomation extends TestConfig {
     public void testVerifySubjectGuides() throws Exception { //***
         test = extent.createTest("Verifying Subjects Guide ");
         login.doLogin(test);
-        try
-        {
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Help Button Clicked");
-        WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
-        helpButton.click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Sunburst Shown");
-        test.createNode("Verified Subject Guides Successfully!");
-        driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[3]/div/div/div/ul/li[2]/span")).click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Clicked on Domain Values");
-        driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[3]/div/div/div/ul/li/span")).click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Clicked on Drill down for Sub-elements");
-        driver.findElement(By.xpath("//*[text()=' -- Subjects Guide -- ']"));
-        test.log(Status.INFO, "Subjects Guide Displayed");
-        driver.findElement(By.xpath("//*[text()='Domain of Values']"));
-        test.log(Status.INFO, "Domain of Values Displayed");
-        driver.findElement(By.xpath("//*[text()='Drill down for Sub-elements']"));
-        test.log(Status.INFO,"Drill down for Sub-elements Displayed");
-        }
-        catch (Exception e) {
+        try {
+            Thread.sleep(5 * 1000);
+            test.log(Status.INFO, "Help Button Clicked");
+            WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+            helpButton.click();
+            Thread.sleep(5 * 1000);
+            test.log(Status.INFO, "Sunburst Shown");
+            test.createNode("Verified Subject Guides Successfully!");
+            driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[3]/div/div/div/ul/li[2]/span")).click();
+            Thread.sleep(5 * 1000);
+            test.log(Status.INFO, "Clicked on Domain Values");
+            driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[3]/div/div/div/ul/li/span")).click();
+            Thread.sleep(5 * 1000);
+            test.log(Status.INFO, "Clicked on Drill down for Sub-elements");
+            driver.findElement(By.xpath("//*[text()=' -- Subjects Guide -- ']"));
+            test.log(Status.INFO, "Subjects Guide Displayed");
+            driver.findElement(By.xpath("//*[text()='Domain of Values']"));
+            test.log(Status.INFO, "Domain of Values Displayed");
+            driver.findElement(By.xpath("//*[text()='Drill down for Sub-elements']"));
+            test.log(Status.INFO, "Drill down for Sub-elements Displayed");
+        } catch (Exception e) {
             // test.createNode("Exception (" + e.toString() + ") found").fail(e);
             e.printStackTrace();
         }
@@ -381,6 +373,8 @@ public class HomePageAutomation extends TestConfig {
         login.doLogin(test);
         test.log(Status.INFO, "Help Button Clicked");
         test.createNode("Help Button Click");
+        // WebElement helpButton = driver.findElement(By.className("MuiSvgIcon-root helpIcon explore-query-svg ml-2")); // classname not working
+
         WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
         helpButton.click();
         Thread.sleep(5 * 1000);
@@ -415,12 +409,6 @@ public class HomePageAutomation extends TestConfig {
     }
 
 
-    
-
- 
-
-  
-
     /**
      * testPrivateQueries is used to automate private queries button (verify its existence)
      *
@@ -442,7 +430,7 @@ public class HomePageAutomation extends TestConfig {
             test.createNode("Clicking on Private Query Button");
             //test.log(Status.INFO, "Clicking on Private Query Button");
             WebElement privateQueryButton = driver.findElement(By.id("scrollable-auto-tab-1"));
-          //  WebElement privateQueryButton = driver.findElement(By.xpath("//*[@id=\"scrollable-auto-tab-1\"]/span[1]")); old one used xpath
+            //  WebElement privateQueryButton = driver.findElement(By.xpath("//*[@id=\"scrollable-auto-tab-1\"]/span[1]")); old one used xpath
             highlightHelper.highLightElement(driver, privateQueryButton);
             privateQueryButton.click();
         } catch (Exception e) {
@@ -522,34 +510,34 @@ public class HomePageAutomation extends TestConfig {
     @Test
     public void testDocBydocTypeOGraphs() {
         test = extent.createTest("Verify DocByDoctypeGraph");
-       // WebDriverWait wait = new WebDriverWait(driver, 15);
+        // WebDriverWait wait = new WebDriverWait(driver, 15);
         try {
             login.doLogin(test);
 
-            WebElement helpbtn=driver.findElement(By.cssSelector(".explore-quiries-inner"));
+            WebElement helpbtn = driver.findElement(By.cssSelector(".explore-quiries-inner"));
             wait.until(ExpectedConditions.visibilityOf(helpbtn));
             helpbtn.click();
             test.createNode("HelpButton clicked");
 
-            WebElement shipment=driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d"));
+            WebElement shipment = driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d"));
             wait.until(ExpectedConditions.visibilityOf(shipment));
             shipment.click();
             test.createNode("clicked on shipments");
             //clicking on shipments
 
-            WebElement document=driver.findElement(By.id("mainArc-11a018d0-8978-48ff-9c7b-ea8606201da5"));
+            WebElement document = driver.findElement(By.id("mainArc-11a018d0-8978-48ff-9c7b-ea8606201da5"));
             wait.until(ExpectedConditions.visibilityOf(document));
             document.click();
             test.createNode("clicked on documents");
             //clicking on documents
 
-            WebElement documenttype=driver.findElement(By.id("mainArc-287afee1-7e35-4f10-a768-4d44610ecea8"));
+            WebElement documenttype = driver.findElement(By.id("mainArc-287afee1-7e35-4f10-a768-4d44610ecea8"));
             wait.until(ExpectedConditions.visibilityOf(documenttype));
             documenttype.click();
             test.createNode("clicked on document type");
             //clicking on document Type
 
-            WebElement Ograph=driver.findElement(By.xpath("/html/body/div[1]/div/div/main/div/div/div/div[5]/div/div/div/header/div/div/div/button[3]/span[1]"));
+            WebElement Ograph = driver.findElement(By.xpath("/html/body/div[1]/div/div/main/div/div/div/div[5]/div/div/div/header/div/div/div/button[3]/span[1]"));
             wait.until(ExpectedConditions.visibilityOf(Ograph));
             Ograph.click();
             test.createNode("clicked on other graphical Views");
@@ -577,7 +565,7 @@ public class HomePageAutomation extends TestConfig {
             graph.sendKeys(Keys.ENTER);
             test.createNode("input given to graphs as vertical graph");
 
-            WebElement show=driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span"));
+            WebElement show = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span"));
             wait.until(ExpectedConditions.visibilityOf(show));
             show.click();
             test.createNode("clicked on show");
@@ -592,33 +580,33 @@ public class HomePageAutomation extends TestConfig {
     @Test
     public void testDocTypeGraph() {
         test = extent.createTest("Verify DocByDoctypeGraph");
-       // WebDriverWait wait = new WebDriverWait(driver, 15);
+        // WebDriverWait wait = new WebDriverWait(driver, 15);
         try {
             login.doLogin(test);
-            WebElement helpbtn=driver.findElement(By.cssSelector(".explore-quiries-inner"));
+            WebElement helpbtn = driver.findElement(By.cssSelector(".explore-quiries-inner"));
             wait.until(ExpectedConditions.visibilityOf(helpbtn));
             helpbtn.click();
             test.createNode("HelpButton clicked");
 
-            WebElement shipment=driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d"));
+            WebElement shipment = driver.findElement(By.id("mainArc-0b981a1b-32dc-43b1-b257-70c8c5a6cc6d"));
             wait.until(ExpectedConditions.visibilityOf(shipment));
             shipment.click();
             test.createNode("clicked on shipments");
             //clicking on shipments
 
-            WebElement document=driver.findElement(By.id("mainArc-11a018d0-8978-48ff-9c7b-ea8606201da5"));
+            WebElement document = driver.findElement(By.id("mainArc-11a018d0-8978-48ff-9c7b-ea8606201da5"));
             wait.until(ExpectedConditions.visibilityOf(document));
             document.click();
             test.createNode("clicked on documents");
             //clicking on documents
 
-            WebElement documenttype=driver.findElement(By.id("mainArc-287afee1-7e35-4f10-a768-4d44610ecea8"));
+            WebElement documenttype = driver.findElement(By.id("mainArc-287afee1-7e35-4f10-a768-4d44610ecea8"));
             wait.until(ExpectedConditions.visibilityOf(documenttype));
             documenttype.click();
             test.createNode("clicked on document type");
             //clicking on document Type
 
-            WebElement graphicalView=driver.findElement(By.xpath("//span[text()='Graphical View']"));
+            WebElement graphicalView = driver.findElement(By.xpath("//span[text()='Graphical View']"));
             wait.until(ExpectedConditions.visibilityOf(graphicalView));
             graphicalView.click();
             test.createNode("clicked on graphical View");
@@ -639,7 +627,7 @@ public class HomePageAutomation extends TestConfig {
     @Test
     public void testColumresize() {
         test = extent.createTest("Verify testColumresize");
-      //  WebDriverWait wait = new WebDriverWait(driver, 15);
+        //  WebDriverWait wait = new WebDriverWait(driver, 15);
         try {
             login.doLogin(test);
             WebElement searchBubble = driver.findElement(By.xpath("//input[@class='auto-suggestion-input']"));
@@ -675,7 +663,7 @@ public class HomePageAutomation extends TestConfig {
     @Test
     public void testShipmentsDocURLsDocProGraph() {//prasanna
         test = extent.createTest("Verifying Shipments Documents Test");
-        WebDriverWait wait = new WebDriverWait(driver,15);
+        WebDriverWait wait = new WebDriverWait(driver, 15);
         //driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);
 
 
@@ -683,7 +671,7 @@ public class HomePageAutomation extends TestConfig {
             driver.manage().window().maximize();
             login.doLogin(test);
             WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
-            wait.until(ExpectedConditions.visibilityOf( helpButton));
+            wait.until(ExpectedConditions.visibilityOf(helpButton));
             //highlightHelper.highLightElement(driver, helpButton);
             helpButton.click();
             test.log(Status.INFO, "Sunburst Shown");
@@ -700,7 +688,7 @@ public class HomePageAutomation extends TestConfig {
             DocumentURLsCluster.click();
             test.log(Status.INFO, "Document URLs Cluster Click");
             test.createNode("Document URLs Cluster Click");
-            Thread.sleep(5*1000);
+            Thread.sleep(5 * 1000);
             WebElement DocumentsProviderCluster = driver.findElement(By.id("mainArc-d71a8a74-5e78-426f-ad9e-a7bab8283818"));
             wait.until(ExpectedConditions.visibilityOf(DocumentsProviderCluster));
             DocumentsProviderCluster.click();
@@ -732,17 +720,11 @@ public class HomePageAutomation extends TestConfig {
     }
 
 
-
-
-
-
-
-
     @Test
     public void testForValidationOfAllOtherGraphsInDocProv() {//prasanna
         test = extent.createTest("Verifying the all Other GraphicalViews in Doc URLS Doc Providers Test");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);
-        Actions action =new Actions(driver);
+        Actions action = new Actions(driver);
 
 
         try {
@@ -778,8 +760,6 @@ public class HomePageAutomation extends TestConfig {
             test.createNode("Tabular View displayed");
 
 
-
-
             //WebElement OtherG = driver.findElement(By.id("panel1d-header"));
             WebElement OtherG = driver.findElement(By.xpath("/html/body/div[1]/div/div/main/div/div/div/div[3]/div/div/div/header/div/div/div/button[3]/span[1]"));
             OtherG.click();
@@ -805,7 +785,7 @@ public class HomePageAutomation extends TestConfig {
             // Validation for Axis 2 Drop-Down
             test.createNode("Select count in Axis 2");
             Assert.assertTrue(count.getText().equals("COUNT"));
-            Assert.assertEquals(count.getText(),"COUNT");
+            Assert.assertEquals(count.getText(), "COUNT");
             count.click();
 
             WebElement Graph1 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div/div/div"));
@@ -814,7 +794,7 @@ public class HomePageAutomation extends TestConfig {
             //Thread.sleep(2*1000);
 
 
-            WebElement graphSelector1  = driver.findElement(By.id("react-select-4-option-0"));
+            WebElement graphSelector1 = driver.findElement(By.id("react-select-4-option-0"));
             Assert.assertTrue(graphSelector1.getText().equals("Vertical Bar Graph")); //1st Validator
             Assert.assertEquals(graphSelector1.getText(), "Vertical Bar Graph");// 2nd Validator
             graphSelector1.click();
@@ -838,7 +818,6 @@ public class HomePageAutomation extends TestConfig {
             test.createNode("re open the other graph to edit next graph ");
 
 
-
             WebElement Axis12 = driver.findElement(By.xpath("/html/body/div[1]/div/div/main/div/div/div/div[3]/div/div/div/div[3]/div/div[1]/div[2]/div/div/div/div/div/form/div[1]/div[2]/div/div/div[1]"));
             Axis12.click();
             test.createNode(" click on the Axis 1");
@@ -859,7 +838,7 @@ public class HomePageAutomation extends TestConfig {
             // Validation for Axis 2 Drop-Down
             test.createNode("Select count in Axis 2");
             Assert.assertTrue(count1.getText().equals("COUNT"));
-            Assert.assertEquals(count1.getText(),"COUNT");
+            Assert.assertEquals(count1.getText(), "COUNT");
             count1.click();
 
 
@@ -868,11 +847,11 @@ public class HomePageAutomation extends TestConfig {
             test.createNode(" Graph button selected");
 
 
-            WebElement graphSelector2   = driver.findElement(By.id("react-select-4-option-1"));
+            WebElement graphSelector2 = driver.findElement(By.id("react-select-4-option-1"));
             Assert.assertTrue(graphSelector2.getText().equals("Horizontal Bar Graph")); //1st Validator
             Assert.assertEquals(graphSelector2.getText(), "Horizontal Bar Graph");// 2nd Validator
             graphSelector2.click();
-            test.createNode(" Selected Horizontal graph " );
+            test.createNode(" Selected Horizontal graph ");
 
             WebElement ShowButton2 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span"));
             ShowButton2.click();
@@ -910,9 +889,8 @@ public class HomePageAutomation extends TestConfig {
             // Validation for Axis 2 Drop-Down
             test.createNode("Select count in Axis 2");
             Assert.assertTrue(count2.getText().equals("COUNT"));
-            Assert.assertEquals(count2.getText(),"COUNT");
+            Assert.assertEquals(count2.getText(), "COUNT");
             count2.click();
-
 
 
             WebElement Graph3 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div/div/div"));
@@ -920,7 +898,7 @@ public class HomePageAutomation extends TestConfig {
             test.createNode(" Graph button selected");
 
 
-            WebElement graphSelector3   = driver.findElement(By.id("react-select-4-option-2"));
+            WebElement graphSelector3 = driver.findElement(By.id("react-select-4-option-2"));
             Assert.assertTrue(graphSelector3.getText().equals("Pie Graph")); //1st Validator
             Assert.assertEquals(graphSelector3.getText(), "Pie Graph");// 2nd Validator
             graphSelector3.click();
@@ -962,9 +940,8 @@ public class HomePageAutomation extends TestConfig {
             // Validation for Axis 2 Drop-Down
             test.createNode("Select count in Axis 2");
             Assert.assertTrue(count3.getText().equals("COUNT"));
-            Assert.assertEquals(count3.getText(),"COUNT");
+            Assert.assertEquals(count3.getText(), "COUNT");
             count3.click();
-
 
 
             WebElement Graph4 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div/div/div"));
@@ -972,7 +949,7 @@ public class HomePageAutomation extends TestConfig {
             test.createNode(" Graph button selected");
 
 
-            WebElement graphSelector4   = driver.findElement(By.id("react-select-4-option-3"));
+            WebElement graphSelector4 = driver.findElement(By.id("react-select-4-option-3"));
             Assert.assertTrue(graphSelector4.getText().equals("Donut Graph")); //1st Validator
             Assert.assertEquals(graphSelector4.getText(), "Donut Graph");// 2nd Validator
             graphSelector4.click();
@@ -1014,7 +991,7 @@ public class HomePageAutomation extends TestConfig {
             // Validation for Axis 2 Drop-Down
             test.createNode("Select count in Axis 2");
             Assert.assertTrue(count4.getText().equals("COUNT"));
-            Assert.assertEquals(count4.getText(),"COUNT");
+            Assert.assertEquals(count4.getText(), "COUNT");
             count4.click();
 
 
@@ -1024,7 +1001,7 @@ public class HomePageAutomation extends TestConfig {
             //Thread.sleep(2*1000);
 
 
-            WebElement BG  = driver.findElement(By.id("react-select-4-option-4"));
+            WebElement BG = driver.findElement(By.id("react-select-4-option-4"));
             Assert.assertTrue(BG.getText().equals("Bubble Graph")); //1st Validator
             Assert.assertEquals(BG.getText(), "Bubble Graph");// 2nd Validator
             BG.click();
@@ -1033,7 +1010,6 @@ public class HomePageAutomation extends TestConfig {
             WebElement ShowButton5 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span"));
             ShowButton5.click();
             test.createNode("Show button clicked ");
-
 
 
             //validation of Bubble Graph including each bubble in Bubble Graph
@@ -1047,25 +1023,23 @@ public class HomePageAutomation extends TestConfig {
             WebElement internal = driver.findElement(By.id("internal-"));
             highlightHelper.highLightElement(driver, internal);
             //WebElement internal = driver.findElement(By.xpath("/html/body/div[1]/div/div/main/div/div/div/div[3]/div/div/div/div[3]/div/div[4]/div/div[1]/svg/g/g[1]/circle"));
-            System.out.println("Rad of the button is:- "+ internal.getAttribute("r"));
+            System.out.println("Rad of the button is:- " + internal.getAttribute("r"));
             test.createNode("select on thr internal bubble and bubble radious " + internal.getAttribute("r"));
 
             WebElement ups = driver.findElement(By.id("ups-"));
             highlightHelper.highLightElement(driver, ups);
-            System.out.println("Rad of the button is:- "+ ups.getAttribute("r"));
+            System.out.println("Rad of the button is:- " + ups.getAttribute("r"));
             test.createNode("select  the ups bubble and bubble radious " + ups.getAttribute("r"));
 
             WebElement FedEx = driver.findElement(By.id("fedex-"));
             highlightHelper.highLightElement(driver, FedEx);
-            System.out.println("Rad of the button is:- "+ FedEx.getAttribute("r"));
+            System.out.println("Rad of the button is:- " + FedEx.getAttribute("r"));
             test.createNode("select  the FedEx bubble and bubble radious " + FedEx.getAttribute("r"));
 
             WebElement dhl = driver.findElement(By.id("dhl"));
             highlightHelper.highLightElement(driver, dhl);
-            System.out.println("Rad of the button is:- "+ dhl.getAttribute("r"));
+            System.out.println("Rad of the button is:- " + dhl.getAttribute("r"));
             test.createNode("select the dhl bubble and bubble radious " + dhl.getAttribute("r"));
-
-
 
 
         } catch (Exception e) {
@@ -1076,12 +1050,11 @@ public class HomePageAutomation extends TestConfig {
     }
 
 
-
     /**
-         * testPublicQueries is used to automate public queries button (verify its existence)
-         *
-         * @author Haritha
-         */
+     * testPublicQueries is used to automate public queries button (verify its existence)
+     *
+     * @author Haritha
+     */
 
     @Test
     public void testPublicQueries() throws Exception {
@@ -1115,17 +1088,35 @@ public class HomePageAutomation extends TestConfig {
         try {
             login.doLogin(test);
 
-        queryChecker.runSearchBubbleQuery(driver, "list all documents", test);
-        queryChecker.runSearchBubbleQuery(driver, "list all documents where provider is FedEx", test);
-        queryChecker.runSearchBubbleQuery(driver, "list all documents where delivery number ends with 003", test);
-        queryChecker.runSearchBubbleQuery(driver, "list all documents where document type is LBL ", test);
+            queryChecker.runSearchBubbleQuery(driver, "list all documents", test);
+            queryChecker.runSearchBubbleQuery(driver, "list all documents where provider is FedEx", test);
+            queryChecker.runSearchBubbleQuery(driver, "list all documents where delivery number ends with 003", test);
+            queryChecker.runSearchBubbleQuery(driver, "list all documents where document type is LBL ", test);
 
-        test.createNode("Verified Documents Queries Successfully!");
+            test.createNode("Verified Documents Queries Successfully!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Test
+    public void testTwoDifferentPackagesColumnQueries() throws Exception {
+        test = extent.createTest("Verify Documents Queries");
+        try {
+            login.doLogin(test);
+
+            queryChecker.runSearchBubbleQuery(driver, "list all packages", test);
+            queryChecker.runSearchBubbleQuery(driver, " list of all plant identifier starts with 1314 where packages", test);
+            queryChecker.runSearchBubbleQuery(driver, "list of all ltl class starts with 50 where packages", test);
+            test.createNode("Verified packages Queries Successfully!");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
+
 
 
 
