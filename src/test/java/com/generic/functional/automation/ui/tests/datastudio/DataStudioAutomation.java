@@ -370,6 +370,10 @@ public class DataStudioAutomation extends TestConfig {
         WebElement remove=driver.findElement(By.id("controlsIconsDelete-table-AutoGenrated"));
         wait.until(ExpectedConditions.elementToBeClickable(remove));
         remove.click();
+
+        WebElement del=driver.findElement(By.cssSelector("button[class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-containedSizeSmall MuiButton-sizeSmall']"));
+        wait.until(ExpectedConditions.elementToBeClickable((del)));
+        del.click();
         Thread.sleep(5000);
     }
 }
