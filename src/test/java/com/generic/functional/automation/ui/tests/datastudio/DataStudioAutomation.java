@@ -122,7 +122,7 @@ public class DataStudioAutomation extends TestConfig {
             test.log(Status.INFO, " Freight Charges Cluster text =" + freightChargesCluster.getText());//Freight Charges
             Thread.sleep(5 * 1000);
 
-            // before it was there  in application but not now so commenting this
+            // before it was there  in application but not now so commenting this lines
 //            test.createNode("Primary Key   Freight Charges Identifier Element Click");
 //            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("primaryKey-Freight-Charges-Identifier")));
 //            WebElement primaryKeyFreightChargesIdentifier = driver.findElement(By.id("primaryKey-Freight-Charges-Identifier"));
