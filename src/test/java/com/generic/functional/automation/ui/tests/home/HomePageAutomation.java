@@ -178,7 +178,7 @@ public class HomePageAutomation extends TestConfig {
             /// VALIDATION ///
             //WebElement totalRecords = driver.findElement(By.id("total-records-count"));
             // WebElement tr = driver.findElement(By.xpath("/html/body/div/div/div/main/div/div/div/div[5]/div/div/div/div[1]/div/div/div[1]/div[2]/ul/li/div/span/div[2]/span[2]"));
-           WebElement tr = driver.findElement(By.id("total-records-label"));
+            WebElement tr = driver.findElement(By.id("total-records-label"));
             String value = tr.getText();
             if (Integer.parseInt(value) == 0) {
                 test.log(Status.INFO, "No Table should appear since no data fetched for given query");
@@ -195,12 +195,12 @@ public class HomePageAutomation extends TestConfig {
                 Thread.sleep(2 * 1000);
                 test.createNode("Verified the table information is displayed when Country of origin is selected. ");
 
-                WebElement Graphicalview = driver.findElement(By.xpath("//button[@id='simple-tab-1']/span"));
+                WebElement Graphicalview = driver.findElement(By.id("simple-tab-1"));
                 Graphicalview.click(); // Clicks on Graphical View
                 test.createNode("Grahical view clicked");
                 Thread.sleep(2 * 1000);
 
-                WebElement Ograph = driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]"));
+                WebElement Ograph = driver.findElement(By.id("simple-tab-2"));
                 Ograph.click(); // Clicks on Other Graphical View old one
                 test.createNode("Other Graphical view clicked");
                 // WebElement Ograph = driver.findElement(By.id("simple-tab-1")); id is not working
@@ -283,24 +283,20 @@ public class HomePageAutomation extends TestConfig {
             Tabview.click();
             test.log(Status.INFO, "Tabular View displayed");
             test.createNode("Tabular View displayed");
-         // driver.findElement(By.xpath("//button[@id='simple-tab-1']/span")).click(); clicking on Tabular view using xpath old one
             Thread.sleep(3*1000);
 
             WebElement Graphicalview = driver.findElement(By.id("simple-tab-1"));
             Graphicalview.click();
             test.log(Status.INFO, "Graphical View Displayed ");
             test.createNode("Graphical View displayed");
-          //driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]")).click(); // clicking on Graphical view using xpath old one
             Thread.sleep(3*1000);
 
-            WebElement Ograph = driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]"));
+            WebElement Ograph = driver.findElement(By.id("simple-tab-2"));
             Ograph.click();
             test.log(Status.INFO, "Other Graphical View Displayed ");
             test.createNode("Other Graphical View displayed");
-         // WebElement Ograph = driver.findElement(By.id("simple-tab-1"));// clicking on other graphical view
-          //Ograph.click();
 
-            WebElement Axis1 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div/div[2]/div/div/div"));
+            WebElement Axis1 = driver.findElement(By.className("other-graph-axis-1-value"));
             Axis1.click(); //old one
             test.log(Status.INFO, "Under Axis 1");
             Thread.sleep(4*1000);
@@ -314,7 +310,7 @@ public class HomePageAutomation extends TestConfig {
             Provider.click();
             Thread.sleep(5 * 1000);
 
-            WebElement Axis2 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[2]/div[2]/div/div/div"));
+            WebElement Axis2 = driver.findElement(By.className("other-graph-axis-2-value"));
             Axis2.click();
             test.log(Status.INFO, "Under Axis2");
             Thread.sleep(5 * 1000);
@@ -328,7 +324,7 @@ public class HomePageAutomation extends TestConfig {
             Count.click();
             Thread.sleep(5 * 1000);
 
-            WebElement Graph = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div"));
+            WebElement Graph = driver.findElement(By.className("other-graph-type"));
             Graph.click();
             test.log(Status.INFO, "Under Graph");
             Thread.sleep(5 * 1000);
@@ -342,11 +338,11 @@ public class HomePageAutomation extends TestConfig {
             bubbleGraph.click();
             Thread.sleep(5 * 1000);
 
-            test.log(Status.INFO, "Clicked on Show Button ");
           //WebElement showButton = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span"));
           //showButton.click(); old one using xpath
             WebElement Showbutton = driver.findElement(By.className("MuiButton-label"));
             Showbutton.click();
+            test.log(Status.INFO, "Clicked on Show Button ");
             Thread.sleep(5 * 1000);
             test.log(Status.INFO, "Bubble Graph Displayed ");
             test.createNode("Verified Documents Cluster with Dimensional Data");
@@ -398,9 +394,10 @@ public class HomePageAutomation extends TestConfig {
             driver.findElement(By.id("search-text-reset")).click();
             WebElement Resetbtn = driver.findElement(By.id("search-text-reset"));
             Resetbtn.click();
+            highlightHelper.highLightElement(driver,Resetbtn);
             test.createNode("clicked on Reset Button");
             test.log(Status.INFO, "Clicked on Reset Button");
-            driver.findElement(By.xpath("//input[@name='']")).clear();
+
 
         } catch (Exception e) {
              test.createNode("Exception (" + e.toString() + ") found").fail(e);
@@ -1299,8 +1296,29 @@ public class HomePageAutomation extends TestConfig {
             test.createNode("Exception (" + e.toString() + ") found").fail(e);
         }
     }
-}
+    @Test
+    public void TestAutoSuggest() throws Exception {
+        test = extent.createTest("Verify AutoPopulate Search Bar");
+        try {
+            login.doLogin(test);
 
+            WebElement searchBubble = driver.findElement(By.xpath("//input[@value='']"));
+            searchBubble.sendKeys("list all");
+            Thread.sleep(3 * 1000);
+            //searchBubble.sendKeys(Keys.ARROW_DOWN);
+            Thread.sleep(3*1000 );
+            searchBubble.sendKeys(Keys.ENTER); //to select first row
+            Thread.sleep(3*1000 );
+            WebElement search = driver.findElement(By.className("search_icon"));
+            search.click();
+            Thread.sleep(7*1000);
+
+ } catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+    }
+}
 
 
 
