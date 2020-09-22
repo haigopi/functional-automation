@@ -206,7 +206,10 @@ public class HomePageAutomation extends TestConfig {
                 //Ograph.click(); //click on graphical view
                 Thread.sleep(2 * 1000);
 
-                WebElement Axis1 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div/div[2]/div/div/div"));
+                //WebElement Axis1 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div/div[2]/div/div/div"));
+                WebElement Axis1 = driver.findElement(By.className("other-graph-axis-1-value"));
+                // css-yk16xz-control
+                //other-graph-axis-1-value
                 Axis1.click(); // Click Axis 1
                 Thread.sleep(3 * 1000);
                 test.createNode("clciked on Axis1");
@@ -292,14 +295,15 @@ public class HomePageAutomation extends TestConfig {
           //driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]")).click(); // clicking on Graphical view using xpath old one
             Thread.sleep(3*1000);
 
-            WebElement Ograph = driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]"));
+            WebElement Ograph = driver.findElement(By.id("simple-tab-2"));
             Ograph.click();
             test.log(Status.INFO, "Other Graphical View Displayed ");
             test.createNode("Other Graphical View displayed");
          // WebElement Ograph = driver.findElement(By.id("simple-tab-1"));// clicking on other graphical view
           //Ograph.click();
 
-            WebElement Axis1 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div/div[2]/div/div/div"));
+            //WebElement Axis1 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div/div[2]/div/div/div"));
+            WebElement Axis1 = driver.findElement(By.className("other-graph-axis-1-value"));
             Axis1.click(); //old one
             test.log(Status.INFO, "Under Axis 1");
             Thread.sleep(4*1000);
@@ -313,7 +317,7 @@ public class HomePageAutomation extends TestConfig {
             Provider.click();
             Thread.sleep(5 * 1000);
 
-            WebElement Axis2 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[2]/div[2]/div/div/div"));
+            WebElement Axis2 = driver.findElement(By.className("other-graph-axis-2-value"));
             Axis2.click();
             test.log(Status.INFO, "Under Axis2");
             Thread.sleep(5 * 1000);
@@ -327,7 +331,7 @@ public class HomePageAutomation extends TestConfig {
             Count.click();
             Thread.sleep(5 * 1000);
 
-            WebElement Graph = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div"));
+            WebElement Graph = driver.findElement(By.className("other-graph-type"));
             Graph.click();
             test.log(Status.INFO, "Under Graph");
             Thread.sleep(5 * 1000);
