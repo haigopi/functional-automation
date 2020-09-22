@@ -1195,21 +1195,25 @@ public class HomePageAutomation extends TestConfig {
     public void testFreightChargeQueries() throws Exception {
         //Setup
         test = extent.createTest("Verify Freight Charges Queries");
-        login.doLogin(test);
-        test.log(Status.INFO, "Clicking on Search Bar");
-
-        //query 1
-        queryChecker.runSearchBubbleQuery(driver,"list all charges", test);
-
-        //query 2
-        queryChecker.runSearchBubbleQuery(driver,"list all charges where carrier id is fedex", test);
-
-        //query 3
-        queryChecker.runSearchBubbleQuery(driver,"list all charges where charge type is Disk and freight charges amount > 100", test);
-
-        //query 4
-        queryChecker.runSearchBubbleQuery(driver, "list all charges where carrier id is ups frieght", test);
-
+        try {
+            driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);
+            login.doLogin(test);
+            test.log(Status.INFO, "Clicking on Search Bar");
+            //query 1
+            queryChecker.runSearchBubbleQuery(driver, "list all charges", test);
+            test.createNode("list all Freight Charges verified successfully");
+            //query 2
+            queryChecker.runSearchBubbleQuery(driver, "list all charges where carrier id is fedex", test);
+            test.createNode("list all charges where carrier id is fedex verified successfully");
+            //query 3
+            queryChecker.runSearchBubbleQuery(driver, "list all charges where charge type is Disk and freight charges amount > 100", test);
+            test.createNode("list all charges where charge type is Disk and freight charges amount > 100 verified successfully");
+            //query 4
+            queryChecker.runSearchBubbleQuery(driver, "list all charges where carrier id is ups frieght", test);
+            test.createNode("list all charges where carrier id is ups frieght verified successfully");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         test.createNode("Verified Freight Charge Queries Successfully!");
     }
 
@@ -1331,28 +1335,6 @@ public class HomePageAutomation extends TestConfig {
             e.printStackTrace();
             test.createNode("Exception (" + e.toString() + ") found").fail(e);
         }
-    }
-    @Test
-    public void TestAutoSuggest() throws Exception {
-        test = extent.createTest("Verify AutoPopulate Search Bar");
-        try {
-            login.doLogin(test);
-
-            WebElement searchBubble = driver.findElement(By.xpath("//input[@value='']"));
-            searchBubble.sendKeys("list all");
-            Thread.sleep(3 * 1000);
-            //searchBubble.sendKeys(Keys.ARROW_DOWN);
-            Thread.sleep(3*1000 );
-            searchBubble.sendKeys(Keys.ENTER); //to select first row
-            Thread.sleep(3*1000 );
-            WebElement search = driver.findElement(By.className("search_icon"));
-            search.click();
-            Thread.sleep(7*1000);
-
- } catch (Exception e)
-            {
-                e.printStackTrace();
-            }
     }
 }
 
