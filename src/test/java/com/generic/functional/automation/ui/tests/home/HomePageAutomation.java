@@ -1287,7 +1287,7 @@ public class HomePageAutomation extends TestConfig {
             privateQueryButton.click();
 
             test.createNode("Execute NLP Query Button clicked under a query");
-            WebElement nlpqueryButton = driver.findElement(By.id("execute-private-query-5"));
+            WebElement nlpqueryButton = driver.findElement(By.id("execute-private-query-9"));
             actions.moveToElement(nlpqueryButton).click().perform();
 
             test.createNode("Scroll to view tabular view and other results");
