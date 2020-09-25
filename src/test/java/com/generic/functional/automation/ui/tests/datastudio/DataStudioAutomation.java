@@ -4,313 +4,493 @@ import com.aventstack.extentreports.Status;
 import com.generic.functional.automation.ui.tests.common.TestConfig;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 public class DataStudioAutomation extends TestConfig {
 
-    @Test(priority = 1)
-    public void DataStudioSmartView() throws Exception {
-        test = extent.createTest("Data Studio Button Click Smart View");
+    final int time_to_wait = 60;
+
+    @BeforeClass
+
+    public void DataStudioLogin() throws Exception {
+        test = extent.createTest("Data Studio till login");
         login.doLogin(test);
-        Thread.sleep(5 * 1000);
-        test.createNode("Data Studio Button Clicked");
-        WebElement DataStudioButton = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/header/div/header/div/div/div[3]/div[2]/div/div[2]/span"));
-        DataStudioButton.click();
-        test.createNode("Smart View Is Displayed  ");
-        Thread.sleep(5 * 1000);
+
     }
 
-    @Test(priority = 2)
-    public void DataStudioSmartViewAndInternalView() throws Exception {
-        test = extent.createTest("Data Studio Smart & InternalView ", "Smart View Expand & Expand And Internal View");
-//       driver.get("https://a4data-qe.netlify.app/databaseManager/");
-//       driver.navigate().refresh();
-//       test.createNode("Refreshing :\"A4data Screen\"");
-        login.doLogin(test);
-        Thread.sleep(5 * 1000);
-        test.createNode("Data Studio Button Clicked");
-        WebElement DataStudioButton = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/header/div/header/div/div/div[3]/div[2]/div/div[2]/span"));
-        DataStudioButton.click();
-        Thread.sleep(5 * 1000);
-        test.createNode("Subject Shipments Cluster Click ");
-        WebElement SubjectShipmentsCluster = driver.findElement(By.cssSelector("#subject-Shipments > text"));
-        SubjectShipmentsCluster.click();
-        Thread.sleep(5 * 1000);
-        test.createNode("International Cluster Click to Show  Working of Internal View");
-        WebElement InternationalCluster = driver.findElement(By.cssSelector("#table-International > text"));
-        InternationalCluster.click();
-        Thread.sleep(5 * 1000);
-        test.createNode("Smart View Click For Expand Smart View");
-        WebElement SmartViewClickForExpand = driver.findElement(By.cssSelector("header > svg.MuiSvgIcon-root"));
-        SmartViewClickForExpand.click();
-        Thread.sleep(5 * 1000);
-        test.createNode("Smart View Click For Expand Smart View");
-        WebElement SmartViewClickCollapse = driver.findElement(By.cssSelector("header > svg.MuiSvgIcon-root > path"));
-        SmartViewClickCollapse.click();
-        Thread.sleep(5 * 1000);
+
+    @BeforeMethod
+    public void DataStudioANDSubjectShipments() {
+        test = extent.createTest("Data Studio Button Click and Subject Shipments for reuse");
+        //driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        //implicitlyWait (or) wait is not working so using Thread
+        try {
+            // WebDriverWait wait = new WebDriverWait(driver, 15);
+            driver.get("https://a4data-qe.netlify.app/databaseManager/");
+            driver.navigate().refresh();//refreshing the screen so no need of login every time
+            test.createNode("Refreshing :\"A4data Screen\"");
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Data Studio Button Clicked");
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("databaseManager")));
+            WebElement dataStudioButton = driver.findElement(By.id("databaseManager"));
+            dataStudioButton.click();
+            Assert.assertTrue(dataStudioButton.getText().equals("Data Studio"));//validation 1
+            Assert.assertEquals(dataStudioButton.getText(), "Data Studio");//validation 2
+            test.log(Status.INFO, "data studio button text =" + dataStudioButton.getText());//Data Studio
+            Thread.sleep(7 * 1000);
+
+            test.createNode("Smart View Is Displayed  ");
+
+            test.createNode("Subject Shipments Cluster Click ");
+            //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("subject-Shipments")));
+            WebElement subjectShipmentsCluster = driver.findElement(By.id("plusCircle-text-subject-Shipments"));
+            subjectShipmentsCluster.click();
+            Assert.assertTrue(subjectShipmentsCluster.getText().equals("Shipments"));//validation 1
+            Assert.assertEquals(subjectShipmentsCluster.getText(), "Shipments");//validation 2
+            test.log(Status.INFO, "Subject Shipments Cluster text = " + subjectShipmentsCluster.getText());//Shipments
+            Thread.sleep(5 * 1000);
+
+
+        } catch (Exception e) {
+            test.createNode("Exception (" + e.toString() + ") found").fail(e); // catches exception (test still passes)
+            Assert.assertTrue(false);
+        }
     }
 
-    @Test(priority = 3)
-    public void DataStudioFreightChargesClusterForeignKeyAndPrimaryKeyInInternalView() throws Exception {
+
+    @Test(priority = 1) //priyanka
+    public void DataStudioSmartViewAndInternalView() {
+        test = extent.createTest("Data Studio Smart & InternalView ", "Smart View Expand & Collapse & Internal View");
+        // driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        //implicitlyWait (or) wait is not working so using Thread
+        try {
+            // WebDriverWait wait = new WebDriverWait(driver, 15);
+
+            test.createNode("International Cluster Click to Show  Working of Internal View");
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("table-International")));
+            WebElement internationalCluster = driver.findElement(By.id("plusCircle-text-table-International"));
+            internationalCluster.click();
+            //  test.log(Status.INFO,"International Cluster Click"+internationalCluster.getText());
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Smart View Click For Expand Smart View");
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("header > svg.MuiSvgIcon-root ")));
+            WebElement smartViewClickExpand = driver.findElement(By.cssSelector("header > svg.MuiSvgIcon-root "));//id not there so used  css
+            smartViewClickExpand.click();
+            // test.log(Status.INFO,"Smart View Click text ="+smartViewClickExpand.getText());
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Smart View Click For collapse Smart View");
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("header > svg.MuiSvgIcon-root > path ")));
+            WebElement smartViewClickCollapse = driver.findElement(By.cssSelector("header > svg.MuiSvgIcon-root > path"));//id not there so used  css
+            smartViewClickCollapse.click();
+            //test.log(Status.INFO,"Smart View Click text ="+smartViewClickCollapse.getText());
+            Thread.sleep(5 * 1000);
+
+            test.createNode("internal view collapse");
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.rootContainer main.content.after-login-container:nth-child(3) div.MuiContainer-root div.content.pb-10 div.MuiGrid-root.clPanels.MuiGrid-direction-xs-column.MuiGrid-grid-lg-12 > div.MuiGrid-root:nth-child(2)")));
+            WebElement internalViewCollapse = driver.findElement(By.cssSelector("div.rootContainer main.content.after-login-container:nth-child(3) div.MuiContainer-root div.content.pb-10 div.MuiGrid-root.clPanels.MuiGrid-direction-xs-column.MuiGrid-grid-lg-12 > div.MuiGrid-root:nth-child(2)"));
+            //id not there so used  css
+            internalViewCollapse.click();
+            // test.log(Status.INFO,"internal View Click text ="+internalViewCollapse.getText());
+            Thread.sleep(5 * 1000);
+
+        } catch (Exception e) {
+            test.createNode("Exception (" + e.toString() + ") found").fail(e); // catches exception (test still passes)
+            Assert.assertTrue(false);
+        }
+
+    }
+
+    @Test(priority = 2) //priyanka
+    public void DataStudioFreightChargesClusterForeignKeyAndPrimaryKeyInInternalView() {
         test = extent.createTest("Data Studio Freight Charges Cluster Foreign Key & Primary Key In Internal View");
-//        driver.get("https://a4data-qe.netlify.app/databaseManager/");
-//      driver.navigate().refresh();
-//      test.createNode("Refreshing :\"A4data Screen\"");
-        login.doLogin(test);
-        Thread.sleep(5 * 1000);
-        test.createNode("Data Studio Button Clicked");
-        WebElement DataStudioButton = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/header/div/header/div/div/div[3]/div[2]/div/div[2]/span"));
-        DataStudioButton.click();
-        Thread.sleep(5 * 1000);
+        //driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        //implicitlyWait (or) wait is not working so using Thread
+        try {
+            // WebDriverWait wait = new WebDriverWait(driver, 15);
 
-        test.createNode("Subject Shipments Cluster Click ");
-        WebElement SubjectShipmentsCluster = driver.findElement(By.cssSelector("#subject-Shipments > text"));
-        SubjectShipmentsCluster.click();
-        Thread.sleep(5 * 1000);
-        test.createNode("Freight Charges Cluster Click");
-        WebElement FreightChargesCluster = driver.findElement(By.cssSelector("#table-Freight\\ Charges"));
-        FreightChargesCluster.click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Primary Key   Freight Charges Identifier Element Click");
-        WebElement PrimaryKeyFreightChargesIdentifier = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/button/span"));
-        PrimaryKeyFreightChargesIdentifier.click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Foreign key Shipping Number Element Click");
-        WebElement ForeignKeyShippingNumber = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/button[2]/span"));
-        ForeignKeyShippingNumber.click();
-        test.createNode("Primary Key & Foreign Key Displayed For Freight Charges Cluster ");
-        Thread.sleep(5 * 1000);
+            test.createNode("Freight Charges Cluster Click");
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("table-Freight Charges")));
+            WebElement freightChargesCluster = driver.findElement(By.id("plusCircle-text-table-Freight Charges"));
+            freightChargesCluster.click();
+            Assert.assertTrue(freightChargesCluster.getText().equals("Freight Charges"));//validation 1
+            Assert.assertEquals(freightChargesCluster.getText(), "Freight Charges");//validation 2
+            test.log(Status.INFO, " Freight Charges Cluster text =" + freightChargesCluster.getText());//Freight Charges
+            Thread.sleep(5 * 1000);
+
+            // before it was there  in application but not now so commenting this lines
+//            test.createNode("Primary Key   Freight Charges Identifier Element Click");
+//            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("primaryKey-Freight-Charges-Identifier")));
+//            WebElement primaryKeyFreightChargesIdentifier = driver.findElement(By.id("primaryKey-Freight-Charges-Identifier"));
+//            primaryKeyFreightChargesIdentifier.click();
+//            Assert.assertTrue(primaryKeyFreightChargesIdentifier.getText().equals("Freight .."));//validation 1
+//            Assert.assertEquals(primaryKeyFreightChargesIdentifier.getText(), "Freight ..");//validation 2
+//            test.log(Status.INFO, "  primaryKey Freight Charges Cluster text =" + primaryKeyFreightChargesIdentifier.getText());//Freight ..
+//            Thread.sleep(5 * 1000);
+
+            test.createNode("Foreign key Shipping Number Element Click");
+            //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("foreignKey-Shipping-Number")));
+            WebElement foreignKeyShippingNumber = driver.findElement(By.id("foreignKey-Shipping-Number"));
+            foreignKeyShippingNumber.click();
+            Assert.assertTrue(foreignKeyShippingNumber.getText().equals("Shipping.."));//validation 1
+            Assert.assertEquals(foreignKeyShippingNumber.getText(), "Shipping..");//validation 2
+            test.log(Status.INFO, " Foreign key Freight Charges Cluster text =" + foreignKeyShippingNumber.getText());//Shipping..
+            Thread.sleep(5 * 1000);
+
+        } catch (Exception e) {
+            test.createNode("Exception (" + e.toString() + ") found").fail(e); // catches exception (test still passes)
+            Assert.assertTrue(false);
+        }
+
+
     }
 
-    @Test(priority = 4)
-    public void DataStudioInternationalClusterForeignAndPrimaryKey() throws Exception {
+
+    @Test(priority = 3) //priyanka
+    public void DataStudioInternationalClusterForeignAndPrimaryKey() {
         test = extent.createTest("Data Studio International Cluster Foreign Key & Primary Key In Internal View");
-//        driver.get("https://a4data-qe.netlify.app/databaseManager/");
-//        driver.navigate().refresh();
-//        test.createNode("Refreshing :\"A4data Screen\"");
-        login.doLogin(test);
-        Thread.sleep(5 * 1000);
-        test.createNode("Data Studio Button Clicked");
-        WebElement DataStudioButton = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/header/div/header/div/div/div[3]/div[2]/div/div[2]/span"));
-        DataStudioButton.click();
-        Thread.sleep(5 * 1000);
-        test.createNode("Subject Shipments Cluster Click ");
-        WebElement SubjectShipmentsCluster = driver.findElement(By.cssSelector("#subject-Shipments > text"));
-        SubjectShipmentsCluster.click();
-        Thread.sleep(5 * 1000);
-        test.createNode("International Cluster Click");
-        WebElement InternationalCluster = driver.findElement(By.cssSelector("#table-International > text"));
-        InternationalCluster.click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Foreign key Handling Element Click");
-        WebElement ForeignKeyHandling = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/button/span"));
-        ForeignKeyHandling.click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Foreign key Shipping  Element Click");
-        WebElement ForeignKeyShipping = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/button[13]/span"));
-        ForeignKeyShipping.click();
-        test.createNode("Primary Key & Foreign Key Displayed For International Cluster");
-        Thread.sleep(5 * 1000);
+        //WebDriverWait wait = new WebDriverWait(driver, 30);
+        //   driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        //implicitlyWait (or) wait is not working so using Thread
+        try {
+            test.createNode("International Cluster Click");
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("table-International")));
+            WebElement internationalCluster = driver.findElement(By.id("plusCircle-text-table-International"));
+            internationalCluster.click();
+            Assert.assertTrue(internationalCluster.getText().equals("International"));//validation 1
+            Assert.assertEquals(internationalCluster.getText(), "International");//validation 2
+            test.log(Status.INFO, "International Cluster text =" + internationalCluster.getText());//International
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Foreign key Handling Element Click");
+            //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("foreignKey-Handling-Unit")));
+            WebElement foreignKeyHandling = driver.findElement(By.id("foreignKey-Handling-Unit"));
+            foreignKeyHandling.click();
+            Assert.assertTrue(foreignKeyHandling.getText().equals("Handling.."));//validation 1
+            Assert.assertEquals(foreignKeyHandling.getText(), "Handling..");//validation 2
+            test.log(Status.INFO, "Foreign key Handling Element text =" + foreignKeyHandling.getText());//Handling..
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Foreign key Shipping  Element Click");
+            //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("foreignKey-Shipping-Number")));
+            WebElement foreignKeyShipping = driver.findElement(By.id("foreignKey-Shipping-Number"));
+            foreignKeyShipping.click();
+            Assert.assertTrue(foreignKeyShipping.getText().equals("Shipping.."));//validation 1
+            Assert.assertEquals(foreignKeyShipping.getText(), "Shipping..");//validation 2
+            test.log(Status.INFO, "Foreign key Shipping  Element text =" + foreignKeyShipping.getText());//Shipping..
+            Thread.sleep(5 * 1000);
+
+
+            test.createNode("Primary Key & Foreign Key Displayed For International Cluster");
+        } catch (Exception e) {
+            test.createNode("Exception (" + e.toString() + ") found").fail(e); // catches exception (test still passes)
+            Assert.assertTrue(false);
+        }
 
     }
 
-    @Test(priority = 5)
-    public void DataStudioDocumentsClusterForeignAndPrimaryKey() throws Exception {
+    @Test(priority = 4) //priyanka
+    public void DataStudioDocumentsClusterForeignAndPrimaryKey() {
         test = extent.createTest("Data Studio Documents Cluster Foreign Key & Primary Key In Internal View");
-//        driver.get("https://a4data-qe.netlify.app/databaseManager/");
-//        driver.navigate().refresh();
-//        test.createNode("Refreshing :\"A4data Screen\"");
-        login.doLogin(test);
-        Thread.sleep(5 * 1000);
-        test.createNode("Data Studio Button Clicked");
-        WebElement DataStudioButton = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/header/div/header/div/div/div[3]/div[2]/div/div[2]/span"));
-        DataStudioButton.click();
-        Thread.sleep(5 * 1000);
-        test.createNode("Subject Shipments Cluster Click ");
-        WebElement SubjectShipmentsCluster = driver.findElement(By.cssSelector("#subject-Shipments > text"));
-        SubjectShipmentsCluster.click();
-        Thread.sleep(5 * 1000);
-        test.createNode("Documents Cluster Click");
-        WebElement DocumentsCluster = driver.findElement(By.cssSelector("#table-Documents > text"));
-        DocumentsCluster.click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Primary Key Documents Identifier Element Click");
-        WebElement PrimaryKeyDocumentsIdentifier = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/button/span"));
-        PrimaryKeyDocumentsIdentifier.click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Foreign key Plant Identifier Element Click");
-        WebElement ForeignKeyPlantIdentifier = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/button[2]/span"));
-        ForeignKeyPlantIdentifier.click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Foreign key ShippingNumber Element Click");
-        WebElement ForeignKeyShippingNumber = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/button[5]/span"));
-        ForeignKeyShippingNumber.click();
-        test.createNode("Primary Key & Foreign Key Displayed For DocumentsCluster");
-        Thread.sleep(5 * 1000);
+        //WebDriverWait wait = new WebDriverWait(driver, 15);
+        //driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        //implicitlyWait (or) wait is not working so using Thread
+        try {
+            test.createNode("Documents Cluster Click");
+            //  wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("table-Documents")));
+            WebElement documentsCluster = driver.findElement(By.id("plusCircle-text-table-Documents"));
+            documentsCluster.click();
+            Assert.assertTrue(documentsCluster.getText().equals("Documents"));//validation 1
+            Assert.assertEquals(documentsCluster.getText(), "Documents");//validation 2
+            test.log(Status.INFO, "Documents Cluster text=" + documentsCluster.getText());//Documents
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Primary Key Documents Identifier Element Click");
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("primaryKey-Document-Identifier")));
+            WebElement primaryKeyDocumentsIdentifier = driver.findElement(By.id("primaryKey-Document-Identifier"));
+            primaryKeyDocumentsIdentifier.click();
+            Assert.assertTrue(primaryKeyDocumentsIdentifier.getText().equals("Document.."));//validation 1
+            Assert.assertEquals(primaryKeyDocumentsIdentifier.getText(), "Document..");//validation 2
+            test.log(Status.INFO, "Primary Key Documents Identifier Element text =" + primaryKeyDocumentsIdentifier.getText());//Document..
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Foreign key Plant Identifier Element Click");
+            //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("foreignKey-Plant-Identifier")));
+            WebElement foreignKeyPlantIdentifier = driver.findElement(By.id("foreignKey-Plant-Identifier"));
+            foreignKeyPlantIdentifier.click();
+            Assert.assertTrue(foreignKeyPlantIdentifier.getText().equals("Plant Id.."));//validation 1
+            Assert.assertEquals(foreignKeyPlantIdentifier.getText(), "Plant Id..");//validation 2
+            test.log(Status.INFO, "Foreign key Plant Identifier Element text =" + foreignKeyPlantIdentifier.getText());//Plant Id..
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Foreign key ShippingNumber Element Click");
+            //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("foreignKey-Shipping-Number")));
+            WebElement foreignKeyShippingNumber = driver.findElement(By.id("foreignKey-Shipping-Number"));
+            foreignKeyShippingNumber.click();
+            Assert.assertTrue(foreignKeyShippingNumber.getText().equals("Shipping.."));//validation 1
+            Assert.assertEquals(foreignKeyShippingNumber.getText(), "Shipping..");//validation 2
+            test.log(Status.INFO, "Foreign key ShippingNumber Element text =" + foreignKeyShippingNumber.getText());//Shipping..
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Primary Key & Foreign Key Displayed For DocumentsCluster");
+        } catch (Exception e) {
+            test.createNode("Exception (" + e.toString() + ") found").fail(e); // catches exception (test still passes)
+            Assert.assertTrue(false);
+        }
+
     }
 
-    @Test(priority = 6)
-    public void DataStudioDocumentsURLsClusterForeignAndPrimaryKey() throws Exception {
+    @Test(priority = 5) //priyanka
+    public void DataStudioDocumentsURLsClusterForeignAndPrimaryKey() {
         test = extent.createTest("Data Studio DocumentsURLs Cluster Foreign Key & Primary Key In Internal View");
-        //driver.get("https://a4data-qe.netlify.app/databaseManager/");
-        //driver.navigate().refresh();
-        //test.createNode("Refreshing :\"A4data Screen\"");
-        login.doLogin(test);
-        Thread.sleep(5 * 1000);
-        test.createNode("Data Studio Button Clicked");
-        WebElement DataStudioButton = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/header/div/header/div/div/div[3]/div[2]/div/div[2]/span"));
-        DataStudioButton.click();
-        Thread.sleep(5 * 1000);
-        test.createNode("Subject Shipments Cluster Click ");
-        WebElement SubjectShipmentsCluster = driver.findElement(By.cssSelector("#subject-Shipments > text"));
-        SubjectShipmentsCluster.click();
-        Thread.sleep(5 * 1000);
-        test.createNode(" Data Studio DocumentsURLs Cluster Click");
-        WebElement DocumentsURLsCluster = driver.findElement(By.cssSelector("#table-Document\\ URLs > text"));
-        DocumentsURLsCluster.click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Primary Key DocumentsURLs IdentifierElement  Click");
-        WebElement PrimaryKeyDocumentsURLsIdentifier = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/button/span"));
-        PrimaryKeyDocumentsURLsIdentifier.click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Foreign key Handling unit Element  Click");
-        WebElement ForeignKeyShippingNumber = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/button[2]/span"));
-        ForeignKeyShippingNumber.click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Foreign key Plant Identifier Element Click");
-        WebElement ForeignKeyPlantIdentifier = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/button[5]/span"));
-        ForeignKeyPlantIdentifier.click();
-        test.createNode("Primary Key & Foreign Key Displayed For DocumentsURLs Cluster ");
-        Thread.sleep(5 * 1000);
+        //WebDriverWait wait = new WebDriverWait(driver, 15);
+        //driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        //implicitlyWait (or) wait is not working so using Thread
+        try {
+            test.createNode(" Data Studio DocumentsURLs Cluster Click");
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("table-Document URLs")));
+            WebElement documentsURLsCluster = driver.findElement(By.id("plusCircle-text-table-Document URLs"));
+            documentsURLsCluster.click();
+            Assert.assertTrue(documentsURLsCluster.getText().equals("Document URLs"));//validation 1
+            Assert.assertEquals(documentsURLsCluster.getText(), "Document URLs");//validation 2
+            test.log(Status.INFO, " Data Studio DocumentsURLs Cluster text =" + documentsURLsCluster.getText());//Document URLs
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Primary Key DocumentsURLs IdentifierElement  Click");
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("primaryKey-Document-URL-Identifier")));
+            WebElement primaryKeyDocumentsURLsIdentifier = driver.findElement(By.id("primaryKey-Document-URL-Identifier"));
+            primaryKeyDocumentsURLsIdentifier.click();
+            Assert.assertTrue(primaryKeyDocumentsURLsIdentifier.getText().equals("Document.."));//validation 1
+            Assert.assertEquals(primaryKeyDocumentsURLsIdentifier.getText(), "Document..");//validation 2
+            test.createNode("text on primary Key Documents URLs Identifier=" + primaryKeyDocumentsURLsIdentifier.getText());//Document..
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Foreign key Shipping Number Element  Click");
+            //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("foreignKey-Shipping-Number")));
+            WebElement foreignKeyShippingNumber = driver.findElement(By.id("foreignKey-Shipping-Number"));
+            foreignKeyShippingNumber.click();
+            Assert.assertTrue(foreignKeyShippingNumber.getText().equals("Shipping.."));//validation 1
+            Assert.assertEquals(foreignKeyShippingNumber.getText(), "Shipping..");//validation 2
+            test.log(Status.INFO, "Foreign key Shipping Number Element text=" + foreignKeyShippingNumber.getText());//Shipping..
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Foreign key Plant Identifier Element Click");
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("foreignKey-Plant-Identifier")));
+            WebElement foreignKeyPlantIdentifier = driver.findElement(By.id("foreignKey-Plant-Identifier"));
+            foreignKeyPlantIdentifier.click();
+            Assert.assertTrue(foreignKeyPlantIdentifier.getText().equals("Plant Id.."));//validation 1
+            Assert.assertEquals(foreignKeyPlantIdentifier.getText(), "Plant Id..");//validation 2
+            test.log(Status.INFO, "Foreign key Plant Identifier Element text =" + foreignKeyPlantIdentifier.getText());//Plant Id..
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Primary Key & Foreign Key Displayed For DocumentsURLs Cluster ");
+        } catch (Exception e) {
+            test.createNode("Exception (" + e.toString() + ") found").fail(e); // catches exception (test still passes)
+            Assert.assertTrue(false);
+        }
+
     }
 
-    @Test(priority = 7)
-    public void DataStudioPackingItemsClusterForeignAndPrimaryKey() throws Exception {
+    @Test(priority = 6) //priyanka
+    public void DataStudioPackingItemsClusterForeignAndPrimaryKey() {
         test = extent.createTest("Data Studio Packing Items Cluster Foreign Key & Primary Key In Internal View");
-//        driver.get("https://a4data-qe.netlify.app/databaseManager/");
-//        driver.navigate().refresh();
-//        test.createNode("Refreshing :\"A4data Screen\"");
-        login.doLogin(test);
-        Thread.sleep(5 * 1000);
-        test.createNode("Data Studio Button Clicked");
-        WebElement DataStudioButton = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/header/div/header/div/div/div[3]/div[2]/div/div[2]/span"));
-        DataStudioButton.click();
-        Thread.sleep(5 * 1000);
-        test.createNode("Subject Shipments Cluster Click ");
-        WebElement SubjectShipmentsCluster = driver.findElement(By.cssSelector("#subject-Shipments > text"));
-        SubjectShipmentsCluster.click();
-        Thread.sleep(5 * 1000);
-        test.createNode("PackingItems Cluster Click");
-        WebElement PackingItemsCluster = driver.findElement(By.cssSelector("#table-Packing\\ Items > text"));
-        PackingItemsCluster.click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Primary Key PackingItem Identifier Element Click");
-        WebElement PrimaryKeyPackingItemIdentifier = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/button/span"));
-        PrimaryKeyPackingItemIdentifier.click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Foreign key Plant Identifier Element Click");
-        WebElement ForeignKeyPlantIdentifier = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/button[2]/span"));
-        ForeignKeyPlantIdentifier.click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Foreign key HandlingUnit Element Click");
-        WebElement ForeignKeyHandlingUnit = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/button[3]/span"));
-        ForeignKeyHandlingUnit.click();
-        test.createNode("Primary Key & Foreign Key Displayed For PackingItems Cluster ");
-        Thread.sleep(5 * 1000);
+        //WebDriverWait wait = new WebDriverWait(driver, 15);
+        //driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        //implicitlyWait (or) wait is not working so using Thread
+        try {
+            test.createNode("PackingItems Cluster Click");
+            WebElement packingItemsClusterButton = driver.findElement(By.id("plusCircle-text-table-Packing Items"));
+            packingItemsClusterButton.click();
+            Assert.assertTrue(packingItemsClusterButton.getText().equals("Packing Items"));//validation 1
+            Assert.assertEquals(packingItemsClusterButton.getText(), "Packing Items");//validation 2
+            test.log(Status.INFO, "PackingItems Cluster text =" + packingItemsClusterButton.getText());//Packing Items
+            // action.moveToElement(packingItemsClusterButton).click().perform();
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Primary Key PackingItem Identifier Element Click");
+            //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("primaryKey-Packing-Item-Identifier")));
+            WebElement primaryKeyPackingItemIdentifierButton = driver.findElement(By.id("primaryKey-Packing-Item-Identifier"));
+            primaryKeyPackingItemIdentifierButton.click();
+
+            Assert.assertTrue(primaryKeyPackingItemIdentifierButton.getText().equals("Packing .."));//validation 1
+            Assert.assertEquals(primaryKeyPackingItemIdentifierButton.getText(), "Packing ..");//validation 2
+            test.log(Status.INFO, "Primary Key PackingItem Identifier Element text=" + primaryKeyPackingItemIdentifierButton.getText());//Packing ..
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Foreign key Plant Identifier Element Click");
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("foreignKey-Plant-Identifier")));
+            WebElement foreignKeyPlantIdentifier = driver.findElement(By.id("foreignKey-Plant-Identifier"));
+            foreignKeyPlantIdentifier.click();
+            Assert.assertTrue(foreignKeyPlantIdentifier.getText().equals("Plant Id.."));//validation 1
+            Assert.assertEquals(foreignKeyPlantIdentifier.getText(), "Plant Id..");//validation 2
+            test.log(Status.INFO, "Foreign key Plant Identifier Element text=" + foreignKeyPlantIdentifier.getText());//Plant Id..
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Foreign key HandlingUnit Element Click");
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("foreignKey-Handling-Unit")));
+            WebElement foreignKeyHandlingUnit = driver.findElement(By.id("foreignKey-Handling-Unit"));
+            foreignKeyHandlingUnit.click();
+            Assert.assertTrue(foreignKeyHandlingUnit.getText().equals("Handling.."));//validation 1
+            Assert.assertEquals(foreignKeyHandlingUnit.getText(), "Handling..");//validation 2
+            test.log(Status.INFO, "Foreign key HandlingUnit Element text = " + foreignKeyHandlingUnit.getText());//Handling..
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Primary Key & Foreign Key Displayed For PackingItems Cluster ");
+
+        } catch (Exception e) {
+            test.createNode("Exception (" + e.toString() + ") found").fail(e); // catches exception (test still passes)
+            Assert.assertTrue(false);
+        }
+
 
     }
 
-    @Test(priority = 8)
-    public void DataStudioPackagesClusterForeignKeyPrimaryKey() throws Exception {
+    @Test(priority = 7) //priyanka
+    public void DataStudioPackagesClusterForeignKeyPrimaryKey() {
         test = extent.createTest("Data Studio Packages Cluster", "Foreign Key & Primary Key In Internal View");
-//        driver.get("https://a4data-qe.netlify.app/databaseManager/");
-//        driver.navigate().refresh();
-//        test.createNode("Refreshing :\"A4data Screen\"");
-        login.doLogin(test);
-        Thread.sleep(5 * 1000);
-        test.createNode("Data Studio Button Clicked");
-        WebElement DataStudioButton = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/header/div/header/div/div/div[3]/div[2]/div/div[2]/span"));
-        DataStudioButton.click();
-        Thread.sleep(5 * 1000);
-        test.createNode("Subject Shipments Cluster Click ");
-        WebElement SubjectShipmentsCluster = driver.findElement(By.cssSelector("#subject-Shipments > text"));
-        SubjectShipmentsCluster.click();
-        Thread.sleep(5 * 1000);
-        test.createNode("Packages Cluster Click");
-        WebElement PackagesCluster = driver.findElement(By.cssSelector("#table-Packages"));
-        PackagesCluster.click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Primary Key HandlingUnit Element Click");
-        WebElement PrimaryKeyHandlingUnit = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/button/span"));
-        PrimaryKeyHandlingUnit.click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Foreign key Plant Identifier Element Click");
-        WebElement ForeignKeyPlantIdentifier = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/button[2]/span"));
-        ForeignKeyPlantIdentifier.click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Foreign key  ShippingNumber Element Click");
-        WebElement ForeignKeyShippingNumber = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/button[3]/span"));
-        ForeignKeyShippingNumber.click();
-        test.createNode("Primary Key & Foreign Key Displayed For Packages Cluster ");
-        Thread.sleep(5 * 1000);
+        /// WebDriverWait wait = new WebDriverWait(driver, 15);
+        //  driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        //implicitlyWait (or) wait is not working so using Thread
+        try {
+
+            test.createNode("Packages Cluster Click");
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("table-Packages")));
+            WebElement packagesCluster = driver.findElement(By.id("plusCircle-text-table-Packages"));
+            packagesCluster.click();
+            Assert.assertTrue(packagesCluster.getText().equals("Packages"));//validation 1
+            Assert.assertEquals(packagesCluster.getText(), "Packages");//validation 2
+            test.log(Status.INFO, "Packages Cluster text" + packagesCluster.getText());//Packages
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Primary Key HandlingUnit Element Click");
+            //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("primaryKey-Handling-Unit")));
+            WebElement primaryKeyHandlingUnit = driver.findElement(By.id("primaryKey-Handling-Unit"));
+            primaryKeyHandlingUnit.click();
+            Assert.assertTrue(primaryKeyHandlingUnit.getText().equals("Handling.."));//validation 1
+            Assert.assertEquals(primaryKeyHandlingUnit.getText(), "Handling..");//validation 2
+            test.log(Status.INFO, "Primary Key HandlingUnit Element text=" + primaryKeyHandlingUnit.getText());//Handling..
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Foreign key Plant Identifier Element Click");
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("foreignKey-Plant-Identifier")));
+            WebElement foreignKeyPlantIdentifier = driver.findElement(By.id("foreignKey-Plant-Identifier"));
+            foreignKeyPlantIdentifier.click();
+            Assert.assertTrue(foreignKeyPlantIdentifier.getText().equals("Plant Id.."));//validation 1
+            Assert.assertEquals(foreignKeyPlantIdentifier.getText(), "Plant Id..");//validation 2
+            test.log(Status.INFO, "Foreign key Plant Identifier Element text =" + foreignKeyPlantIdentifier.getText());//Plant Id..
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Foreign key  ShippingNumber Element Click");
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("foreignKey-Shipping-Number")));
+            WebElement foreignKeyShippingNumber = driver.findElement(By.id("foreignKey-Shipping-Number"));
+            foreignKeyShippingNumber.click();
+            Assert.assertTrue(foreignKeyShippingNumber.getText().equals("Shipping.."));//validation 1
+            Assert.assertEquals(foreignKeyShippingNumber.getText(), "Shipping..");//validation 2
+            test.log(Status.INFO, "Foreign key  ShippingNumber Element text =" + foreignKeyShippingNumber.getText());//Shipping..
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Primary Key & Foreign Key Displayed For Packages Cluster ");
+        } catch (Exception e) {
+            test.createNode("Exception (" + e.toString() + ") found").fail(e); // catches exception (test still passes)
+            Assert.assertTrue(false);
+        }
+
 
     }
 
-    @Test(priority = 9)
-    public void DataStudioLocationClusterPrimaryAndForeignKey() throws Exception {
+    @Test(priority = 8) //priyanka
+    public void DataStudioLocationClusterPrimaryAndForeignKey() {
         test = extent.createTest("Data Studio Location Cluster", "Primary Key & ForeignKey In Internal View");
-//        driver.get("https://a4data-qe.netlify.app/databaseManager/");
-//        driver.navigate().refresh();
-//        test.createNode("Refreshing :\"A4data Screen\"");
-        login.doLogin(test);
-        Thread.sleep(5 * 1000);
-        test.createNode("Data Studio Button Clicked");
-        WebElement DataStudioButton = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/header/div/header/div/div/div[3]/div[2]/div/div[2]/span"));
-        DataStudioButton.click();
-        Thread.sleep(5 * 1000);
-        test.createNode("Subject Shipments Cluster Click ");
-        WebElement SubjectShipmentsCluster = driver.findElement(By.cssSelector("#subject-Shipments > text"));
-        SubjectShipmentsCluster.click();
-        Thread.sleep(5 * 1000);
-        test.createNode("Location Cluster Click");
-        WebElement LocationCluster = driver.findElement(By.cssSelector("#table-Location"));
-        LocationCluster.click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Primary Key Plant Identifier Element Click");
-        WebElement PrimaryKeyPlantIdentifier = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/button/span"));
-        PrimaryKeyPlantIdentifier.click();
-        test.createNode(" Primary Key Displayed For Location Cluster ");
-        Thread.sleep(5 * 1000);
+        // WebDriverWait wait = new WebDriverWait(driver, 3);
+        // driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        //implicitlyWait (or) wait is not working so using Thread
+        try {
+            test.createNode("Location Cluster Click");
+            //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("table-Location")));
+            WebElement locationCluster = driver.findElement(By.id("plusCircle-text-table-Location"));
+            locationCluster.click();
+            Assert.assertTrue(locationCluster.getText().equals("Location"));//validation 1
+            Assert.assertEquals(locationCluster.getText(), "Location");//validation 2
+            test.log(Status.INFO, "Location Cluster text validation =" + locationCluster.getText());//Location
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Primary Key Plant Identifier Element Click");
+            //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("primaryKey-Plant-Identifier")));
+            WebElement primaryKeyPlantIdentifier = driver.findElement(By.id("primaryKey-Plant-Identifier"));
+            primaryKeyPlantIdentifier.click();
+            Thread.sleep(5 * 1000);
+            Assert.assertTrue(primaryKeyPlantIdentifier.getText().equals("Plant Id.."));//validation 1
+            Assert.assertEquals(primaryKeyPlantIdentifier.getText(), "Plant Id..");//validation 2
+            test.log(Status.INFO, "validation Primary Key Plant Identifier Element text  validation=" + primaryKeyPlantIdentifier.getText());//Plant Id..
+            Thread.sleep(5 * 1000);
+
+            test.createNode(" Primary Key Displayed For Location Cluster ");
+
+        } catch (Exception e) {
+            test.createNode("Exception (" + e.toString() + ") found").fail(e); // catches exception (test still passes)
+            Assert.assertTrue(false);
+        }
     }
 
-    @Test(priority = 10)
-    public void DataStudioShipmentsClusterForeignAndPrimaryKey() throws Exception {
+    @Test(priority = 9) //priyanka
+    public void DataStudioShipmentsClusterForeignAndPrimaryKey() {
         test = extent.createTest("Data Studio Shipments Cluster Foreign Key & Primary Key In Internal View");
-//        driver.get("https://a4data-qe.netlify.app/databaseManager/");
-//       driver.navigate().refresh();
-//       test.createNode("Refreshing :\"A4data Screen\"");
-        login.doLogin(test);
-        Thread.sleep(5 * 1000);
-        test.createNode("Data Studio Button Clicked");
-        WebElement DataStudioButton = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/header/div/header/div/div/div[3]/div[2]/div/div[2]/span"));
-        DataStudioButton.click();
-        Thread.sleep(5 * 1000);
-        test.createNode("Subject Shipments Cluster Click ");
-        WebElement SubjectShipmentsCluster = driver.findElement(By.cssSelector("#subject-Shipments > text"));
-        SubjectShipmentsCluster.click();
-        Thread.sleep(5 * 1000);
-        test.createNode("Shipments Cluster Click");
-        WebElement ShipmentsCluster = driver.findElement(By.cssSelector("#table-Shipments"));
-        ShipmentsCluster.click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Primary key ShippingNumber Element Click");
-        WebElement ForeignKeyShippingNumber = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/button/span"));
-        ForeignKeyShippingNumber.click();
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Foreign key Plant Identifier Element Click");
-        WebElement ForeignKeyPlantIdentifier = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/button[3]/span"));
-        ForeignKeyPlantIdentifier.click();
-        test.createNode("Primary Key & Foreign Key Displayed For Shipments Cluster ");
-        Thread.sleep(5 * 1000);
+        //WebDriverWait wait = new WebDriverWait(driver, 30);
+        // driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        //implicitlyWait (or) wait is not working so using Thread
+        try {
+
+            test.createNode("Shipments Cluster Click");
+            //wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("table-Shipments")));
+            WebElement shipmentsCluster = driver.findElement(By.id("plusCircle-text-table-Shipments"));
+            shipmentsCluster.click();
+            Assert.assertTrue(shipmentsCluster.getText().equals("Shipments"));//validation 1
+            Assert.assertEquals(shipmentsCluster.getText(), "Shipments");//validation 2
+            test.log(Status.INFO, "Shipments Cluster text validation =" + shipmentsCluster.getText());//Shipments
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Primary key ShippingNumber Element Click");
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("primaryKey-Shipping-Number")));
+            WebElement primaryKeyShippingNumber = driver.findElement(By.id("primaryKey-Shipping-Number"));
+            primaryKeyShippingNumber.click();
+            String ShippingNumberActual = driver.getTitle();
+            String ShippingNumberExpected = "Shipping Number";
+            if (ShippingNumberActual.equals(ShippingNumberExpected)) {
+                test.createNode("Primary key ShippingNumber Element title validation  pass" + ShippingNumberActual);
+            } else {
+                test.createNode( "Primary key ShippingNumber Element title validation Failed");
+            }
+
+            Assert.assertTrue(primaryKeyShippingNumber.getText().equals("Shipping.."));//validation 1
+            Assert.assertEquals(primaryKeyShippingNumber.getText(), "Shipping..");//validation 2
+            test.log(Status.INFO, "Primary key ShippingNumber Element text validation =" + primaryKeyShippingNumber.getText());//Shipping..
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Foreign key Plant Identifier Element Click");
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("foreignKey-Plant-Identifier")));
+            WebElement foreignKeyPlantIdentifier = driver.findElement(By.id("foreignKey-Plant-Identifier"));
+            foreignKeyPlantIdentifier.click();
+            String plantIdentifierActual = driver.getTitle();
+            String plantIdentifierExpected = "Plant Identifier";
+            if (plantIdentifierActual.equals(plantIdentifierExpected)) {
+                test.createNode("Foreign key Plant Identifier Element title validation  pass");
+                System.out.println("Foreign key Plant Identifier Element title validation  pass" + driver.getTitle());
+            } else {
+                test.createNode("Foreign key Plant Identifier Element title validation Failed");
+            }
+            Assert.assertTrue(foreignKeyPlantIdentifier.getText().equals("Plant Id.."));//validation 1
+            Assert.assertEquals(foreignKeyPlantIdentifier.getText(), "Plant Id..");//validation 2
+            test.log(Status.INFO, "Foreign key Plant Identifier Element text Validation =" + foreignKeyPlantIdentifier.getText());//Plant Id..
+            Thread.sleep(5 * 1000);
+
+            test.createNode("Primary Key & Foreign Key Displayed For Shipments Cluster ");
+        } catch (Exception e) {
+            test.createNode("Exception (" + e.toString() + ") found").fail(e); // catches exception (test still passes)
+            Assert.assertTrue(false);
+        }
     }
 }
