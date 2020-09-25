@@ -1285,7 +1285,7 @@ public class HomePageAutomation extends TestConfig {
             test.createNode("Exception (" + e.toString() + ") found").fail(e);
         }
     }
-    @Test
+    @Test (enabled = false, groups = {"regressionTest"})
     public void TestAutoSuggest() throws Exception {
         test = extent.createTest("Verify AutoPopulate Search Bar");
         try {

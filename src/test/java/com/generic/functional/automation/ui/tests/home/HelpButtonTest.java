@@ -39,7 +39,7 @@ public class HelpButtonTest extends TestConfig {
 
     }**/
 
-    @Test
+    @Test (groups = {"smokeTest"})
     public void helpButtonTestCase() throws Exception {
         test = extent.createTest("helpButtonClickTestCase");
         login.doLogin(test);
