@@ -34,9 +34,10 @@ public class HomePageAutomation extends TestConfig {
         wait = new WebDriverWait(driver, 15);
         queryChecker = new QueryChecker();
         highlightHelper = new HighlightHelper();
+
     }
 
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testHelpButtonShipmentsClick() throws Exception {
         test = extent.createTest("Help Button Shipments Click");
         login.doLogin(test);
@@ -60,7 +61,7 @@ public class HomePageAutomation extends TestConfig {
     }
 
 
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testVerifyResetButtonSearchBar() throws Exception { //Haritha
         test = extent.createTest("Home > Verify Reset Button / Clear the Search Bubble");
         try {
@@ -79,8 +80,8 @@ public class HomePageAutomation extends TestConfig {
             e1.click();
             Thread.sleep(4 * 1000);
 
-            WebElement International = driver.findElement(By.id("mainArc-71ef3c15-be01-454d-bd1e-c59d13904a65"));
-            International.click();
+            WebElement international = driver.findElement(By.id("mainArc-71ef3c15-be01-454d-bd1e-c59d13904a65"));
+            international.click();
             test.log(Status.INFO, "Clicked on International");
             test.createNode("Clicked on International");
             Thread.sleep(4 * 1000);
@@ -98,9 +99,8 @@ public class HomePageAutomation extends TestConfig {
             test.createNode("Clicked on Search button");
             Thread.sleep(4 * 1000); //next line error (works now)
 
-            WebElement hoverElement = driver.findElement(By.cssSelector("#scrollable-auto-tabpanel-0 > div > div.pl-4.pr-4.pb-2 > div > div > div > div > div > div > div.MuiButtonBase-root.MuiExpansionPanelSummary-root.query-title-wrapper > div > div > div.right-carousel-item > div.query-text-area"));
-        //*[@id="gatsby-focus-wrapper"]/div/main/div/div/div/div[4]/div/div[2]/div[2]/div/div/div/div/div/div/div/div[1] OLD
-         // WebElement hoverElement = driver.findElement(By.id("copyexecute-current-query-1")); id is not working
+            WebElement hoverElement = driver.findElement(By.id("copyexecute-current-query-0"));
+            hoverElement.click();
             highlightHelper.highLightElement(driver, hoverElement);
             hoverElement.click();
             Thread.sleep(4 * 1000);
@@ -117,12 +117,14 @@ public class HomePageAutomation extends TestConfig {
             WebElement searchBubble = driver.findElement(By.className("search_input"));
             String queryText = searchBubble.getAttribute("value");
             test.log(Status.INFO, "Text in Search Bubble BEFORE reset button clicked (" + queryText + ")");
+
             WebElement resetButton = driver.findElement(By.id("search-text-reset")); // Reset Button
             highlightHelper.highLightElement(driver, resetButton);
             resetButton.click();
             Thread.sleep(3 * 1000);
             test.log(Status.INFO, "Reset Button Clicked");
             test.createNode("clicked on Reset button");
+
             // Check After Reset Button Clicked
             queryText = searchBubble.getAttribute("value"); // Used to get value after reset button clicked
             if (queryText.isEmpty()) {
@@ -143,9 +145,13 @@ public class HomePageAutomation extends TestConfig {
         // <input class="search_input" type="text" name="" placeholder="Search..." value="">
 
     }
+    /**
+     * testVerifyInternationalCountryOfOrigin is used to Verifying table information when CountryOfOrigin is selected)
+     *
+     * @author Haritha
+     */
 
-
-    @Test
+    @Test (enabled = false, groups = {"smokeTest"})
     public void testVerifyInternationalCountryOfOrigin() throws Exception {
         test = extent.createTest("Verify International Facts Country Of Origin");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
@@ -174,11 +180,14 @@ public class HomePageAutomation extends TestConfig {
             helpButtoncountry.click();
             Thread.sleep(5 * 1000);
 
+            WebElement TabularView = driver.findElement(By.id("simple-tab-0"));
+            TabularView.click();
+            Thread.sleep(4*1000);
+
             /// VALIDATION ///
-            //WebElement totalRecords = driver.findElement(By.id("total-records-count"));
-            // WebElement tr = driver.findElement(By.xpath("/html/body/div/div/div/main/div/div/div/div[5]/div/div/div/div[1]/div/div/div[1]/div[2]/ul/li/div/span/div[2]/span[2]"));
-           WebElement tr = driver.findElement(By.id("total-records-label"));
+            WebElement tr = driver.findElement(By.id("total-records-count"));
             String value = tr.getText();
+            System.out.println("total record->"+value);
             if (Integer.parseInt(value) == 0) {
                 test.log(Status.INFO, "No Table should appear since no data fetched for given query");
                 Assert.assertEquals(0, 0);
@@ -194,58 +203,58 @@ public class HomePageAutomation extends TestConfig {
                 Thread.sleep(2 * 1000);
                 test.createNode("Verified the table information is displayed when Country of origin is selected. ");
 
-                WebElement Graphicalview = driver.findElement(By.xpath("//button[@id='simple-tab-1']/span"));
+                WebElement Graphicalview = driver.findElement(By.id("simple-tab-1"));
                 Graphicalview.click(); // Clicks on Graphical View
                 test.createNode("Grahical view clicked");
                 Thread.sleep(2 * 1000);
 
-                WebElement Ograph = driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]"));
+                WebElement Ograph = driver.findElement(By.id("simple-tab-2"));
                 Ograph.click(); // Clicks on Other Graphical View old one
                 test.createNode("Other Graphical view clicked");
-                // WebElement Ograph = driver.findElement(By.id("simple-tab-1")); id is not working
-                //Ograph.click(); //click on graphical view
                 Thread.sleep(2 * 1000);
 
-                WebElement Axis1 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div/div[2]/div/div/div"));
+                WebElement Axis1 = driver.findElement(By.className("other-graph-axis-1-value"));
                 Axis1.click(); // Click Axis 1
                 Thread.sleep(3 * 1000);
                 test.createNode("clciked on Axis1");
                 driver.findElement(By.id("react-select-2-option-0")).click(); // Click origin country
                 Thread.sleep(2 * 1000);
 
-                WebElement Axis2 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[2]/div[2]/div/div/div"));
+                WebElement Axis2 = driver.findElement(By.className("other-graph-axis-2-value"));
                 Axis2.click(); // Click Axis 2
                 test.createNode("clciked on Axis2");
-                //driver.findElement(By.className("css-yk16xz-control"));not working
                 Thread.sleep(3 * 1000);
-                driver.findElement(By.id("react-select-3-option-0")).click(); // Click count
+                WebElement count = driver.findElement(By.id("react-select-3-option-0"));
+                count.click(); // Click count
                 Thread.sleep(5 * 1000);
 
-                WebElement Graph = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div"));
+                WebElement Graph = driver.findElement(By.className("other-graph-type"));
                 Graph.click(); //Click graph
                 test.createNode("clicked on graph");
                 Thread.sleep(3 * 1000);
-                driver.findElement(By.id("react-select-4-option-4")).click(); // Click bubble Graph
-                Thread.sleep(5 * 1000);
 
-                WebElement Show = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span")); // Click Show
-                test.createNode("clicked ON Show button ");//WebElement Show = driver.findElement(By.className("MuiButton-label")); not working
+                WebElement bubblegraph = driver.findElement(By.id("react-select-4-option-4"));
+                bubblegraph.click(); // Click bubble Graph
+                Thread.sleep(4 * 1000);
+
+                WebElement Show = driver.findElement(By.className("MuiButton-label")); // Click Show
+                test.createNode("clicked ON Show button ");
                 Show.click();
             }
 
 
-    } catch(
-    Exception e)
+        } catch(
+                Exception e)
 
-    {
-        test.createNode("Exception (" + e.toString() + ") found").fail(e);
-        // e.printStackTrace();
+        {
+            test.createNode("Exception (" + e.toString() + ") found").fail(e);
+            // e.printStackTrace();
+        }
+
     }
 
-}
 
-
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testShipmentsSunburstDocClick() throws Exception { //Haritha
         test = extent.createTest("Verifying Shipments Documents Test");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
@@ -282,24 +291,20 @@ public class HomePageAutomation extends TestConfig {
             Tabview.click();
             test.log(Status.INFO, "Tabular View displayed");
             test.createNode("Tabular View displayed");
-         // driver.findElement(By.xpath("//button[@id='simple-tab-1']/span")).click(); clicking on Tabular view using xpath old one
             Thread.sleep(3*1000);
 
             WebElement Graphicalview = driver.findElement(By.id("simple-tab-1"));
             Graphicalview.click();
             test.log(Status.INFO, "Graphical View Displayed ");
             test.createNode("Graphical View displayed");
-          //driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]")).click(); // clicking on Graphical view using xpath old one
             Thread.sleep(3*1000);
 
-            WebElement Ograph = driver.findElement(By.xpath("(//button[@id='simple-tab-1']/span)[3]"));
+            WebElement Ograph = driver.findElement(By.id("simple-tab-2"));
             Ograph.click();
             test.log(Status.INFO, "Other Graphical View Displayed ");
             test.createNode("Other Graphical View displayed");
-         // WebElement Ograph = driver.findElement(By.id("simple-tab-1"));// clicking on other graphical view
-          //Ograph.click();
 
-            WebElement Axis1 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div/div[2]/div/div/div"));
+            WebElement Axis1 = driver.findElement(By.className("other-graph-axis-1-value"));
             Axis1.click(); //old one
             test.log(Status.INFO, "Under Axis 1");
             Thread.sleep(4*1000);
@@ -313,7 +318,7 @@ public class HomePageAutomation extends TestConfig {
             Provider.click();
             Thread.sleep(5 * 1000);
 
-            WebElement Axis2 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[2]/div[2]/div/div/div"));
+            WebElement Axis2 = driver.findElement(By.className("other-graph-axis-2-value"));
             Axis2.click();
             test.log(Status.INFO, "Under Axis2");
             Thread.sleep(5 * 1000);
@@ -327,7 +332,7 @@ public class HomePageAutomation extends TestConfig {
             Count.click();
             Thread.sleep(5 * 1000);
 
-            WebElement Graph = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div"));
+            WebElement Graph = driver.findElement(By.className("other-graph-type"));
             Graph.click();
             test.log(Status.INFO, "Under Graph");
             Thread.sleep(5 * 1000);
@@ -341,24 +346,22 @@ public class HomePageAutomation extends TestConfig {
             bubbleGraph.click();
             Thread.sleep(5 * 1000);
 
-            test.log(Status.INFO, "Clicked on Show Button ");
-          //WebElement showButton = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span"));
-          //showButton.click(); old one using xpath
             WebElement Showbutton = driver.findElement(By.className("MuiButton-label"));
             Showbutton.click();
+            test.log(Status.INFO, "Clicked on Show Button ");
             Thread.sleep(5 * 1000);
             test.log(Status.INFO, "Bubble Graph Displayed ");
             test.createNode("Verified Documents Cluster with Dimensional Data");
         }
         catch (Exception e)
-            {
-                 test.createNode("Exception (" + e.toString() + ") found").fail(e);
+        {
+            test.createNode("Exception (" + e.toString() + ") found").fail(e);
 
-            }
+        }
 
     }
 
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testVerifyResetButtonSunburst() throws Exception { //*** Haritha
         test = extent.createTest("Home Page Verify Reset Button by Sunburst");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
@@ -397,60 +400,60 @@ public class HomePageAutomation extends TestConfig {
             driver.findElement(By.id("search-text-reset")).click();
             WebElement Resetbtn = driver.findElement(By.id("search-text-reset"));
             Resetbtn.click();
+            highlightHelper.highLightElement(driver,Resetbtn);
             test.createNode("clicked on Reset Button");
             test.log(Status.INFO, "Clicked on Reset Button");
-            driver.findElement(By.xpath("//input[@name='']")).clear();
+
 
         } catch (Exception e) {
-             test.createNode("Exception (" + e.toString() + ") found").fail(e);
-           // e.printStackTrace();
+            test.createNode("Exception (" + e.toString() + ") found").fail(e);
+            // e.printStackTrace();
         }
-         test.createNode("Verified Reset Button");
+        test.createNode("Verified Reset Button");
     }
 
 
 
-    @Test
-
+    @Test (groups = {"smokeTest"})
     public void testVerifySubjectGuides() throws Exception { //***
         test = extent.createTest("Verifying Subjects Guide ");
         login.doLogin(test);
         try
         {
-        Thread.sleep(5 * 1000);
+            Thread.sleep(5 * 1000);
 
-        WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
-        helpButton.click();
-        test.log(Status.INFO, "Help Button Clicked");
-        test.createNode("Help button clicked");
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Sunburst Shown");
-        WebElement Dov = driver.findElement(By.className("domain_of_values"));
-        Dov.click();
-      //WebElement Dov = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[3]/div/div/div/ul/li[2]/span"));
-      //Dov.click(); old one used xpath
-        Thread.sleep(5 * 1000);
-        test.log(Status.INFO, "Clicked on Domain Values");
-        test.createNode("clicked on Domain Values");
-        WebElement Ds = driver.findElement(By.className("drill_down"));Ds.click();
-        Thread.sleep(5 * 1000);
-      //driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[3]/div/div/div/ul/li/span")).click(); old one used xpath
-        test.log(Status.INFO, "Clicked on Drill down for Sub-elements");
-        driver.findElement(By.xpath("//*[text()=' -- Subjects Guide -- ']"));
-        test.log(Status.INFO, "Subjects Guide Displayed");
-        driver.findElement(By.xpath("//*[text()='Domain of Values']"));
-        test.log(Status.INFO, "Domain of Values Displayed");
-        driver.findElement(By.xpath("//*[text()='Drill down for Sub-elements']"));
-        test.log(Status.INFO,"Drill down for Sub-elements Displayed");
+            WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
+            helpButton.click();
+            test.log(Status.INFO, "Help Button Clicked");
+            test.createNode("Help button clicked");
+            Thread.sleep(5 * 1000);
+            test.log(Status.INFO, "Sunburst Shown");
+            WebElement Dov = driver.findElement(By.className("domain_of_values"));
+            Dov.click();
+            //WebElement Dov = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[3]/div/div/div/ul/li[2]/span"));
+            //Dov.click(); old one used xpath
+            Thread.sleep(5 * 1000);
+            test.log(Status.INFO, "Clicked on Domain Values");
+            test.createNode("clicked on Domain Values");
+            WebElement Ds = driver.findElement(By.className("drill_down"));Ds.click();
+            Thread.sleep(5 * 1000);
+            //driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/div/div/div[3]/div/div/div/ul/li/span")).click(); old one used xpath
+            test.log(Status.INFO, "Clicked on Drill down for Sub-elements");
+            driver.findElement(By.xpath("//*[text()=' -- Subjects Guide -- ']"));
+            test.log(Status.INFO, "Subjects Guide Displayed");
+            driver.findElement(By.xpath("//*[text()='Domain of Values']"));
+            test.log(Status.INFO, "Domain of Values Displayed");
+            driver.findElement(By.xpath("//*[text()='Drill down for Sub-elements']"));
+            test.log(Status.INFO,"Drill down for Sub-elements Displayed");
         }
         catch (Exception e) {
             test.createNode("Exception (" + e.toString() + ") found").fail(e);
-           // e.printStackTrace();
+            // e.printStackTrace();
         }
         test.createNode("Verified Subject Guides Successfully!");
     }
 
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testDownloadCSVButton() throws Exception { // Geeta
         test = extent.createTest("DownloadCSVButton");
         login.doLogin(test);
@@ -497,7 +500,7 @@ public class HomePageAutomation extends TestConfig {
      * @author Sai
      */
 
-    @Test
+    @Test (groups = {"regressionTest"})
     public void testPrivateQueries() {
         test = extent.createTest("Verify Private Query Button");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
@@ -512,7 +515,6 @@ public class HomePageAutomation extends TestConfig {
             test.createNode("Clicking on Private Query Button");
             //test.log(Status.INFO, "Clicking on Private Query Button");
             WebElement privateQueryButton = driver.findElement(By.id("scrollable-auto-tab-1"));
-          //  WebElement privateQueryButton = driver.findElement(By.xpath("//*[@id=\"scrollable-auto-tab-1\"]/span[1]")); old one used xpath
             highlightHelper.highLightElement(driver, privateQueryButton);
             privateQueryButton.click();
         } catch (Exception e) {
@@ -522,7 +524,7 @@ public class HomePageAutomation extends TestConfig {
         test.createNode("Verified Private Query Successfully");
     }
 
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testDocumentBydocTypeQueries() {//pardhu
         test = extent.createTest("Verify DocumentByDocTypeQueries");
         try {
@@ -540,7 +542,7 @@ public class HomePageAutomation extends TestConfig {
         }
     }
 
-    @Test
+    @Test (groups = {"regressionTest"})
     public void TestPackages() throws Exception { //saraswathikakollu
         test = extent.createTest("Home > Verify Packing Items Facts");
         login.doLogin(test);
@@ -564,7 +566,7 @@ public class HomePageAutomation extends TestConfig {
         Thread.sleep(5 * 1000);
     }
 
-    @Test
+    @Test (groups = {"regressionTest"})
     public void LocationFacts() throws Exception { //saraswathikakollu
         test = extent.createTest("Home > Verify Location Facts");
         login.doLogin(test);
@@ -589,10 +591,10 @@ public class HomePageAutomation extends TestConfig {
     }
 
 
-    @Test
+    @Test (groups = {"regressionTest"})
     public void testDocBydocTypeOGraphs() {
         test = extent.createTest("Verify DocByDoctypeGraph");
-       // WebDriverWait wait = new WebDriverWait(driver, 15);
+        // WebDriverWait wait = new WebDriverWait(driver, 15);
         try {
             login.doLogin(test);
 
@@ -662,7 +664,7 @@ public class HomePageAutomation extends TestConfig {
     @Test
     public void testDocTypeGraph() {
         test = extent.createTest("Verify DocByDoctypeGraph");
-       // WebDriverWait wait = new WebDriverWait(driver, 15);
+        // WebDriverWait wait = new WebDriverWait(driver, 15);
         try {
             login.doLogin(test);
             WebElement helpbtn=driver.findElement(By.cssSelector(".explore-quiries-inner"));
@@ -706,10 +708,10 @@ public class HomePageAutomation extends TestConfig {
      * @author Pardhu
      */
 
-    @Test
+    @Test (groups = {"regressionTest"})
     public void testColumresize() {
         test = extent.createTest("Verify testColumresize");
-      //  WebDriverWait wait = new WebDriverWait(driver, 15);
+        //  WebDriverWait wait = new WebDriverWait(driver, 15);
         try {
             login.doLogin(test);
             WebElement searchBubble = driver.findElement(By.xpath("//input[@class='auto-suggestion-input']"));
@@ -742,7 +744,7 @@ public class HomePageAutomation extends TestConfig {
         }
     }
 
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testShipmentsDocURLsDocProGraph() {//prasanna
         test = extent.createTest("Verifying Shipments Documents Test");
         WebDriverWait wait = new WebDriverWait(driver,15);
@@ -803,19 +805,10 @@ public class HomePageAutomation extends TestConfig {
     }
 
 
-
-
-
-
-
-
-    @Test
+    @Test (groups = {"regressionTest"})
     public void testForValidationOfAllOtherGraphsInDocProv() {//prasanna
         test = extent.createTest("Verifying the all Other GraphicalViews in Doc URLS Doc Providers Test");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);
-
-
-
         try {
             driver.manage().window().maximize();
             login.doLogin(test);
@@ -847,9 +840,6 @@ public class HomePageAutomation extends TestConfig {
             //Thread.sleep(5*1000);
             test.log(Status.INFO, "Tabular View displayed");
             test.createNode("Tabular View displayed");
-
-
-
 
             //WebElement OtherG = driver.findElement(By.id("panel1d-header"));
             WebElement OtherG = driver.findElement(By.xpath("/html/body/div[1]/div/div/main/div/div/div/div[3]/div/div/div/header/div/div/div/button[3]/span[1]"));
@@ -1146,15 +1136,13 @@ public class HomePageAutomation extends TestConfig {
         }
     }
 
-
-
     /**
-         * testPublicQueries is used to automate public queries button (verify its existence)
-         *
-         * @author Haritha
-         */
+     * testPublicQueries is used to automate public queries button (verify its existence)
+     *
+     * @author Haritha
+     */
 
-    @Test
+    @Test (groups = {"regressionTest"})
     public void testPublicQueries() throws Exception {
         test = extent.createTest("Verify Public Query Button");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);
@@ -1162,14 +1150,14 @@ public class HomePageAutomation extends TestConfig {
             login.doLogin(test);
             //Thread.sleep(4 * 1000);
             test.createNode("Clicking on Help Button");
-            //test.log(Status.INFO, "Clicking on Help Button");
+            test.log(Status.INFO, "Clicking on Help Button");
             WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
             highlightHelper.highLightElement(driver, helpButton);
             helpButton.click();
 
             //Thread.sleep(4 * 1000);
             test.createNode("Clicking on Public Query Button");
-            //test.log(Status.INFO, "Clicking on Public Query Button");
+            test.log(Status.INFO, "Clicking on Public Query Button");
             WebElement publicQueryButton = driver.findElement(By.id("scrollable-auto-tab-2"));
             highlightHelper.highLightElement(driver, publicQueryButton);
             publicQueryButton.click();
@@ -1180,29 +1168,59 @@ public class HomePageAutomation extends TestConfig {
         test.createNode("Verified Public Query Successfully");
     }
 
+    /**
+     * testFreightChareQueries is used to run some queries in search bubble
+     *
+     * @author Haritha
+     */
     @Test
+    public void testFreightChargeQueries() throws Exception {
+        //Setup
+        test = extent.createTest("Verify Freight Charges Queries");
+        try {
+            driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);
+            login.doLogin(test);
+            test.log(Status.INFO, "Clicking on Search Bar");
+            //query 1
+            queryChecker.runSearchBubbleQuery(driver, "list all charges", test);
+            test.createNode("list all Freight Charges verified successfully");
+            //query 2
+            queryChecker.runSearchBubbleQuery(driver, "list all charges where carrier id is fedex", test);
+            test.createNode("list all charges where carrier id is fedex verified successfully");
+            //query 3
+            queryChecker.runSearchBubbleQuery(driver, "list all charges where charge type is Disk and freight charges amount > 100", test);
+            test.createNode("list all charges where charge type is Disk and freight charges amount > 100 verified successfully");
+            //query 4
+            queryChecker.runSearchBubbleQuery(driver, "list all charges where carrier id is ups frieght", test);
+            test.createNode("list all charges where carrier id is ups frieght verified successfully");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        test.createNode("Verified Freight Charge Queries Successfully!");
+    }
+  
+  
+    @Test(groups = {"smokeTest"})
     public void testDocumentsQueries() {
         test = extent.createTest("Verify Documents Queries");
         try {
             login.doLogin(test);
 
-        queryChecker.runSearchBubbleQuery(driver, "list all documents", test);
-        queryChecker.runSearchBubbleQuery(driver, "list all documents where provider is FedEx", test);
-        queryChecker.runSearchBubbleQuery(driver, "list all documents where delivery number ends with 003", test);
-        queryChecker.runSearchBubbleQuery(driver, "list all documents where document type is LBL ", test);
+            queryChecker.runSearchBubbleQuery(driver, "list all documents", test);
+            queryChecker.runSearchBubbleQuery(driver, "list all documents where provider is FedEx", test);
+            queryChecker.runSearchBubbleQuery(driver, "list all documents where delivery number ends with 003", test);
+            queryChecker.runSearchBubbleQuery(driver, "list all documents where document type is LBL ", test);
 
-        test.createNode("Verified Documents Queries Successfully!");
+            test.createNode("Verified Documents Queries Successfully!");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testVerifyRadioButton() {//prasanna
         test = extent.createTest("Verifying the Radio button collapse and expand the Query result Test");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);
-
-
 
         try {
             login.doLogin(test);
@@ -1215,7 +1233,6 @@ public class HomePageAutomation extends TestConfig {
             Thread.sleep(2*1000);
             WebElement expandButton  = driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.search-show-more"));
             expandButton.click();
-            Thread.sleep(2*1000);
             WebElement ColumnName = driver.findElement(By.xpath("//*[text()='ROWID']"));
             test.createNode(" Test is passes if it displays true ");
             if (ColumnName.isDisplayed()){
@@ -1234,7 +1251,7 @@ public class HomePageAutomation extends TestConfig {
 
 
     }
-    @Test
+    @Test (groups = {"regressionTest"})
     public void testDragDropCol(){
         test = extent.createTest("Verify testColumremoving");
         try {
@@ -1270,7 +1287,7 @@ public class HomePageAutomation extends TestConfig {
         }
 
     }
-    @Test
+    @Test (groups = {"regressionTest"})
     public void testVerifyExecuteNLPQueryButtonPrivateQueries(){ //teja
         test = extent.createTest("Verify Execute NLP Query Button under Private Queries");
         Actions actions = new Actions(driver);
@@ -1287,7 +1304,7 @@ public class HomePageAutomation extends TestConfig {
             privateQueryButton.click();
 
             test.createNode("Execute NLP Query Button clicked under a query");
-            WebElement nlpqueryButton = driver.findElement(By.id("execute-private-query-5"));
+            WebElement nlpqueryButton = driver.findElement(By.id("execute-private-query-9"));
             actions.moveToElement(nlpqueryButton).click().perform();
 
             test.createNode("Scroll to view tabular view and other results");
@@ -1299,8 +1316,36 @@ public class HomePageAutomation extends TestConfig {
             test.createNode("Exception (" + e.toString() + ") found").fail(e);
         }
     }
-}
+    @Test (enabled = false, groups = {"regressionTest"})
+    public void TestAutoSuggest() throws Exception {
+        test = extent.createTest("Verify AutoPopulate Search Bar");
+        try {
+            login.doLogin(test);
+            //Find search bubble and send keys
+            WebElement searchBubble = driver.findElement(By.xpath("//input[@value='']"));
+            searchBubble.sendKeys("list all");
 
+            WebElement selectedItem = driver.findElement(By.className("highlight"));
+            String highlightedText = selectedItem.getText();
+            System.out.println("Highlighted Text in Drop-Down: " + highlightedText);
+            Thread.sleep(5*1000 );
+
+            searchBubble.sendKeys(Keys.ENTER); //to select first row
+            String searchBubbleText = searchBubble.getAttribute("value");
+            System.out.println("Text in Search Bubble: " + searchBubbleText);
+            //Compare the two to check if the "highlighted query" is executed
+            System.out.println(searchBubbleText.equalsIgnoreCase(highlightedText));
+            Thread.sleep(3*1000 );
+            WebElement search = driver.findElement(By.className("search_icon"));
+            search.click();
+            Thread.sleep(7*1000);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+}
 
 
 
