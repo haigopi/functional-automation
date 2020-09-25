@@ -38,4 +38,46 @@ public class HelpButtonTest extends TestConfig {
         Thread.sleep(2 * 1000);
 
     }**/
+
+    @Test
+    public void helpButtonTestCase() throws Exception {
+        test = extent.createTest("helpButtonClickTestCase");
+        login.doLogin(test);
+        test.createNode("looking for help button and clicking on it");
+
+        WebElement helpbtn=driver.findElement(By.cssSelector(".explore-quiries-inner"));
+        helpbtn.click();
+        Thread.sleep(6 * 1000);
+        test.createNode("HelpButton clicked");
+
+        test.createNode("clicking on user");
+        WebElement  user=driver.findElement(By.id("mainArc-a17f0131-7e52-49e9-ac2e-251cbfec5f9d"));
+        user.click();
+        test.createNode("users clicked");
+        Thread.sleep(6 * 1000);
+
+        test.createNode("clicking on userTest");
+        WebElement  userTest= driver.findElement(By.id("mainArc-91f13178-2fe2-4f1d-8e38-91e2b18185a9"));
+        userTest.click();
+        Thread.sleep(6 * 1000);
+
+        test.createNode("clicking on gCircle");
+        WebElement  gCircle=//driver.findElement(By.cssSelector("g > circle"));
+                driver.findElement(By.cssSelector("g > circle"));
+        gCircle.click();
+        Thread.sleep(6 * 1000);
+
+        test.createNode("clicking on userCluster");
+        WebElement  userCluster=driver.findElement(By.id("mainArc-461e1fbb-d3a8-40b1-87ab-ca12d2aae080"));
+        userCluster.click();
+        Thread.sleep(6 * 1000);
+
+        test.createNode("clicking on gCircle");
+        WebElement  gCircle1=driver.findElement(By.cssSelector("g > circle"));
+        gCircle1.click();
+        Thread.sleep(6 * 1000);
+
+
+
+    }
 }
