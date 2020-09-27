@@ -190,7 +190,7 @@ public class GraphsAutomation extends TestConfig {
             test.createNode("Tabular View displayed");
 
             //WebElement GraphicalView = driver.findElement(By.xpath("//span[text()='Graphical View']"));
-            WebElement GraphicalView = driver.findElement(By.xpath("//button[@id='simple-tab-1']/span"));
+            WebElement GraphicalView = driver.findElement(By.id("simple-tab-1"));
             wait.until(ExpectedConditions.visibilityOf(GraphicalView));
             GraphicalView.click();
             test.createNode("Graphical view displayed");
@@ -202,6 +202,7 @@ public class GraphsAutomation extends TestConfig {
             test.createNode("Error in the graphical view of Doc URLs  --" + e + "---In testShipmentsSunburstDocURLsDocClick ");
         }
     }
+
 
 
     @Test(groups = {"regressionTest"})
@@ -241,11 +242,11 @@ public class GraphsAutomation extends TestConfig {
             test.createNode("Tabular View displayed");
 
             //WebElement OtherG = driver.findElement(By.id("panel1d-header"));
-            WebElement OtherG = driver.findElement(By.xpath("/html/body/div[1]/div/div/main/div/div/div/div[3]/div/div/div/header/div/div/div/button[3]/span[1]"));
+            WebElement OtherG = driver.findElement(By.id("simple-tab-2"));
             OtherG.click();
             test.createNode("Other Graphical view button click");
 
-            WebElement Axis1 = driver.findElement(By.xpath("/html/body/div[1]/div/div/main/div/div/div/div[3]/div/div/div/div[3]/div/div[1]/div[2]/div/div/div/div/div/form/div[1]/div[2]/div/div/div[1]"));
+            WebElement Axis1 = driver.findElement(By.className("other-graph-axis-1-value"));
             Axis1.click();
             test.createNode(" click on the Axis 1");
 
@@ -256,8 +257,7 @@ public class GraphsAutomation extends TestConfig {
             Assert.assertEquals(DocPro.getText(), "Docs Provider"); // 2nd Validator
             DocPro.click();
 
-
-            WebElement Axis2 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[2]/div[2]/div/div/div"));
+            WebElement Axis2 = driver.findElement(By.className("other-graph-axis-2-value"));
             Axis2.click();
             test.createNode("click on the axis2");
 
@@ -268,7 +268,7 @@ public class GraphsAutomation extends TestConfig {
             Assert.assertEquals(count.getText(), "COUNT");
             count.click();
 
-            WebElement Graph1 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div/div/div"));
+            WebElement Graph1 = driver.findElement(By.className("other-graph-type"));
             Graph1.click();
             test.createNode(" Graph button selected");
             //Thread.sleep(2*1000);
@@ -280,7 +280,7 @@ public class GraphsAutomation extends TestConfig {
             test.createNode(" Vertical bar Graph selected ");
             //Thread.sleep(5*1000);
 
-            WebElement ShowButton = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span"));
+            WebElement ShowButton = driver.findElement(By.className("MuiButton-label"));
             ShowButton.click();
             test.createNode("Show button clicked ");
             //Thread.sleep(5*1000);
@@ -295,7 +295,7 @@ public class GraphsAutomation extends TestConfig {
             minimise1.click();
             test.createNode("re open the other graph to edit next graph ");
 
-            WebElement Axis12 = driver.findElement(By.xpath("/html/body/div[1]/div/div/main/div/div/div/div[3]/div/div/div/div[3]/div/div[1]/div[2]/div/div/div/div/div/form/div[1]/div[2]/div/div/div[1]"));
+            WebElement Axis12 = driver.findElement(By.className("other-graph-axis-1-value"));
             Axis12.click();
             test.createNode(" click on the Axis 1");
 
@@ -306,7 +306,7 @@ public class GraphsAutomation extends TestConfig {
             Assert.assertEquals(DocPro1.getText(), "Docs Provider"); // 2nd Validator
             DocPro1.click();
 
-            WebElement Axis21 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[2]/div[2]/div/div/div"));
+            WebElement Axis21 = driver.findElement(By.className("other-graph-axis-2-value"));
             Axis21.click();
             test.createNode("click on the axis2");
 
@@ -317,7 +317,7 @@ public class GraphsAutomation extends TestConfig {
             Assert.assertEquals(count1.getText(), "COUNT");
             count1.click();
 
-            WebElement Graph2 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div/div/div"));
+            WebElement Graph2 = driver.findElement(By.className("other-graph-type"));
             Graph2.click();
             test.createNode(" Graph button selected");
 
@@ -327,7 +327,7 @@ public class GraphsAutomation extends TestConfig {
             graphSelector2.click();
             test.createNode(" Selected Horizontal graph ");
 
-            WebElement ShowButton2 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span"));
+            WebElement ShowButton2 = driver.findElement(By.className("MuiButton-label"));
             ShowButton2.click();
             test.createNode("Show button clicked ");
 
@@ -342,7 +342,7 @@ public class GraphsAutomation extends TestConfig {
             minimise2.click();
             test.createNode("re open the other graph to edit next graph ");
 
-            WebElement Axis13 = driver.findElement(By.xpath("/html/body/div[1]/div/div/main/div/div/div/div[3]/div/div/div/div[3]/div/div[1]/div[2]/div/div/div/div/div/form/div[1]/div[2]/div/div/div[1]"));
+            WebElement Axis13 = driver.findElement(By.className("other-graph-axis-1-value"));
             Axis13.click();
             test.createNode(" click on the Axis 1");
 
@@ -353,7 +353,7 @@ public class GraphsAutomation extends TestConfig {
             Assert.assertEquals(DocPro2.getText(), "Docs Provider"); // 2nd Validator
             DocPro2.click();
 
-            WebElement Axis22 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[2]/div[2]/div/div/div"));
+            WebElement Axis22 = driver.findElement(By.className("other-graph-axis-2-value"));
             Axis22.click();
             test.createNode("click on the axis2");
 
@@ -364,7 +364,7 @@ public class GraphsAutomation extends TestConfig {
             Assert.assertEquals(count2.getText(), "COUNT");
             count2.click();
 
-            WebElement Graph3 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div/div/div"));
+            WebElement Graph3 = driver.findElement(By.className("other-graph-type"));
             Graph3.click();
             test.createNode(" Graph button selected");
 
@@ -374,7 +374,7 @@ public class GraphsAutomation extends TestConfig {
             graphSelector3.click();
             test.createNode(" Pie graph selected");
 
-            WebElement ShowButton3 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span"));
+            WebElement ShowButton3 = driver.findElement(By.className("MuiButton-label"));
             ShowButton3.click();
             test.createNode("Show button clicked ");
 
@@ -389,7 +389,7 @@ public class GraphsAutomation extends TestConfig {
             minimise3.click();
             test.createNode("re open the other graph to edit next graph ");
 
-            WebElement Axis14 = driver.findElement(By.xpath("/html/body/div[1]/div/div/main/div/div/div/div[3]/div/div/div/div[3]/div/div[1]/div[2]/div/div/div/div/div/form/div[1]/div[2]/div/div/div[1]"));
+            WebElement Axis14 = driver.findElement(By.className("other-graph-axis-1-value"));
             Axis14.click();
             test.createNode(" click on the Axis 1");
 
@@ -400,7 +400,7 @@ public class GraphsAutomation extends TestConfig {
             Assert.assertEquals(DocPro3.getText(), "Docs Provider"); // 2nd Validator
             DocPro3.click();
 
-            WebElement Axis23 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[2]/div[2]/div/div/div"));
+            WebElement Axis23 = driver.findElement(By.className("other-graph-axis-2-value"));
             Axis23.click();
             test.createNode("click on the axis2");
 
@@ -411,7 +411,7 @@ public class GraphsAutomation extends TestConfig {
             Assert.assertEquals(count3.getText(), "COUNT");
             count3.click();
 
-            WebElement Graph4 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div/div/div"));
+            WebElement Graph4 = driver.findElement(By.className("other-graph-type"));
             Graph4.click();
             test.createNode(" Graph button selected");
 
@@ -421,7 +421,7 @@ public class GraphsAutomation extends TestConfig {
             graphSelector4.click();
             test.createNode(" Donut graph selected ");
 
-            WebElement ShowButton4 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span"));
+            WebElement ShowButton4 = driver.findElement(By.className("MuiButton-label"));
             ShowButton4.click();
             test.createNode("Show button clicked ");
 
@@ -436,7 +436,7 @@ public class GraphsAutomation extends TestConfig {
             minimise4.click();
             test.createNode("re open the other graph to edit next graph ");
 
-            WebElement Axis15 = driver.findElement(By.xpath("/html/body/div[1]/div/div/main/div/div/div/div[3]/div/div/div/div[3]/div/div[1]/div[2]/div/div/div/div/div/form/div[1]/div[2]/div/div/div[1]"));
+            WebElement Axis15 = driver.findElement(By.className("other-graph-axis-1-value"));
             Axis15.click();
             test.createNode(" click on the Axis 1");
 
@@ -447,7 +447,7 @@ public class GraphsAutomation extends TestConfig {
             Assert.assertEquals(DocPro4.getText(), "Docs Provider"); // 2nd Validator
             DocPro4.click();
 
-            WebElement Axis24 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[2]/div[2]/div/div/div"));
+            WebElement Axis24 = driver.findElement(By.className("other-graph-axis-2-value"));
             Axis24.click();
             test.createNode("click on the axis2");
 
@@ -458,7 +458,7 @@ public class GraphsAutomation extends TestConfig {
             Assert.assertEquals(count4.getText(), "COUNT");
             count4.click();
 
-            WebElement Graph5 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[3]/div[2]/div/div/div"));
+            WebElement Graph5 = driver.findElement(By.className("other-graph-type"));
             Graph5.click();
             test.createNode(" Graph button selected");
             //Thread.sleep(2*1000);
@@ -469,7 +469,7 @@ public class GraphsAutomation extends TestConfig {
             BG.click();
             test.createNode(" Selected graph name is bubble is ");
 
-            WebElement ShowButton5 = driver.findElement(By.xpath("//div[@id='panel1d-content']/div/div/form/div[4]/div[2]/button/span"));
+            WebElement ShowButton5 = driver.findElement(By.className("MuiButton-label"));
             ShowButton5.click();
             test.createNode("Show button clicked ");
 
@@ -482,7 +482,6 @@ public class GraphsAutomation extends TestConfig {
 
             WebElement internal = driver.findElement(By.id("internal"));
             highlightHelper.highLightElement(driver, internal);
-            //WebElement internal = driver.findElement(By.xpath("/html/body/div[1]/div/div/main/div/div/div/div[3]/div/div/div/div[3]/div/div[4]/div/div[1]/svg/g/g[1]/circle"));
             System.out.println("Rad of the button is:- " + internal.getAttribute("r"));
             test.createNode("select on thr internal bubble and bubble radious " + internal.getAttribute("r"));
 
