@@ -364,14 +364,17 @@ public class HomePageAutomation extends TestConfig {
             Subelement.click();
             test.createNode("Clicked on Sub Elements");
             test.log(Status.INFO, "Clicked on Sub element to get the Query");
+            Thread.sleep(3*1000);
 
             WebElement Subelement1 = driver.findElement(By.id("mainArc-a4b796c9-8bbb-4f37-b959-26b2e1dd758e"));
             Subelement1.click();
             test.log(Status.INFO, "Clicked on Sub element to get the Query");
+            Thread.sleep(3*1000);
 
             WebElement Subelement2 = driver.findElement(By.id("mainArc-dcf61afd-31e9-4faa-9e8f-8743a267ac26"));
             Subelement2.click();
             test.log(Status.INFO, "Clicked on Sub element to get the Query");
+            Thread.sleep(3*1000);
 
             driver.findElement(By.id("search-text-reset")).click();
             WebElement Resetbtn = driver.findElement(By.id("search-text-reset"));
