@@ -59,6 +59,7 @@ public class QueriesAutomation extends TestConfig {
     @Test
     public void testFreightChargeQueries() throws Exception {
         //Setup
+
         test = extent.createTest("Verify Freight Charges Queries");
         try {
             driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);
