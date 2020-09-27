@@ -75,6 +75,7 @@ public class HomePageAutomation extends TestConfig {
             test.createNode("Clicked on Search button");
             Thread.sleep(4 * 1000); //next line error (works now)
 
+
             WebElement hoverElement = driver.findElement(By.id("copyexecute-current-query-0"));
             hoverElement.click();
             highlightHelper.highLightElement(driver, hoverElement);
