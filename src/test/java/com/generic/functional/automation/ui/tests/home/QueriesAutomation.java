@@ -56,7 +56,7 @@ public class QueriesAutomation extends TestConfig {
      *
      * @author Haritha
      */
-    @Test
+    @Test (groups = {"smokeTest"})
     public void testFreightChargeQueries() throws Exception {
         //Setup
 
