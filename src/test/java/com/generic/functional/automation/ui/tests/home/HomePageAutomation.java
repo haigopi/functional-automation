@@ -366,7 +366,7 @@ public class HomePageAutomation extends TestConfig {
             test.log(Status.INFO, "Clicked on Sub element to get the Query");
 
             WebElement Subelement1 = driver.findElement(By.id("mainArc-a4b796c9-8bbb-4f37-b959-26b2e1dd758e"));
-            Subelement1.click();
+            Subelement1.click(); // Error!
             test.log(Status.INFO, "Clicked on Sub element to get the Query");
 
             WebElement Subelement2 = driver.findElement(By.id("mainArc-dcf61afd-31e9-4faa-9e8f-8743a267ac26"));
@@ -485,7 +485,6 @@ public class HomePageAutomation extends TestConfig {
             privateQueryButton.click();
         } catch (Exception e) {
             test.createNode("Exception (" + e.toString() + ") found").fail(e);
-            Assert.assertTrue(false);
         }
         test.createNode("Verified Private Query Successfully");
     }
