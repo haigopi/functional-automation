@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="A4 Suite - S/R">
+    <test name="Smoke Tests - Test Cases" verbose="2">
+        <packages>
+            <package name="com.generic.functional.automation.ui.tests.home"></package>
+            <package name="com.generic.functional.automation.ui.tests.datastudio"></package>
+        </packages>
+
+        <groups>
+            <run>
+                <include name="smokeTest"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name = "com.generic.functional.automation.ui.tests.home.HomePageAutomation" />
+            <class name = "com.generic.functional.automation.ui.tests.datastudio.DataStudioAutomation" />
+            <class name = "com.generic.functional.automation.ui.tests.home.HelpButtonTest" />
+            <class name = "com.generic.functional.automation.ui.tests.home.QueriesAutomation" />
+            <class name = "com.generic.functional.automation.ui.tests.home.SortingAutomation" />
+        </classes>
+    </test>
+
+    <test name="Regression Tests - Test Cases" verbose="2">
+        <packages>
+            <package name="com.generic.functional.automation.ui.tests"></package>
+            <package name="com.generic.functional.automation.ui.tests.datastudio"></package>
+        </packages>
+
+        <groups>
+            <run>
+                <include name="regressionTest"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name = "com.generic.functional.automation.ui.tests.home.HomePageAutomation" />
+            <class name = "com.generic.functional.automation.ui.tests.datastudio.DataStudioAutomation" />
+            <class name = "com.generic.functional.automation.ui.tests.home.GraphsAutomation" />
+            <class name = "com.generic.functional.automation.ui.tests.home.SortingAutomation" />
+        </classes>
+    </test>
+
+</suite>
