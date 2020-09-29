@@ -8,6 +8,9 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.concurrent.TimeUnit;
+
 public class DataStudioAutomation extends TestConfig {
 
     final int time_to_wait = 60;
@@ -24,7 +27,7 @@ public class DataStudioAutomation extends TestConfig {
     @BeforeMethod
     public void DataStudioANDSubjectShipments() {
         test = extent.createTest("Data Studio Button Click and Subject Shipments for reuse");
-        //driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
         //implicitlyWait (or) wait is not working so using Thread
         try {
             // WebDriverWait wait = new WebDriverWait(driver, 15);
@@ -61,17 +64,17 @@ public class DataStudioAutomation extends TestConfig {
     }
 
 
-    @Test(priority = 1) //priyanka
+    @Test(priority = 1, groups = {"smokeTest"}) //priyanka
     public void DataStudioSmartViewAndInternalView() {
         test = extent.createTest("Data Studio Smart & InternalView ", "Smart View Expand & Collapse & Internal View");
-        // driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
         //implicitlyWait (or) wait is not working so using Thread
         try {
             // WebDriverWait wait = new WebDriverWait(driver, 15);
 
             test.createNode("International Cluster Click to Show  Working of Internal View");
             // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("table-International")));
-            WebElement internationalCluster = driver.findElement(By.id("plusCircle-text-table-International"));
+            WebElement internationalCluster = driver.findElement(By.id("plusCircle-text-table-International")); //Error!
             internationalCluster.click();
             //  test.log(Status.INFO,"International Cluster Click"+internationalCluster.getText());
             Thread.sleep(5 * 1000);
@@ -105,17 +108,17 @@ public class DataStudioAutomation extends TestConfig {
 
     }
 
-    @Test(priority = 2) //priyanka
+    @Test(priority = 2, groups = {"regressionTest"}) //priyanka
     public void DataStudioFreightChargesClusterForeignKeyAndPrimaryKeyInInternalView() {
         test = extent.createTest("Data Studio Freight Charges Cluster Foreign Key & Primary Key In Internal View");
-        //driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
         //implicitlyWait (or) wait is not working so using Thread
         try {
             // WebDriverWait wait = new WebDriverWait(driver, 15);
 
             test.createNode("Freight Charges Cluster Click");
             // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("table-Freight Charges")));
-            WebElement freightChargesCluster = driver.findElement(By.id("plusCircle-text-table-Freight Charges"));
+            WebElement freightChargesCluster = driver.findElement(By.id("plusCircle-text-table-Freight Charges")); //Error!
             freightChargesCluster.click();
             Assert.assertTrue(freightChargesCluster.getText().equals("Freight Charges"));//validation 1
             Assert.assertEquals(freightChargesCluster.getText(), "Freight Charges");//validation 2

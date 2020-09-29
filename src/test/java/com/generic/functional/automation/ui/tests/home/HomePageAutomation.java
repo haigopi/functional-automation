@@ -357,28 +357,33 @@ public class HomePageAutomation extends TestConfig {
 
             WebElement Internationalbtn = driver.findElement(By.id("mainArc-71ef3c15-be01-454d-bd1e-c59d13904a65"));
             Internationalbtn.click();
+            Thread.sleep(3*1000);
             test.log(Status.INFO, "Clicked on International");
             test.createNode("Clicked on International Cluster");
 
             WebElement Subelement = driver.findElement(By.id("mainArc-7000c84e-b726-405b-ae57-3103e755a869"));
             Subelement.click();
+            Thread.sleep(3*1000);
             test.createNode("Clicked on Sub Elements");
             test.log(Status.INFO, "Clicked on Sub element to get the Query");
             Thread.sleep(3*1000);
 
             WebElement Subelement1 = driver.findElement(By.id("mainArc-a4b796c9-8bbb-4f37-b959-26b2e1dd758e"));
-            Subelement1.click();
+            Subelement1.click(); // Error!
+            Thread.sleep(3*1000);
             test.log(Status.INFO, "Clicked on Sub element to get the Query");
             Thread.sleep(3*1000);
 
             WebElement Subelement2 = driver.findElement(By.id("mainArc-dcf61afd-31e9-4faa-9e8f-8743a267ac26"));
             Subelement2.click();
+            Thread.sleep(3*1000);
             test.log(Status.INFO, "Clicked on Sub element to get the Query");
             Thread.sleep(3*1000);
 
             driver.findElement(By.id("search-text-reset")).click();
             WebElement Resetbtn = driver.findElement(By.id("search-text-reset"));
             Resetbtn.click();
+            Thread.sleep(3*1000);
             highlightHelper.highLightElement(driver,Resetbtn);
             test.createNode("clicked on Reset Button");
             test.log(Status.INFO, "Clicked on Reset Button");
@@ -488,7 +493,6 @@ public class HomePageAutomation extends TestConfig {
             privateQueryButton.click();
         } catch (Exception e) {
             test.createNode("Exception (" + e.toString() + ") found").fail(e);
-            Assert.assertTrue(false);
         }
         test.createNode("Verified Private Query Successfully");
     }
