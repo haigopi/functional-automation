@@ -76,6 +76,11 @@ public class SortingAutomation extends TestConfig {
         }
     }
 
+    /**
+     * removing Column by drag drop
+     *
+     * @author Pardhu
+     */
     @Test(groups = {"regressionTest"})
     public void testDragDropCol() {
         test = extent.createTest("Verify testColumremoving");

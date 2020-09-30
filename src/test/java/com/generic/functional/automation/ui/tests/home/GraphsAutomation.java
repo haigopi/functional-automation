@@ -34,6 +34,11 @@ public class GraphsAutomation extends TestConfig {
 
     }
 
+    /**
+     * testDocBydocTypeOGraphs is use to verify the graphs.
+     *
+     * @author Pardhu
+     */
     @Test(groups = {"regressionTest"})
     public void testDocBydocTypeOGraphs() {
         test = extent.createTest("Verify DocByDoctypeGraph");
