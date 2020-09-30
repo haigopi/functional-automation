@@ -36,7 +36,9 @@ public class HomePageAutomation extends TestConfig {
         highlightHelper = new HighlightHelper();
 
     }
-
+    /**
+     * testVerifyResetbuttonSearchBar - On clicking Reset button Query in the Search tab should get Cleared.
+     */
     @Test (groups = {"smokeTest"})
     public void testVerifyResetButtonSearchBar() throws Exception { //Haritha
         test = extent.createTest("Home > Verify Reset Button / Clear the Search Bubble");
@@ -229,7 +231,11 @@ public class HomePageAutomation extends TestConfig {
         }
 
     }
-
+    /**
+     * testVerifyShipmentsSunburstDocClick is used to Verify the table information when Documents cluster is selected)
+     *
+     * @author Haritha
+     **/
     @Test (groups = {"smokeTest"})
     public void testShipmentsSunburstDocClick() throws Exception { //Haritha
         test = extent.createTest("Verifying Shipments Documents Test");
@@ -336,7 +342,11 @@ public class HomePageAutomation extends TestConfig {
         }
 
     }
-
+    /**
+     * testVerifyResetButtonSunburst is used to Verify the Reset Button by selecting a query from sunburst)
+     *
+     * @author Haritha
+     */
     @Test (groups = {"smokeTest"})
     public void testVerifyResetButtonSunburst() throws Exception { //*** Haritha
         test = extent.createTest("Home Page Verify Reset Button by Sunburst");
@@ -366,16 +376,19 @@ public class HomePageAutomation extends TestConfig {
             Thread.sleep(3*1000);
             test.createNode("Clicked on Sub Elements");
             test.log(Status.INFO, "Clicked on Sub element to get the Query");
+            Thread.sleep(3*1000);
 
             WebElement Subelement1 = driver.findElement(By.id("mainArc-a4b796c9-8bbb-4f37-b959-26b2e1dd758e"));
             Subelement1.click(); // Error!
             Thread.sleep(3*1000);
             test.log(Status.INFO, "Clicked on Sub element to get the Query");
+            Thread.sleep(3*1000);
 
             WebElement Subelement2 = driver.findElement(By.id("mainArc-dcf61afd-31e9-4faa-9e8f-8743a267ac26"));
             Subelement2.click();
             Thread.sleep(3*1000);
             test.log(Status.INFO, "Clicked on Sub element to get the Query");
+            Thread.sleep(3*1000);
 
             driver.findElement(By.id("search-text-reset")).click();
             WebElement Resetbtn = driver.findElement(By.id("search-text-reset"));
@@ -392,7 +405,11 @@ public class HomePageAutomation extends TestConfig {
         }
         test.createNode("Verified Reset Button");
     }
-
+    /**
+     * testVerifySubjectGuides is used to Verify the SubjectGuides is displayed when HelpButton is clicked)
+     *
+     * @author Haritha
+     */
     @Test (groups = {"smokeTest"})
     public void testVerifySubjectGuides() throws Exception { //***
         test = extent.createTest("Verifying Subjects Guide ");
