@@ -100,4 +100,32 @@ public class QueriesAutomation extends TestConfig {
             e.printStackTrace();
         }
     }
+    /**
+     * testShipmentsByShipTypeQueries  is used to automate some queries search bubble about Shipments Table(verify its existence)
+     *
+     * @author priyanka
+     */
+    @Test
+    public void testShipmentsByShipTypeQueries() {
+        test = extent.createTest("Verify ShipmentsByShipTypeQueries");
+        try {
+            login.doLogin(test);
+            //query 1
+            queryChecker.runSearchBubbleQuery(driver, "list all Shipments ", test);
+            test.createNode("list all Shipments verified successfully");
+            //query 2
+            queryChecker.runSearchBubbleQuery(driver, "list of shipments where shipment number is 24691", test);
+            test.createNode("list of shipments where shipment number is 24691 verified successfully");
+            //query 3
+            queryChecker.runSearchBubbleQuery(driver, "list all shipments where plant is 2100", test);
+            test.createNode("list all shipments where plant is 2100 verified successfully");
+            //query 4
+            queryChecker.runSearchBubbleQuery(driver, "list all shipments where delivery number start with pwsr", test);
+            test.createNode("list all shipments where delivery number start with pwsr verified successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        test.createNode("Verified Shipments  Queries Successfully!");
+    }
+
 }
