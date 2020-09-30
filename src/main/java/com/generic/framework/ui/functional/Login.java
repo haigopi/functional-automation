@@ -22,7 +22,7 @@ public class Login {
     }
 
     /**
-     * This is login method  - Added by Maruthi
+     * This is login method  - Added by Maruthi Chavala
      * @param test
      * @throws Exception
      */
