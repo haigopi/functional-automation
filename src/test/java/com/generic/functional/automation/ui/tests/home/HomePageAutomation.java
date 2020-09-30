@@ -36,7 +36,9 @@ public class HomePageAutomation extends TestConfig {
         highlightHelper = new HighlightHelper();
 
     }
-
+    /**
+     * testVerifyResetbuttonSearchBar - On clicking Reset button Query in the Search tab should get Cleared.
+     */
     @Test (groups = {"smokeTest"})
     public void testVerifyResetButtonSearchBar() throws Exception { //Haritha
         test = extent.createTest("Home > Verify Reset Button / Clear the Search Bubble");
@@ -229,7 +231,11 @@ public class HomePageAutomation extends TestConfig {
         }
 
     }
-
+    /**
+     * testVerifyShipmentsSunburstDocClick is used to Verify the table information when Documents cluster is selected)
+     *
+     * @author Haritha
+     **/
     @Test (groups = {"smokeTest"})
     public void testShipmentsSunburstDocClick() throws Exception { //Haritha
         test = extent.createTest("Verifying Shipments Documents Test");
@@ -336,7 +342,11 @@ public class HomePageAutomation extends TestConfig {
         }
 
     }
-
+    /**
+     * testVerifyResetButtonSunburst is used to Verify the Reset Button by selecting a query from sunburst)
+     *
+     * @author Haritha
+     */
     @Test (groups = {"smokeTest"})
     public void testVerifyResetButtonSunburst() throws Exception { //*** Haritha
         test = extent.createTest("Home Page Verify Reset Button by Sunburst");
@@ -395,7 +405,11 @@ public class HomePageAutomation extends TestConfig {
         }
         test.createNode("Verified Reset Button");
     }
-
+    /**
+     * testVerifySubjectGuides is used to Verify the SubjectGuides is displayed when HelpButton is clicked)
+     *
+     * @author Haritha
+     */
     @Test (groups = {"smokeTest"})
     public void testVerifySubjectGuides() throws Exception { //***
         test = extent.createTest("Verifying Subjects Guide ");
