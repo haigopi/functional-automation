@@ -18,8 +18,14 @@ public class Login {
     public Login(WebDriver driver) {
         this.driver = driver;
         //this.highlightHelper = new HighlightHelper();
+
     }
 
+    /**
+     * This is login method  - Added by Maruthi
+     * @param test
+     * @throws Exception
+     */
     public void doLogin(ExtentTest test) throws Exception {
     test.createNode("Launching the URL=\"https://a4data-qe.netlify.app\"");
     driver.manage().window().maximize();
