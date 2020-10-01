@@ -34,6 +34,12 @@ public class QueriesAutomation extends TestConfig {
 
     }
 
+    /**
+     * testDocumentsQueries is used to run and verify document related queries in search bubble
+     *
+     * @author Teja
+     */
+
     @Test(groups = {"smokeTest"})
     public void testDocumentsQueries() {
         test = extent.createTest("Verify Documents Queries");
@@ -41,9 +47,13 @@ public class QueriesAutomation extends TestConfig {
             login.doLogin(test);
 
             queryChecker.runSearchBubbleQuery(driver, "list all documents", test);
+            test.createNode("list all Documents verified successfully");
             queryChecker.runSearchBubbleQuery(driver, "list all documents where provider is FedEx", test);
+            test.createNode("list all documents where provider is FedEx verified successfully");
             queryChecker.runSearchBubbleQuery(driver, "list all documents where delivery number ends with 003", test);
+            test.createNode("list all documents where delivery number ends with 003 verified successfully");
             queryChecker.runSearchBubbleQuery(driver, "list all documents where document type is LBL ", test);
+            test.createNode("list all documents where document type is LBL verified successfully");
 
             test.createNode("Verified Documents Queries Successfully!");
         } catch (Exception e) {

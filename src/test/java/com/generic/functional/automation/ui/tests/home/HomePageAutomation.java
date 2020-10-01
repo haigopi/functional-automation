@@ -592,10 +592,16 @@ public class HomePageAutomation extends TestConfig {
         test.createNode("Verified Public Query Successfully");
     }
 
+    /**
+     * testVerifyExecuteNLPQueryButtonPrivateQueries is used to verify if Execute NLP Query Button(hover element) is working(executing) under private queries
+     *
+     * @author Teja
+     */
 
     @Test (groups = {"regressionTest"})
-    public void testVerifyExecuteNLPQueryButtonPrivateQueries(){ //teja
+    public void testVerifyExecuteNLPQueryButtonPrivateQueries(){
         test = extent.createTest("Verify Execute NLP Query Button under Private Queries");
+        driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);
         Actions actions = new Actions(driver);
         try {
             login.doLogin(test);
@@ -611,10 +617,12 @@ public class HomePageAutomation extends TestConfig {
 
             test.createNode("Execute NLP Query Button clicked under a query");
             WebElement nlpqueryButton = driver.findElement(By.id("execute-private-query-9"));
+            highlightHelper.highLightElement(driver, nlpqueryButton);
             actions.moveToElement(nlpqueryButton).click().perform();
 
             test.createNode("Scroll to view tabular view and other results");
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"gatsby-focus-wrapper\"]/div/main/div/div/div/div[4]")));
+            actions.sendKeys(Keys.PAGE_DOWN).build().perform();
             test.createNode("Tabular view displayed");
             test.createNode("Verified Execute NLP Query Button Successfully");
         } catch (Exception e) {
@@ -622,6 +630,7 @@ public class HomePageAutomation extends TestConfig {
             test.createNode("Exception (" + e.toString() + ") found").fail(e);
         }
     }
+
     @Test (enabled = false, groups = {"regressionTest"})
     public void TestAutoSuggest() throws Exception {
         test = extent.createTest("Verify AutoPopulate Search Bar");
