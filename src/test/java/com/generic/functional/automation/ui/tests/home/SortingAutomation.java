@@ -118,7 +118,7 @@ public class SortingAutomation extends TestConfig {
 
     }
     /**
-     * testVerifyRadioButton validate the Expand and Collapse functionality of Tabular view
+     * @Description: testVerifyRadioButton validate the Expand and Collapse functionality of Tabular view
      *
      * @author: Prasanna
      */
