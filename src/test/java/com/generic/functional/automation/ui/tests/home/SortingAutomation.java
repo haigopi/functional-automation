@@ -76,6 +76,11 @@ public class SortingAutomation extends TestConfig {
         }
     }
 
+    /**
+     * removing Column by drag drop
+     *
+     * @author Pardhu
+     */
     @Test(groups = {"regressionTest"})
     public void testDragDropCol() {
         test = extent.createTest("Verify testColumremoving");
@@ -129,7 +134,7 @@ public class SortingAutomation extends TestConfig {
             Thread.sleep(2 * 1000);
             WebElement expandButton = driver.findElement(By.cssSelector("svg.MuiSvgIcon-root.search-show-more"));
             expandButton.click();
-            Thread.sleep(5 * 1000);
+            Thread.sleep(2 * 1000);
             WebElement ColumnName = driver.findElement(By.xpath("//*[text()='ROWID']"));
             test.createNode(" Test is passes if it displays true ");
             if (ColumnName.isDisplayed()) {
