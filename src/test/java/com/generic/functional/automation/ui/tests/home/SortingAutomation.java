@@ -35,7 +35,7 @@ public class SortingAutomation extends TestConfig {
     }
 
     /**
-     * testColumresize is used to verify whether the columns can be resized are not.
+     * @Description : testColumresize is used to verify whether the columns can be resized are not.
      *
      * @author Pardhu
      */
@@ -117,6 +117,11 @@ public class SortingAutomation extends TestConfig {
         }
 
     }
+    /**
+     * @Description: testVerifyRadioButton validate the Expand and Collapse functionality of Tabular view
+     *
+     * @author: Prasanna
+     */
 
     @Test(groups = {"smokeTest"})
     public void testVerifyRadioButton() {//prasanna
