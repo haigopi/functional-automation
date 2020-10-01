@@ -36,7 +36,9 @@ public class HomePageAutomation extends TestConfig {
         highlightHelper = new HighlightHelper();
 
     }
-
+    /**
+     * testVerifyResetbuttonSearchBar - On clicking Reset button Query in the Search tab should get Cleared.
+     */
     @Test (groups = {"smokeTest"})
     public void testVerifyResetButtonSearchBar() throws Exception { //Haritha
         test = extent.createTest("Home > Verify Reset Button / Clear the Search Bubble");
@@ -229,7 +231,11 @@ public class HomePageAutomation extends TestConfig {
         }
 
     }
-
+    /**
+     * testVerifyShipmentsSunburstDocClick is used to Verify the table information when Documents cluster is selected)
+     *
+     * @author Haritha
+     **/
     @Test (groups = {"smokeTest"})
     public void testShipmentsSunburstDocClick() throws Exception { //Haritha
         test = extent.createTest("Verifying Shipments Documents Test");
@@ -336,7 +342,11 @@ public class HomePageAutomation extends TestConfig {
         }
 
     }
-
+    /**
+     * testVerifyResetButtonSunburst is used to Verify the Reset Button by selecting a query from sunburst)
+     *
+     * @author Haritha
+     */
     @Test (groups = {"smokeTest"})
     public void testVerifyResetButtonSunburst() throws Exception { //*** Haritha
         test = extent.createTest("Home Page Verify Reset Button by Sunburst");
@@ -357,25 +367,33 @@ public class HomePageAutomation extends TestConfig {
 
             WebElement Internationalbtn = driver.findElement(By.id("mainArc-71ef3c15-be01-454d-bd1e-c59d13904a65"));
             Internationalbtn.click();
+            Thread.sleep(3*1000);
             test.log(Status.INFO, "Clicked on International");
             test.createNode("Clicked on International Cluster");
 
             WebElement Subelement = driver.findElement(By.id("mainArc-7000c84e-b726-405b-ae57-3103e755a869"));
             Subelement.click();
+            Thread.sleep(3*1000);
             test.createNode("Clicked on Sub Elements");
             test.log(Status.INFO, "Clicked on Sub element to get the Query");
+            Thread.sleep(3*1000);
 
             WebElement Subelement1 = driver.findElement(By.id("mainArc-a4b796c9-8bbb-4f37-b959-26b2e1dd758e"));
-            Subelement1.click();
+            Subelement1.click(); // Error!
+            Thread.sleep(3*1000);
             test.log(Status.INFO, "Clicked on Sub element to get the Query");
+            Thread.sleep(3*1000);
 
             WebElement Subelement2 = driver.findElement(By.id("mainArc-dcf61afd-31e9-4faa-9e8f-8743a267ac26"));
             Subelement2.click();
+            Thread.sleep(3*1000);
             test.log(Status.INFO, "Clicked on Sub element to get the Query");
+            Thread.sleep(3*1000);
 
             driver.findElement(By.id("search-text-reset")).click();
             WebElement Resetbtn = driver.findElement(By.id("search-text-reset"));
             Resetbtn.click();
+            Thread.sleep(3*1000);
             highlightHelper.highLightElement(driver,Resetbtn);
             test.createNode("clicked on Reset Button");
             test.log(Status.INFO, "Clicked on Reset Button");
@@ -387,7 +405,11 @@ public class HomePageAutomation extends TestConfig {
         }
         test.createNode("Verified Reset Button");
     }
-
+    /**
+     * testVerifySubjectGuides is used to Verify the SubjectGuides is displayed when HelpButton is clicked)
+     *
+     * @author Haritha
+     */
     @Test (groups = {"smokeTest"})
     public void testVerifySubjectGuides() throws Exception { //***
         test = extent.createTest("Verifying Subjects Guide ");
@@ -485,7 +507,6 @@ public class HomePageAutomation extends TestConfig {
             privateQueryButton.click();
         } catch (Exception e) {
             test.createNode("Exception (" + e.toString() + ") found").fail(e);
-            Assert.assertTrue(false);
         }
         test.createNode("Verified Private Query Successfully");
     }
@@ -571,10 +592,16 @@ public class HomePageAutomation extends TestConfig {
         test.createNode("Verified Public Query Successfully");
     }
 
+    /**
+     * testVerifyExecuteNLPQueryButtonPrivateQueries is used to verify if Execute NLP Query Button(hover element) is working(executing) under private queries
+     *
+     * @author Teja
+     */
 
     @Test (groups = {"regressionTest"})
-    public void testVerifyExecuteNLPQueryButtonPrivateQueries(){ //teja
+    public void testVerifyExecuteNLPQueryButtonPrivateQueries(){
         test = extent.createTest("Verify Execute NLP Query Button under Private Queries");
+        driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);
         Actions actions = new Actions(driver);
         try {
             login.doLogin(test);
@@ -590,10 +617,12 @@ public class HomePageAutomation extends TestConfig {
 
             test.createNode("Execute NLP Query Button clicked under a query");
             WebElement nlpqueryButton = driver.findElement(By.id("execute-private-query-9"));
+            highlightHelper.highLightElement(driver, nlpqueryButton);
             actions.moveToElement(nlpqueryButton).click().perform();
 
             test.createNode("Scroll to view tabular view and other results");
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"gatsby-focus-wrapper\"]/div/main/div/div/div/div[4]")));
+            actions.sendKeys(Keys.PAGE_DOWN).build().perform();
             test.createNode("Tabular view displayed");
             test.createNode("Verified Execute NLP Query Button Successfully");
         } catch (Exception e) {
@@ -601,6 +630,7 @@ public class HomePageAutomation extends TestConfig {
             test.createNode("Exception (" + e.toString() + ") found").fail(e);
         }
     }
+
     @Test (enabled = false, groups = {"regressionTest"})
     public void TestAutoSuggest() throws Exception {
         test = extent.createTest("Verify AutoPopulate Search Bar");
