@@ -4,6 +4,8 @@ import com.aventstack.extentreports.Status;
 import com.generic.functional.automation.ui.tests.common.TestConfig;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -14,6 +16,12 @@ import java.util.concurrent.TimeUnit;
 public class DataStudioAutomation extends TestConfig {
 
     final int time_to_wait = 60;
+    WebDriverWait wait;
+
+    @BeforeMethod
+    public void beforeMethod() {
+        wait = new WebDriverWait(driver, 15);
+    }
 
     @BeforeClass
     /**

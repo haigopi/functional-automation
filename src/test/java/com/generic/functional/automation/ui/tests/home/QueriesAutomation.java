@@ -93,8 +93,13 @@ public class QueriesAutomation extends TestConfig {
         test.createNode("Verified Freight Charge Queries Successfully!");
     }
 
+    /**
+     * testDocumentBydocTypeQueries is used to run some queries in search bubble.
+     *
+     * @author Pardhu
+     */
     @Test (groups = {"smokeTest"})
-    public void testDocumentBydocTypeQueries() {//pardhu
+    public void testDocumentBydocTypeQueries() {
         test = extent.createTest("Verify DocumentByDocTypeQueries");
         try {
             login.doLogin(test);
