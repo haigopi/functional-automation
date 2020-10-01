@@ -4,27 +4,42 @@ import com.aventstack.extentreports.Status;
 import com.generic.functional.automation.ui.tests.common.TestConfig;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.concurrent.TimeUnit;
+
 public class DataStudioAutomation extends TestConfig {
 
     final int time_to_wait = 60;
+    WebDriverWait wait;
+
+    @BeforeMethod
+    public void beforeMethod() {
+        wait = new WebDriverWait(driver, 15);
+    }
 
     @BeforeClass
-
+    /**
+     * BeforeClass is using to login the A4Data
+     */
     public void DataStudioLogin() throws Exception {
         test = extent.createTest("Data Studio till login");
         login.doLogin(test);
 
     }
+    /**
+     *BeforeMethod is using to click on datastudio button and subject shipments reusing all test cases and we are refreshing the A4Data page after every test case
+     * */
 
-
-    @BeforeMethod
+     @BeforeMethod
     public void DataStudioANDSubjectShipments() {
         test = extent.createTest("Data Studio Button Click and Subject Shipments for reuse");
-        //driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
         //implicitlyWait (or) wait is not working so using Thread
         try {
             // WebDriverWait wait = new WebDriverWait(driver, 15);
@@ -60,18 +75,24 @@ public class DataStudioAutomation extends TestConfig {
         }
     }
 
+    /**
+     * DataStudioSmartViewAndInternalView is used to automate SmartView And InternalView buttons (verify its existence)
+     *
+     * @author priyanka
+     */
 
-    @Test(priority = 1) //priyanka
+
+    @Test(priority = 1, groups = {"smokeTest"}) //priyanka
     public void DataStudioSmartViewAndInternalView() {
         test = extent.createTest("Data Studio Smart & InternalView ", "Smart View Expand & Collapse & Internal View");
-        // driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
         //implicitlyWait (or) wait is not working so using Thread
         try {
             // WebDriverWait wait = new WebDriverWait(driver, 15);
 
             test.createNode("International Cluster Click to Show  Working of Internal View");
             // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("table-International")));
-            WebElement internationalCluster = driver.findElement(By.id("plusCircle-text-table-International"));
+            WebElement internationalCluster = driver.findElement(By.id("plusCircle-text-table-International")); //Error!
             internationalCluster.click();
             //  test.log(Status.INFO,"International Cluster Click"+internationalCluster.getText());
             Thread.sleep(5 * 1000);
@@ -105,17 +126,26 @@ public class DataStudioAutomation extends TestConfig {
 
     }
 
-    @Test(priority = 2) //priyanka
+    /**
+     * DataStudioFreightChargesClusterForeignKeyAndPrimaryKeyInInternalView()
+     *
+     * This test is used to automate DataStudio-Subject shipments-Freight Charges Cluster ForeignKey And PrimaryKey buttons (verify its existence)
+     *
+     * @author priyanka
+     */
+
+
+    @Test(priority = 2, groups = {"regressionTest"}) //priyanka
     public void DataStudioFreightChargesClusterForeignKeyAndPrimaryKeyInInternalView() {
         test = extent.createTest("Data Studio Freight Charges Cluster Foreign Key & Primary Key In Internal View");
-        //driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
         //implicitlyWait (or) wait is not working so using Thread
         try {
             // WebDriverWait wait = new WebDriverWait(driver, 15);
 
             test.createNode("Freight Charges Cluster Click");
             // wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("table-Freight Charges")));
-            WebElement freightChargesCluster = driver.findElement(By.id("plusCircle-text-table-Freight Charges"));
+            WebElement freightChargesCluster = driver.findElement(By.id("plusCircle-text-table-Freight Charges")); //Error!
             freightChargesCluster.click();
             Assert.assertTrue(freightChargesCluster.getText().equals("Freight Charges"));//validation 1
             Assert.assertEquals(freightChargesCluster.getText(), "Freight Charges");//validation 2
@@ -149,12 +179,19 @@ public class DataStudioAutomation extends TestConfig {
 
     }
 
+    /**
+     * DataStudioInternationalClusterForeignAndPrimaryKey()
+     *
+     * This test is used to automate DataStudio-Subject shipments- International Cluster ForeignKey And PrimaryKey buttons (verify its existence)
+     *
+     * @author priyanka
+     */
 
     @Test(priority = 3) //priyanka
     public void DataStudioInternationalClusterForeignAndPrimaryKey() {
         test = extent.createTest("Data Studio International Cluster Foreign Key & Primary Key In Internal View");
         //WebDriverWait wait = new WebDriverWait(driver, 30);
-        //   driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
         //implicitlyWait (or) wait is not working so using Thread
         try {
             test.createNode("International Cluster Click");
@@ -193,11 +230,19 @@ public class DataStudioAutomation extends TestConfig {
 
     }
 
+    /**
+     * DataStudioDocumentsClusterForeignAndPrimaryKey()
+     *
+     * This test is used to automate Data Studio-Subject shipments- Documents Cluster Foreign Key And Primary Key buttons(verify its existence)
+     *
+     * @author priyanka
+     */
+
     @Test(priority = 4) //priyanka
     public void DataStudioDocumentsClusterForeignAndPrimaryKey() {
         test = extent.createTest("Data Studio Documents Cluster Foreign Key & Primary Key In Internal View");
         //WebDriverWait wait = new WebDriverWait(driver, 15);
-        //driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
         //implicitlyWait (or) wait is not working so using Thread
         try {
             test.createNode("Documents Cluster Click");
@@ -244,11 +289,19 @@ public class DataStudioAutomation extends TestConfig {
 
     }
 
+    /**
+     *  DataStudioDocumentsURLsClusterForeignAndPrimaryKey()
+     *
+     * This test is used to automate DataStudio-Subject shipments- Documents URLs Cluster ForeignKey And PrimaryKey buttons(verify its existence)
+     *
+     * @author priyanka
+     */
+
     @Test(priority = 5) //priyanka
     public void DataStudioDocumentsURLsClusterForeignAndPrimaryKey() {
         test = extent.createTest("Data Studio DocumentsURLs Cluster Foreign Key & Primary Key In Internal View");
         //WebDriverWait wait = new WebDriverWait(driver, 15);
-        //driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
         //implicitlyWait (or) wait is not working so using Thread
         try {
             test.createNode(" Data Studio DocumentsURLs Cluster Click");
@@ -295,11 +348,19 @@ public class DataStudioAutomation extends TestConfig {
 
     }
 
+    /**
+     * DataStudioPackingItemsClusterForeignAndPrimaryKey()
+     *
+     * This test is used to automate DataStudio-Subject shipments- PackingItems Cluster ForeignKey And PrimaryKey buttons (verify its existence)
+     *
+     * @author priyanka
+     */
+
     @Test(priority = 6) //priyanka
     public void DataStudioPackingItemsClusterForeignAndPrimaryKey() {
         test = extent.createTest("Data Studio Packing Items Cluster Foreign Key & Primary Key In Internal View");
         //WebDriverWait wait = new WebDriverWait(driver, 15);
-        //driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
         //implicitlyWait (or) wait is not working so using Thread
         try {
             test.createNode("PackingItems Cluster Click");
@@ -346,14 +407,21 @@ public class DataStudioAutomation extends TestConfig {
             Assert.assertTrue(false);
         }
 
-
     }
+
+    /**
+     * DataStudioPackagesClusterForeignKeyPrimaryKey()
+     *
+     * This test is used to automate DataStudio-Subject Shipments- PackagesClusterCluster ForeignKey And PrimaryKey buttons (verify its existence)
+     *
+     * @author priyanka
+     */
 
     @Test(priority = 7) //priyanka
     public void DataStudioPackagesClusterForeignKeyPrimaryKey() {
         test = extent.createTest("Data Studio Packages Cluster", "Foreign Key & Primary Key In Internal View");
         /// WebDriverWait wait = new WebDriverWait(driver, 15);
-        //  driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
         //implicitlyWait (or) wait is not working so using Thread
         try {
 
@@ -399,14 +467,21 @@ public class DataStudioAutomation extends TestConfig {
             Assert.assertTrue(false);
         }
 
-
     }
+
+    /**
+     * DataStudioLocationClusterPrimaryAndForeignKey()
+     *
+     * This test is used to automate DataStudio-Subject shipments- Location Cluster ForeignKey And PrimaryKey buttons (verify its existence)
+     *
+     * @author priyanka
+     */
 
     @Test(priority = 8) //priyanka
     public void DataStudioLocationClusterPrimaryAndForeignKey() {
         test = extent.createTest("Data Studio Location Cluster", "Primary Key & ForeignKey In Internal View");
         // WebDriverWait wait = new WebDriverWait(driver, 3);
-        // driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+        driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
         //implicitlyWait (or) wait is not working so using Thread
         try {
             test.createNode("Location Cluster Click");
@@ -436,11 +511,19 @@ public class DataStudioAutomation extends TestConfig {
         }
     }
 
+    /**
+     * DataStudioShipmentsClusterForeignAndPrimaryKey()
+     *
+     * This test is used to automate DataStudio-Subject shipments- Shipments Cluster ForeignKey And PrimaryKey buttons (verify its existence)
+     *
+     * @author priyanka
+     */
+
     @Test(priority = 9) //priyanka
     public void DataStudioShipmentsClusterForeignAndPrimaryKey() {
         test = extent.createTest("Data Studio Shipments Cluster Foreign Key & Primary Key In Internal View");
         //WebDriverWait wait = new WebDriverWait(driver, 30);
-        // driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
+         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);//this is global so no need to mention multiple times
         //implicitlyWait (or) wait is not working so using Thread
         try {
 

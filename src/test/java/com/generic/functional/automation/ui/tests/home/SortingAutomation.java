@@ -76,6 +76,11 @@ public class SortingAutomation extends TestConfig {
         }
     }
 
+    /**
+     * removing Column by drag drop
+     *
+     * @author Pardhu
+     */
     @Test(groups = {"regressionTest"})
     public void testDragDropCol() {
         test = extent.createTest("Verify testColumremoving");
@@ -147,7 +152,6 @@ public class SortingAutomation extends TestConfig {
 
         } catch (Exception e) {
             test.createNode("Exception (" + e.toString() + ") found").fail(e);
-            Assert.assertTrue(false);
             test.createNode("Error in validation of Radio button   --" + e + "---In testVerifyRadioButton  ");
         }
 
