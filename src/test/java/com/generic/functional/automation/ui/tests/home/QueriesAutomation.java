@@ -87,10 +87,13 @@ public class QueriesAutomation extends TestConfig {
             //query 4
             queryChecker.runSearchBubbleQuery(driver, "list all charges where carrier id is ups frieght", test);
             test.createNode("list all charges where carrier id is ups frieght verified successfully");
+            test.createNode("Verified Freight Charge Queries Successfully!");
+
         } catch (Exception e) {
-            e.printStackTrace();
+            test.createNode("Exception (" + e.toString() + ") found").fail(e);
+
         }
-        test.createNode("Verified Freight Charge Queries Successfully!");
+
     }
 
     /**
@@ -137,10 +140,11 @@ public class QueriesAutomation extends TestConfig {
             //query 4
             queryChecker.runSearchBubbleQuery(driver, "list all shipments where delivery number start with pwsr", test);
             test.createNode("list all shipments where delivery number start with pwsr verified successfully");
+            test.createNode("Verified Shipments  Queries Successfully!");
+
         } catch (Exception e) {
-            e.printStackTrace();
+            test.createNode("Exception (" + e.toString() + ") found").fail(e);
         }
-        test.createNode("Verified Shipments  Queries Successfully!");
     }
 
 }
