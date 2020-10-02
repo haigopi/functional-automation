@@ -150,6 +150,12 @@ public class GraphsAutomation extends TestConfig {
     }
 
 
+    /**
+     * @Description : testShipmentsDocURLsDocProGraph verify the Graphical view of Document Provider Table.
+     * HelpButton-->Shipments-->Documents URLs--> Document Providers-->Tabular view--> Graphical View
+     *
+     * @author : Prasanna
+     */
     @Test(groups = {"smokeTest"})
     public void testShipmentsDocURLsDocProGraph() {//prasanna
         test = extent.createTest("Verifying Shipments Documents Test");
@@ -207,7 +213,12 @@ public class GraphsAutomation extends TestConfig {
         }
     }
 
-
+    /**
+     * @Description : testForValidationOfAllOtherGraphsInDocProv verify the all other Graphical views available in Othaer Graphical View  .
+     * HelpButton-->Shipments-->Documents URLs--> Document Providers-->Tabular view--> Graphical View-->Other Graphical View
+     *
+     * @author: Prasanna
+     */
 
     @Test(groups = {"regressionTest"})
     public void testForValidationOfAllOtherGraphsInDocProv() {//prasanna
