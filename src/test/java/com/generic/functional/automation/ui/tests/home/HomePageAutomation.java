@@ -116,7 +116,7 @@ public class HomePageAutomation extends TestConfig {
                 Assert.assertFalse(true); // terminate & exit
             }
         } catch (Exception e) {
-            // test.createNode("Exception (" + e.toString() + ") found").fail(e);
+            test.createNode("Exception (" + e.toString() + ") found").fail(e);
             e.printStackTrace();
         }
         test.createNode("Verified Reset Button by Query History Search");
@@ -397,13 +397,12 @@ public class HomePageAutomation extends TestConfig {
             highlightHelper.highLightElement(driver,Resetbtn);
             test.createNode("clicked on Reset Button");
             test.log(Status.INFO, "Clicked on Reset Button");
-
+            test.createNode("Verified Reset Button");
 
         } catch (Exception e) {
             test.createNode("Exception (" + e.toString() + ") found").fail(e);
             // e.printStackTrace();
         }
-        test.createNode("Verified Reset Button");
     }
     /**
      * testVerifySubjectGuides is used to Verify the SubjectGuides is displayed when HelpButton is clicked)
@@ -437,11 +436,11 @@ public class HomePageAutomation extends TestConfig {
             test.log(Status.INFO, "Domain of Values Displayed");
             driver.findElement(By.xpath("//*[text()='Drill down for Sub-elements']"));
             test.log(Status.INFO,"Drill down for Sub-elements Displayed");
+            test.createNode("Verified Subject Guides Successfully!");
         }
         catch (Exception e) {
             test.createNode("Exception (" + e.toString() + ") found").fail(e);
         }
-        test.createNode("Verified Subject Guides Successfully!");
     }
 
     @Test (groups = {"smokeTest"})
@@ -479,7 +478,7 @@ public class HomePageAutomation extends TestConfig {
                 test.createNode("Failed to delete the file");
             }
         } catch (Exception e) {
-            System.out.println(e);
+            test.createNode("Exception (" + e.toString() + ") found").fail(e);
         }
     }
     /**
@@ -505,10 +504,10 @@ public class HomePageAutomation extends TestConfig {
             WebElement privateQueryButton = driver.findElement(By.id("scrollable-auto-tab-1"));
             highlightHelper.highLightElement(driver, privateQueryButton);
             privateQueryButton.click();
+            test.createNode("Verified Private Query Successfully");
         } catch (Exception e) {
             test.createNode("Exception (" + e.toString() + ") found").fail(e);
         }
-        test.createNode("Verified Private Query Successfully");
     }
 
 
@@ -657,6 +656,7 @@ public class HomePageAutomation extends TestConfig {
 
         } catch (Exception e) {
             e.printStackTrace();
+            test.createNode("Exception (" + e.toString() + ") found").fail(e);
         }
     }
 

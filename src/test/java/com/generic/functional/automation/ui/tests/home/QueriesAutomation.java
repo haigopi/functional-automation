@@ -57,7 +57,9 @@ public class QueriesAutomation extends TestConfig {
 
             test.createNode("Verified Documents Queries Successfully!");
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            test.createNode("Exception (" + e.toString() + ") found").fail(e); // catches exception (test still passes)
+//            Assert.assertTrue(false);
         }
     }
 
@@ -87,10 +89,12 @@ public class QueriesAutomation extends TestConfig {
             //query 4
             queryChecker.runSearchBubbleQuery(driver, "list all charges where carrier id is ups frieght", test);
             test.createNode("list all charges where carrier id is ups frieght verified successfully");
+            test.createNode("Verified Freight Charge Queries Successfully!");
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            test.createNode("Exception (" + e.toString() + ") found").fail(e);
         }
-        test.createNode("Verified Freight Charge Queries Successfully!");
+
     }
 
     /**
@@ -112,7 +116,7 @@ public class QueriesAutomation extends TestConfig {
             queryChecker.runSearchBubbleQuery(driver, "list all Document where Document Type is LBL", test);
             test.createNode("list all Documents where Document Type is LBL verified successfully");
         } catch (Exception e) {
-            e.printStackTrace();
+            test.createNode("Exception (" + e.toString() + ") found").fail(e);
         }
     }
     /**
@@ -137,10 +141,10 @@ public class QueriesAutomation extends TestConfig {
             //query 4
             queryChecker.runSearchBubbleQuery(driver, "list all shipments where delivery number start with pwsr", test);
             test.createNode("list all shipments where delivery number start with pwsr verified successfully");
+            test.createNode("Verified Freight Charge Queries Successfully!");
         } catch (Exception e) {
-            e.printStackTrace();
+            test.createNode("Exception (" + e.toString() + ") found").fail(e);
         }
-        test.createNode("Verified Shipments  Queries Successfully!");
     }
 
 }
