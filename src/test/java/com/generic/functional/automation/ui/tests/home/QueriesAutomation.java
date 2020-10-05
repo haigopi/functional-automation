@@ -142,6 +142,7 @@ public class QueriesAutomation extends TestConfig {
             queryChecker.runSearchBubbleQuery(driver, "list all shipments where delivery number start with pwsr", test);
             test.createNode("list all shipments where delivery number start with pwsr verified successfully");
             test.createNode("Verified Freight Charge Queries Successfully!");
+
         } catch (Exception e) {
             test.createNode("Exception (" + e.toString() + ") found").fail(e);
         }

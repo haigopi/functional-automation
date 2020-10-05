@@ -115,13 +115,12 @@ public class HomePageAutomation extends TestConfig {
                 test.log(Status.INFO, "Search Bubble still has text in it -> not null; Reset Button Did not Work!");
                 Assert.assertFalse(true); // terminate & exit
             }
+            test.createNode("Verified Reset Button by Query History Search");
         } catch (Exception e) {
             test.createNode("Exception (" + e.toString() + ") found").fail(e);
             e.printStackTrace();
         }
-        test.createNode("Verified Reset Button by Query History Search");
-        //HTML CODE TO ACCESS
-        // <input class="search_input" type="text" name="" placeholder="Search..." value="">
+
 
     }
     /**
@@ -398,7 +397,6 @@ public class HomePageAutomation extends TestConfig {
             test.createNode("clicked on Reset Button");
             test.log(Status.INFO, "Clicked on Reset Button");
             test.createNode("Verified Reset Button");
-
         } catch (Exception e) {
             test.createNode("Exception (" + e.toString() + ") found").fail(e);
             // e.printStackTrace();
@@ -413,8 +411,7 @@ public class HomePageAutomation extends TestConfig {
     public void testVerifySubjectGuides() throws Exception { //***
         test = extent.createTest("Verifying Subjects Guide ");
         login.doLogin(test);
-        try
-        {
+        try {
             Thread.sleep(5 * 1000);
             WebElement helpButton = driver.findElement(By.cssSelector(".explore-quiries-inner"));
             helpButton.click();
@@ -427,7 +424,8 @@ public class HomePageAutomation extends TestConfig {
             Thread.sleep(5 * 1000);
             test.log(Status.INFO, "Clicked on Domain Values");
             test.createNode("clicked on Domain Values");
-            WebElement Ds = driver.findElement(By.className("drill_down"));Ds.click();
+            WebElement Ds = driver.findElement(By.className("drill_down"));
+            Ds.click();
             Thread.sleep(5 * 1000);
             test.log(Status.INFO, "Clicked on Drill down for Sub-elements");
             driver.findElement(By.xpath("//*[text()=' -- Subjects Guide -- ']"));
@@ -584,11 +582,11 @@ public class HomePageAutomation extends TestConfig {
             WebElement publicQueryButton = driver.findElement(By.id("scrollable-auto-tab-2"));
             highlightHelper.highLightElement(driver, publicQueryButton);
             publicQueryButton.click();
+            test.createNode("Verified Public Query Successfully");
             //Thread.sleep(4 * 1000);
         } catch (Exception e) {
             test.createNode("Caught [ " + e + " ] exception in testPublicQueries");
         }
-        test.createNode("Verified Public Query Successfully");
     }
 
     /**
