@@ -33,6 +33,7 @@ public class ClusterAutomation extends TestConfig {
 
     @Test
     public void TestingClusters() throws Exception{
+        try{
         test = extent.createTest("Data Studio Adding and removing clusters in Pardhus DB");
         login.doLogin(test);
         WebElement DataStudioBtn=driver.findElement(By.xpath("//*[@id=\"databaseManager\"]"));
@@ -91,6 +92,8 @@ public class ClusterAutomation extends TestConfig {
         wait.until(ExpectedConditions.elementToBeClickable((del)));
         del.click();
         test.createNode("Click on delete");
-        Thread.sleep(5000);
+        Thread.sleep(5000);}catch (Exception e){
+            test.createNode("Exception (" + e.toString() + ") found").fail(e);
+        }
     }
 }
