@@ -1,5 +1,8 @@
 package com.generic.framework.ui.functional;
 
+/**
+ * Application constants
+ */
 public class AppConstants {
     public static String REPORT_PATH = "/test-output/index.html";
     public static String SCREEN_SHOT_PATH = "/test-output/a4-test-report-screenshots/";
